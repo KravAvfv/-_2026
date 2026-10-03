@@ -1,0 +1,23 @@
+{
+  "file": "08_split_model",
+  "native_px": [
+    1000,
+    474
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 7.0,
+    "main_pt": 7.0,
+    "dpi": 616
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.9,
+    "main_pt": 10.9,
+    "dpi": 395
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

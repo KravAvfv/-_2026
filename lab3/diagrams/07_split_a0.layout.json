@@ -1,0 +1,23 @@
+{
+  "file": "07_split_a0",
+  "native_px": [
+    1076,
+    616
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 6.5,
+    "main_pt": 6.5,
+    "dpi": 497
+  },
+  "landscape": {
+    "width_cm": 25.33,
+    "font_pt": 10.0,
+    "main_pt": 10.0,
+    "dpi": 324
+  },
+  "orientation": "landscape",
+  "width_cm": 25.33,
+  "legible": true
+}

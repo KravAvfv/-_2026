@@ -39,6 +39,7 @@
 | `tools/build_report.py` | YAML spec → .docx (title page fill, sections, numbering, landscape, previews) |
 | `tools/check_report.py` | automated compliance checks of a built .docx |
 | `tools/bpmn_model.py`, `tools/bpmn/` | BPMN 2.0 generator (grid layout + DI) and bpmn-js renderer (node, puppeteer-core); legibility gate |
+| `tools/idef_model.py` | IDEF0 / IDEF3 / node-tree renderer (AFPM-style frame, ICOM routing, squiggle label placer, tunnels, call arrows, FEO) → SVG/PNG + legibility gate |
 | `tools/docx2pdf.sh` | headless .docx → .pdf via OnlyOffice x2t (no LibreOffice on this machine) |
 | `.claude/skills/diagram-generator/` | diagram workflow skill |
 | `.claude/skills/academic-report-builder/` | report assembly skill |
@@ -74,7 +75,7 @@
 - **ЛР2** — BPMN model of the organisation; each function as a separate pool; analysis of pools/lanes/interactions.
   Done: `lab2/make_lab2.py` (5 functional pools P1–P5 + interaction map, 8 `.bpmn` diagrams, analysis computed
   from the model).
-- **ЛР3** — IDEF0 context + decomposition, model report, node tree, FEO, split/merge, IDEF3 + scenario (AFPM-style;
+- **ЛР3** — done: `lab3/model3.py` (model data) + `lab3/make_lab3.py` (10 diagrams, report). IDEF0 context + decomposition, model report, node tree, FEO, split/merge, IDEF3 + scenario (AFPM-style;
   we reproduce diagrams faithfully with Mermaid and describe the tool steps).
 
 ## 8. Operational rules for future sessions

@@ -99,6 +99,8 @@ def main():
     ranged = set()                      # "рис. 1.4–1.8" references every figure in the range
     for l1, n1, l2, n2 in re.findall(r"(?:рис\.|рисунк\w*)\s*(\d+)\.(\d+)\s*[–-]\s*(\d+)\.(\d+)", body_text, re.I):
         ranged.update((l1, str(x)) for x in range(int(n1), int(n2) + 1))
+    for grp in re.findall(r"(?:рис\.|рисунк\w*)\s*((?:\d+\.\d+(?:\s*,\s*|\s+і\s+)?)+)", body_text, re.I):
+        ranged.update(tuple(x.split(".")) for x in re.findall(r"\d+\.\d+", grp))
     for l, k in figs:
         if (l, k) not in ranged and not re.search(rf"(рис\.|рисунк\w*)\s*{l}\.{k}\b", body_text, re.I):
             warn(f"Рис. {l}.{k} is never referenced in the text")

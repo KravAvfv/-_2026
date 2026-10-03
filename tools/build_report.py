@@ -466,6 +466,9 @@ class ReportBuilder:
             img = png
         else:
             img = src
+            lj = src.with_suffix(".layout.json")        # pre-rendered diagram (e.g. IDEF) with its layout
+            if lj.exists():
+                layout = json.loads(lj.read_text(encoding="utf-8"))
         orient = f.get("orientation", "auto")
         if orient == "auto":
             orient = layout.get("orientation", "portrait")

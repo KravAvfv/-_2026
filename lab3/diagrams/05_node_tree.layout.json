@@ -1,0 +1,23 @@
+{
+  "file": "05_node_tree",
+  "native_px": [
+    1076,
+    575
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 6.5,
+    "main_pt": 6.5,
+    "dpi": 497
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.2,
+    "main_pt": 10.2,
+    "dpi": 319
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

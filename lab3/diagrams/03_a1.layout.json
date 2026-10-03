@@ -1,0 +1,23 @@
+{
+  "file": "03_a1",
+  "native_px": [
+    996,
+    560
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 7.0,
+    "main_pt": 7.0,
+    "dpi": 613
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 11.0,
+    "main_pt": 11.0,
+    "dpi": 394
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

@@ -99,6 +99,13 @@ Mermaid cannot draw real BPMN (typed events, gateway markers, pools/lanes, messa
 - **Always regenerate the model (`make_labN.py`) before re-rendering** — `tools/bpmn_model.py file.bpmn` only
   re-renders existing XML.
 
+## 4b. IDEF0 / IDEF3 / node tree (use this, not Mermaid)
+`tools/idef_model.py` renders strict IDEF diagrams from dicts (see `lab3/model3.py`, `lab3/make_lab3.py`):
+boxes in staircase order, ICOM arrows (`src` I/C/M/box, `dst` "A2:C" / "O"), ICOM codes, tunnels
+(`"tunnel": True`), call arrow (`"call"`), FEO (`"feo": True` + filtered arrows), IDEF3 UOW/junctions/referents.
+Budget for ≥ 10 pt: 5 boxes per decomposition at default geometry, ≤ 4 boxes with `bw` 140. Output PNG +
+`.layout.json`; reference the PNG in the report spec.
+
 ## 5. Hand-off to the report
 In `labN/report.yaml` reference the `.mmd` / `.bpmn` source (not the PNG):
 ```yaml

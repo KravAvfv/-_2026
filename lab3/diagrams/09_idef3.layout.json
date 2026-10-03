@@ -1,0 +1,23 @@
+{
+  "file": "09_idef3",
+  "native_px": [
+    1010,
+    454
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 6.9,
+    "main_pt": 6.9,
+    "dpi": 622
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.8,
+    "main_pt": 10.8,
+    "dpi": 399
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}
