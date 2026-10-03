@@ -1,0 +1,25 @@
+{
+  "file": "05_p3_mission_b.bpmn",
+  "native_px": [
+    966,
+    468
+  ],
+  "png_px": [
+    3864,
+    1872
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 7.3,
+    "dpi": 595
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 11.3,
+    "dpi": 382
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

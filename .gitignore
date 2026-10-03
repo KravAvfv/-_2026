@@ -4,3 +4,4 @@ __pycache__/
 */preview/
 lab*/*.pdf
 lab*/diagrams/*.svg
+node_modules/

@@ -83,8 +83,24 @@ numbering correct. Only then hand the `.mmd` to the report.
 - **Architecture/deployment:** `flowchart TB` with subgraphs per IoT layer (рівень сприйняття → периферійний →
   прикладний → користувача).
 
+## 4a. Strict BPMN 2.0 (use this, not Mermaid, for BPMN)
+Mermaid cannot draw real BPMN (typed events, gateway markers, pools/lanes, message flows). Use the project engine:
+- Describe the diagram as a Python dict (pools → lanes → nodes with `col`/`row`, `flows`, `data`, `messages`) —
+  see `lab2/make_lab2.py` and the docstring of `tools/bpmn_model.py`.
+- `write(spec, "labN/diagrams/NN_name.bpmn")` emits valid BPMN 2.0 XML **with DI** (opens in Camunda Modeler /
+  bpmn.io); `tools/bpmn/render.mjs` renders it with **bpmn-js** (bpmn.io reference renderer) in Chrome headless,
+  Times New Roman, 4× scale; `render()` applies the same legibility gate (`.layout.json`).
+- Budget per landscape figure at ≥ 10 pt: ≈ 1090 × 615 native px → about 4 task columns + 2–3 narrow
+  (event/gateway) columns and ≤ 5 lane-rows. Split big pools with **link events** (`"marker": "link", "link": "А"`).
+- Engine conventions: gateway questions ≤ 18 chars (one line above the diamond; auto-moves below when a branch goes
+  up); events get labels opposite their message flows; tasks' message flows attach off-centre; loops run along
+  the lane bottom; collapsed external pools can share a row (`"slot"`, `"cols"`); `"free": True` for hand-placed
+  interaction maps. Keep lane names ≤ 2 lines (≈ 14 chars per line).
+- **Always regenerate the model (`make_labN.py`) before re-rendering** — `tools/bpmn_model.py file.bpmn` only
+  re-renders existing XML.
+
 ## 5. Hand-off to the report
-In `labN/report.yaml` reference the `.mmd` (not the PNG):
+In `labN/report.yaml` reference the `.mmd` / `.bpmn` source (not the PNG):
 ```yaml
 - figure: {id: goal_tree, src: lab1/diagrams/03_goal_tree_overview.mmd, caption: Дерево цілей …, orientation: auto}
 ```

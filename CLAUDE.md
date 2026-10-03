@@ -38,6 +38,7 @@
 | `tools/mermaid-config.json` | diagram theme (Times New Roman 20 px, monochrome, no shadows) |
 | `tools/build_report.py` | YAML spec → .docx (title page fill, sections, numbering, landscape, previews) |
 | `tools/check_report.py` | automated compliance checks of a built .docx |
+| `tools/bpmn_model.py`, `tools/bpmn/` | BPMN 2.0 generator (grid layout + DI) and bpmn-js renderer (node, puppeteer-core); legibility gate |
 | `tools/docx2pdf.sh` | headless .docx → .pdf via OnlyOffice x2t (no LibreOffice on this machine) |
 | `.claude/skills/diagram-generator/` | diagram workflow skill |
 | `.claude/skills/academic-report-builder/` | report assembly skill |
@@ -46,6 +47,8 @@
 
 ## 5. Environment
 - Python venv: `.venv/` (python-docx, lxml, Pillow, PyYAML, pypdf). Always call `.venv/bin/python`.
+- Node packages for BPMN rendering: `tools/bpmn/node_modules` (bpmn-js 18, puppeteer-core) — `npm install` in
+  `tools/bpmn/` if missing; uses the Chrome Headless Shell from `~/.cache/puppeteer`.
 - Mermaid CLI: `mmdc` 12 (system, Chrome headless via puppeteer cache).
 - PDF/raster: `pdftotext`, `pdftoppm`, `magick`. OnlyOffice converter `/opt/onlyoffice/desktopeditors/converter/x2t`
   with font cache `~/.local/share/onlyoffice/desktopeditors/data/fonts/AllFonts.js`.
@@ -69,6 +72,8 @@
   (10) дерево цілей; (11) робоча структура проекту; (12) етапи розробки WBS; (13) аналіз характеристик проекту;
   (14) схематичне WBS зображення.
 - **ЛР2** — BPMN model of the organisation; each function as a separate pool; analysis of pools/lanes/interactions.
+  Done: `lab2/make_lab2.py` (5 functional pools P1–P5 + interaction map, 8 `.bpmn` diagrams, analysis computed
+  from the model).
 - **ЛР3** — IDEF0 context + decomposition, model report, node tree, FEO, split/merge, IDEF3 + scenario (AFPM-style;
   we reproduce diagrams faithfully with Mermaid and describe the tool steps).
 

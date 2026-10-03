@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs_d1_monitoring" targetNamespace="http://knu.ua/pis/shchyt-link" exporter="tools/bpmn_model.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_d1_monitoring">
+    <bpmn:participant id="X_SENS" name="Сенсорна мережа (акустичні вузли, РЛС, оптико-електронні пости)"/>
+    <bpmn:participant id="P1" name="Моніторинг повітряної обстановки" processRef="Proc_P1"/>
+    <bpmn:participant id="P2c" name="Призначення цілі та санкціонування пуску"/>
+    <bpmn:messageFlow id="MF_d1_monitoring_0" sourceRef="X_SENS" targetRef="P1_s" name="Виявлення цілі"/>
+    <bpmn:messageFlow id="MF_d1_monitoring_1" sourceRef="P1_e3" targetRef="P2c" name="Підтверджена ціль"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_P1" isExecutable="false">
+    <bpmn:laneSet id="LS_P1">
+      <bpmn:lane id="P1_L1" name="Оператор поста">
+        <bpmn:flowNodeRef>P1_s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P1_t1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P1_g1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P1_e1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P1_L2" name="Аналітик обстановки">
+        <bpmn:flowNodeRef>P1_t2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P1_t3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P1_g2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P1_e2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P1_L3" name="Оперативний черговий">
+        <bpmn:flowNodeRef>P1_t4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P1_e3</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P1_s" name="Виявлення надійшло"><bpmn:outgoing>SF_P1_0</bpmn:outgoing><bpmn:messageEventDefinition id="ED_P1_s"/></bpmn:startEvent>
+    <bpmn:userTask id="P1_t1" name="Верифікувати виявлення"><bpmn:incoming>SF_P1_0</bpmn:incoming><bpmn:outgoing>SF_P1_1</bpmn:outgoing></bpmn:userTask>
+    <bpmn:exclusiveGateway id="P1_g1" name="Підтверджено?"><bpmn:incoming>SF_P1_1</bpmn:incoming><bpmn:outgoing>SF_P1_2</bpmn:outgoing><bpmn:outgoing>SF_P1_3</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:endEvent id="P1_e1" name="Хибне виявлення"><bpmn:incoming>SF_P1_2</bpmn:incoming></bpmn:endEvent>
+    <bpmn:serviceTask id="P1_t2" name="Злити виявлення у трек цілі"><bpmn:incoming>SF_P1_3</bpmn:incoming><bpmn:outgoing>SF_P1_4</bpmn:outgoing><bpmn:dataOutputAssociation id="DOA_P1_t2_0"><bpmn:targetRef>P1_d1</bpmn:targetRef></bpmn:dataOutputAssociation></bpmn:serviceTask>
+    <bpmn:userTask id="P1_t3" name="Класифікувати ціль і оцінити загрозу"><bpmn:incoming>SF_P1_4</bpmn:incoming><bpmn:outgoing>SF_P1_5</bpmn:outgoing></bpmn:userTask>
+    <bpmn:exclusiveGateway id="P1_g2" name="Ворожа ціль?"><bpmn:incoming>SF_P1_5</bpmn:incoming><bpmn:outgoing>SF_P1_6</bpmn:outgoing><bpmn:outgoing>SF_P1_7</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:endEvent id="P1_e2" name="Трек під спостереженням"><bpmn:incoming>SF_P1_6</bpmn:incoming></bpmn:endEvent>
+    <bpmn:userTask id="P1_t4" name="Підтвердити класифікацію цілі"><bpmn:incoming>SF_P1_7</bpmn:incoming><bpmn:outgoing>SF_P1_8</bpmn:outgoing></bpmn:userTask>
+    <bpmn:endEvent id="P1_e3" name="Ціль передано"><bpmn:incoming>SF_P1_8</bpmn:incoming><bpmn:messageEventDefinition id="ED_P1_e3"/></bpmn:endEvent>
+    <bpmn:sequenceFlow id="SF_P1_0" sourceRef="P1_s" targetRef="P1_t1" name=""/>
+    <bpmn:sequenceFlow id="SF_P1_1" sourceRef="P1_t1" targetRef="P1_g1" name=""/>
+    <bpmn:sequenceFlow id="SF_P1_2" sourceRef="P1_g1" targetRef="P1_e1" name="ні"/>
+    <bpmn:sequenceFlow id="SF_P1_3" sourceRef="P1_g1" targetRef="P1_t2" name="так"/>
+    <bpmn:sequenceFlow id="SF_P1_4" sourceRef="P1_t2" targetRef="P1_t3" name=""/>
+    <bpmn:sequenceFlow id="SF_P1_5" sourceRef="P1_t3" targetRef="P1_g2" name=""/>
+    <bpmn:sequenceFlow id="SF_P1_6" sourceRef="P1_g2" targetRef="P1_e2" name="ні"/>
+    <bpmn:sequenceFlow id="SF_P1_7" sourceRef="P1_g2" targetRef="P1_t4" name="так"/>
+    <bpmn:sequenceFlow id="SF_P1_8" sourceRef="P1_t4" targetRef="P1_e3" name=""/>
+    <bpmn:dataStoreReference id="P1_d1" name="Сховище треків"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Dgm_d1_monitoring"><bpmndi:BPMNPlane id="Plane_d1_monitoring" bpmnElement="Collab_d1_monitoring">
+    <bpmndi:BPMNShape id="X_SENS_di" bpmnElement="X_SENS" isHorizontal="true"><dc:Bounds x="0" y="0" width="1044" height="64"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_di" bpmnElement="P1" isHorizontal="true"><dc:Bounds x="0" y="104" width="1044" height="354"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_L1_di" bpmnElement="P1_L1" isHorizontal="true"><dc:Bounds x="50" y="104" width="994" height="118"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_L2_di" bpmnElement="P1_L2" isHorizontal="true"><dc:Bounds x="50" y="222" width="994" height="118"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_L3_di" bpmnElement="P1_L3" isHorizontal="true"><dc:Bounds x="50" y="340" width="994" height="118"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_s_di" bpmnElement="P1_s"><dc:Bounds x="136" y="143" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="104" y="186" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_t1_di" bpmnElement="P1_t1"><dc:Bounds x="214" y="119" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_g1_di" bpmnElement="P1_g1"><dc:Bounds x="453" y="136" width="54" height="54"/><bpmndi:BPMNLabel><dc:Bounds x="400" y="113" width="160" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_e1_di" bpmnElement="P1_e1"><dc:Bounds x="644" y="143" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="612" y="186" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_t2_di" bpmnElement="P1_t2"><dc:Bounds x="398" y="237" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_t3_di" bpmnElement="P1_t3"><dc:Bounds x="582" y="237" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_g2_di" bpmnElement="P1_g2"><dc:Bounds x="821" y="254" width="54" height="54"/><bpmndi:BPMNLabel><dc:Bounds x="768" y="231" width="160" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_e2_di" bpmnElement="P1_e2"><dc:Bounds x="968" y="261" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="924" y="304" width="129" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_t4_di" bpmnElement="P1_t4"><dc:Bounds x="766" y="355" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_e3_di" bpmnElement="P1_e3"><dc:Bounds x="968" y="379" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="936" y="339" width="104" height="38"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P1_d1_di" bpmnElement="P1_d1"><dc:Bounds x="453" y="374" width="54" height="50"/><bpmndi:BPMNLabel><dc:Bounds x="410" y="428" width="140" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P2c_di" bpmnElement="P2c" isHorizontal="true"><dc:Bounds x="0" y="498" width="1044" height="64"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="SF_P1_0_di" bpmnElement="SF_P1_0"><di:waypoint x="176" y="163"/><di:waypoint x="214" y="163"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P1_1_di" bpmnElement="SF_P1_1"><di:waypoint x="378" y="163"/><di:waypoint x="453" y="163"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P1_2_di" bpmnElement="SF_P1_2"><di:waypoint x="507" y="163"/><di:waypoint x="644" y="163"/><bpmndi:BPMNLabel><dc:Bounds x="513" y="141" width="23" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P1_3_di" bpmnElement="SF_P1_3"><di:waypoint x="480" y="190"/><di:waypoint x="480" y="237"/><bpmndi:BPMNLabel><dc:Bounds x="485" y="192" width="32" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P1_4_di" bpmnElement="SF_P1_4"><di:waypoint x="562" y="281"/><di:waypoint x="582" y="281"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P1_5_di" bpmnElement="SF_P1_5"><di:waypoint x="746" y="281"/><di:waypoint x="821" y="281"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P1_6_di" bpmnElement="SF_P1_6"><di:waypoint x="875" y="281"/><di:waypoint x="968" y="281"/><bpmndi:BPMNLabel><dc:Bounds x="881" y="259" width="23" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P1_7_di" bpmnElement="SF_P1_7"><di:waypoint x="848" y="308"/><di:waypoint x="848" y="355"/><bpmndi:BPMNLabel><dc:Bounds x="853" y="310" width="32" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P1_8_di" bpmnElement="SF_P1_8"><di:waypoint x="930" y="399"/><di:waypoint x="968" y="399"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="DOA_P1_t2_0_di" bpmnElement="DOA_P1_t2_0"><di:waypoint x="480" y="325"/><di:waypoint x="480" y="374"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d1_monitoring_0_di" bpmnElement="MF_d1_monitoring_0"><di:waypoint x="156" y="64"/><di:waypoint x="156" y="143"/><bpmndi:BPMNLabel><dc:Bounds x="162" y="73" width="120" height="22"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d1_monitoring_1_di" bpmnElement="MF_d1_monitoring_1"><di:waypoint x="988" y="419"/><di:waypoint x="988" y="498"/><bpmndi:BPMNLabel><dc:Bounds x="836" y="467" width="146" height="22"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

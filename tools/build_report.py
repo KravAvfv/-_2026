@@ -453,11 +453,12 @@ class ReportBuilder:
     def figure(self, f):
         src = (ROOT / f["src"]).resolve()
         layout = {}
-        if src.suffix == ".mmd":
+        if src.suffix in (".mmd", ".bpmn"):
             png = src.with_suffix(".png")
             lj = src.with_suffix(".layout.json")
+            tool = "tools/mmd_render.py" if src.suffix == ".mmd" else "tools/bpmn_model.py"
             if not png.exists() or not lj.exists() or png.stat().st_mtime < src.stat().st_mtime:
-                r = subprocess.run([sys.executable, str(ROOT / "tools/mmd_render.py"), str(src)],
+                r = subprocess.run([sys.executable, str(ROOT / tool), str(src)],
                                    capture_output=True, text=True)
                 if r.returncode != 0:
                     sys.exit(f"Diagram {src.name} failed legibility/render:\n{r.stdout}{r.stderr}")
@@ -522,6 +523,9 @@ def split_tables(pdf, meta):
             .split("Pages:")[1].split()[0])
     pages = [subprocess.run(["pdftotext", "-f", str(i), "-l", str(i), str(pdf), "-"],
                             capture_output=True, text=True).stdout for i in range(1, n + 1)]
+    # -layout keeps table rows on one line (plain mode reads tables column by column)
+    pages_lay = [subprocess.run(["pdftotext", "-layout", "-f", str(i), "-l", str(i), str(pdf), "-"],
+                                capture_output=True, text=True).stdout for i in range(1, n + 1)]
     bad, used = [], {}
     for key, keep, probe, last, head in meta:
         start = used.get(probe, 0)
@@ -536,11 +540,15 @@ def split_tables(pdf, meta):
         if words:   # (a) last row's words missing from the caption page
             on_page = set(WORD.findall(pages[pg].split(probe, 1)[1]))
             split = len(words & on_page) / len(words) < 0.8
-        hw = set(WORD.findall(head))
-        if not split and hw and pg + 1 < n:   # (b) header row repeated at the top of the next page
-            top = pages[pg + 1].lstrip()[:len(head) + 80]
-            if not top.startswith(("Таблиця", "Продовження")):
-                split = len(hw & set(WORD.findall(top))) / len(hw) >= 0.8
+        if not split and head and pg + 1 < n:  # (b) header row repeated at the top of the next page
+            nxt = pages_lay[pg + 1].lstrip()
+            if not nxt.startswith(("Таблиця", "Продовження")):
+                top = nxt[:len(head) * 3 + 200]
+                compact = lambda t: re.sub(r"[\s\-]+", "", t)   # header cell wrapped mid-word
+                toks = lambda t: set(re.findall(r"[A-Za-zА-ЯІЇЄҐа-яіїєґ’'\-]{2,}", t))
+                ht = toks(head)                                     # header cells wrapped onto 2+ lines
+                split = compact(head)[:40] in compact(top) or (
+                    len(ht) >= 2 and len(ht & toks(top)) / len(ht) >= 0.8)
         if split:
             bad.append(key)
     return bad

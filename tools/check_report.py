@@ -121,7 +121,7 @@ def main():
         spec = yaml.safe_load(Path(a.spec).read_text(encoding="utf-8"))
         for b in spec["blocks"]:
             f = b.get("figure")
-            if not f or not str(f["src"]).endswith(".mmd"):
+            if not f or not str(f["src"]).endswith((".mmd", ".bpmn")):
                 continue
             lj = (ROOT / f["src"]).with_suffix(".layout.json")
             if not lj.exists():

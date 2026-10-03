@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs_d0_overview" targetNamespace="http://knu.ua/pis/shchyt-link" exporter="tools/bpmn_model.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_d0_overview">
+    <bpmn:participant id="O_SENS" name="Сенсорна мережа"/>
+    <bpmn:participant id="O_AF" name="Вищий командний пункт (Повітряні сили ЗСУ)"/>
+    <bpmn:participant id="O_P1" name="Моніторинг повітряної обстановки"/>
+    <bpmn:participant id="O_P2" name="Призначення цілі та санкціонування пуску"/>
+    <bpmn:participant id="O_P3" name="Виконання місії перехоплення"/>
+    <bpmn:participant id="O_P4" name="Оцінка результату та звітність"/>
+    <bpmn:participant id="O_SUP" name="Постачальник"/>
+    <bpmn:participant id="O_P5" name="Забезпечення готовності ресурсів"/>
+    <bpmn:participant id="O_DSNS" name="ДСНС"/>
+    <bpmn:messageFlow id="MF_d0_overview_0" sourceRef="O_SENS" targetRef="O_P1" name="Виявлення цілей"/>
+    <bpmn:messageFlow id="MF_d0_overview_1" sourceRef="O_AF" targetRef="O_P2" name="Плани польотів"/>
+    <bpmn:messageFlow id="MF_d0_overview_2" sourceRef="O_P2" targetRef="O_AF" name="Запит на погодження"/>
+    <bpmn:messageFlow id="MF_d0_overview_3" sourceRef="O_P4" targetRef="O_AF" name="Звіт про перехоплення"/>
+    <bpmn:messageFlow id="MF_d0_overview_4" sourceRef="O_P1" targetRef="O_P2" name="Підтверджена ціль"/>
+    <bpmn:messageFlow id="MF_d0_overview_5" sourceRef="O_P2" targetRef="O_P3" name="Бойове завдання"/>
+    <bpmn:messageFlow id="MF_d0_overview_6" sourceRef="O_P3" targetRef="O_P2" name="Прийняття / відмова"/>
+    <bpmn:messageFlow id="MF_d0_overview_7" sourceRef="O_P3" targetRef="O_P4" name="Доповідь про результат"/>
+    <bpmn:messageFlow id="MF_d0_overview_8" sourceRef="O_P5" targetRef="O_P2" name="Готовність розрахунків"/>
+    <bpmn:messageFlow id="MF_d0_overview_9" sourceRef="O_P3" targetRef="O_P5" name="Дані про витрату"/>
+    <bpmn:messageFlow id="MF_d0_overview_10" sourceRef="O_P4" targetRef="O_DSNS" name="Координати падіння"/>
+    <bpmn:messageFlow id="MF_d0_overview_11" sourceRef="O_P5" targetRef="O_SUP" name="Заявка на поповнення"/>
+  </bpmn:collaboration>
+  <bpmndi:BPMNDiagram id="Dgm_d0_overview"><bpmndi:BPMNPlane id="Plane_d0_overview" bpmnElement="Collab_d0_overview">
+    <bpmndi:BPMNShape id="O_SENS_di" bpmnElement="O_SENS" isHorizontal="true"><dc:Bounds x="0" y="0" width="200" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="O_AF_di" bpmnElement="O_AF" isHorizontal="true"><dc:Bounds x="296" y="0" width="792" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="O_P1_di" bpmnElement="O_P1" isHorizontal="true"><dc:Bounds x="0" y="182" width="200" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="O_P2_di" bpmnElement="O_P2" isHorizontal="true"><dc:Bounds x="296" y="182" width="200" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="O_P3_di" bpmnElement="O_P3" isHorizontal="true"><dc:Bounds x="592" y="182" width="200" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="O_P4_di" bpmnElement="O_P4" isHorizontal="true"><dc:Bounds x="888" y="182" width="200" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="O_SUP_di" bpmnElement="O_SUP" isHorizontal="true"><dc:Bounds x="0" y="364" width="200" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="O_P5_di" bpmnElement="O_P5" isHorizontal="true"><dc:Bounds x="296" y="364" width="496" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="O_DSNS_di" bpmnElement="O_DSNS" isHorizontal="true"><dc:Bounds x="888" y="364" width="200" height="72"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="MF_d0_overview_0_di" bpmnElement="MF_d0_overview_0"><di:waypoint x="100" y="72"/><di:waypoint x="100" y="182"/><bpmndi:BPMNLabel><dc:Bounds x="106" y="107" width="88" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_1_di" bpmnElement="MF_d0_overview_1"><di:waypoint x="356" y="72"/><di:waypoint x="356" y="182"/><bpmndi:BPMNLabel><dc:Bounds x="280" y="107" width="70" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_2_di" bpmnElement="MF_d0_overview_2"><di:waypoint x="446" y="182"/><di:waypoint x="446" y="72"/><bpmndi:BPMNLabel><dc:Bounds x="452" y="107" width="88" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_3_di" bpmnElement="MF_d0_overview_3"><di:waypoint x="988" y="182"/><di:waypoint x="988" y="72"/><bpmndi:BPMNLabel><dc:Bounds x="994" y="107" width="88" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_4_di" bpmnElement="MF_d0_overview_4"><di:waypoint x="200" y="218"/><di:waypoint x="296" y="218"/><bpmndi:BPMNLabel><dc:Bounds x="204" y="176" width="88" height="38"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_5_di" bpmnElement="MF_d0_overview_5"><di:waypoint x="496" y="204"/><di:waypoint x="592" y="204"/><bpmndi:BPMNLabel><dc:Bounds x="500" y="162" width="88" height="38"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_6_di" bpmnElement="MF_d0_overview_6"><di:waypoint x="592" y="234"/><di:waypoint x="496" y="234"/><bpmndi:BPMNLabel><dc:Bounds x="500" y="238" width="88" height="38"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_7_di" bpmnElement="MF_d0_overview_7"><di:waypoint x="792" y="218"/><di:waypoint x="888" y="218"/><bpmndi:BPMNLabel><dc:Bounds x="796" y="176" width="88" height="38"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_8_di" bpmnElement="MF_d0_overview_8"><di:waypoint x="396" y="364"/><di:waypoint x="396" y="254"/><bpmndi:BPMNLabel><dc:Bounds x="402" y="289" width="88" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_9_di" bpmnElement="MF_d0_overview_9"><di:waypoint x="692" y="254"/><di:waypoint x="692" y="364"/><bpmndi:BPMNLabel><dc:Bounds x="698" y="289" width="88" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_10_di" bpmnElement="MF_d0_overview_10"><di:waypoint x="988" y="254"/><di:waypoint x="988" y="364"/><bpmndi:BPMNLabel><dc:Bounds x="994" y="289" width="88" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d0_overview_11_di" bpmnElement="MF_d0_overview_11"><di:waypoint x="296" y="400"/><di:waypoint x="200" y="400"/><bpmndi:BPMNLabel><dc:Bounds x="204" y="358" width="88" height="38"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,25 @@
+{
+  "file": "02_p2_assignment_a.bpmn",
+  "native_px": [
+    1066,
+    572
+  ],
+  "png_px": [
+    4264,
+    2288
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 6.6,
+    "dpi": 656
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.3,
+    "dpi": 421
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}
