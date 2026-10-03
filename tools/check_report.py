@@ -22,7 +22,7 @@ from docx import Document
 
 ROOT = Path(__file__).resolve().parent.parent
 REQUIRED = ["МЕТА РОБОТИ", "КОРОТКІ ТЕОРЕТИЧНІ ВІДОМОСТІ", "ХІД ВИКОНАННЯ РОБОТИ", "ВИСНОВКИ"]
-PLACEHOLDERS = re.compile(r"\b(User|Manager|Item\d*|ProcessData|TODO|TBD|Lorem|Foo|Bar|XXX)\b")
+PLACEHOLDERS = re.compile(r"\b(User(?! Defined)|Manager|Item\d*|ProcessData|TODO|TBD|Lorem|Foo|Bar|XXX)\b")
 RUSSIAN = re.compile(r"[ыэъёЫЭЪЁ]")
 
 fails, warns = [], []
@@ -104,8 +104,15 @@ def main():
     for l, k in figs:
         if (l, k) not in ranged and not re.search(rf"(рис\.|рисунк\w*)\s*{l}\.{k}\b", body_text, re.I):
             warn(f"Рис. {l}.{k} is never referenced in the text")
+    tref = set()
+    for grp in re.findall(r"(?:табл\.|таблиц\w*)\s*((?:\d+\.\d+(?:\s*[,–-]\s*|\s+і\s+)?)+)", body_text, re.I):
+        nums = re.findall(r"\d+\.\d+", grp)
+        tref.update(tuple(x.split(".")) for x in nums)
+        if "–" in grp and len(nums) == 2:
+            (l1, a1), (_, b1) = nums[0].split("."), nums[1].split(".")
+            tref.update((l1, str(x)) for x in range(int(a1), int(b1) + 1))
     for l, k in tabs:
-        if not re.search(rf"(табл\.|таблиц\w*)\s*{l}\.{k}\b", body_text, re.I):
+        if (l, k) not in tref and not re.search(rf"(табл\.|таблиц\w*)\s*{l}\.{k}\b", body_text, re.I):
             warn(f"Таблиця {l}.{k} is never referenced in the text")
 
     # --- language hygiene
@@ -123,7 +130,7 @@ def main():
         spec = yaml.safe_load(Path(a.spec).read_text(encoding="utf-8"))
         for b in spec["blocks"]:
             f = b.get("figure")
-            if not f or not str(f["src"]).endswith((".mmd", ".bpmn")):
+            if not f or not str(f["src"]).endswith((".mmd", ".bpmn", ".puml")):
                 continue
             lj = (ROOT / f["src"]).with_suffix(".layout.json")
             if not lj.exists():

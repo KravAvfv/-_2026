@@ -1,0 +1,42 @@
+@startuml
+abstract class User as "Користувач" {
+  - піб : String
+  - роль : Роль
+  + автентифікуватися() : Boolean
+}
+class DutyOfficer as "ОперативнийЧерговий"
+class FireOfficer as "ОфіцерБойовогоУправління"
+class Mission as "Місія" {
+  - номер : String
+  - стан : СтанМісії
+  - результат : Результат
+  + approve(черговий) : void
+  + abort(причина) : void
+}
+class MissionEvent as "ПодіяМісії" {
+  - час : DateTime
+  - тип : ТипПодії
+}
+class Crew as "Розрахунок" {
+  - позивний : String
+  - стан : СтанРозрахунку
+  + прийнятиЗавдання(м) : Boolean
+}
+class Interceptor as "Перехоплювач" {
+  - серійнийНомер : String
+  - стан : СтанПерехоплювача
+}
+class Position as "ВогневаПозиція" {
+  - код : String
+  - координати : GeoPoint
+}
+User <|-- DutyOfficer
+User <|-- FireOfficer
+DutyOfficer ..> Mission : санкціонує
+FireOfficer ..> Mission : пропонує
+Mission "1" *-- "*" MissionEvent
+Crew "1" -- "*" Mission : виконує
+Mission "*" --> "0..1" Interceptor : використовує
+Position "1" o-- "*" Crew
+Position "1" o-- "*" Interceptor
+@enduml

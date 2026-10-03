@@ -1,0 +1,26 @@
+@startuml
+hide footbox
+actor "ОБУ" as FCO
+boundary "Інтерфейс КП" as UI
+control "Сервіс\nпризначень" as TS
+control "Гео-сервіс" as GEO
+entity "Місія" as MIS
+actor "Черговий" as OC
+participant "Застосунок\nрозрахунку" as APP
+FCO -> UI : обрати ціль
+UI -> TS : запитКандидатів(трек)
+TS -> GEO : перевіритиДеконфлікцію()
+TS --> UI : кандидати
+FCO -> UI : обрати розрахунок
+UI -> TS : створитиМісію()
+TS -> MIS ** : create()
+TS -> OC : запит на санкціонування
+OC -> TS : дозволити пуск
+TS -> MIS : approve()
+TS -> APP : бойове завдання
+alt підтверджено за 15 с
+  APP --> TS : підтвердження
+else тайм-аут
+  TS -> UI : резервний розрахунок
+end
+@enduml

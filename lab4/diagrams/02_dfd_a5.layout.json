@@ -1,23 +1,23 @@
 {
-  "file": "07_split_a0",
+  "file": "02_dfd_a5",
   "native_px": [
-    1072,
-    616
+    1074,
+    554
   ],
   "min_font_px": 15,
   "portrait": {
     "width_cm": 16.5,
     "font_pt": 6.5,
     "main_pt": 6.5,
-    "dpi": 495
+    "dpi": 496
   },
   "landscape": {
-    "width_cm": 25.23,
-    "font_pt": 10.0,
-    "main_pt": 10.0,
-    "dpi": 324
+    "width_cm": 25.7,
+    "font_pt": 10.2,
+    "main_pt": 10.2,
+    "dpi": 318
   },
   "orientation": "landscape",
-  "width_cm": 25.23,
+  "width_cm": 25.7,
   "legible": true
 }

@@ -65,7 +65,7 @@ def feo(focus="A3"):
 
 
 D["06_feo_a3"] = feo()
-D["07_split_a0"] = dict(copy.deepcopy(D["02_a0"]), number="7", gap=58, lz=112, rz=112,
+D["07_split_a0"] = dict(copy.deepcopy(D["02_a0"]), number="7",
                         call={"box": "A3", "label": f"Модель «{SPLIT_NAME}»"})
 SPLIT_ARROWS = [
     {"label": "Готові перехоплювачі", "src": "I", "dst": ["A0:I"], "type": "Input"},

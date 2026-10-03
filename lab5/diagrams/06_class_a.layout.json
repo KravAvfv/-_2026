@@ -1,0 +1,21 @@
+{
+  "file": "06_class_a.puml",
+  "native_px": [
+    541,
+    331
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 13.0,
+    "dpi": 333
+  },
+  "landscape": {
+    "width_cm": 16.54,
+    "font_pt": 13.0,
+    "dpi": 332
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

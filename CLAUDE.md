@@ -40,6 +40,7 @@
 | `tools/check_report.py` | automated compliance checks of a built .docx |
 | `tools/bpmn_model.py`, `tools/bpmn/` | BPMN 2.0 generator (grid layout + DI) and bpmn-js renderer (node, puppeteer-core); legibility gate |
 | `tools/idef_model.py` | IDEF0 / IDEF3 / node-tree renderer (AFPM-style frame, ICOM routing, squiggle label placer, tunnels, call arrows, FEO) → SVG/PNG + legibility gate |
+| `tools/puml_render.py`, `tools/plantuml/` | PlantUML renderer (jar not committed — see tools/plantuml/README.md) + legibility gate |
 | `tools/docx2pdf.sh` | headless .docx → .pdf via OnlyOffice x2t (no LibreOffice on this machine) |
 | `.claude/skills/diagram-generator/` | diagram workflow skill |
 | `.claude/skills/academic-report-builder/` | report assembly skill |
@@ -76,7 +77,12 @@
   Done: `lab2/make_lab2.py` (5 functional pools P1–P5 + interaction map, 8 `.bpmn` diagrams, analysis computed
   from the model).
 - **ЛР3** — done: `lab3/model3.py` (model data) + `lab3/make_lab3.py` (10 diagrams, report). IDEF0 context + decomposition, model report, node tree, FEO, split/merge, IDEF3 + scenario (AFPM-style;
-  we reproduce diagrams faithfully with Mermaid and describe the tool steps).
+  diagrams rendered by `tools/idef_model.py`; AFPM dialog steps described in text).
+- **ЛР4** — done: `lab4/model4.py` + `lab4/make_lab4.py`: DFD A4, DFD A5 (Gane–Sarson, off-page reference),
+  ABC (cost centres, roll-up C = Σ C·F, A0 with ABC Data), Activity Cost Report, UDP + Diagram Object Report,
+  Arrow / Data Usage / Consistency reports.
+- **ЛР5** (brief `лб5_6.docx`) — done: `lab5/model5.py` + `lab5/make_lab5.py`: use-case diagrams (idef_model
+  `usecase` renderer), activity ×2, sequence, class ×2 (PlantUML via `tools/puml_render.py`). Next: лб7_Архітектура ІоТ.docx.
 
 ## 8. Operational rules for future sessions
 - **Formatting rules (2026-10-03, see academic-report-builder §4a):** dot after heading numbers; new page before

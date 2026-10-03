@@ -1,0 +1,23 @@
+{
+  "file": "01_usecase_combat",
+  "native_px": [
+    1056,
+    589
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 6.6,
+    "main_pt": 6.6,
+    "dpi": 488
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.3,
+    "main_pt": 10.3,
+    "dpi": 313
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

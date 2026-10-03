@@ -1,0 +1,23 @@
+{
+  "file": "02_usecase_support",
+  "native_px": [
+    956,
+    563
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 7.3,
+    "main_pt": 7.3,
+    "dpi": 589
+  },
+  "landscape": {
+    "width_cm": 24.61,
+    "font_pt": 10.9,
+    "main_pt": 10.9,
+    "dpi": 395
+  },
+  "orientation": "landscape",
+  "width_cm": 24.61,
+  "legible": true
+}

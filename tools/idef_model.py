@@ -163,7 +163,7 @@ class Placer:
                 for t in range(nsamp + 1):
                     ax = x1 + (x2 - x1) * t / nsamp
                     ay = y1 + (y2 - y1) * t / nsamp
-                    for d in (2, 16, 34, 56, 84):
+                    for d in (2, 16, 34, 56, 84, 116, 150):
                         if horiz:
                             cands = [(ax + 4, ay - h - d), (ax - w - 4, ay - h - d), (ax - w / 2, ay - h - d),
                                      (ax + 4, ay + d + 1), (ax - w - 4, ay + d + 1), (ax - w / 2, ay + d + 1)]
@@ -183,6 +183,12 @@ class Placer:
                             if d > 9:
                                 qx, qy = min(max(ax, cx), cx + w), min(max(ay, cy), cy + h)
                                 sq_hits = sum(1 for sg in self.segs if _cross(((qx, qy), (ax, ay)), sg))
+                                for k_ in range(1, 10):          # leader must not pass over a box
+                                    px_ = qx + (ax - qx) * k_ / 10; py_ = qy + (ay - qy) * k_ / 10
+                                    if any(o[0] + 2 < px_ < o[0] + o[2] - 2 and o[1] + 2 < py_ < o[1] + o[3] - 2
+                                           for o in self.obst):
+                                        sq_hits += 1
+                                        break
                             # a label hugging another arrow's line reads as belonging to it
                             near = _seg_hits((cx - 9, cy - 7, w + 18, h + 14), foreign)
                             sc += near * 260
@@ -256,8 +262,8 @@ def frame(svg, W, H, node, title, number, status="РОБОЧИЙ", feo=False):
 # ------------------------------------------------------------------------------------------- IDEF0
 def render_idef0(spec, svg_path):
     ctx = len(spec["boxes"]) == 1
-    BW, BH = (340, 190) if ctx else (spec.get("bw", 124), spec.get("bh", 88))
-    GAP, DY = spec.get("gap", 52), spec.get("dy", 74)
+    BW, BH = (340, 190) if ctx else (spec.get("bw", 116), spec.get("bh", 88))
+    GAP, DY = spec.get("gap", 62), spec.get("dy", 74)
     LZ, RZ = spec.get("lz", 122), spec.get("rz", 122)
     TZ, BZ = spec.get("tz", 64), spec.get("bz", 66)
     n = len(spec["boxes"])
@@ -486,6 +492,8 @@ def render_idef0(spec, svg_path):
         th_ = len(lines) * FPX * LH
         svg.text(bx + bw / 2, by + (bh - 16 - th_) / 2 + 2, lines, anchor="middle")
         svg.text(bx + bw - 5, by + bh - FPX - 3, [bid if not ctx else spec["node"]], anchor="end", size=FPX)
+        if spec.get("abc", {}).get(bid):            # ABC Data: cost in the lower-left corner (AFPM style)
+            svg.text(bx + 5, by + bh - FPX - 3, [spec["abc"][bid]])
     # draw arrows (heads at each target end)
     order = sorted(routes, key=lambda r: 0 if r[0] == "call" or arrows[r[0]]["src"] in ("I", "C", "M") or
                    "O" in arrows[r[0]]["dst"] else 1)
@@ -704,11 +712,244 @@ def render_tree(spec, svg_path):
     return W, H
 
 
+
+# ------------------------------------------------------------------------------------------- DFD (Gane–Sarson)
+def render_dfd(spec, svg_path):
+    """spec: {"kind": "dfd", "node", "title", "number",
+       "processes": [{"id": "A41", "name", "col", "row"}], "stores": [{"id": "D1", "name", "col", "row"}],
+       "externals": [{"id": "E1", "name", "col", "row"}],
+       "flows": [{"src", "dst", "label", "route": "h|v|hv|vh", "ofs": 0, "bidir": False}]}
+       src/dst "@A5:right" / "@A4:top" = off-page reference at the frame border (label = node number)."""
+    PW, PH = spec.get("pw", 150), spec.get("ph", 84)
+    SW, SH = 156, 44
+    EW, EH = 140, 60
+    CW, RH = spec.get("cw", 206), spec.get("rh", 150)
+    X0, Y0 = 22, HDR_H + spec.get("top", 26)
+    items = spec["processes"] + spec.get("stores", []) + spec.get("externals", [])
+    cols = 1 + max(i["col"] for i in items)
+    rows = 1 + max(i["row"] for i in items)
+    W = max(X0 * 2 + cols * CW, 980)
+    H = Y0 + rows * RH + spec.get("bottom", 10) + FTR_H
+    shift = (W - X0 * 2 - cols * CW) / 2
+    shapes = {}
+    for kind, lst, (w, h) in (("p", spec["processes"], (PW, PH)), ("d", spec.get("stores", []), (SW, SH)),
+                              ("e", spec.get("externals", []), (EW, EH))):
+        for o in lst:
+            cx = X0 + shift + o["col"] * CW + CW / 2
+            cy = Y0 + o["row"] * RH + RH / 2
+            shapes[o["id"]] = (kind, cx - w / 2, cy - h / 2, w, h, o)
+    top, bottom, left, right = HDR_H, H - FTR_H, 0, W
+    svg = SVG()
+    frame(svg, W, H, spec["node"], spec["title"], spec.get("number", ""), spec.get("status", "РОБОЧИЙ"))
+    for sid, (k, x, y, w, h, o) in shapes.items():
+        if k == "p":       # process: rounded rectangle, node number bottom-right
+            svg.items.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w}" height="{h}" rx="12" fill="#fff" '
+                             f'stroke="#000" stroke-width="2"/>')
+            lines = wrap(o["name"], w - 16)
+            svg.text(x + w / 2, y + (h - 16 - len(lines) * FPX * LH) / 2 + 1, lines, anchor="middle")
+            svg.text(x + w - 8, y + h - FPX - 4, [sid], anchor="end")
+        elif k == "d":     # data store: open rectangle with ID cell
+            svg.line([(x + w, y), (x, y), (x, y + h), (x + w, y + h)], sw=1.8)
+            svg.line([(x + 36, y), (x + 36, y + h)], sw=1.3)
+            svg.text(x + 18, y + (h - FPX) / 2, [sid], anchor="middle")
+            lines = wrap(o["name"], w - 46)
+            svg.text(x + 42, y + (h - len(lines) * FPX * LH) / 2, lines)
+        else:              # external entity: rectangle with shadow (Gane–Sarson)
+            svg.rect(x + 5, y + 5, w, h, sw=1.0, fill="#000")
+            svg.rect(x, y, w, h, sw=1.8)
+            lines = wrap(o["name"], w - 12)
+            svg.text(x + w / 2, y + (h - len(lines) * FPX * LH) / 2, lines, anchor="middle")
+    routes = []
+    for f in spec["flows"]:
+        ofs = f.get("ofs", 0)
+
+        def anchor(ref, other_c, is_src):
+            if ref.startswith("@"):
+                node, side = ref[1:].split(":")
+                return ("border", node, side)
+            k, x, y, w, h, o = shapes[ref]
+            return ("shape", (x, y, w, h))
+        sref, dref = f["src"], f["dst"]
+        mode = f.get("route", "h")
+        def box(ref):
+            k, x, y, w, h, o = shapes[ref]
+            return x, y, w, h
+        if sref.startswith("@") or dref.startswith("@"):
+            ref, node_side = (dref, sref) if sref.startswith("@") else (sref, dref)
+            node, side = node_side[1:].split(":")
+            x, y, w, h = box(ref)
+            cx, cy = x + w / 2 + (ofs if side in ("top", "bottom") else 0), y + h / 2 + (ofs if side in ("left", "right") else 0)
+            if side == "right":
+                pts = [(x + w, cy), (right, cy)]
+            elif side == "left":
+                pts = [(left, cy), (x, cy)][::-1]
+            elif side == "top":
+                pts = [(cx, y), (cx, top)]
+            else:
+                pts = [(cx, y + h), (cx, bottom)]
+            if sref.startswith("@"):
+                pts = pts[::-1]
+            routes.append((f, pts, (node, side)))
+            continue
+        sx, sy, sw_, sh = box(sref)
+        tx, ty, tw_, th = box(dref)
+        scx, scy, tcx, tcy = sx + sw_ / 2, sy + sh / 2, tx + tw_ / 2, ty + th / 2
+        if mode == "h":
+            y_ = scy + ofs
+            pts = [(sx + sw_, y_), (tx, y_)] if tcx > scx else [(sx, y_), (tx + tw_, y_)]
+        elif mode == "v":
+            x_ = scx + ofs
+            pts = [(x_, sy + sh), (x_, ty)] if tcy > scy else [(x_, sy), (x_, ty + th)]
+        elif mode == "hv":   # leave horizontally, enter target top/bottom
+            y_ = scy + ofs
+            xe = tcx + f.get("ofs2", 0)
+            sxe = sx + sw_ if tcx > scx else sx
+            pts = [(sxe, y_), (xe, y_), (xe, ty if tcy > scy else ty + th)]
+        else:                # "vh": leave vertically, enter target side
+            x_ = scx + ofs
+            ye = tcy + f.get("ofs2", 0)
+            sye = sy + sh if tcy > scy else sy
+            pts = [(x_, sye), (x_, ye), (tx if tcx > scx else tx + tw_, ye)]
+        routes.append((f, pts, None))
+    allsegs = [sg for _, pts, _ in routes for sg in zip(pts, pts[1:])]
+    obst = [(x - 3, y - 3, w + 9, h + 9) for (_, x, y, w, h, _) in shapes.values()]
+    placer = Placer((0, HDR_H, W, H - HDR_H - FTR_H), obst, allsegs)
+    for f, pts, off in routes:
+        svg.line(pts, sw=1.5)
+        svg.head(pts[-2], pts[-1])
+        if f.get("bidir"):
+            svg.head(pts[1], pts[0])
+        if off:                                   # off-page reference: node number at the border
+            node, side = off
+            (bx_, by_) = pts[0] if f["src"].startswith("@") else pts[-1]
+            lbl = node
+            tw0 = tw(lbl) + 10
+            if side in ("left", "right"):
+                rx_ = 4 if side == "left" else W - tw0 - 4
+                bx2 = (rx_, by_ + 4, tw0, FPX + 6)
+            else:
+                rx_ = bx_ + 6
+                bx2 = (rx_, (top + 4) if side == "top" else (bottom - FPX - 10), tw0, FPX + 6)
+            svg.rect(*bx2, sw=1.0)
+            svg.text(bx2[0] + tw0 / 2, bx2[1] + 2, [lbl], anchor="middle")
+            placer.obst.append(bx2)
+    for f, pts, off in routes:
+        res = placer.place(f["label"], pts)
+        if res:
+            (lx, ly, lw, lh), lines, sq = res
+            svg.text(lx + 1, ly, lines)
+            if sq:
+                squiggle(svg, *sq)
+    svg.save(svg_path, W, H)
+    return W, H
+
+
+
+# ------------------------------------------------------------------------------------------- UML use case
+def render_usecase(spec, svg_path):
+    """Deterministic UML use-case layout.
+    spec: {"kind": "usecase", "title": "...", "boundary": "...",
+      "actors": [{"id", "name", "side": "left"|"right", "row": float, "system": bool, "parent": id|None}],
+      "usecases": [{"id", "name", "col": 0|1, "row": float}],
+      "assoc": [(actor, uc)], "include": [(base, incl)], "extend": [(ext, base)]}
+    Parent actors (generalisation targets) are drawn in an extra column further out."""
+    RH = spec.get("rh", 52)
+    UW, UH = spec.get("uw", 240), 40
+    AW = 150
+    left_par = [a for a in spec["actors"] if a["side"] == "left" and a.get("is_parent")]
+    xl_par, xl = 52, (190 if left_par else 90)
+    bx = xl + 96
+    cols = 1 + max(u["col"] for u in spec["usecases"])
+    colw = UW + 40
+    bw = cols * colw + 40
+    has_right = any(a["side"] == "right" for a in spec["actors"])
+    W = bx + bw + (170 if has_right else 30)
+    rows = 1 + max([u["row"] for u in spec["usecases"]] + [a["row"] for a in spec["actors"]])
+    top = 40
+    H = top + 46 + rows * RH + 30
+    svg = SVG()
+    svg.items.append(f'<rect x="{bx}" y="{top}" width="{bw}" height="{H - top - 14}" rx="10" fill="#fff" '
+                     f'stroke="#000" stroke-width="1.6"/>')
+    svg.text(bx + bw / 2, top + 8, [spec["boundary"]], anchor="middle", bold=True)
+    y0 = top + 46
+    pos = {}
+    for u in spec["usecases"]:
+        cx = bx + 20 + u["col"] * colw + colw / 2
+        cy = y0 + u["row"] * RH + RH / 2
+        pos[u["id"]] = ("u", cx, cy)
+        lines = wrap(u["name"], UW - 30)
+        h = max(UH, len(lines) * FPX * LH + 18)
+        svg.items.append(f'<ellipse cx="{cx:.1f}" cy="{cy:.1f}" rx="{UW / 2}" ry="{h / 2:.1f}" fill="#fff" '
+                         f'stroke="#000" stroke-width="1.5"/>')
+        svg.text(cx, cy - len(lines) * FPX * LH / 2, lines, anchor="middle")
+        pos[u["id"]] = ("u", cx, cy, UW / 2, h / 2)
+    for a in spec["actors"]:
+        if a["side"] == "left":
+            ax = xl_par if a.get("is_parent") else xl
+        else:
+            ax = bx + bw + 85
+        ay = y0 + a["row"] * RH + RH / 2 - 14
+        pos[a["id"]] = ("a", ax, ay)
+        # stick figure (head r=8, body 22, arms, legs)
+        svg.circle(ax, ay - 20, 8)
+        svg.line([(ax, ay - 12), (ax, ay + 10)], sw=1.4)
+        svg.line([(ax - 13, ay - 4), (ax + 13, ay - 4)], sw=1.4)
+        svg.line([(ax - 11, ay + 26), (ax, ay + 10), (ax + 11, ay + 26)], sw=1.4)
+        lines = wrap(a["name"], AW)
+        if a.get("is_parent"):     # generalisation lines arrive from the right — caption above the head
+            svg.text(ax, ay - 30 - len(lines) * FPX * LH, lines, anchor="middle")
+        else:
+            svg.text(ax, ay + 29, lines, anchor="middle")
+        if a.get("system"):
+            svg.text(ax, ay - 48, ["«система»"], anchor="middle", italic=True)
+
+    def uc_edge(uid, toward):
+        _, cx, cy, rx, ry = pos[uid]
+        dx, dy = toward[0] - cx, toward[1] - cy
+        t = 1 / math.sqrt((dx / rx) ** 2 + (dy / ry) ** 2)
+        return cx + dx * t, cy + dy * t
+    for a_, u_ in spec.get("assoc", []):
+        _, ax, ay = pos[a_]
+        side = 1 if pos[u_][1] > ax else -1
+        par = any(a.get("is_parent") and a["id"] == a_ for a in spec["actors"])
+        start = (ax + side * 22, ay + (18 if par else 0))   # parent: below the generalisation bus
+        svg.line([start, uc_edge(u_, start)], sw=1.3)
+    gens = {}
+    for c, par in spec.get("generalize", []):
+        gens.setdefault(par, []).append(c)
+    for par, kids in gens.items():                     # generalisation tree: shared bus, one hollow triangle
+        _, px, py = pos[par]
+        busx = xl - 85
+        ys = [pos[k][2] - 4 for k in kids]
+        for k in kids:
+            _, kx, ky = pos[k]
+            svg.line([(kx - 16, ky - 4), (busx, ky - 4)], sw=1.3)
+        svg.line([(busx, min(ys + [py - 4])), (busx, max(ys + [py - 4]))], sw=1.3)
+        svg.line([(busx, py - 4), (px + 16, py - 4)], sw=1.3)
+        svg.head((busx, py - 4), (px + 16, py - 4), size=13, filled=False)
+    for kind, pairs in (("include", spec.get("include", [])), ("extend", spec.get("extend", []))):
+        for s_, t_ in pairs:
+            _, sx, sy, *_ = pos[s_]; _, tx, ty, *_ = pos[t_]
+            p1, p2 = uc_edge(s_, (tx, ty)), uc_edge(t_, (sx, sy))
+            svg.line([p1, p2], sw=1.3, dash="6 4")
+            svg.head(p1, p2, filled=False)
+            mx, my = (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2
+            lab = f"«{kind}»"
+            if abs(p1[0] - p2[0]) < 30:          # vertical link: label beside the line
+                svg.text(mx + 8, my - 9, [lab])
+                continue
+            svg.items.append(f'<rect x="{mx - tw(lab) / 2 - 3:.1f}" y="{my - 10:.1f}" width="{tw(lab) + 6:.1f}" '
+                             f'height="19" fill="#fff" stroke="none"/>')
+            svg.text(mx, my - 9, [lab], anchor="middle")
+    svg.save(svg_path, W, H)
+    return W, H
+
+
 # ------------------------------------------------------------------------------------------- render + gate
 def render(spec, out_base, min_pt=10.0):
     out_base = Path(out_base)
     svg = out_base.with_suffix(".svg")
-    fn = {"idef0": render_idef0, "idef3": render_idef3, "tree": render_tree}[spec["kind"]]
+    fn = {"idef0": render_idef0, "idef3": render_idef3, "tree": render_tree, "dfd": render_dfd, "usecase": render_usecase}[spec["kind"]]
     W, H = fn(spec, svg)
     png = out_base.with_suffix(".png")
     res = {"file": out_base.name, "native_px": [round(W), round(H)], "min_font_px": FPX}

@@ -5,3 +5,4 @@ __pycache__/
 lab*/*.pdf
 lab*/diagrams/*.svg
 node_modules/
+tools/plantuml/plantuml.jar

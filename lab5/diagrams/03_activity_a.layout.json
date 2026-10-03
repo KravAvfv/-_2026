@@ -1,0 +1,21 @@
+{
+  "file": "03_activity_a.puml",
+  "native_px": [
+    568,
+    889
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 14.38,
+    "font_pt": 10.8,
+    "dpi": 301
+  },
+  "landscape": {
+    "width_cm": 9.26,
+    "font_pt": 6.9,
+    "dpi": 467
+  },
+  "orientation": "portrait",
+  "width_cm": 14.38,
+  "legible": true
+}

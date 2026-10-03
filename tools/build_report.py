@@ -453,10 +453,11 @@ class ReportBuilder:
     def figure(self, f):
         src = (ROOT / f["src"]).resolve()
         layout = {}
-        if src.suffix in (".mmd", ".bpmn"):
+        if src.suffix in (".mmd", ".bpmn", ".puml"):
             png = src.with_suffix(".png")
             lj = src.with_suffix(".layout.json")
-            tool = "tools/mmd_render.py" if src.suffix == ".mmd" else "tools/bpmn_model.py"
+            tool = {".mmd": "tools/mmd_render.py", ".bpmn": "tools/bpmn_model.py",
+                    ".puml": "tools/puml_render.py"}[src.suffix]
             if not png.exists() or not lj.exists() or png.stat().st_mtime < src.stat().st_mtime:
                 r = subprocess.run([sys.executable, str(ROOT / tool), str(src)],
                                    capture_output=True, text=True)

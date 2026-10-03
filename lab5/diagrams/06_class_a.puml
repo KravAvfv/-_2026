@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+class Sensor as "Сенсор" {
+  - id : UUID
+  - тип : ТипСенсора
+  - координати : GeoPoint
+  - стан : СтанСенсора
+  + надіслатиВиявлення() : Виявлення
+}
+class Detection as "Виявлення" {
+  - час : DateTime
+  - пеленг : Double
+  - достовірність : Double
+}
+class Track as "ПовітрянийТрек" {
+  - номер : String
+  - стан : СтанТреку
+  - належність : Належність
+  - оцінкаЗагрози : Double
+  + класифікувати(тип) : void
+  + прогнозуватиТраєкторію() : Маршрут
+}
+class Mission as "Місія" {
+  - номер : String
+  - стан : СтанМісії
+}
+Sensor "1" --> "*" Detection : формує
+Track "1" o-- "*" Detection : об’єднує
+Track "1" -- "0..*" Mission : ціль
+@enduml
