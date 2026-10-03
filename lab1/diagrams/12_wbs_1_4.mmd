@@ -1,0 +1,24 @@
+flowchart LR
+  classDef l0 fill:#D9D9D9,stroke:#000,stroke-width:2.5px,font-weight:bold;
+  classDef l1 fill:#EDEDED,stroke:#000,stroke-width:2px,font-weight:bold;
+  classDef l2 fill:#F7F7F7,stroke:#000,stroke-width:1.3px;
+  classDef l3 fill:#FFFFFF,stroke:#000,stroke-width:1px;
+  classDef alt fill:#FFFFFF,stroke:#000,stroke-width:1px,stroke-dasharray:6 4;
+
+  N1_4["1.4 Підсистема<br/>ситуаційної<br/>обізнаності"]:::l1
+  N1_4_1["1.4.1 Злиття даних"]:::l2
+  N1_4 --> N1_4_1
+  N1_4_1_1["1.4.1.1 Сервіс злиття<br/>виявлень у треки"]:::l3
+  N1_4_1 --> N1_4_1_1
+  N1_4_1_2["1.4.1.2 Прогноз траєкторій<br/>і часу підльоту"]:::l3
+  N1_4_1 --> N1_4_1_2
+  N1_4_2["1.4.2 Класифікація<br/>та оцінка загрози"]:::l2
+  N1_4 --> N1_4_2
+  N1_4_2_1["1.4.2.1 Модель<br/>класифікації повітряних<br/>цілей"]:::l3
+  N1_4_2 --> N1_4_2_1
+  N1_4_2_2["1.4.2.2 Розрахунок<br/>пріоритету загрози"]:::l3
+  N1_4_2 --> N1_4_2_2
+  N1_4_3["1.4.3 Інтерфейс<br/>командного пункту"]:::l2
+  N1_4 --> N1_4_3
+  N1_4_3_1["1.4.3.1 Мнемосхема<br/>повітряної обстановки"]:::l3
+  N1_4_3 --> N1_4_3_1

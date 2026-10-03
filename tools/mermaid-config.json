@@ -1,0 +1,53 @@
+{
+  "theme": "base",
+  "themeVariables": {
+    "fontFamily": "Times New Roman, Liberation Serif, serif",
+    "fontSize": "20px",
+    "primaryColor": "#FFFFFF",
+    "primaryTextColor": "#000000",
+    "primaryBorderColor": "#000000",
+    "secondaryColor": "#F2F2F2",
+    "tertiaryColor": "#FFFFFF",
+    "lineColor": "#000000",
+    "textColor": "#000000",
+    "mainBkg": "#FFFFFF",
+    "nodeBorder": "#000000",
+    "clusterBkg": "#FAFAFA",
+    "clusterBorder": "#404040",
+    "edgeLabelBackground": "#FFFFFF",
+    "actorBorder": "#000000",
+    "actorBkg": "#FFFFFF",
+    "noteBkgColor": "#FFFFFF",
+    "noteBorderColor": "#000000"
+  },
+  "flowchart": {
+    "htmlLabels": true,
+    "curve": "linear",
+    "nodeSpacing": 30,
+    "rankSpacing": 45,
+    "padding": 12,
+    "wrappingWidth": 600,
+    "useMaxWidth": false
+  },
+  "sequence": {
+    "useMaxWidth": false,
+    "actorFontSize": 18,
+    "messageFontSize": 18,
+    "noteFontSize": 17
+  },
+  "class": {
+    "useMaxWidth": false
+  },
+  "state": {
+    "useMaxWidth": false
+  },
+  "er": {
+    "useMaxWidth": false,
+    "fontSize": 18
+  },
+  "gantt": {
+    "useMaxWidth": false,
+    "fontSize": 16
+  },
+  "themeCSS": "* { filter: none !important; } .edgeLabel, .edgeLabel p { background-color: #FFFFFF !important; }"
+}

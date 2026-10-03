@@ -1,0 +1,26 @@
+{
+  "file": "12_wbs_1_4.mmd",
+  "native_px": [
+    715,
+    626
+  ],
+  "png_px": [
+    2145,
+    1878
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 16.39,
+    "font_pt": 13.0,
+    "dpi": 332
+  },
+  "landscape": {
+    "width_cm": 16.39,
+    "font_pt": 13.0,
+    "dpi": 332
+  },
+  "orientation": "portrait",
+  "width_cm": 16.39,
+  "legible": true,
+  "aspect": 1.14
+}

@@ -1,0 +1,43 @@
+flowchart TB
+  classDef l0 fill:#D9D9D9,stroke:#000,stroke-width:2.5px,font-weight:bold;
+  classDef l1 fill:#EDEDED,stroke:#000,stroke-width:2px,font-weight:bold;
+  classDef l2 fill:#F7F7F7,stroke:#000,stroke-width:1.3px;
+  classDef l3 fill:#FFFFFF,stroke:#000,stroke-width:1px;
+  classDef alt fill:#FFFFFF,stroke:#000,stroke-width:1px,stroke-dasharray:6 4;
+
+  classDef frame fill:#FFFFFF,stroke:#808080,stroke-width:1px;
+  N4["4. Безпечне, надійне та кіберзахищене<br/>функціонування системи"]:::l1
+  N4_1["4.1 Захист інформації<br/>від несанкціонованого<br/>доступу"]:::l2
+  N4 --> N4_1
+  subgraph FN4_1[" "]
+    direction TB
+    N4_1_1["4.1.1 Взаємна<br/>автентифікація<br/>пристроїв і сервісів<br/>(mTLS)"]:::l3
+    N4_1_2["4.1.2 Рольове<br/>управління доступом і<br/>багатофакторна<br/>автентифікація"]:::l3
+    N4_1_3["4.1.3 Незмінний<br/>журнал аудиту всіх<br/>команд"]:::l3
+    N4_1_1 ~~~ N4_1_2
+    N4_1_2 ~~~ N4_1_3
+  end
+  class FN4_1 frame
+  N4_1 --> FN4_1
+  N4_2["4.2 Доступність ядра<br/>99,95 % та<br/>автономність<br/>периферії не менше 4<br/>год"]:::l2
+  N4 --> N4_2
+  subgraph FN4_2[" "]
+    direction TB
+    N4_2_1["4.2.1 Локальне злиття<br/>даних і призначення<br/>цілей на периферійних<br/>шлюзах"]:::l3
+    N4_2_2a["4.2.2а Гаряче<br/>резервування ядра у<br/>двох центрах обробки<br/>даних"]:::alt
+    N4_2_2b["4.2.2б Холодне<br/>резервування з<br/>відновленням не довше<br/>15 хв"]:::alt
+    N4_2_1 ~~~ N4_2_2a
+    N4_2_2a ~~~ N4_2_2b
+  end
+  class FN4_2 frame
+  N4_2 --> FN4_2
+  N4_3["4.3 Запобігання<br/>ураженню дружніх<br/>повітряних суден і<br/>цивільних об’єктів"]:::l2
+  N4 --> N4_3
+  subgraph FN4_3[" "]
+    direction TB
+    N4_3_1["4.3.1 Автоматичний<br/>контроль зон заборони<br/>ураження"]:::l3
+    N4_3_2["4.3.2 Правило двох<br/>осіб для<br/>санкціонування пуску"]:::l3
+    N4_3_1 ~~~ N4_3_2
+  end
+  class FN4_3 frame
+  N4_3 --> FN4_3

@@ -1,0 +1,22 @@
+flowchart LR
+  classDef l0 fill:#D9D9D9,stroke:#000,stroke-width:2.5px,font-weight:bold;
+  classDef l1 fill:#EDEDED,stroke:#000,stroke-width:2px,font-weight:bold;
+  classDef l2 fill:#F7F7F7,stroke:#000,stroke-width:1.3px;
+  classDef l3 fill:#FFFFFF,stroke:#000,stroke-width:1px;
+  classDef alt fill:#FFFFFF,stroke:#000,stroke-width:1px,stroke-dasharray:6 4;
+
+  N1_7["1.7 Інфраструктура<br/>та кібербезпека"]:::l1
+  N1_7_1["1.7.1 Обчислювальна<br/>інфраструктура"]:::l2
+  N1_7 --> N1_7_1
+  N1_7_1_1["1.7.1.1 Розгортання<br/>основного та резервного<br/>ЦОД"]:::l3
+  N1_7_1 --> N1_7_1_1
+  N1_7_1_2["1.7.1.2 Шина подій і<br/>сховища даних"]:::l3
+  N1_7_1 --> N1_7_1_2
+  N1_7_2["1.7.2 Кібербезпека"]:::l2
+  N1_7 --> N1_7_2
+  N1_7_2_1["1.7.2.1 Інфраструктура<br/>відкритих ключів, mTLS і<br/>керування доступом"]:::l3
+  N1_7_2 --> N1_7_2_1
+  N1_7_2_2["1.7.2.2 Журнал аудиту і<br/>моніторинг подій безпеки"]:::l3
+  N1_7_2 --> N1_7_2_2
+  N1_7_2_3["1.7.2.3 Створення КСЗІ та<br/>її державна експертиза"]:::l3
+  N1_7_2 --> N1_7_2_3

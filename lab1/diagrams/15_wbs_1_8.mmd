@@ -1,0 +1,24 @@
+flowchart LR
+  classDef l0 fill:#D9D9D9,stroke:#000,stroke-width:2.5px,font-weight:bold;
+  classDef l1 fill:#EDEDED,stroke:#000,stroke-width:2px,font-weight:bold;
+  classDef l2 fill:#F7F7F7,stroke:#000,stroke-width:1.3px;
+  classDef l3 fill:#FFFFFF,stroke:#000,stroke-width:1px;
+  classDef alt fill:#FFFFFF,stroke:#000,stroke-width:1px,stroke-dasharray:6 4;
+
+  N1_8["1.8 Впровадження"]:::l1
+  N1_8_1["1.8.1 Випробування"]:::l2
+  N1_8 --> N1_8_1
+  N1_8_1_1["1.8.1.1 Попередні<br/>автономні та комплексні<br/>випробування"]:::l3
+  N1_8_1 --> N1_8_1_1
+  N1_8_1_2["1.8.1.2 Дослідна<br/>експлуатація"]:::l3
+  N1_8_1 --> N1_8_1_2
+  N1_8_2["1.8.2 Підготовка<br/>персоналу"]:::l2
+  N1_8 --> N1_8_2
+  N1_8_2_1["1.8.2.1 Навчання<br/>операторів та<br/>адміністраторів"]:::l3
+  N1_8_2 --> N1_8_2_1
+  N1_8_2_2["1.8.2.2 Експлуатаційна<br/>документація"]:::l3
+  N1_8_2 --> N1_8_2_2
+  N1_8_3["1.8.3 Введення в дію"]:::l2
+  N1_8 --> N1_8_3
+  N1_8_3_1["1.8.3.1 Приймальні<br/>випробування та введення в<br/>постійну експлуатацію"]:::l3
+  N1_8_3 --> N1_8_3_1

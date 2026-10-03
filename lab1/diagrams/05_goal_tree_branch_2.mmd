@@ -1,0 +1,43 @@
+flowchart TB
+  classDef l0 fill:#D9D9D9,stroke:#000,stroke-width:2.5px,font-weight:bold;
+  classDef l1 fill:#EDEDED,stroke:#000,stroke-width:2px,font-weight:bold;
+  classDef l2 fill:#F7F7F7,stroke:#000,stroke-width:1.3px;
+  classDef l3 fill:#FFFFFF,stroke:#000,stroke-width:1px;
+  classDef alt fill:#FFFFFF,stroke:#000,stroke-width:1px,stroke-dasharray:6 4;
+
+  classDef frame fill:#FFFFFF,stroke:#808080,stroke-width:1px;
+  N2["2. Скорочення тривалості циклу<br/>„виявлення — рішення — перехоплення“"]:::l1
+  N2_1["2.1 Призначення цілі<br/>розрахунку не пізніше<br/>30 с після<br/>підтвердження треку"]:::l2
+  N2 --> N2_1
+  subgraph FN2_1[" "]
+    direction TB
+    N2_1_1["2.1.1 Автоматичний<br/>розрахунок пріоритету<br/>загрози"]:::l3
+    N2_1_2a["2.1.2а Автоматичне<br/>призначення<br/>розрахунку з<br/>підтвердженням<br/>офіцером бойового<br/>управління"]:::alt
+    N2_1_2b["2.1.2б Рекомендація<br/>переліку<br/>розрахунків-кандидатів<br/>для ручного вибору"]:::alt
+    N2_1_1 ~~~ N2_1_2a
+    N2_1_2a ~~~ N2_1_2b
+  end
+  class FN2_1 frame
+  N2_1 --> FN2_1
+  N2_2["2.2 Доставка бойового<br/>завдання на планшет<br/>розрахунку не довше 1<br/>с"]:::l2
+  N2 --> N2_2
+  subgraph FN2_2[" "]
+    direction TB
+    N2_2_1["2.2.1 Передавання<br/>завдання разом із<br/>цілевказанням"]:::l3
+    N2_2_2["2.2.2 Контроль<br/>підтвердження<br/>завдання з ескалацією<br/>через 15 с"]:::l3
+    N2_2_1 ~~~ N2_2_2
+  end
+  class FN2_2 frame
+  N2_2 --> FN2_2
+  N2_3["2.3 Супровід місії<br/>перехоплення в<br/>реальному часі"]:::l2
+  N2 --> N2_3
+  subgraph FN2_3[" "]
+    direction TB
+    N2_3_1["2.3.1 Спільне<br/>відображення цілі та<br/>перехоплювача"]:::l3
+    N2_3_2["2.3.2 Оперативне<br/>скасування місії за<br/>правилами безпеки"]:::l3
+    N2_3_3["2.3.3 Повторне<br/>цілевказання в разі<br/>втрати цілі"]:::l3
+    N2_3_1 ~~~ N2_3_2
+    N2_3_2 ~~~ N2_3_3
+  end
+  class FN2_3 frame
+  N2_3 --> FN2_3

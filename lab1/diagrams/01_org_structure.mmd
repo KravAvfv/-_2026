@@ -1,0 +1,23 @@
+flowchart LR
+  classDef top fill:#E6E6E6,stroke:#000,stroke-width:2.5px,font-weight:bold;
+  classDef dep fill:#F2F2F2,stroke:#000,stroke-width:1.5px;
+  classDef unit fill:#FFFFFF,stroke:#000,stroke-width:1px;
+
+  HEAD["Начальник центру"]:::top
+  DCC["Заступник начальника<br/>з бойового управління"]:::dep
+  DTS["Заступник начальника<br/>з технічного забезпечення"]:::dep
+  ANL["Відділ аналітики,<br/>планування та звітності"]:::dep
+  TRN["Навчально-тренувальний<br/>відділ"]:::dep
+  COOP["Сектор взаємодії"]:::dep
+
+  HEAD --> DCC & DTS & ANL & TRN & COOP
+
+  CP["Командний пункт<br/>(оперативний черговий центр)"]:::unit
+  RECON["Відділ розвідки<br/>повітряного простору<br/>та сенсорних мереж"]:::unit
+  INT["Підрозділ<br/>дронів-перехоплювачів<br/>(18 розрахунків)"]:::unit
+  DCC --> CP & RECON & INT
+
+  IT["Служба зв’язку та ІТ"]:::unit
+  TECH["Технічна служба"]:::unit
+  LOG["Служба логістики"]:::unit
+  DTS --> IT & TECH & LOG

@@ -1,0 +1,26 @@
+{
+  "file": "04_goal_tree_branch_1.mmd",
+  "native_px": [
+    918,
+    1050
+  ],
+  "png_px": [
+    2757,
+    3150
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.2,
+    "dpi": 424
+  },
+  "landscape": {
+    "width_cm": 12.68,
+    "font_pt": 7.8,
+    "dpi": 552
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true,
+  "aspect": 0.87
+}

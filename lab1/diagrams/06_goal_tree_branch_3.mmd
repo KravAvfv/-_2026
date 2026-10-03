@@ -1,0 +1,43 @@
+flowchart TB
+  classDef l0 fill:#D9D9D9,stroke:#000,stroke-width:2.5px,font-weight:bold;
+  classDef l1 fill:#EDEDED,stroke:#000,stroke-width:2px,font-weight:bold;
+  classDef l2 fill:#F7F7F7,stroke:#000,stroke-width:1.3px;
+  classDef l3 fill:#FFFFFF,stroke:#000,stroke-width:1px;
+  classDef alt fill:#FFFFFF,stroke:#000,stroke-width:1px,stroke-dasharray:6 4;
+
+  classDef frame fill:#FFFFFF,stroke:#808080,stroke-width:1px;
+  N3["3. Ефективне управління ресурсами центру"]:::l1
+  N3_1["3.1 Актуальні дані<br/>про бойову готовність<br/>розрахунків"]:::l2
+  N3 --> N3_1
+  subgraph FN3_1[" "]
+    direction TB
+    N3_1_1["3.1.1 Облік змін,<br/>допусків і статусів<br/>розрахунків"]:::l3
+    N3_1_2["3.1.2 Автоматичні<br/>доповіді про<br/>готовність позицій"]:::l3
+    N3_1_1 ~~~ N3_1_2
+  end
+  class FN3_1 frame
+  N3_1 --> FN3_1
+  N3_2["3.2 Облік ресурсу<br/>перехоплювачів і АКБ<br/>у реальному часі"]:::l2
+  N3 --> N3_2
+  subgraph FN3_2[" "]
+    direction TB
+    N3_2_1["3.2.1 Облік станів і<br/>нальоту кожного<br/>перехоплювача"]:::l3
+    N3_2_2a["3.2.2а Ідентифікація<br/>техніки за QR- або<br/>RFID-мітками"]:::alt
+    N3_2_2b["3.2.2б Ідентифікація<br/>техніки за серійними<br/>номерами"]:::alt
+    N3_2_3["3.2.3 Облік циклів<br/>заряджання та<br/>списання АКБ"]:::l3
+    N3_2_1 ~~~ N3_2_2a
+    N3_2_2a ~~~ N3_2_2b
+    N3_2_2b ~~~ N3_2_3
+  end
+  class FN3_2 frame
+  N3_2 --> FN3_2
+  N3_3["3.3 Забезпеченість<br/>позицій запасами не<br/>менше ніж на дві ночі"]:::l2
+  N3 --> N3_3
+  subgraph FN3_3[" "]
+    direction TB
+    N3_3_1["3.3.1 Прогноз витрати<br/>за статистикою атак"]:::l3
+    N3_3_2["3.3.2 Автоматичне<br/>формування заявок на<br/>поповнення"]:::l3
+    N3_3_1 ~~~ N3_3_2
+  end
+  class FN3_3 frame
+  N3_3 --> FN3_3

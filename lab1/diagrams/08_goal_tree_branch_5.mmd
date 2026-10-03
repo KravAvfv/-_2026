@@ -1,0 +1,39 @@
+flowchart TB
+  classDef l0 fill:#D9D9D9,stroke:#000,stroke-width:2.5px,font-weight:bold;
+  classDef l1 fill:#EDEDED,stroke:#000,stroke-width:2px,font-weight:bold;
+  classDef l2 fill:#F7F7F7,stroke:#000,stroke-width:1.3px;
+  classDef l3 fill:#FFFFFF,stroke:#000,stroke-width:1px;
+  classDef alt fill:#FFFFFF,stroke:#000,stroke-width:1px,stroke-dasharray:6 4;
+
+  classDef frame fill:#FFFFFF,stroke:#808080,stroke-width:1px;
+  N5["5. Аналітика, звітність і безперервне<br/>вдосконалення діяльності"]:::l1
+  N5_1["5.1 Формування звіту<br/>про перехоплення не<br/>пізніше 15 хв"]:::l2
+  N5 --> N5_1
+  subgraph FN5_1[" "]
+    direction TB
+    N5_1_1["5.1.1 Автоматичне<br/>збирання доказів:<br/>відео та дані<br/>сенсорів"]:::l3
+    N5_1_2["5.1.2 Передавання<br/>звітів вищому<br/>командному пункту"]:::l3
+    N5_1_1 ~~~ N5_1_2
+  end
+  class FN5_1 frame
+  N5_1 --> FN5_1
+  N5_2["5.2 Моніторинг<br/>ключових показників<br/>ефективності (KPI)"]:::l2
+  N5 --> N5_2
+  subgraph FN5_2[" "]
+    direction TB
+    N5_2_1["5.2.1 Інформаційна<br/>панель KPI циклу<br/>перехоплення"]:::l3
+    N5_2_2["5.2.2 Відтворення<br/>записів місій для<br/>розбору"]:::l3
+    N5_2_1 ~~~ N5_2_2
+  end
+  class FN5_2 frame
+  N5_2 --> FN5_2
+  N5_3["5.3 Підвищення<br/>кваліфікації<br/>операторів"]:::l2
+  N5 --> N5_3
+  subgraph FN5_3[" "]
+    direction TB
+    N5_3_1a["5.3.1а Тренування на<br/>симуляторі за<br/>реальними сценаріями"]:::alt
+    N5_3_1b["5.3.1б Розбір записів<br/>реальних місій з<br/>інструктором"]:::alt
+    N5_3_1a ~~~ N5_3_1b
+  end
+  class FN5_3 frame
+  N5_3 --> FN5_3
