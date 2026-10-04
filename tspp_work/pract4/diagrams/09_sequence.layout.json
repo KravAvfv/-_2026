@@ -1,0 +1,21 @@
+{
+  "file": "09_sequence.puml",
+  "native_px": [
+    772,
+    586
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 9.1,
+    "dpi": 357
+  },
+  "landscape": {
+    "width_cm": 19.1,
+    "font_pt": 10.5,
+    "dpi": 308
+  },
+  "orientation": "landscape",
+  "width_cm": 19.1,
+  "legible": true
+}

@@ -1,0 +1,52 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+class "Сенсор" as Sensor {
+  тип
+  координати
+  стан
+  +надіслатиВиявлення()
+}
+class "Виявлення" as Detection {
+  час
+  пеленг
+  достовірність
+}
+class "ПовітрянийТрек" as Track {
+  номер
+  належність
+  оцінкаЗагрози
+  +класифікувати()
+}
+class "Місія" as Mission {
+  номер
+  стан
+  результат
+  +санкціонувати()
+  +скасувати()
+}
+class "Розрахунок" as Crew {
+  позивний
+  стан
+  +прийнятиЗавдання()
+}
+class "Перехоплювач" as Interceptor {
+  серійнийНомер
+  стан
+}
+class "Користувач" as User {
+  ПІБ
+  роль
+}
+class "ЗвітПроПерехоплення" as Report {
+  оцінкаРезультату
+  докази
+}
+Sensor "1" --> "*" Detection : формує
+Track "1" o-- "*" Detection : агрегує
+Track "1" -- "0..*" Mission : ціль
+Crew "1" -- "*" Mission : виконує
+Interceptor "0..1" -- "*" Mission : застосовується
+User "1" -- "*" Mission : санкціонує
+Mission "1" *-- "0..1" Report : підсумовує
+@enduml

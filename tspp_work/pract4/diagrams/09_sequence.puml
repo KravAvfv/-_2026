@@ -1,0 +1,25 @@
+@startuml
+hide footbox
+actor "ОБУ" as FCO
+participant "АРМ КП" as UI
+participant "Призначення\nі місії" as TSK
+participant "Геосервіс" as GEO
+queue "Шина\nподій" as BUS
+actor "ОЧ" as OC
+participant "Планшет" as TAB
+FCO -> UI : обратиЦіль()
+UI -> TSK : кандидати()
+TSK -> GEO : деконфлікція()
+GEO --> TSK : дозволено
+TSK --> UI : кандидати
+FCO -> UI : призначити(розрахунок)
+UI -> TSK : створитиМісію()
+TSK -> BUS : «місію запропоновано»
+BUS -> OC : місія на санкцію
+OC -> TSK : санкціонувати()
+TSK -> BUS : «місію санкціоновано»
+BUS -> TAB : бойове завдання
+TAB -> BUS : прийнято()
+BUS -> TSK : «завдання прийнято»
+TSK --> UI : стан місії
+@enduml

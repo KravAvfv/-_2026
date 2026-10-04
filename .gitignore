@@ -6,3 +6,6 @@ lab*/*.pdf
 lab*/diagrams/*.svg
 node_modules/
 tools/plantuml/plantuml.jar
+tspp_work/*/preview/
+tspp_work/*/*.pdf
+tspp_work/*/diagrams/*.svg

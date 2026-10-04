@@ -1,0 +1,21 @@
+{
+  "file": "05_er_combat.puml",
+  "native_px": [
+    555,
+    874
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 14.29,
+    "font_pt": 10.9,
+    "dpi": 395
+  },
+  "landscape": {
+    "width_cm": 9.21,
+    "font_pt": 7.1,
+    "dpi": 612
+  },
+  "orientation": "portrait",
+  "width_cm": 14.29,
+  "legible": true
+}

@@ -1,0 +1,48 @@
+@startuml
+hide circle
+hide methods
+skinparam classAttributeIconSize 0
+class "air_track «table»" as T {
+  PK track_id : UUID
+  {field} track_number : VARCHAR(12)
+  identity : ENUM
+  {field} threat_score : DECIMAL(5,2)
+}
+class "crew «table»" as C {
+  PK crew_id : UUID
+  FK position_id : UUID
+  {field} call_sign : VARCHAR(20)
+  status : ENUM
+}
+class "interceptor «table»" as I {
+  PK interceptor_id : UUID
+  FK position_id : UUID
+  {field} serial_no : VARCHAR(40)
+  state : ENUM
+}
+class "mission «table»" as M {
+  PK mission_id : UUID
+  FK track_id : UUID
+  FK crew_id : UUID
+  FK interceptor_id : UUID
+  FK approved_by : UUID
+  state : ENUM
+  launched_at : TIMESTAMPTZ
+}
+class "personnel «table»" as P {
+  PK user_id : UUID
+  FK role_id : UUID
+  {field} full_name : VARCHAR(150)
+  mfa_enabled : BOOL
+}
+class "engagement_report «table»" as R {
+  PK report_id : UUID
+  FK mission_id : UUID
+  assessment : ENUM
+}
+T "1" -- "0..*" M
+C "1" -- "0..*" M
+I "0..1" -- "0..*" M
+P "1" -- "0..*" M
+M "1" -- "0..1" R
+@enduml

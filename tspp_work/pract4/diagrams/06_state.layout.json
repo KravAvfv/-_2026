@@ -1,0 +1,21 @@
+{
+  "file": "06_state.puml",
+  "native_px": [
+    574,
+    617
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 12.2,
+    "dpi": 353
+  },
+  "landscape": {
+    "width_cm": 13.49,
+    "font_pt": 10.0,
+    "dpi": 432
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

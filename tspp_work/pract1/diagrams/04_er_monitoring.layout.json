@@ -1,0 +1,21 @@
+{
+  "file": "04_er_monitoring.puml",
+  "native_px": [
+    613,
+    366
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 11.4,
+    "dpi": 377
+  },
+  "landscape": {
+    "width_cm": 18.74,
+    "font_pt": 13.0,
+    "dpi": 332
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

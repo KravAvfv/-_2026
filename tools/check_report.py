@@ -3,6 +3,9 @@
 
 Usage: .venv/bin/python tools/check_report.py <report.docx> [--lab N] [--spec labN/report.yaml]
 
+The spec may override the course defaults (Track 2 — «Технології створення програмних продуктів»):
+  work_label: "Практична робота №"; required_sections: ["1. МЕТА ТА ЗАВДАННЯ РОБОТИ", ...]
+
 Checks (FAIL = must fix, WARN = review):
   * title page filled (no "__" placeholders, lab number, theme, current year)
   * required sections present: Мета роботи, Короткі теоретичні відомості, Хід виконання роботи,
@@ -42,6 +45,9 @@ def main():
     paras = doc.paragraphs
     texts = [p.text for p in paras]
     full = "\n".join(texts)
+    spec = yaml.safe_load(Path(a.spec).read_text(encoding="utf-8")) if a.spec else {}
+    label = spec.get("work_label", "Лабораторна робота №")
+    required = spec.get("required_sections", REQUIRED)
 
     # --- title page
     title_zone = "\n".join(texts[:25])
@@ -50,13 +56,12 @@ def main():
     year = datetime.date.today().year
     if f"Київ-{year}" not in title_zone:
         warn(f"Title page year is not Київ-{year}")
-    m = re.search(r"Лабораторна робота №\s*(\d+)", title_zone)
+    m = re.search(re.escape(label) + r"\s*(\d+)", title_zone)
     lab = a.lab or (int(m.group(1)) if m else None)
     if not m:
         fail("Lab number missing on title page")
     theme = (ROOT / "My_theme.txt").read_text(encoding="utf-8").strip().splitlines()[0]
-    if a.spec:
-        theme = yaml.safe_load(Path(a.spec).read_text(encoding="utf-8")).get("theme") or theme
+    theme = spec.get("theme") or theme
     if " ".join(theme.split()) not in " ".join(title_zone.split()):
         fail("Expected «Тема» text not found on title page")
     if "гіпотетичн" not in full and "умовн" not in full:
@@ -64,14 +69,14 @@ def main():
 
     # --- sections
     upper = [t.strip().upper() for t in texts]
-    for sec in REQUIRED:
+    for sec in required:
         if sec not in upper:
             fail(f"Missing section heading: {sec}")
-    if "ГРАФІЧНА ЧАСТИНА" not in upper:
+    if required == REQUIRED and "ГРАФІЧНА ЧАСТИНА" not in upper:
         warn("No 'ГРАФІЧНА ЧАСТИНА' heading (OK only if all figures are inside 'Хід виконання роботи')")
 
     # --- fonts (body after title page)
-    body_start = next((i for i, t in enumerate(upper) if t == "МЕТА РОБОТИ"), 25)
+    body_start = next((i for i, t in enumerate(upper) if t == required[0]), 25)
     bad_font = set()
     for p in paras[body_start:]:
         for r in p.runs:
@@ -117,17 +122,19 @@ def main():
 
     # --- language hygiene
     table_text = "\n".join(c.text for t in doc.tables for row in t.rows for c in row.cells)
-    for name, txt in (("body", full), ("tables", table_text)):
+    # source titles in the reference list keep their original language ("… User Guide") — not placeholders
+    refs_at = next((i for i, t in enumerate(texts) if t.strip().upper() == "СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ"), len(texts))
+    body_no_refs = "\n".join(texts[:refs_at])
+    for name, txt in (("body", body_no_refs), ("tables", table_text)):
         ph = sorted(set(PLACEHOLDERS.findall(txt)))
         if ph:
             fail(f"Generic placeholder words in {name}: {ph}")
-        ru = RUSSIAN.findall(txt)
+        ru = RUSSIAN.findall(full if name == "body" else txt)
         if ru:
             fail(f"Russian-specific letters in {name}: {sorted(set(ru))}")
 
     # --- figures legibility (from spec)
     if a.spec:
-        spec = yaml.safe_load(Path(a.spec).read_text(encoding="utf-8"))
         for b in spec["blocks"]:
             f = b.get("figure")
             if not f or not str(f["src"]).endswith((".mmd", ".bpmn", ".puml")):
@@ -175,7 +182,7 @@ def main():
         fail("No 'ЗМІСТ' page after the title page")
     for par in paras[body_start:]:
         t = par.text.strip()
-        if t in REQUIRED or re.match(r"^\d+\.\s", t) and par.runs and all(r.bold for r in par.runs if r.text.strip()):
+        if t in required or re.match(r"^\d+\.\s", t) and par.runs and all(r.bold for r in par.runs if r.text.strip()):
             if not par.style.name.startswith("Heading"):
                 fail(f"Heading not in a Heading style (missing from TOC): '{t[:40]}'")
 

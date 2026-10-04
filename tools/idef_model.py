@@ -238,12 +238,17 @@ def squiggle(svg, a, b):
 HDR_H, FTR_H = 34, 34
 
 
+FRAME_DEFAULT = {"author": "Кравченко П.", "project": "ІС «Щит-Лінк»", "date": "03.10.2026",
+                 "reader": "Гладка М. В."}     # ПІС defaults; a spec may override any key via "frame": {...}
+_FRAME = dict(FRAME_DEFAULT)
+
+
 def frame(svg, W, H, node, title, number, status="РОБОЧИЙ", feo=False):
     svg.rect(1, 1, W - 2, H - 2, sw=1.8)
     svg.line([(1, HDR_H), (W - 1, HDR_H)], sw=1.2)
     svg.line([(1, H - FTR_H), (W - 1, H - FTR_H)], sw=1.2)
-    fields = [("АВТОР:", "Кравченко П."), ("ПРОЄКТ:", "ІС «Щит-Лінк»"), ("ДАТА:", "03.10.2026"),
-              ("СТАН:", status), ("ЧИТАЧ:", "Гладка М. В.")]
+    fields = [("АВТОР:", _FRAME["author"]), ("ПРОЄКТ:", _FRAME["project"]), ("ДАТА:", _FRAME["date"]),
+              ("СТАН:", status), ("ЧИТАЧ:", _FRAME["reader"])]
     x = 8
     for i, (k, v) in enumerate(fields):
         svg.text(x, 9, [f"{k} {v}"])
@@ -724,12 +729,14 @@ def render_dfd(spec, svg_path):
     SW, SH = 156, 44
     EW, EH = 140, 60
     CW, RH = spec.get("cw", 206), spec.get("rh", 150)
-    X0, Y0 = 22, HDR_H + spec.get("top", 26)
+    framed = spec.get("frame", True)
+    hdr, ftr = (HDR_H, FTR_H) if framed else (30 if spec.get("columns") else 4, 4)
+    X0, Y0 = 22, hdr + spec.get("top", 26 if framed else 6)
     items = spec["processes"] + spec.get("stores", []) + spec.get("externals", [])
     cols = 1 + max(i["col"] for i in items)
     rows = 1 + max(i["row"] for i in items)
     W = max(X0 * 2 + cols * CW, 980)
-    H = Y0 + rows * RH + spec.get("bottom", 10) + FTR_H
+    H = Y0 + rows * RH + spec.get("bottom", 10) + ftr
     shift = (W - X0 * 2 - cols * CW) / 2
     shapes = {}
     for kind, lst, (w, h) in (("p", spec["processes"], (PW, PH)), ("d", spec.get("stores", []), (SW, SH)),
@@ -738,9 +745,15 @@ def render_dfd(spec, svg_path):
             cx = X0 + shift + o["col"] * CW + CW / 2
             cy = Y0 + o["row"] * RH + RH / 2
             shapes[o["id"]] = (kind, cx - w / 2, cy - h / 2, w, h, o)
-    top, bottom, left, right = HDR_H, H - FTR_H, 0, W
+    top, bottom, left, right = hdr, H - ftr, 0, W
     svg = SVG()
-    frame(svg, W, H, spec["node"], spec["title"], spec.get("number", ""), spec.get("status", "РОБОЧИЙ"))
+    if framed:
+        frame(svg, W, H, spec["node"], spec["title"], spec.get("number", ""), spec.get("status", "РОБОЧИЙ"))
+    for c in spec.get("columns", []):          # layer bands: shaded column with a header
+        c0, c1 = c["cols"]
+        x0_, x1_ = X0 + shift + c0 * CW + 3, X0 + shift + (c1 + 1) * CW - 3
+        svg.rect(x0_, 3, x1_ - x0_, H - 6, sw=1.0, fill="#F4F4F4")
+        svg.text((x0_ + x1_) / 2, 7, [c["name"]], anchor="middle", bold=True)
     for sid, (k, x, y, w, h, o) in shapes.items():
         if k == "p":       # process: rounded rectangle, node number bottom-right
             svg.items.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w}" height="{h}" rx="12" fill="#fff" '
@@ -813,7 +826,7 @@ def render_dfd(spec, svg_path):
         routes.append((f, pts, None))
     allsegs = [sg for _, pts, _ in routes for sg in zip(pts, pts[1:])]
     obst = [(x - 3, y - 3, w + 9, h + 9) for (_, x, y, w, h, _) in shapes.values()]
-    placer = Placer((0, HDR_H, W, H - HDR_H - FTR_H), obst, allsegs)
+    placer = Placer((0, hdr, W, H - hdr - ftr), obst, allsegs)
     for f, pts, off in routes:
         svg.line(pts, sw=1.5)
         svg.head(pts[-2], pts[-1])
@@ -945,11 +958,197 @@ def render_usecase(spec, svg_path):
     return W, H
 
 
+
+# ------------------------------------------------------------------------------------------- layered IoT architecture
+def render_layers(spec, svg_path):
+    """Multi-level architecture diagram (portrait page).
+    spec: {"kind": "layers", "slots": 5, "bands": [{"name", "items": [{"id", "name", "slot", "sec": [..]}],
+             "side": {"id", "name"} | None}],
+           "links": [{"src", "dst", "label", "kind": "data"|"cmd"|"both", "dx": 0, "dx2": dx}]}
+    Bands are listed top→bottom. Security badges ("S1"…) sit inside the component's top-right corner."""
+    SLOTS = spec.get("slots", 5)
+    MAIN_W, SIDE_W, GAP_SIDE = spec.get("main_w", 550), spec.get("side_w", 110), 14
+    BW, BH = spec.get("bw", 92), spec.get("bh", 74)
+    TITLE_H, PAD, GAP = 24, 8, spec.get("gap", 46)
+    X0, Y0 = 6, 6
+    W = X0 + MAIN_W + GAP_SIDE + SIDE_W + 6
+    slot_w = MAIN_W / SLOTS
+    pos, band_of = {}, {}
+    svg = SVG()
+    band_boxes, y = [], Y0
+    for b in spec["bands"]:
+        bh = TITLE_H + BH + 2 * PAD
+        band_boxes.append((b, y, bh))
+        y += bh + GAP
+    H = y - GAP + Y0
+    badges = []
+    for bi, (b, by, bh) in enumerate(band_boxes):
+        svg.rect(X0, by, MAIN_W, bh, sw=1.4, fill="#F4F4F4")
+        for it in b["items"]:
+            cx = X0 + slot_w * (it["slot"] + 0.5)
+            w = it.get("w", BW)
+            x, yy = cx - w / 2, by + TITLE_H + PAD
+            svg.items.append(f'<rect x="{x:.1f}" y="{yy:.1f}" width="{w}" height="{BH}" rx="6" fill="#fff" '
+                             f'stroke="#000" stroke-width="1.5"/>')
+            lines = wrap(it["name"], w - 8)
+            top_res = 19 if it.get("sec") else 0
+            svg.text(cx, yy + top_res + (BH - top_res - len(lines) * FPX * LH) / 2, lines, anchor="middle")
+            pos[it["id"]] = (x, yy, w, BH)
+            band_of[it["id"]] = bi
+            bxr = x + w - 3
+            for sname in reversed(it.get("sec", [])):
+                bwd = tw(sname, True) + 6
+                bxr -= bwd
+                badges.append((bxr, yy + 3, bwd, sname))
+                bxr -= 2
+        if b.get("side"):
+            sd = b["side"]
+            sx = X0 + MAIN_W + GAP_SIDE
+            syy = by + TITLE_H + PAD
+            svg.rect(sx, syy, SIDE_W, BH, sw=1.5, dash="5 3")
+            lines = wrap(sd["name"], SIDE_W - 8)
+            svg.text(sx + SIDE_W / 2, syy + (BH - len(lines) * FPX * LH) / 2, lines, anchor="middle", italic=True)
+            pos[sd["id"]] = (sx, syy, SIDE_W, BH)
+            band_of[sd["id"]] = bi
+    for bx_, by_, bw_, sname in badges:
+        svg.items.append(f'<rect x="{bx_:.1f}" y="{by_:.1f}" width="{bw_:.1f}" height="17" rx="3" fill="#000"/>')
+        svg.items.append(f'<text x="{bx_ + bw_ / 2:.1f}" y="{by_ + 13:.1f}" font-family="Times New Roman" '
+                         f'font-size="{FPX - 1}" font-weight="bold" fill="#fff" text-anchor="middle">{sname}</text>')
+    routes = []
+    for l in spec.get("links", []):
+        sx, sy, sw_, sh = pos[l["src"]]
+        tx, ty, tw_, th = pos[l["dst"]]
+        dx = l.get("dx", 0)
+        if band_of[l["src"]] == band_of[l["dst"]]:           # same band: horizontal
+            yy = sy + sh / 2 + dx
+            pts = [(sx + sw_, yy), (tx, yy)] if tx > sx else [(sx, yy), (tx + tw_, yy)]
+        else:
+            down = ty > sy
+            x1 = sx + sw_ / 2 + dx
+            x2 = tx + tw_ / 2 + l.get("dx2", dx)
+            y1 = sy + sh if down else sy
+            y2 = ty if down else ty + th
+            if abs(x1 - x2) < 1:
+                pts = [(x1, y1), (x2, y2)]
+            else:                                            # turn in the middle of the gap between bands
+                ym = (ty - TITLE_H - PAD - GAP / 2) if down else (ty + th + PAD + GAP / 2)
+                ym += l.get("dy", 0)
+                pts = [(x1, y1), (x1, ym), (x2, ym), (x2, y2)]
+        routes.append((l, pts))
+    allsegs = [sg for _, pts in routes for sg in zip(pts, pts[1:])]
+    obst = [(x - 2, y - 2, w + 4, h + 4) for (x, y, w, h) in pos.values()]
+    titles = []
+    for b, by, bh in band_boxes:
+        tw_ = tw(b["name"], True) + 10
+        cands = [X0 + 4, X0 + (MAIN_W - tw_) / 2, X0 + MAIN_W - tw_ - 4]
+        def crossings(tx):
+            return sum(1 for (p1, p2) in allsegs if abs(p1[0] - p2[0]) < 0.5 and tx <= p1[0] <= tx + tw_
+                       and min(p1[1], p2[1]) < by + TITLE_H and max(p1[1], p2[1]) > by)
+        tx = min(cands, key=lambda c: (crossings(c), cands.index(c)))
+        titles.append((tx, by, tw_, b["name"]))
+        obst.append((tx, by, tw_, TITLE_H))
+        obst += [(X0, by - 2, MAIN_W, 4), (X0, by + bh - 2, MAIN_W, 4)]     # band borders
+    placer = Placer((0, 0, W, H), obst, allsegs)
+    for l, pts in routes:
+        dash = "6 4" if l.get("kind") == "cmd" else None
+        svg.line(pts, sw=1.5, dash=dash)
+        svg.head(pts[-2], pts[-1], size=8)
+        if l.get("kind") == "both":
+            svg.head(pts[1], pts[0], size=8)
+    for tx, by, tw_, name in titles:          # band titles on a backing, above any crossing line
+        svg.items.append(f'<rect x="{tx:.1f}" y="{by + 2:.1f}" width="{tw_:.1f}" height="{TITLE_H - 4}" '
+                         f'fill="#F4F4F4" stroke="none"/>')
+        svg.text(tx + 5, by + 4, [name], bold=True)
+    for l, pts in routes:
+        if not l.get("label"):
+            continue
+        res = placer.place(l["label"], pts, widths=(110, 80, 140))
+        if res:
+            (lx, ly, lw, lh), lines, sq = res
+            svg.text(lx + 1, ly, lines)
+            if sq:
+                squiggle(svg, *sq)
+    svg.save(svg_path, W, H)
+    return W, H
+
+
 # ------------------------------------------------------------------------------------------- render + gate
+# ------------------------------------------------------------------------------------------- IoT columns (ecosystem)
+def render_columns(spec, svg_path):
+    """IoT-ecosystem diagram in vertical columns (devices → connectivity → processing → applications), the layout of
+    the «Технології створення програмних продуктів» reference figure. Dashed separators, column titles on top, layer
+    names (bold) at the bottom; item-to-item arrows routed orthogonally through the gaps.
+    spec: {"kind": "columns", "colw": 235, "bw": 190, "rh": 70,
+      "gap": 16,                                     # vertical gap between stacked boxes
+      "columns": [{"title": "...", "layer": "...", "fill": "#fff",
+                   "items": [{"id", "name", "row": float, "span": 1.0, "fill": None, "bold": False}]}],
+      "links": [(src, dst) | (src, dst, {"both": True, "dash": "6 4"})]}"""
+    cols = spec["columns"]
+    CW, BW, RH = spec.get("colw", 235), spec.get("bw", 190), spec.get("rh", 70)
+    GAP = spec.get("gap", 16)                          # vertical white space between stacked boxes
+    M, HEAD, FOOT = 18, 52, 50
+    nrows = max(it["row"] + it.get("span", 1) for c in cols for it in c["items"])
+    W = 2 * M + len(cols) * CW
+    y0 = M + HEAD
+    H = y0 + nrows * RH + FOOT + M
+    svg = SVG()
+    for ci in range(1, len(cols)):
+        x = M + ci * CW
+        svg.line([(x, M), (x, H - M)], sw=1.1, dash="7 5")
+    box = {}
+    for ci, c in enumerate(cols):
+        cx = M + ci * CW + CW / 2
+        tl = wrap(c["title"], CW - 16, bold=True)
+        svg.text(cx, M + (HEAD - len(tl) * FPX * LH) / 2 - 4, tl, anchor="middle", bold=True)
+        ll = wrap(c["layer"], CW - 16, bold=True)
+        svg.text(cx, H - M - FOOT + (FOOT - len(ll) * FPX * LH) / 2, ll, anchor="middle", bold=True)
+        for it in c["items"]:
+            span = it.get("span", 1)
+            lines = wrap(it["name"], BW - 16, bold=it.get("bold", False))
+            h = max(span * RH - GAP, len(lines) * FPX * LH + 14)
+            cy = y0 + (it["row"] + span / 2) * RH
+            x, y = cx - BW / 2, cy - h / 2
+            svg.rect(x, y, BW, h, sw=1.4, fill=it.get("fill") or c.get("fill", "#fff"))
+            svg.text(cx, cy - len(lines) * FPX * LH / 2, lines, anchor="middle", bold=it.get("bold", False))
+            box[it["id"]] = (ci, x, y, BW, h)
+    for ln in spec.get("links", []):
+        a, b = ln[0], ln[1]
+        opt = ln[2] if len(ln) > 2 else {}
+        ca, ax, ay, aw, ah = box[a]
+        cb, bx, by, bw, bh = box[b]
+        dash = opt.get("dash")
+        if ca == cb:                                   # vertical link inside a column
+            x = ax + aw / 2 + opt.get("dx", 0)
+            p1, p2 = ((x, ay + ah), (x, by)) if by > ay else ((x, ay), (x, by + bh))
+            pts = [p1, p2]
+        else:
+            right = cb > ca
+            sx = ax + aw if right else ax
+            tx = bx if right else bx + bw
+            sy = ay + ah / 2 + opt.get("dy", 0)
+            tcy = by + bh / 2
+            if by + 8 <= sy <= by + bh - 8:            # target overlaps vertically: straight arrow
+                pts = [(sx, sy), (tx, sy)]
+            elif ay + 8 <= tcy <= ay + ah - 8:         # tall source spans the target: straight at target height
+                pts = [(sx, tcy), (tx, tcy)]
+            else:
+                ty = by + bh / 2 + opt.get("ty", 0)
+                # trunk just past the source box — never on the dashed column separator
+                mx = sx + (12 if right else -12) + opt.get("mx", 0)
+                pts = [(sx, sy), (mx, sy), (mx, ty), (tx, ty)]
+        svg.line(pts, sw=1.3, dash=dash)
+        svg.head(pts[-2], pts[-1])
+        if opt.get("both"):
+            svg.head(pts[1], pts[0])
+    svg.save(svg_path, W, H)
+    return W, H
+
+
 def render(spec, out_base, min_pt=10.0):
     out_base = Path(out_base)
     svg = out_base.with_suffix(".svg")
-    fn = {"idef0": render_idef0, "idef3": render_idef3, "tree": render_tree, "dfd": render_dfd, "usecase": render_usecase}[spec["kind"]]
+    fn = {"idef0": render_idef0, "idef3": render_idef3, "tree": render_tree, "dfd": render_dfd, "usecase": render_usecase, "layers": render_layers, "columns": render_columns}[spec["kind"]]
+    _FRAME.clear(); _FRAME.update(FRAME_DEFAULT, **spec.get("frame", {}))
     W, H = fn(spec, svg)
     png = out_base.with_suffix(".png")
     res = {"file": out_base.name, "native_px": [round(W), round(H)], "min_font_px": FPX}

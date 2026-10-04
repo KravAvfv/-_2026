@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+skinparam sequenceMessageAlign center
+box "Датчики" #FFFFFF
+participant "Сенсор" as S
+end box
+box "Мережевий" #F2F2F2
+participant "Шлюз" as G
+end box
+box "Обробка даних" #E6E6E6
+queue "Шина\nподій" as B
+participant "Сервіси\nядра" as C
+end box
+box "Застосунки" #FFFFFF
+participant "АРМ КП" as W
+participant "Планшет" as P
+end box
+S -> G : виявлення
+G -> B : нормалізована подія
+B -> C : подія «виявлення»
+C -> B : «трек оновлено»
+B -> W : приріст обстановки
+note over S, W : ≤ 2 с
+W -> C : призначення, санкція
+C -> B : «місію санкціоновано»
+B -> G : завдання (пріоритет 1)
+G -> P : завдання розрахунку
+note over C, P : ≤ 1 с
+P -> G : прийнято
+G -> B : «завдання прийнято»
+B -> W : стан місії
+@enduml

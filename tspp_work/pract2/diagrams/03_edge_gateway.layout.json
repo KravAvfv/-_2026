@@ -1,0 +1,26 @@
+{
+  "file": "03_edge_gateway.mmd",
+  "native_px": [
+    859,
+    880
+  ],
+  "png_px": [
+    2577,
+    2640
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.9,
+    "dpi": 397
+  },
+  "landscape": {
+    "width_cm": 14.15,
+    "font_pt": 9.3,
+    "dpi": 463
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true,
+  "aspect": 0.98
+}

@@ -1,6 +1,22 @@
-# CLAUDE.md — ПІС (Проєктування інформаційних систем) course project
+# CLAUDE.md — two independent course tracks (ПІС + «Технології створення програмних продуктів»)
 
-## 1. Project overview
+## 0. Tracks — read first
+| | Track 1 | Track 2 |
+|---|---|---|
+| Course | ПІС — Проєктування інформаційних систем | «Технології створення програмних продуктів» (always the full name, never abbreviated in deliverables) |
+| Work type | Лабораторні роботи (ЛР1…ЛР7) | Практичні роботи (ПР1…ПР4) |
+| Instructor | к.т.н. Гладка М. В. | к.т.н., доц. Кравченко Ольга Віталіївна |
+| Theory sources | `ПІС_*.pdf`, `Корисна інфа 1–5.pdf`, `лбN.docx` | **only** files in `Технології створення програмних продуктів/` (lectures `Л1…Л8 *.pptx`, testing PDFs, `Корисна література від викладача/`, `2020-КР-Приклад опису Діаграм…pdf`) |
+| Theme file | `My_theme.txt` (root) | `Технології створення програмних продуктів/My_theme.txt` |
+| Title template | `Титульна сторінка для лб.docx` | `Технології створення програмних продуктів/Титульна сторінка для практичних робіт.docx` |
+| Workspace | `labN/` | `tspp_work/practN/` |
+| Details | §1–§8 below | §9 below |
+
+**Knowledge isolation:** never cite or borrow theory, standards or terminology of one course in the other. **Shared:**
+the domain model (`DOMAIN_KNOWLEDGE_BASE.md` — РЦПДО «Щит-Північ», IoT-платформа «Щит-Лінк») and the toolchain in
+`tools/`. Never modify `lab1/`…`lab7/` or root ПІС files from Track 2 work.
+
+## 1. Project overview (Track 1 — ПІС)
 - **Student:** Петро Кравченко, гр. ІР-31, КНУ ім. Тараса Шевченка, ФІТ, кафедра інформаційних систем та технологій.
 - **Instructor / lecturer:** к.т.н. Гладка Мирослава Вікторівна (lectures `ПІС_*.pdf` are hers — her terminology wins).
 - **Theme (verbatim from `My_theme.txt`):** «Проєктування розподіленої IoT-системи обміну телеметрією та координації
@@ -45,6 +61,7 @@
 | `.claude/skills/diagram-generator/` | diagram workflow skill |
 | `.claude/skills/academic-report-builder/` | report assembly skill |
 | `.claude/skills/curriculum-compliance-reviewer/` | pre-submission audit skill |
+| `tspp_work/practN/` | Track 2 workspace (see §9): `model_pN.py`, `make_practN.py`, `diagrams/`, output `ПРN_Кравченко_ІР-31.docx` |
 | `labN/` | per-lab workspace: `report.yaml`, `diagrams/*.mmd`, output `ЛРN_Кравченко_ІР-31.docx`, `preview/` |
 
 ## 5. Environment
@@ -82,7 +99,10 @@
   ABC (cost centres, roll-up C = Σ C·F, A0 with ABC Data), Activity Cost Report, UDP + Diagram Object Report,
   Arrow / Data Usage / Consistency reports.
 - **ЛР5** (brief `лб5_6.docx`) — done: `lab5/model5.py` + `lab5/make_lab5.py`: use-case diagrams (idef_model
-  `usecase` renderer), activity ×2, sequence, class ×2 (PlantUML via `tools/puml_render.py`). Next: лб7_Архітектура ІоТ.docx.
+  `usecase` renderer), activity ×2, sequence, class ×2 (PlantUML via `tools/puml_render.py`).
+- **ЛР7** (brief `лб7_Архітектура ІоТ.docx`) — done: `lab7/model7.py` + `lab7/make_lab7.py`: 6-level architecture
+  (idef_model `layers` renderer, portrait, security badges S1–S5), information-flow diagram (`dfd` with
+  `frame: False` + layer `columns`), components / protocols / security tables.
 
 ## 8. Operational rules for future sessions
 - **Formatting rules (2026-10-03, see academic-report-builder §4a):** dot after heading numbers; new page before
@@ -97,3 +117,47 @@
 - Git: commit only when the user asks; branch off `main` first.
 - If a tool fails twice for the same reason, diagnose root cause (paths with Cyrillic, fonts, mmdc syntax) instead
   of retrying blindly.
+
+## 9. Track 2 — «Технології створення програмних продуктів» (practical works)
+- **Briefs:** ПР1 = `Технології створення програмних продуктів/Практична робота 1.docx`; ПР2–ПР4 are screenshots
+  `Практична робота 2.png`, `3.png`, `4.png` — `Read` them (image) before work. They do not name specific slides;
+  map lectures yourself (Л1 ЖЦ/models, Л2 requirements, Л3 IS & DB, Л4 methodologies, Л5 design/patterns,
+  Л6 testing, Л7 tools, Л8 RUP/use cases).
+  - **ПР1** (done) — Збір та документування вимог: theme + DB (≥ 5–6 linked populated tables), FR/NFR, use case
+    diagram, SRS (10-section structure of the brief), conclusions.
+  - **ПР2** (done; was due 2026-09-23) — Архітектура IoT-екосистеми: `pract2/model_p2.py` + `make_pract2.py`.
+    Level model = the teacher's own 4-level IoT model (Zinko, Kravchenko 2024; Васюта, Кравченко IST 2025; Легойда,
+    Кравченко 2024 — all in `Корисна література від викладача/`): рівень датчиків (сприйняття) / мережевий / обробки
+    даних (проміжного ПЗ) / застосунків, drawn in her 4-column figure style (`idef_model` kind `columns`).
+    Styles/patterns/SOLID from Л5. Do NOT use ПІС lecture 7 terminology here.
+  - **ПР3** (done; was due 2026-09-30) — `pract3/model_p3.py` + `make_pract3.py`: analogues DELTA, DedroneTracker.AI,
+    Flightradar24, ThingsBoard, QGroundControl (9 criteria / 4 groups); hardware by weighted scoring (winner computed):
+    UMA-16 v2 + Raspberry Pi 5, Robin Radar IRIS, FLIR Hadron 640R, Jetson Orin Nano Super. Facts web-verified
+    04.10.2026 (31 sources, «дата звернення»); drop any claim that cannot be verified on a primary page.
+    Original brief: 4–5 software analogues (any domain), each
+    with "what we take from it", comparison table by own criteria; sensors from vendors compared by criteria and
+    chosen; conclusion = overall HW + SW solution. **Sources numbered by order of first mention, `[n]` before the
+    sentence's full stop.** Structure: 2 sections with subsections + Висновки + джерела.
+  - **ПР4** (done; due 2026-10-14) — `pract4/model_p4.py` + `make_pract4.py`: BPMN ×2 (TO-BE, platform lanes),
+    IDEF0 A-0 + A0 (system viewpoint, mechanisms = gateways / core / apps), UML concept (use case reused from ПР1,
+    state of «Місія», classes) → logical (activity, sequence, collaboration) → physical (DB classes, components,
+    deployment), mirroring the 2020 example's structure. `idef_model` IDEF0 frame fields now overridable via spec
+    `frame` (Track 2 reader = Кравченко О. В.). PlantUML: prefix typed attributes with `{field}` when `hide methods`.
+    Original brief: Проектування системи: "section 2 of the project work" — BPMN, UML and IDEF diagrams of
+    the application domain and node/module interconnections; every figure described in detail; third-person
+    technical narrative. Reference: `2020-КР-Приклад опису Діаграм -Розробка UML.pdf`.
+- **Product:** theme from the course `My_theme.txt` («Розподілена IoT-система цілевказівки та координації дронів для
+  перехоплення повітряних цілей») realised as IoT-платформа «Щит-Лінк»; title-page «Тема» = practical-work title.
+- **Pattern:** `tspp_work/practN/model_pN.py` (data) + `make_practN.py` (diagrams + `report.yaml`); shared helpers in
+  `tspp_work/tspp_common.py` (`number_citations` — `[@key]` → `[n]` by first mention, aborts on uncited sources;
+  `block_helpers`). Later practicals import earlier models (e.g. ПР2 reads FR/NFR from `pract1/model_p1.py`).
+- **`idef_model` kind `columns`** (added for Track 2): vertical columns with dashed separators, titles on top, bold
+  layer names at the bottom, orthogonal item-to-item arrows (`gap`, `rh`, `colw`, `bw`, link opts `both`/`dash`).
+- **Spec keys for the shared tools:** `template`, `work_label: "Практична робота №"`, `subject`, `theme`,
+  `required_sections` (checker), block `refs:` for the reference list (left-aligned so URLs don't stretch lines; the checker skips
+  the reference list when scanning for English placeholder words). Structure used: numbered sections
+  `1. Мета та завдання роботи` … `N.`, then `Висновки`, `Список використаних джерел` (each on a new page).
+- **Build/check:** `.venv/bin/python tspp_work/practN/make_practN.py && .venv/bin/python tools/build_report.py
+  tspp_work/practN/report.yaml --pdf && .venv/bin/python tools/check_report.py tspp_work/practN/ПРN_Кравченко_ІР-31.docx
+  --spec tspp_work/practN/report.yaml` (check only `--pdf` builds: without page numbers the ЗМІСТ entries equal the
+  headings and the TOC-style check misfires).

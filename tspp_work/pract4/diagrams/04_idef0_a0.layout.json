@@ -1,0 +1,23 @@
+{
+  "file": "04_idef0_a0",
+  "native_px": [
+    894,
+    542
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 7.8,
+    "main_pt": 7.8,
+    "dpi": 550
+  },
+  "landscape": {
+    "width_cm": 23.92,
+    "font_pt": 11.4,
+    "main_pt": 11.4,
+    "dpi": 380
+  },
+  "orientation": "landscape",
+  "width_cm": 23.92,
+  "legible": true
+}

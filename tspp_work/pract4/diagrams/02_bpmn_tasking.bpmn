@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs_b2_tasking" targetNamespace="http://knu.ua/pis/shchyt-link" exporter="tools/bpmn_model.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_b2_tasking">
+    <bpmn:participant id="CREW" name="Розрахунок перехоплювачів (планшет, НСУ)"/>
+    <bpmn:participant id="ORG" name="РЦПДО «Щит-Північ» з IoT-платформою «Щит-Лінк» (як буде)" processRef="Proc_ORG"/>
+    <bpmn:messageFlow id="MF_b2_tasking_0" sourceRef="m1" targetRef="CREW" name="Завдання"/>
+    <bpmn:messageFlow id="MF_b2_tasking_1" sourceRef="CREW" targetRef="t6" name="Телеметрія"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_ORG" isExecutable="false">
+    <bpmn:laneSet id="LS_ORG">
+      <bpmn:lane id="L_FCO" name="Офіцер бойового управління">
+        <bpmn:flowNodeRef>t3</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_CORE" name="IoT-ядро">
+        <bpmn:flowNodeRef>s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>m1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>e1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_OC" name="Оперативний черговий">
+        <bpmn:flowNodeRef>t4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>g1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>e0</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="s" name="Ціль у черзі"><bpmn:outgoing>SF_ORG_0</bpmn:outgoing><bpmn:messageEventDefinition id="ED_s"/></bpmn:startEvent>
+    <bpmn:serviceTask id="t1" name="Підібрати кандидатів, перевірити деконфлікцію"><bpmn:incoming>SF_ORG_0</bpmn:incoming><bpmn:outgoing>SF_ORG_1</bpmn:outgoing></bpmn:serviceTask>
+    <bpmn:userTask id="t3" name="Обрати розрахунок"><bpmn:incoming>SF_ORG_1</bpmn:incoming><bpmn:outgoing>SF_ORG_2</bpmn:outgoing></bpmn:userTask>
+    <bpmn:userTask id="t4" name="Санкціонувати пуск"><bpmn:incoming>SF_ORG_2</bpmn:incoming><bpmn:outgoing>SF_ORG_3</bpmn:outgoing></bpmn:userTask>
+    <bpmn:exclusiveGateway id="g1" name="Санкцію надано?"><bpmn:incoming>SF_ORG_3</bpmn:incoming><bpmn:outgoing>SF_ORG_4</bpmn:outgoing><bpmn:outgoing>SF_ORG_5</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:intermediateThrowEvent id="m1" name="Завдання надіслано"><bpmn:incoming>SF_ORG_5</bpmn:incoming><bpmn:outgoing>SF_ORG_6</bpmn:outgoing><bpmn:messageEventDefinition id="ED_m1"/></bpmn:intermediateThrowEvent>
+    <bpmn:serviceTask id="t6" name="Супроводжувати місію"><bpmn:incoming>SF_ORG_6</bpmn:incoming><bpmn:outgoing>SF_ORG_7</bpmn:outgoing></bpmn:serviceTask>
+    <bpmn:endEvent id="e0" name="Місію відхилено"><bpmn:incoming>SF_ORG_4</bpmn:incoming></bpmn:endEvent>
+    <bpmn:endEvent id="e1" name="Місію закрито"><bpmn:incoming>SF_ORG_7</bpmn:incoming></bpmn:endEvent>
+    <bpmn:sequenceFlow id="SF_ORG_0" sourceRef="s" targetRef="t1" name=""/>
+    <bpmn:sequenceFlow id="SF_ORG_1" sourceRef="t1" targetRef="t3" name=""/>
+    <bpmn:sequenceFlow id="SF_ORG_2" sourceRef="t3" targetRef="t4" name=""/>
+    <bpmn:sequenceFlow id="SF_ORG_3" sourceRef="t4" targetRef="g1" name=""/>
+    <bpmn:sequenceFlow id="SF_ORG_4" sourceRef="g1" targetRef="e0" name="ні"/>
+    <bpmn:sequenceFlow id="SF_ORG_5" sourceRef="g1" targetRef="m1" name="так"/>
+    <bpmn:sequenceFlow id="SF_ORG_6" sourceRef="m1" targetRef="t6" name=""/>
+    <bpmn:sequenceFlow id="SF_ORG_7" sourceRef="t6" targetRef="e1" name=""/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Dgm_b2_tasking"><bpmndi:BPMNPlane id="Plane_b2_tasking" bpmnElement="Collab_b2_tasking">
+    <bpmndi:BPMNShape id="CREW_di" bpmnElement="CREW" isHorizontal="true"><dc:Bounds x="0" y="0" width="1044" height="64"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ORG_di" bpmnElement="ORG" isHorizontal="true"><dc:Bounds x="0" y="104" width="1044" height="472"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L_FCO_di" bpmnElement="L_FCO" isHorizontal="true"><dc:Bounds x="50" y="104" width="994" height="118"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L_CORE_di" bpmnElement="L_CORE" isHorizontal="true"><dc:Bounds x="50" y="222" width="994" height="236"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="L_OC_di" bpmnElement="L_OC" isHorizontal="true"><dc:Bounds x="50" y="458" width="994" height="118"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="s_di" bpmnElement="s"><dc:Bounds x="136" y="261" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="104" y="304" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t1_di" bpmnElement="t1"><dc:Bounds x="214" y="237" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t3_di" bpmnElement="t3"><dc:Bounds x="398" y="119" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t4_di" bpmnElement="t4"><dc:Bounds x="582" y="473" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="g1_di" bpmnElement="g1"><dc:Bounds x="777" y="490" width="54" height="54"/><bpmndi:BPMNLabel><dc:Bounds x="752" y="547" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="m1_di" bpmnElement="m1"><dc:Bounds x="784" y="261" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="752" y="304" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t6_di" bpmnElement="t6"><dc:Bounds x="862" y="237" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="e0_di" bpmnElement="e0"><dc:Bounds x="924" y="497" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="892" y="540" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="e1_di" bpmnElement="e1"><dc:Bounds x="924" y="379" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="892" y="422" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="SF_ORG_0_di" bpmnElement="SF_ORG_0"><di:waypoint x="176" y="281"/><di:waypoint x="214" y="281"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_ORG_1_di" bpmnElement="SF_ORG_1"><di:waypoint x="378" y="281"/><di:waypoint x="388" y="281"/><di:waypoint x="388" y="163"/><di:waypoint x="398" y="163"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_ORG_2_di" bpmnElement="SF_ORG_2"><di:waypoint x="562" y="163"/><di:waypoint x="572" y="163"/><di:waypoint x="572" y="517"/><di:waypoint x="582" y="517"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_ORG_3_di" bpmnElement="SF_ORG_3"><di:waypoint x="746" y="517"/><di:waypoint x="777" y="517"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_ORG_4_di" bpmnElement="SF_ORG_4"><di:waypoint x="831" y="517"/><di:waypoint x="924" y="517"/><bpmndi:BPMNLabel><dc:Bounds x="837" y="495" width="23" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_ORG_5_di" bpmnElement="SF_ORG_5"><di:waypoint x="804" y="490"/><di:waypoint x="804" y="301"/><bpmndi:BPMNLabel><dc:Bounds x="809" y="468" width="32" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_ORG_6_di" bpmnElement="SF_ORG_6"><di:waypoint x="824" y="281"/><di:waypoint x="862" y="281"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_ORG_7_di" bpmnElement="SF_ORG_7"><di:waypoint x="944" y="325"/><di:waypoint x="944" y="379"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_b2_tasking_0_di" bpmnElement="MF_b2_tasking_0"><di:waypoint x="804" y="261"/><di:waypoint x="804" y="64"/><bpmndi:BPMNLabel><dc:Bounds x="810" y="73" width="69" height="22"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_b2_tasking_1_di" bpmnElement="MF_b2_tasking_1"><di:waypoint x="974" y="64"/><di:waypoint x="974" y="237"/><bpmndi:BPMNLabel><dc:Bounds x="882" y="73" width="86" height="22"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

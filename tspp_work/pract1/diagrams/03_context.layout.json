@@ -1,0 +1,26 @@
+{
+  "file": "03_context.mmd",
+  "native_px": [
+    1234,
+    810
+  ],
+  "png_px": [
+    3702,
+    2430
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 7.6,
+    "dpi": 570
+  },
+  "landscape": {
+    "width_cm": 22.08,
+    "font_pt": 10.1,
+    "dpi": 426
+  },
+  "orientation": "landscape",
+  "width_cm": 22.08,
+  "legible": true,
+  "aspect": 1.52
+}

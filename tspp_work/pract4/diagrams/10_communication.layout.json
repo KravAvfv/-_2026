@@ -1,0 +1,21 @@
+{
+  "file": "10_communication.puml",
+  "native_px": [
+    771,
+    347
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 9.1,
+    "dpi": 475
+  },
+  "landscape": {
+    "width_cm": 23.57,
+    "font_pt": 13.0,
+    "dpi": 332
+  },
+  "orientation": "landscape",
+  "width_cm": 23.57,
+  "legible": true
+}

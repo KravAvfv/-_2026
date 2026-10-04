@@ -1,0 +1,23 @@
+{
+  "file": "01_reference",
+  "native_px": [
+    700,
+    390
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.0,
+    "main_pt": 10.0,
+    "dpi": 323
+  },
+  "landscape": {
+    "width_cm": 21.4,
+    "font_pt": 13.0,
+    "main_pt": 13.0,
+    "dpi": 249
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

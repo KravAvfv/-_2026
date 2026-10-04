@@ -1,0 +1,23 @@
+{
+  "file": "04_core",
+  "native_px": [
+    916,
+    588
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 7.7,
+    "main_pt": 7.7,
+    "dpi": 423
+  },
+  "landscape": {
+    "width_cm": 22.59,
+    "font_pt": 10.5,
+    "main_pt": 10.5,
+    "dpi": 309
+  },
+  "orientation": "landscape",
+  "width_cm": 22.59,
+  "legible": true
+}

@@ -9,6 +9,10 @@ Spec format (YAML) — see .claude/skills/academic-report-builder/SKILL.md for t
     lab_number: 1
     output: lab1/ЛР1_Кравченко_ІР-31.docx
     year: 2026                       # optional, default = current year
+    template: "Технології створення програмних продуктів/Титульна сторінка для практичних робіт.docx"
+                                     # optional title template (default: ПІС lab template)
+    work_label: "Практична робота №" # optional, title-page label before the "__" number placeholder
+    subject: "Технології створення програмних продуктів"   # optional docx core property
     theme: "..."                     # optional, default = first line of My_theme.txt
     blocks:
       - h1: Мета роботи
@@ -18,6 +22,7 @@ Spec format (YAML) — see .claude/skills/academic-report-builder/SKILL.md for t
       - numbered: [пункт, пункт]
       - table: {id: units, caption: Назва, header: [..], rows: [[..]], widths: [3, 6, 7], font: 12}
       - figure: {id: goal_tree, src: lab1/diagrams/goal_tree.mmd, caption: Назва, orientation: auto}
+      - refs: [джерело 1, джерело 2]  # numbered reference list "1. …" (ДСТУ 8302:2015 entries)
       - pagebreak: true
 
 Numbering: figures → "Рис. <lab>.<k> — <caption>", tables → "Таблиця <lab>.<k> — <caption>".
@@ -143,6 +148,17 @@ def cell_text(cell, text, size, bold=False, align=WD_ALIGN_PARAGRAPH.LEFT):
         add_text(p, str(line), size=size, bold=bold)
 
 
+def drop_trailing_spacer(doc):
+    """Remove the last body paragraph if it is an empty spacer (e.g. after a table). Called before a block that
+    starts with page_break_before: a spacer that spilled onto a fresh page would otherwise leave a blank page."""
+    body = doc.element.body
+    last = body[-1] if body[-1].tag != qn("w:sectPr") else body[-2]
+    if last.tag == qn("w:p") and not "".join(last.itertext()).strip() and last.find(qn("w:pPr") + "/" +
+                                                                                     qn("w:sectPr")) is None \
+            and last.find(".//" + qn("w:drawing")) is None and last.find(".//" + qn("w:br")) is None:
+        body.remove(last)
+
+
 def style_by_name(doc, name, outline=None):
     """python-docx lookups translate UI names; the template stores "Heading 1" verbatim — search by name."""
     for st in doc.styles:
@@ -204,7 +220,8 @@ class ReportBuilder:
         self._break_next = False
         self.spec, self.spec_dir = spec, spec_dir
         self.lab = int(spec["lab_number"])
-        self.doc = Document(str(TEMPLATE))
+        self.label = spec.get("work_label", "Лабораторна робота №")
+        self.doc = Document(str(ROOT / spec["template"]) if spec.get("template") else str(TEMPLATE))
         self.fig_ids, self.tab_ids = {}, {}
         self.orientation = "portrait"
         self._number_objects()
@@ -280,7 +297,7 @@ class ReportBuilder:
         done = {"lab": False, "theme": False, "year": False}
         for p in ps:
             txt = p.text
-            if txt.startswith("Лабораторна робота №") and not done["lab"]:
+            if " ".join(txt.split()).startswith(self.label) and not done["lab"]:
                 for r in p.runs:
                     if r.text.strip("_ ") == "" and "_" in r.text:
                         r.text = str(self.lab); r.bold = True; done["lab"] = True; break
@@ -297,8 +314,8 @@ class ReportBuilder:
             sys.exit(f"Title page placeholders not found: {missing}")
         cp = self.doc.core_properties
         cp.author = "Петро Кравченко"
-        cp.title = f"Лабораторна робота №{self.lab}. {theme}"
-        cp.subject = "Проєктування інформаційних систем"
+        cp.title = f"{self.label}{self.lab}. {theme}"
+        cp.subject = self.spec.get("subject", "Проєктування інформаційних систем")
         cp.language = "uk-UA"
 
     # -- sections
@@ -347,6 +364,8 @@ class ReportBuilder:
 
     def _heading(self, text, new_page, align, indent, before, after, bold=True, italic=False, upper=False, level=1):
         self.switch("portrait")
+        if new_page or self._break_next:
+            drop_trailing_spacer(self.doc)
         p = self.doc.add_paragraph()
         p.style = style_by_name(self.doc, f"Heading {level}", outline=level - 1)   # indexed by the TOC field
         fmt_par(p, align=align, indent=indent, before=before, after=after, keep_next=True)
@@ -390,6 +409,14 @@ class ReportBuilder:
             marker = f"{k}) " if numbered else "– "
             add_text(p, marker + self.resolve(it))
 
+    def refs(self, items):
+        """Reference list: "1. Entry." with 1.25 cm first-line indent (ДСТУ 8302:2015 entries written in the spec)."""
+        self.switch("portrait")
+        for k, it in enumerate(items, 1):
+            p = self.doc.add_paragraph()
+            fmt_par(p, align=WD_ALIGN_PARAGRAPH.LEFT)   # ragged-right: long URLs must not stretch the line
+            add_text(p, f"{k}. " + self.resolve(it))
+
     def table(self, t):
         """Table with ДСТУ caption. `continue_at: [i, ...]` (0-based data-row indices) splits a long table into
         explicit chunks; each further chunk starts on a new page under "Продовження таблиці N.k" with the header
@@ -413,6 +440,8 @@ class ReportBuilder:
                               new_page=(ci > 0 or key in self.break_tables or t.get("new_page", False) and ci == 0))
 
     def _table_chunk(self, t, header, rows, caption, probe, key, new_page):
+        if new_page:
+            drop_trailing_spacer(self.doc)
         cap = self.doc.add_paragraph()
         fmt_par(cap, align=WD_ALIGN_PARAGRAPH.LEFT, indent=0, spacing=1.5, before=6, keep_next=True)
         cap.paragraph_format.page_break_before = bool(new_page)
@@ -509,6 +538,7 @@ class ReportBuilder:
             elif key == "numbered": self.lst(val, True)
             elif key == "table": self.table(val)
             elif key == "figure": self.figure(val)
+            elif key == "refs": self.refs(val)
             elif key == "pagebreak": self.pagebreak()
             else: sys.exit(f"Unknown block type: {key}")
         out = (ROOT / self.spec["output"]).resolve()

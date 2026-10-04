@@ -1,0 +1,31 @@
+@startuml
+skinparam componentStyle rectangle
+package "Периферійний шлюз" {
+  [Адаптери протоколів] as AD
+  [Локальний брокер MQTT] as BR
+  [Буфер і міст до ядра] as UP
+}
+package "IoT-ядро" {
+  queue "Шина подій" as BUS
+  [Сервіси реального часу] as RT
+  [Бізнес-сервіси] as BS
+  [API-шлюз] as API
+  database "PostgreSQL,\nTimescaleDB" as DB
+}
+package "Застосунки" {
+  [Веб-АРМ] as WEB
+  [Мобільний застосунок] as MOB
+}
+AD --> BR
+BR --> UP
+UP --> BUS
+BUS --> RT
+BUS --> BS
+RT --> DB
+BS --> DB
+API --> RT
+API --> BS
+WEB --> API
+MOB --> API
+MOB ..> BR : без зв’язку з ядром
+@enduml

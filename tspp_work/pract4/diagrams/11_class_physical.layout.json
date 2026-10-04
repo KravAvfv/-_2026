@@ -1,0 +1,21 @@
+{
+  "file": "11_class_physical.puml",
+  "native_px": [
+    825,
+    447
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 8.5,
+    "dpi": 508
+  },
+  "landscape": {
+    "width_cm": 25.22,
+    "font_pt": 13.0,
+    "dpi": 332
+  },
+  "orientation": "landscape",
+  "width_cm": 25.22,
+  "legible": true
+}

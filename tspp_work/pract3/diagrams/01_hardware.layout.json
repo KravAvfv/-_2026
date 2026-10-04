@@ -1,0 +1,23 @@
+{
+  "file": "01_hardware",
+  "native_px": [
+    804,
+    488
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 8.7,
+    "main_pt": 8.7,
+    "dpi": 495
+  },
+  "landscape": {
+    "width_cm": 23.89,
+    "font_pt": 12.6,
+    "main_pt": 12.6,
+    "dpi": 342
+  },
+  "orientation": "landscape",
+  "width_cm": 23.89,
+  "legible": true
+}

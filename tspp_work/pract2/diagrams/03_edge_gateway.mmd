@@ -1,0 +1,32 @@
+flowchart TB
+  classDef in fill:#FFFFFF,stroke:#000,stroke-width:1.2px;
+  classDef gw fill:#F2F2F2,stroke:#000,stroke-width:1.4px;
+  classDef out fill:#E6E6E6,stroke:#000,stroke-width:1.4px;
+
+  A["Акустичні вузли<br/>(MQTT 5)"]:::in
+  R["РЛС<br/>(ASTERIX, UDP)"]:::in
+  E["Оптико-електронні<br/>пости (RTSP)"]:::in
+  N["НСУ розрахунку<br/>(MAVLink 2)"]:::in
+  subgraph GW[" "]
+    direction TB
+    AD["Адаптери протоколів<br/>(шаблон «Адаптер»)"]:::gw
+    VAL["Автентифікація джерела, перевірка<br/>схеми й часу, канонічна модель"]:::gw
+    BR["Локальний брокер MQTT"]:::gw
+    LF["Локальне злиття треків<br/>(деградований режим)"]:::gw
+    SF["Буфер із відкладеною<br/>передачею (≥ 4 год)"]:::gw
+    HM["Моніторинг стану<br/>вузлів і шлюзу"]:::gw
+    UP["Міст до ядра: класи пріоритету<br/>завдання > треки > телеметрія > відео"]:::gw
+    AD --> VAL --> BR
+    BR --> LF
+    BR --> SF
+    BR --> HM
+    LF --> UP
+    SF --> UP
+    HM --> UP
+  end
+  CORE["IoT-ядро (рівень обробки даних)"]:::out
+  A --> AD
+  R --> AD
+  E --> AD
+  N <--> AD
+  UP <--> CORE

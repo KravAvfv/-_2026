@@ -1,0 +1,21 @@
+{
+  "file": "13_deployment.puml",
+  "native_px": [
+    641,
+    528
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.9,
+    "dpi": 395
+  },
+  "landscape": {
+    "width_cm": 17.6,
+    "font_pt": 11.7,
+    "dpi": 370
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

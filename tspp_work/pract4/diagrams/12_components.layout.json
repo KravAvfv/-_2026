@@ -1,0 +1,21 @@
+{
+  "file": "12_components.puml",
+  "native_px": [
+    552,
+    587
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 12.7,
+    "dpi": 340
+  },
+  "landscape": {
+    "width_cm": 13.64,
+    "font_pt": 10.5,
+    "dpi": 411
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

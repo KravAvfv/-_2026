@@ -1,0 +1,41 @@
+@startuml
+hide circle
+skinparam linetype ortho
+left to right direction
+entity "Сектор" as SEC {
+  * код сектора «PK»
+  --
+  назва
+  тип зони
+}
+entity "Сенсор" as SEN {
+  * код сенсора «PK»
+  --
+  код сектора «FK»
+  тип, стан
+}
+entity "Виявлення" as DET {
+  * код виявлення «PK»
+  --
+  код сенсора «FK»
+  код треку «FK»
+  час, достовірність
+}
+entity "Повітряний трек" as TRK {
+  * код треку «PK»
+  --
+  номер треку
+  належність
+  оцінка загрози
+}
+entity "Позиція" as POS {
+  * код позиції «PK»
+  --
+  код сектора «FK»
+  умовний номер
+}
+SEC ||--o{ SEN : містить
+SEC ||--o{ POS : містить
+SEN ||--o{ DET : формує
+TRK ||--o{ DET : агрегує
+@enduml

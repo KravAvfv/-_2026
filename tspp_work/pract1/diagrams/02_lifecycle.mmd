@@ -1,0 +1,30 @@
+flowchart TB
+  classDef ph fill:#F2F2F2,stroke:#000,stroke-width:1.5px;
+  classDef inc fill:#FFFFFF,stroke:#000,stroke-width:1.5px;
+  classDef ops fill:#E6E6E6,stroke:#000,stroke-width:1.5px;
+
+  subgraph PRE["Спільні етапи"]
+    direction LR
+    P["Планування та аналіз вимог (SRS)"]:::ph
+    D["Проєктування архітектури"]:::ph
+    P --> D
+  end
+
+  subgraph INC["Інкременти (у кожному — цикл V-моделі: проєктування → кодування → тестування)"]
+    direction LR
+    I1["Інкремент 1:<br/>прийом телеметрії,<br/>злиття треків"]:::inc
+    I2["Інкремент 2:<br/>класифікація,<br/>призначення, санкції"]:::inc
+    I3["Інкремент 3:<br/>супровід місії,<br/>звіти, сповіщення"]:::inc
+    I4["Інкремент 4:<br/>ресурси, аналітика,<br/>інтеграції"]:::inc
+    I1 --> I2 --> I3 --> I4
+  end
+
+  subgraph OPS["Конвеєр DevOps (відгуки й запити на зміну повертаються до планування)"]
+    direction LR
+    CI["Безперервна інтеграція<br/>і тестування"]:::ops
+    CD["Безперервне<br/>розгортання"]:::ops
+    MON["Моніторинг<br/>і підтримка"]:::ops
+    CI --> CD --> MON
+  end
+
+  PRE --> INC --> OPS

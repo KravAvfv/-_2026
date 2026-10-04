@@ -1,0 +1,26 @@
+{
+  "file": "01_req_process.mmd",
+  "native_px": [
+    669,
+    820
+  ],
+  "png_px": [
+    2010,
+    2460
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 15.35,
+    "font_pt": 13.0,
+    "dpi": 333
+  },
+  "landscape": {
+    "width_cm": 11.84,
+    "font_pt": 10.0,
+    "dpi": 431
+  },
+  "orientation": "portrait",
+  "width_cm": 15.35,
+  "legible": true,
+  "aspect": 0.82
+}

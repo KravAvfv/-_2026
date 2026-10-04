@@ -1,0 +1,25 @@
+{
+  "file": "01_bpmn_picture.bpmn",
+  "native_px": [
+    1054,
+    586
+  ],
+  "png_px": [
+    4216,
+    2344
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 6.7,
+    "dpi": 649
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.4,
+    "dpi": 417
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

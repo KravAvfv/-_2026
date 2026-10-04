@@ -1,0 +1,19 @@
+@startuml
+node "Позиція (×9)" as POS {
+  node "Периферійний шлюз\nJetson Orin Nano" as GW
+  node "Планшет\nAndroid" as TAB
+}
+node "Сенсори сектора" as SEN
+node "ЦОД 1 (основний)" as DC1 {
+  node "Кластер ядра" as K1
+  database "БД" as D1
+}
+node "ЦОД 2 (резервний)" as DC2
+node "Командний пункт:\nАРМ (браузер)" as CP
+SEN --> GW : MQTT, ASTERIX
+GW --> TAB : Wi-Fi, TLS
+GW --> K1 : VPN, mTLS
+K1 --> D1
+DC1 --> DC2 : реплікація
+CP --> K1 : HTTPS
+@enduml
