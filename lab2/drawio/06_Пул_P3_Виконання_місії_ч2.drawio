@@ -1,0 +1,113 @@
+<mxfile host="app.diagrams.net" agent="Shchyt-Link lab toolchain" version="24.7.17" type="device">
+  <diagram name="P3 Місія (ч. 2)" id="14376434340a56c4a15e">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="996" pageHeight="1169" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pool_P4c" value="Оцінка результату та звітність" style="rounded=0;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fillColor=#FFFFFF;whiteSpace=wrap;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="0" y="0" width="956" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="pool_P3b" value="Виконання місії перехоплення (частина 2)" style="swimlane;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fontStyle=0;horizontal=0;startSize=50;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;collapsible=0;container=1;whiteSpace=wrap;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="0" y="104" width="956" height="354" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_P3b_L1" value="Командир розрахунку" style="swimlane;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fontStyle=0;horizontal=0;startSize=30;fillColor=none;swimlaneFillColor=none;collapsible=0;container=1;whiteSpace=wrap;strokeWidth=1;" parent="pool_P3b" vertex="1">
+          <mxGeometry x="50" y="0" width="906" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_P3b_L2" value="Оператор перехоплювача" style="swimlane;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fontStyle=0;horizontal=0;startSize=30;fillColor=none;swimlaneFillColor=none;collapsible=0;container=1;whiteSpace=wrap;strokeWidth=1;" parent="pool_P3b" vertex="1">
+          <mxGeometry x="50" y="118" width="906" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_P3b_L3" value="Технік розрахунку" style="swimlane;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fontStyle=0;horizontal=0;startSize=30;fillColor=none;swimlaneFillColor=none;collapsible=0;container=1;whiteSpace=wrap;strokeWidth=1;" parent="pool_P3b" vertex="1">
+          <mxGeometry x="50" y="236" width="906" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P3b_lk" value="З частини 1 (Б)" style="shape=mxgraph.bpmn.event;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;perimeter=ellipsePerimeter;outline=catching;symbol=link;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=110;labelBackgroundColor=none;spacing=0;" parent="lane_P3b_L2" vertex="1">
+          <mxGeometry x="86" y="39" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P3b_t1" value="Здійснити пуск і вивести на ціль" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=user;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P3b_L2" vertex="1">
+          <mxGeometry x="164" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P3b_g1" value="Ціль виявлено?" style="shape=mxgraph.bpmn.gateway2;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;perimeter=rhombusPerimeter;outline=none;symbol=none;gwType=exclusive;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=110;labelBackgroundColor=none;spacing=0;" parent="lane_P3b_L2" vertex="1">
+          <mxGeometry x="359" y="32" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P3b_t2" value="Підтвердити ціль у фазі наведення" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=user;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P3b_L2" vertex="1">
+          <mxGeometry x="444" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P3b_t3" value="Доповісти про результат" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=send;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P3b_L1" vertex="1">
+          <mxGeometry x="628" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P3b_t4" value="Повернути або списати перехоплювач" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=manual;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P3b_L3" vertex="1">
+          <mxGeometry x="628" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P3b_e" value="Місію завершено" style="shape=mxgraph.bpmn.event;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;perimeter=ellipsePerimeter;outline=end;symbol=general;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=110;labelBackgroundColor=none;spacing=0;" parent="lane_P3b_L3" vertex="1">
+          <mxGeometry x="830" y="39" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P3b_d1" value="Архів телеметрії" style="shape=datastore;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=146;labelBackgroundColor=none;spacing=0;" parent="lane_P3b_L3" vertex="1">
+          <mxGeometry x="219" y="34" width="54" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f_SF_P3b_0" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P3b_lk" target="n_P3b_t1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="176.00" y="281.00" as="sourcePoint" />
+            <mxPoint x="214.00" y="281.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P3b_1" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P3b_t1" target="n_P3b_g1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="378.00" y="281.00" as="sourcePoint" />
+            <mxPoint x="409.00" y="281.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P3b_2" value="так" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="n_P3b_g1" target="n_P3b_t2">
+          <mxGeometry relative="1" as="geometry" x="0.419">
+            <mxPoint x="0.0" y="-12.0" as="offset" />
+            <mxPoint x="463.00" y="281.00" as="sourcePoint" />
+            <mxPoint x="494.00" y="281.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P3b_3" value="ні" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5000;exitY=0.0000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="n_P3b_g1" target="n_P3b_t3">
+          <mxGeometry relative="1" as="geometry" x="-0.928">
+            <mxPoint x="16.5" y="0.0" as="offset" />
+            <mxPoint x="436.00" y="254.00" as="sourcePoint" />
+            <mxPoint x="678.00" y="163.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="436.00" y="163.00" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P3b_4" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P3b_t2" target="n_P3b_t3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="658.00" y="281.00" as="sourcePoint" />
+            <mxPoint x="678.00" y="163.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="668.00" y="281.00" />
+              <mxPoint x="668.00" y="163.00" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P3b_5" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P3b_t3" target="n_P3b_t4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760.00" y="207.00" as="sourcePoint" />
+            <mxPoint x="760.00" y="355.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P3b_6" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P3b_t4" target="n_P3b_e">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="842.00" y="399.00" as="sourcePoint" />
+            <mxPoint x="880.00" y="399.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_DOA_P3b_t1_0" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=open;endFill=0;dashed=1;dashPattern=2 3;edgeStyle=none;rounded=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P3b_t1" target="n_P3b_d1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="296.00" y="325.00" as="sourcePoint" />
+            <mxPoint x="296.00" y="374.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_MF_d5_mission_b_0" value="Доповідь про результат" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=0;startArrow=oval;startFill=0;startSize=7;dashed=1;dashPattern=8 5;edgeStyle=none;rounded=0;entryX=0.8264;entryY=1.0000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.6829;exitY=0.0000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="n_P3b_t3" target="pool_P4c">
+          <mxGeometry relative="1" as="geometry" x="0.273">
+            <mxPoint x="-100.5" y="0.0" as="offset" />
+            <mxPoint x="790.00" y="119.00" as="sourcePoint" />
+            <mxPoint x="790.00" y="64.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

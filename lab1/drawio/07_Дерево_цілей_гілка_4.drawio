@@ -1,0 +1,107 @@
+<mxfile host="app.diagrams.net" agent="Shchyt-Link lab toolchain" version="24.7.17" type="device">
+  <diagram name="Гілка 4" id="651d2af9c75d58b8ba1d">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="958" pageHeight="1169" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sg_FN4_3" value="" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#808080;strokeWidth=1;container=1;collapsible=0;fontFamily=Times New Roman;verticalAlign=top;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="644.12" y="350" width="274.08" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="sg_FN4_2" value="" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#808080;strokeWidth=1;container=1;collapsible=0;fontFamily=Times New Roman;verticalAlign=top;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="323.47" y="350" width="280.66" height="528" as="geometry" />
+        </mxCell>
+        <mxCell id="sg_FN4_1" value="" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=#808080;strokeWidth=1;container=1;collapsible=0;fontFamily=Times New Roman;verticalAlign=top;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="12" y="350" width="271.47" height="498" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4" value="4. Безпечне, надійне та кіберзахищене&lt;br&gt;функціонування системи" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#EDEDED;strokeColor=#000000;strokeWidth=2;fontStyle=1;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="275.95" y="12" width="375.7" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_1" value="4.1 Захист інформації&lt;br&gt;від несанкціонованого&lt;br&gt;доступу" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#F7F7F7;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="35.68" y="166" width="224.11" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_1_1" value="4.1.1 Взаємна&lt;br&gt;автентифікація&lt;br&gt;пристроїв і сервісів&lt;br&gt;(mTLS)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="sg_FN4_1" vertex="1">
+          <mxGeometry x="36.38" y="24" width="198.7" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_1_2" value="4.1.2 Рольове&lt;br&gt;управління доступом і&lt;br&gt;багатофакторна&lt;br&gt;автентифікація" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="sg_FN4_1" vertex="1">
+          <mxGeometry x="24" y="192" width="223.47" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_1_3" value="4.1.3 Незмінний&lt;br&gt;журнал аудиту всіх&lt;br&gt;команд" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="sg_FN4_1" vertex="1">
+          <mxGeometry x="38.09" y="360" width="195.28" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_2" value="4.2 Доступність ядра&lt;br&gt;99,95 % та&lt;br&gt;автономність&lt;br&gt;периферії не менше 4&lt;br&gt;год" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#F7F7F7;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="355.63" y="136" width="216.33" height="174" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_2_1" value="4.2.1 Локальне злиття&lt;br&gt;даних і призначення&lt;br&gt;цілей на периферійних&lt;br&gt;шлюзах" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="sg_FN4_2" vertex="1">
+          <mxGeometry x="26.73" y="24" width="227.19" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_2_2a" value="4.2.2а Гаряче&lt;br&gt;резервування ядра у&lt;br&gt;двох центрах обробки&lt;br&gt;даних" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontStyle=0;dashed=1;dashPattern=6 4;spacingLeft=4;spacingRight=4;" parent="sg_FN4_2" vertex="1">
+          <mxGeometry x="30.38" y="192" width="219.91" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_2_2b" value="4.2.2б Холодне&lt;br&gt;резервування з&lt;br&gt;відновленням не довше&lt;br&gt;15 хв" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontStyle=0;dashed=1;dashPattern=6 4;spacingLeft=4;spacingRight=4;" parent="sg_FN4_2" vertex="1">
+          <mxGeometry x="24" y="360" width="232.66" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_3" value="4.3 Запобігання&lt;br&gt;ураженню дружніх&lt;br&gt;повітряних суден і&lt;br&gt;цивільних об’єктів" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#F7F7F7;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="683.97" y="151" width="194.39" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_3_1" value="4.3.1 Автоматичний&lt;br&gt;контроль зон заборони&lt;br&gt;ураження" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="sg_FN4_3" vertex="1">
+          <mxGeometry x="24" y="24" width="226.08" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="n_N4_3_2" value="4.3.2 Правило двох&lt;br&gt;осіб для&lt;br&gt;санкціонування пуску" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="sg_FN4_3" vertex="1">
+          <mxGeometry x="27.01" y="162" width="220.06" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.2633;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_N4" target="n_N4_1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="374.87" y="96.00" as="sourcePoint" />
+            <mxPoint x="147.73" y="162.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="374.87" y="108.93" />
+              <mxPoint x="374.87" y="116.00" />
+              <mxPoint x="367.80" y="116.00" />
+              <mxPoint x="154.81" y="116.00" />
+              <mxPoint x="147.73" y="116.00" />
+              <mxPoint x="147.73" y="123.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c3" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_N4_1" target="sg_FN4_1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="147.73" y="280.00" as="sourcePoint" />
+            <mxPoint x="147.73" y="346.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_N4" target="n_N4_2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="463.80" y="96.00" as="sourcePoint" />
+            <mxPoint x="463.80" y="132.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c5" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_N4_2" target="sg_FN4_2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="463.80" y="310.00" as="sourcePoint" />
+            <mxPoint x="463.80" y="346.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c6" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.7367;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_N4" target="n_N4_3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="552.72" y="96.00" as="sourcePoint" />
+            <mxPoint x="781.16" y="147.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="552.72" y="108.93" />
+              <mxPoint x="552.72" y="116.00" />
+              <mxPoint x="559.79" y="116.00" />
+              <mxPoint x="774.09" y="116.00" />
+              <mxPoint x="781.16" y="116.00" />
+              <mxPoint x="781.16" y="123.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c7" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_N4_3" target="sg_FN4_3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="781.16" y="295.00" as="sourcePoint" />
+            <mxPoint x="781.16" y="346.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
