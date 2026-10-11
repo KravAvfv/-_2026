@@ -1,0 +1,23 @@
+{
+  "file": "01_architecture",
+  "native_px": [
+    686,
+    926
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.2,
+    "main_pt": 10.2,
+    "dpi": 317
+  },
+  "landscape": {
+    "width_cm": 10.74,
+    "font_pt": 6.7,
+    "main_pt": 6.7,
+    "dpi": 487
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}
