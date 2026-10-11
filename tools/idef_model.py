@@ -1144,10 +1144,119 @@ def render_columns(spec, svg_path):
     return W, H
 
 
+# ------------------------------------------------------------------------------------------- flowchart (ISO 5807)
+def render_flowchart(spec, svg_path):
+    """Block scheme of an algorithm in ДСТУ ISO 5807 symbols on a grid (long algorithms continue in the next column
+    through on-page connectors).
+    spec: {"kind": "flowchart", "colw": 200, "rowh": 92, "bw": 166,
+      "nodes": [{"id", "kind": term|proc|io|dec|sub|db|conn|note, "text", "col": float, "row": float, "w": px}],
+      "edges": [(src, dst) | (src, dst, {"label", "exit": b|r|l|t, "enter": t|l|r|b, "via": [(col, row), ...],
+                                          "lx": dx, "ly": dy})],
+      "groups": [{"title", "c0", "r0", "c1", "r1"}]}        # optional dashed frames (rows/cols in grid units)"""
+    CW, RH, BW = spec.get("colw", 200), spec.get("rowh", 92), spec.get("bw", 166)
+    M = 16
+    nodes = {n["id"]: n for n in spec["nodes"]}
+    ncols = max(n["col"] for n in spec["nodes"]) + 1
+    nrows = max(n["row"] for n in spec["nodes"]) + 1
+    W, H = 2 * M + ncols * CW, 2 * M + nrows * RH
+    cx = lambda c: M + c * CW + CW / 2                       # noqa: E731
+    cy = lambda r: M + r * RH + RH / 2                       # noqa: E731
+    svg = SVG()
+    for gr in spec.get("groups", []):
+        x0, y0 = M + gr["c0"] * CW + 4, M + gr["r0"] * RH + 2
+        x1, y1 = M + gr["c1"] * CW - 4, M + gr["r1"] * RH - 2
+        svg.rect(x0, y0, x1 - x0, y1 - y0, sw=1.1, dash="7 5", fill="none")
+        svg.text(x0 + 8, y0 + 4, [gr["title"]], bold=True)
+    geo = {}
+    for n in spec["nodes"]:
+        k, x, y = n["kind"], cx(n["col"]), cy(n["row"])
+        w = n.get("w", BW)
+        if k == "conn":
+            r = 15
+            svg.circle(x, y, r)
+            svg.text(x, y - FPX * 0.55, [n["text"]], anchor="middle")
+            geo[n["id"]] = (x, y, 2 * r, 2 * r)
+            continue
+        inner = w * (0.66 if k == "dec" else 0.86 if k in ("io", "sub") else 0.92)
+        lines = wrap(n["text"], inner)
+        th = len(lines) * FPX * LH
+        h = max(n.get("h", 0), th + 22 if k != "dec" else th * 1.6 + 14, 44 if k != "dec" else 58)
+        x0, y0 = x - w / 2, y - h / 2
+        if k == "proc" or k == "note":
+            svg.rect(x0, y0, w, h, sw=1.5, dash="5 4" if k == "note" else None)
+        elif k == "sub":
+            svg.rect(x0, y0, w, h, sw=1.5)
+            svg.line([(x0 + 9, y0), (x0 + 9, y0 + h)], sw=1.2)
+            svg.line([(x0 + w - 9, y0), (x0 + w - 9, y0 + h)], sw=1.2)
+        elif k == "term":
+            svg.items.append(f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{w:.1f}" height="{h:.1f}" rx="{h / 2:.1f}" '
+                             f'fill="#fff" stroke="#000" stroke-width="1.5"/>')
+        elif k == "io":
+            sk = 14
+            pts = [(x0 + sk, y0), (x0 + w, y0), (x0 + w - sk, y0 + h), (x0, y0 + h)]
+            svg.items.append('<polygon points="' + " ".join(f"{a:.1f},{b:.1f}" for a, b in pts) +
+                             '" fill="#fff" stroke="#000" stroke-width="1.5"/>')
+        elif k == "dec":
+            pts = [(x, y0), (x0 + w, y), (x, y0 + h), (x0, y)]
+            svg.items.append('<polygon points="' + " ".join(f"{a:.1f},{b:.1f}" for a, b in pts) +
+                             '" fill="#fff" stroke="#000" stroke-width="1.5"/>')
+        elif k == "db":
+            e = 9
+            svg.items.append(f'<path d="M{x0:.1f},{y0 + e:.1f} A{w / 2:.1f},{e} 0 0 1 {x0 + w:.1f},{y0 + e:.1f} '
+                             f'L{x0 + w:.1f},{y0 + h - e:.1f} A{w / 2:.1f},{e} 0 0 1 {x0:.1f},{y0 + h - e:.1f} Z '
+                             f'M{x0:.1f},{y0 + e:.1f} A{w / 2:.1f},{e} 0 0 0 {x0 + w:.1f},{y0 + e:.1f}" '
+                             f'fill="#fff" stroke="#000" stroke-width="1.5"/>')
+            y = y + e / 2
+        svg.text(x, y - th / 2, lines, anchor="middle")
+        geo[n["id"]] = (cx(n["col"]), cy(n["row"]), w, h)
+
+    def port(nid, side):
+        x, y, w, h = geo[nid]
+        return {"b": (x, y + h / 2), "t": (x, y - h / 2), "l": (x - w / 2, y), "r": (x + w / 2, y)}[side]
+
+    for e in spec.get("edges", []):
+        a, b = e[0], e[1]
+        o = e[2] if len(e) > 2 else {}
+        ex, en = o.get("exit", "b"), o.get("enter", "t")
+        p1, p2 = port(a, ex), port(b, en)
+        pts = [p1]
+        via = [(cx(c), cy(r)) for c, r in o.get("via", [])]
+        cur_vertical = ex in ("b", "t")
+        for q in via + [p2]:
+            last = pts[-1]
+            if abs(last[0] - q[0]) > 0.5 and abs(last[1] - q[1]) > 0.5:
+                if q is p2:
+                    elbow = (q[0], last[1]) if en in ("t", "b") else (last[0], q[1])
+                else:
+                    elbow = (last[0], q[1]) if cur_vertical else (q[0], last[1])
+                pts.append(elbow)
+            pts.append(q)
+            cur_vertical = abs(pts[-1][0] - pts[-2][0]) < 0.5
+        clean = [pts[0]]
+        for q in pts[1:]:
+            if abs(q[0] - clean[-1][0]) > 0.5 or abs(q[1] - clean[-1][1]) > 0.5:
+                clean.append(q)
+        svg.line(clean, sw=1.3)
+        if o.get("arrow", True):
+            svg.head(clean[-2], clean[-1])
+        if o.get("label"):
+            lx, ly = p1[0] + o.get("lx", 0), p1[1] + o.get("ly", 0)
+            if ex == "b":
+                svg.text(lx + 6, ly + 1, [o["label"]], italic=True)
+            elif ex == "r":
+                svg.text(lx + 5, ly - FPX * LH - 1, [o["label"]], italic=True)
+            elif ex == "l":
+                svg.text(lx - 5, ly - FPX * LH - 1, [o["label"]], anchor="end", italic=True)
+            else:
+                svg.text(lx + 6, ly - FPX * LH - 2, [o["label"]], italic=True)
+    svg.save(svg_path, W, H)
+    return W, H
+
+
 def render(spec, out_base, min_pt=10.0):
     out_base = Path(out_base)
     svg = out_base.with_suffix(".svg")
-    fn = {"idef0": render_idef0, "idef3": render_idef3, "tree": render_tree, "dfd": render_dfd, "usecase": render_usecase, "layers": render_layers, "columns": render_columns}[spec["kind"]]
+    fn = {"idef0": render_idef0, "idef3": render_idef3, "tree": render_tree, "dfd": render_dfd, "usecase": render_usecase, "layers": render_layers, "columns": render_columns, "flowchart": render_flowchart}[spec["kind"]]
     _FRAME.clear(); _FRAME.update(FRAME_DEFAULT, **spec.get("frame", {}))
     W, H = fn(spec, svg)
     png = out_base.with_suffix(".png")

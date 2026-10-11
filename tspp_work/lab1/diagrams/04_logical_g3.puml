@@ -1,0 +1,76 @@
+@startuml
+hide circle
+hide methods
+skinparam linetype ortho
+left to right direction
+entity "Місія" as mission {
+  * Код місії «PK»
+  --
+  * Номер місії «U»
+  * Код треку «FK»
+  * Код розрахунку «FK»
+  Код перехоплювача «FK»
+  * Хто запропонував «FK»
+  Хто санкціонував «FK»
+  * Стан місії
+  * Час пропозиції
+  Час санкції
+  Час пуску
+  Час закриття
+  Причина скасування
+}
+entity "Подія місії" as mission_event {
+  * Код події «PK»
+  --
+  * Код місії «FK»
+  * Тип події
+  * Час події
+  Хто ініціював «FK»
+  Дані події
+}
+entity "Кадр телеметрії" as telemetry_frame {
+  * Код перехоплювача «PK, FK»
+  * Час кадру «PK»
+  --
+  * Код місії «FK»
+  * Широта
+  * Довгота
+  Висота
+  Шляхова швидкість
+  Заряд батареї
+  Якість зв’язку
+}
+entity "Звіт про перехоплення" as engagement_report {
+  * Код звіту «PK»
+  --
+  * Код місії «FK, U»
+  * Оцінка результату
+  Підтвердження
+  * Хто подав «FK»
+  * Час подання
+  Час надсилання вищому органу
+}
+entity "Повітряний трек" as air_track <<група 1>> {
+  * Код треку «PK»
+}
+entity "Розрахунок" as crew <<група 2>> {
+  * Код розрахунку «PK»
+}
+entity "Перехоплювач" as interceptor <<група 2>> {
+  * Код перехоплювача «PK»
+}
+entity "Користувач" as personnel <<група 4>> {
+  * Код користувача «PK»
+}
+air_track ||--o{ mission : є ціллю
+crew ||--o{ mission : виконує
+interceptor |o--o{ mission : застосовується в
+personnel ||--o{ mission : пропонує
+personnel |o--o{ mission : санкціонує
+mission ||--o{ mission_event : фіксує
+personnel |o--o{ mission_event : ініціює
+interceptor ||--o{ telemetry_frame : передає
+mission ||--o{ telemetry_frame : супроводжує
+mission ||--o| engagement_report : підсумовує
+personnel ||--o{ engagement_report : подає
+@enduml

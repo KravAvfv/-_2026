@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% block title %}Аналітика{% endblock %}
+{% block body %}
+<h1>Аналітика ефективності</h1>
+<form class="inline" method="get"><label>Період з</label><input type="date" name="from" value="{{ frm }}"><label>до</label><input type="date" name="to" value="{{ to }}"><button class="sec">Розрахувати</button></form>
+<div class="kpis">
+  <div class="kpi"><b>{{ st.missions }}</b><span>місій за період</span></div>
+  <div class="kpi"><b>{{ st.hit_rate or 0 }} %</b><span>частка влучань</span></div>
+  <div class="kpi"><b>{{ st.avg_approve_s or '—' }} с</b><span>пропозиція → санкція</span></div>
+  <div class="kpi"><b>{{ st.avg_launch_s or '—' }} с</b><span>санкція → пуск</span></div>
+</div>
+<div class="cols">
+<div><h2>Результати місій</h2>
+<table><tr><th>Результат</th><th class="num">Кількість</th></tr>
+<tr><td>Влучання</td><td class="num">{{ st.hits }}</td></tr><tr><td>Промах</td><td class="num">{{ st.misses }}</td></tr>
+<tr><td>Скасовано</td><td class="num">{{ st.aborted }}</td></tr><tr><td>Відхилено санкцію</td><td class="num">{{ st.rejected }}</td></tr></table></div>
+<div><h2>Розрахунки</h2>
+<table><tr><th>Позивний</th><th class="num">Місій</th><th class="num">Влучань</th><th class="num">Санкція → пуск, с</th></tr>
+{% for c in crews %}<tr><td>{{ c.call_sign }}</td><td class="num">{{ c.n }}</td><td class="num">{{ c.hits }}</td><td class="num">{{ c.launch_s or '—' }}</td></tr>{% endfor %}</table></div>
+</div>
+{% endblock %}

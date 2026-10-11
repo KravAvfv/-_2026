@@ -1,0 +1,23 @@
+{
+  "file": "04_mission",
+  "native_px": [
+    698,
+    694
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.1,
+    "main_pt": 10.1,
+    "dpi": 322
+  },
+  "landscape": {
+    "width_cm": 14.58,
+    "font_pt": 8.9,
+    "main_pt": 8.9,
+    "dpi": 365
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

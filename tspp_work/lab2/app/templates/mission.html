@@ -1,0 +1,36 @@
+{% extends "base.html" %}{% block title %}Місія {{ m.mission_no }}{% endblock %}
+{% block body %}
+<h1>Місія {{ m.mission_no }} <span class="badge {{ state_class[m.state] }}">{{ m.state }}</span></h1>
+<div class="cols">
+<div class="card"><dl>
+  <dt>Ціль</dt><dd>{{ m.track_number }} · {{ m.identity }} · загроза {{ m.threat_score }}</dd>
+  <dt>Розрахунок</dt><dd>«{{ m.call_sign }}», позиція {{ m.pos_code }}</dd>
+  <dt>Запропонував</dt><dd>{{ m.proposed_name }} · {{ fmt_dt(m.proposed_at) }}</dd>
+  <dt>Санкціонував</dt><dd>{{ m.approved_name or '—' }}{% if m.approved_at %} · {{ fmt_dt(m.approved_at) }}{% endif %}</dd>
+  <dt>Перехоплювач</dt><dd>{{ m.serial_no or '—' }}{% if m.launched_at %} · пуск {{ fmt_dt(m.launched_at) }}{% endif %}</dd>
+  <dt>Результат</dt><dd>{{ m.assessment or '—' }}{% if m.abort_reason %} · {{ m.abort_reason }}{% endif %}</dd>
+</dl></div>
+<div class="card">
+  <b>Дії</b>
+  {% for t in trans %}
+  <form method="post" class="inline"><input type="hidden" name="to_state" value="{{ t.to }}"><input type="hidden" name="action" value="transition">
+    {% if t.to == 'виконується' %}<select name="interceptor_id">{% for i in ints %}<option value="{{ i.interceptor_id }}">{{ i.serial_no }} ({{ i.model }})</option>{% endfor %}</select>{% endif %}
+    {% if t.to == 'скасована' %}<input name="abort_reason" placeholder="причина скасування" size="18">{% endif %}
+    <button class="{{ 'danger' if t.to in ('відхилена','скасована') else '' }}">{{ t.label }}</button></form>
+  {% endfor %}
+  {% if m.state == 'виконується' and can('mission.report') %}
+  <form method="post" class="inline"><input type="hidden" name="action" value="report">
+    <select name="assessment"><option>влучання</option><option>промах</option><option>скасовано</option></select><button>Доповісти результат</button></form>
+  {% endif %}
+  {% if not trans and not (m.state == 'виконується' and can('mission.report')) %}<p class="muted">Для вашої ролі в стані «{{ m.state }}» дій немає.</p>{% endif %}
+</div>
+</div>
+<h2>Хронологія</h2>
+<table><tr><th>Час</th><th>Подія</th><th>Зміна</th><th>Виконавець</th></tr>
+{% for e in events %}<tr><td>{{ fmt_dt(e.event_at) }}</td><td>{{ e.event_type }}</td><td>{{ e.payload['з'] or 'створення' }} → {{ e.payload['до'] }}</td><td>{{ e.full_name or 'система' }}</td></tr>{% endfor %}
+</table>
+{% if tele %}<h2>Телеметрія (останні кадри)</h2>
+<table><tr><th>Час</th><th>Координати</th><th class="num">Висота, м</th><th class="num">Швидкість, м/с</th><th class="num">Батарея, %</th><th class="num">Зв’язок, %</th></tr>
+{% for f in tele %}<tr><td>{{ fmt_dt(f.ts) }}</td><td>{{ f.lat }}, {{ f.lon }}</td><td class="num">{{ f.alt_m }}</td><td class="num">{{ f.ground_speed_mps }}</td><td class="num">{{ f.battery_pct }}</td><td class="num">{{ f.link_quality_pct }}</td></tr>{% endfor %}
+</table>{% endif %}
+{% endblock %}

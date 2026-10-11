@@ -1,0 +1,16 @@
+{
+  "file": "21_guard.png",
+  "native_px": [
+    2970,
+    1705
+  ],
+  "min_font_px": 64,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.1,
+    "dpi": 457
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

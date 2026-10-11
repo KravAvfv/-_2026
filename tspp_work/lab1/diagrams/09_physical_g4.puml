@@ -1,0 +1,59 @@
+@startuml
+hide circle
+hide methods
+skinparam linetype ortho
+top to bottom direction
+entity "role" as role {
+  {field} * role_id : SMALLINT «PK»
+  --
+  {field} * code : VARCHAR(10) «U»
+  {field} * name : VARCHAR(100) «U»
+  {field} * combat_rights : BOOLEAN
+  {field} description : TEXT
+}
+entity "permission" as permission {
+  {field} * permission_id : SMALLINT «PK»
+  --
+  {field} * code : VARCHAR(50) «U»
+  {field} * description : VARCHAR(200)
+}
+entity "role_permission" as role_permission {
+  {field} * role_id : SMALLINT «PK, FK»
+  {field} * permission_id : SMALLINT «PK, FK»
+  --
+  {field} * granted_at : TIMESTAMPTZ
+}
+entity "personnel" as personnel {
+  {field} * user_id : UUID «PK»
+  --
+  {field} * role_id : SMALLINT «FK»
+  {field} crew_id : UUID «FK»
+  {field} * full_name : VARCHAR(150)
+  {field} rank : VARCHAR(40)
+  {field} * login : VARCHAR(40) «U»
+  {field} * mfa_enabled : BOOLEAN
+  {field} admission_valid_to : DATE
+  {field} * status : personnel_status
+}
+entity "audit_log" as audit_log {
+  {field} * entry_id : BIGINT «PK»
+  --
+  {field} * logged_at : TIMESTAMPTZ
+  {field} actor_id : UUID «FK»
+  {field} * actor_type : actor_type
+  {field} * action : VARCHAR(80)
+  {field} * entity : VARCHAR(40)
+  {field} * entity_id : VARCHAR(40)
+  {field} details : JSONB
+  {field} prev_hash : CHAR(64)
+  {field} * hash : CHAR(64) «U»
+}
+entity "crew" as crew <<група 2>> {
+  {field} * crew_id : UUID «PK»
+}
+role ||--o{ role_permission
+permission ||--o{ role_permission
+role ||--o{ personnel
+crew |o--o{ personnel
+personnel |o--o{ audit_log
+@enduml

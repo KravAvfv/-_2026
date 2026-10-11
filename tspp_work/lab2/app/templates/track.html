@@ -1,0 +1,30 @@
+{% extends "base.html" %}{% block title %}Трек {{ t.track_number }}{% endblock %}
+{% block body %}
+<h1>Трек {{ t.track_number }} <span class="badge">{{ t.state }}</span></h1>
+<div class="cols">
+<div class="card"><dl>
+  <dt>Належність</dt><dd class="{{ 'hostile' if t.identity == 'ворожа' }}">{{ t.identity }}{% if t.target_type %} · {{ t.target_type }}{% endif %}</dd>
+  <dt>Оцінка загрози</dt><dd>{{ t.threat_score }} · підліт {{ fmt_eta(t.eta_s) }}</dd>
+  <dt>Об’єкт під загрозою</dt><dd>{{ t.object_name or '—' }}</dd>
+  <dt>Остання позиція</dt><dd>{{ t.lat }}, {{ t.lon }} · {{ t.speed }} м/с</dd>
+  <dt>Класифікував</dt><dd>{{ t.classified_name or '—' }}</dd>
+</dl></div>
+<div class="card">
+  {% if can('track.classify') %}
+  <form method="post" class="inline"><input type="hidden" name="action" value="classify">
+    <label>Належність</label><select name="identity">{% for i in identities %}<option {{ 'selected' if i == t.identity }}>{{ i }}</option>{% endfor %}</select>
+    <input name="target_type" value="{{ t.target_type or 'ударний БпЛА' }}" size="14"><button>Класифікувати</button></form>
+  {% endif %}
+  {% if active %}<p>Активна місія: <a href="{{ url_for('mission', mid=active.mission_id) }}">{{ active.mission_no }}</a> ({{ active.state }})</p>
+  {% elif can('mission.propose') %}
+  <form method="post" class="inline"><input type="hidden" name="action" value="propose">
+    <label>Розрахунок</label><select name="crew_id">{% for c in cands %}<option value="{{ c.crew_id }}">{{ c.call_sign }} ({{ c.position_code }}, {{ c.dist_km }} км{{ '' if c.in_range else ', поза радіусом' }})</option>{% endfor %}</select>
+    <button>Запропонувати місію</button></form>
+  {% endif %}
+</div>
+</div>
+<h2>Останні виявлення</h2>
+<table><tr><th>Час</th><th>Сенсор</th><th>Тип</th><th>Координати</th><th class="num">Висота, м</th><th class="num">Швидкість</th><th class="num">Достовірність</th></tr>
+{% for d in dets %}<tr><td>{{ fmt_dt(d.detected_at) }}</td><td class="mono">{{ d.hw_serial }}</td><td>{{ d.kind }}</td><td>{{ '%.4f'|format(d.lat) }}, {{ '%.4f'|format(d.lon) }}</td><td class="num">{{ d.altitude_m }}</td><td class="num">{{ d.speed_mps }}</td><td class="num">{{ d.confidence }}</td></tr>{% endfor %}
+</table>
+{% endblock %}

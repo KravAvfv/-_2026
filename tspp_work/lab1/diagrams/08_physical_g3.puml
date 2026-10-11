@@ -1,0 +1,76 @@
+@startuml
+hide circle
+hide methods
+skinparam linetype ortho
+left to right direction
+entity "mission" as mission {
+  {field} * mission_id : UUID «PK»
+  --
+  {field} * mission_no : VARCHAR(16) «U»
+  {field} * track_id : UUID «FK»
+  {field} * crew_id : UUID «FK»
+  {field} interceptor_id : UUID «FK»
+  {field} * proposed_by : UUID «FK»
+  {field} approved_by : UUID «FK»
+  {field} * state : mission_state
+  {field} * proposed_at : TIMESTAMPTZ
+  {field} approved_at : TIMESTAMPTZ
+  {field} launched_at : TIMESTAMPTZ
+  {field} closed_at : TIMESTAMPTZ
+  {field} abort_reason : VARCHAR(200)
+}
+entity "mission_event" as mission_event {
+  {field} * event_id : BIGINT «PK»
+  --
+  {field} * mission_id : UUID «FK»
+  {field} * event_type : mission_event_type
+  {field} * event_at : TIMESTAMPTZ
+  {field} actor_id : UUID «FK»
+  {field} payload : JSONB
+}
+entity "telemetry_frame" as telemetry_frame {
+  {field} * interceptor_id : UUID «PK, FK»
+  {field} * ts : TIMESTAMPTZ «PK»
+  --
+  {field} * mission_id : UUID «FK»
+  {field} * lat : DECIMAL(9,6)
+  {field} * lon : DECIMAL(9,6)
+  {field} alt_m : DECIMAL(7,1)
+  {field} ground_speed_mps : DECIMAL(5,1)
+  {field} battery_pct : SMALLINT
+  {field} link_quality_pct : SMALLINT
+}
+entity "engagement_report" as engagement_report {
+  {field} * report_id : UUID «PK»
+  --
+  {field} * mission_id : UUID «FK, U»
+  {field} * assessment : engagement_assessment
+  {field} evidence : JSONB
+  {field} * submitted_by : UUID «FK»
+  {field} * submitted_at : TIMESTAMPTZ
+  {field} sent_to_higher_at : TIMESTAMPTZ
+}
+entity "air_track" as air_track <<група 1>> {
+  {field} * track_id : UUID «PK»
+}
+entity "crew" as crew <<група 2>> {
+  {field} * crew_id : UUID «PK»
+}
+entity "interceptor" as interceptor <<група 2>> {
+  {field} * interceptor_id : UUID «PK»
+}
+entity "personnel" as personnel <<група 4>> {
+  {field} * user_id : UUID «PK»
+}
+air_track ||--o{ mission
+crew ||--o{ mission
+interceptor |o--o{ mission
+personnel ||--o{ mission
+personnel |o--o{ mission
+mission ||--o{ mission_event
+personnel |o--o{ mission_event
+interceptor ||--o{ telemetry_frame
+mission ||--o{ telemetry_frame
+mission ||--o| engagement_report
+personnel ||--o{ engagement_report
+@enduml

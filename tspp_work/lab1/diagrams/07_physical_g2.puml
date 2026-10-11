@@ -1,0 +1,52 @@
+@startuml
+hide circle
+hide methods
+skinparam linetype ortho
+top to bottom direction
+entity "interceptor_model" as interceptor_model {
+  {field} * model_id : SMALLINT «PK»
+  --
+  {field} * name : VARCHAR(60) «U»
+  {field} * max_speed_kmh : SMALLINT
+  {field} * range_km : DECIMAL(5,1)
+  {field} * endurance_min : SMALLINT
+  {field} * wind_limit_mps : DECIMAL(4,1)
+  {field} * night_capable : BOOLEAN
+  {field} * reusable : BOOLEAN
+}
+entity "position" as position {
+  {field} * position_id : UUID «PK»
+  --
+  {field} * sector_id : UUID «FK»
+  {field} * code : VARCHAR(10) «U»
+  {field} * status : position_status
+  {field} * lat : DECIMAL(9,6)
+  {field} * lon : DECIMAL(9,6)
+  {field} * engagement_radius_m : INTEGER
+}
+entity "crew" as crew {
+  {field} * crew_id : UUID «PK»
+  --
+  {field} * position_id : UUID «FK»
+  {field} * call_sign : VARCHAR(20) «U»
+  {field} * status : crew_status
+}
+entity "interceptor" as interceptor {
+  {field} * interceptor_id : UUID «PK»
+  --
+  {field} * model_id : SMALLINT «FK»
+  {field} position_id : UUID «FK»
+  {field} * serial_no : VARCHAR(40) «U»
+  {field} * state : interceptor_state
+  {field} firmware_version : VARCHAR(20)
+  {field} * flight_count : INTEGER
+  {field} * received_at : DATE
+}
+entity "sector" as sector <<група 1>> {
+  {field} * sector_id : UUID «PK»
+}
+sector ||--o{ position
+position ||--o{ crew
+interceptor_model ||--o{ interceptor
+position |o--o{ interceptor
+@enduml

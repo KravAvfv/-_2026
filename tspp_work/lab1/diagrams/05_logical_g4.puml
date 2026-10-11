@@ -1,0 +1,59 @@
+@startuml
+hide circle
+hide methods
+skinparam linetype ortho
+top to bottom direction
+entity "Роль" as role {
+  * Код ролі «PK»
+  --
+  * Умовний код ролі «U»
+  * Назва ролі «U»
+  * Ознака бойових прав
+  Опис ролі
+}
+entity "Право доступу" as permission {
+  * Код права «PK»
+  --
+  * Ідентифікатор права «U»
+  * Опис права
+}
+entity "Право ролі" as role_permission {
+  * Код ролі «PK, FK»
+  * Код права «PK, FK»
+  --
+  * Дата надання
+}
+entity "Користувач" as personnel {
+  * Код користувача «PK»
+  --
+  * Код ролі «FK»
+  Код розрахунку «FK»
+  * Прізвище, ім’я, по батькові
+  Звання
+  * Логін «U»
+  * Двофакторна автентифікація
+  Допуск дійсний до
+  * Стан облікового запису
+}
+entity "Запис журналу аудиту" as audit_log {
+  * Код запису «PK»
+  --
+  * Час запису
+  Користувач «FK»
+  * Тип суб’єкта
+  * Дія
+  * Таблиця об’єкта
+  * Ідентифікатор об’єкта
+  Деталі
+  Хеш попереднього запису
+  * Хеш запису «U»
+}
+entity "Розрахунок" as crew <<група 2>> {
+  * Код розрахунку «PK»
+}
+role ||--o{ role_permission : надає
+permission ||--o{ role_permission : входить до
+role ||--o{ personnel : визначає права
+crew |o--o{ personnel : включає
+personnel |o--o{ audit_log : виконує дії
+@enduml

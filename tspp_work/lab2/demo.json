@@ -1,0 +1,293 @@
+{
+ "fr": {
+  "01": [
+   true,
+   "19 таблиць (18 + mission_transition), 53 функцій, 9 тригерів, 2 представлення"
+  ],
+  "02": [
+   true,
+   "основні: 10–60 записів; операційні: 24–651"
+  ],
+  "03": [
+   true,
+   "створення, зміна, видалення перехоплювача виконано; видалення використаного відхилено: update or delete on table \"interceptor\" violates foreign key constraint \"mission_interceptor_id_fkey\" on table \"mission\""
+  ],
+  "04": [
+   true,
+   "201 → трек ЩП-0004; сенсор поза мережею → 422; невірний ключ → 401"
+  ],
+  "05": [
+   true,
+   "5 треків, впорядковано за спаданням"
+  ],
+  "06": [
+   true,
+   "місія М-1011-03 пройшла цикл через інтерфейс (5 подій); санкція автором відхилена"
+  ],
+  "07": [
+   true,
+   "перехід «санкціонована → виконується»: Недопустимий перехід стану місії: «санкціонована» → «виконується»; «прийнята» від ОЧ: Немає права mission.accept для переходу «санкціонована» → «прийнята»"
+  ],
+  "08": [
+   true,
+   "повторний звіт відхилено; сума вильотів 28 = кількості пусків 28"
+  ],
+  "09": [
+   true,
+   "10 позицій, готових перехоплювачів 30"
+  ],
+  "10": [
+   true,
+   "місій 31, влучань 20 (80.0 %), пропозиція → санкція 33.5 с, санкція → пуск 38.7 с"
+  ],
+  "13": [
+   true,
+   "копія 174 КБ; відновлено 19 таблиць, кількість записів збігається; перевірка аудиту у копії: порушень 0"
+  ],
+  "11": [
+   true,
+   "ланцюжок 288 записів цілий; UPDATE/DELETE заборонено; підробку запису № 40 виявлено"
+  ],
+  "12": [
+   true,
+   "аналітик: permission denied for table mission; офіцер → audit_log: permission denied for table audit_log; офіцер кібербезпеки читає 288 записів"
+  ]
+ },
+ "seed_outcomes": {
+  "miss": 5,
+  "hit": 17,
+  "reject": 2,
+  "reassign": 2,
+  "abort": 2
+ },
+ "seed_seconds": 0.3,
+ "version": "18.6",
+ "counts": {
+  "air_track": 40,
+  "audit_log": 282,
+  "crew": 18,
+  "detection": 651,
+  "engagement_report": 24,
+  "interceptor": 60,
+  "interceptor_model": 4,
+  "mission": 30,
+  "mission_event": 146,
+  "mission_transition": 8,
+  "permission": 20,
+  "personnel": 60,
+  "position": 10,
+  "protected_object": 12,
+  "role": 13,
+  "role_permission": 50,
+  "sector": 12,
+  "sensor": 40,
+  "telemetry_frame": 523
+ },
+ "objects": {
+  "functions": 53,
+  "triggers": 9,
+  "views": 2,
+  "roles": 5,
+  "tables": 19
+ },
+ "api_ok": [
+  {
+   "sensor": "AC-0001",
+   "detected_at": "2026-10-11T16:55:11.668+03:00",
+   "lat": 51.510395,
+   "lon": 32.013077,
+   "alt": 210,
+   "speed": 54.9,
+   "bearing": 187.5,
+   "signature": "ударний поршневий",
+   "confidence": 0.91
+  },
+  201,
+  {
+   "detection_id": 652,
+   "track_id": "8506430f-cb51-447f-97c4-c2d3fe05b0cb",
+   "track_number": "ЩП-0004"
+  }
+ ],
+ "api_off": [
+  "AC-0008",
+  422,
+  {
+   "error": "Сенсор AC-0008 у стані «поза мережею» — виявлення не приймаються"
+  }
+ ],
+ "api_noauth": [
+  401,
+  {
+   "error": "unauthorized"
+  }
+ ],
+ "api_threats": [
+  200,
+  {
+   "threats": [
+    {
+     "eta_s": 280,
+     "identity": "невідома",
+     "object_name": "Нафтобаза",
+     "state": "підтверджений",
+     "threat_score": 67.56,
+     "track_number": "ЩП-0005"
+    },
+    {
+     "eta_s": 367,
+     "identity": "ворожа",
+     "object_name": "Хлібозавод",
+     "state": "перехоплюється",
+     "threat_score": 50.0,
+     "track_number": "ЩП-0002"
+    },
+    {
+     "eta_s": 686,
+     "identity": "ворожа",
+     "object_name": "Нафтобаза",
+     "state": "класифікований",
+     "threat_score": 50.0,
+     "track_number": "ЩП-0004"
+    },
+    {
+     "eta_s": 741,
+     "identity": "ворожа",
+     "object_name": "Елеватор",
+     "state": "класифікований",
+     "threat_score": 50.0,
+     "track_number": "ЩП-0001"
+    },
+    {
+     "eta_s": 786,
+     "identity": "ворожа",
+     "object_name": "Нафтобаза",
+     "state": "класифікований",
+     "threat_score": 50.0,
+     "track_number": "ЩП-0003"
+    },
+    {
+     "eta_s": 690,
+     "identity": "невідома",
+     "object_name": "Залізничний вузол",
+     "state": "підтверджений",
+     "threat_score": 49.33,
+     "track_number": "ЩП-0006"
+    }
+   ]
+  }
+ ],
+ "api_latency_ms": {
+  "median": 7.8,
+  "p95": 9.8,
+  "max": 9.8
+ },
+ "shots": {
+  "scr_01_login": {
+   "url": "/login",
+   "cssHeight": 389,
+   "font_pt": 10.4
+  },
+  "scr_02_situation": {
+   "url": "/situation",
+   "cssHeight": 597,
+   "font_pt": 10.4
+  },
+  "scr_03_track": {
+   "url": "/tracks/8506430f-cb51-447f-97c4-c2d3fe05b0cb",
+   "cssHeight": 763,
+   "font_pt": 10.4
+  },
+  "mission": "/missions/d56d2f45-7982-4644-8816-fbf0b3ef5522",
+  "scr_04_proposed": {
+   "url": "/missions/d56d2f45-7982-4644-8816-fbf0b3ef5522",
+   "cssHeight": 527,
+   "font_pt": 10.4
+  },
+  "scr_05_approved": {
+   "url": "/missions/d56d2f45-7982-4644-8816-fbf0b3ef5522",
+   "cssHeight": 620,
+   "font_pt": 10.4
+  },
+  "scr_06_missions": {
+   "url": "/missions",
+   "cssHeight": 886,
+   "font_pt": 10.4
+  },
+  "scr_07_accepted": {
+   "url": "/missions/d56d2f45-7982-4644-8816-fbf0b3ef5522",
+   "cssHeight": 651,
+   "font_pt": 10.4
+  },
+  "scr_08_closed": {
+   "url": "/missions/d56d2f45-7982-4644-8816-fbf0b3ef5522",
+   "cssHeight": 736,
+   "font_pt": 10.4
+  },
+  "scr_09_resources": {
+   "url": "/resources?pos=%D0%9F-01",
+   "cssHeight": 861,
+   "font_pt": 10.4
+  },
+  "scr_10_edit": {
+   "url": "/interceptors/92fc1cd7-813b-4840-8c5a-a252b5984416/edit",
+   "cssHeight": 395,
+   "font_pt": 10.4
+  },
+  "scr_11_delete_refused": {
+   "url": "/resources?pos=%D0%9F-01",
+   "cssHeight": 936,
+   "font_pt": 10.4
+  },
+  "scr_12_analytics": {
+   "url": "/analytics",
+   "cssHeight": 574,
+   "font_pt": 10.4
+  },
+  "scr_13_audit": {
+   "url": "/audit",
+   "cssHeight": 700,
+   "font_pt": 10.4
+  }
+ },
+ "demo_mission": [
+  "М-1011-03",
+  "закрита",
+  "влучання",
+  "Орлан-3",
+  5
+ ],
+ "transition_errors": [
+  "Недопустимий перехід стану місії: «санкціонована» → «виконується»",
+  "Немає права mission.accept для переходу «санкціонована» → «прийнята»"
+ ],
+ "stats": [
+  "31",
+  "20",
+  "5",
+  "2",
+  "2",
+  "80.0",
+  "33.5",
+  "38.7"
+ ],
+ "dump_kb": 174,
+ "audit": {
+  "before": [
+   288,
+   0,
+   null
+  ],
+  "after": [
+   288,
+   1,
+   40
+  ],
+  "update_err": "Журнал аудиту незмінний: операція UPDATE заборонена",
+  "delete_err": "Журнал аудиту незмінний: операція DELETE заборонена"
+ },
+ "roles_err": [
+  "permission denied for table mission",
+  "permission denied for table audit_log"
+ ]
+}

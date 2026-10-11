@@ -1,0 +1,21 @@
+{
+  "file": "04_logical_g3.puml",
+  "native_px": [
+    868,
+    594
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 8.1,
+    "dpi": 401
+  },
+  "landscape": {
+    "width_cm": 21.19,
+    "font_pt": 10.4,
+    "dpi": 312
+  },
+  "orientation": "landscape",
+  "width_cm": 21.19,
+  "legible": true
+}

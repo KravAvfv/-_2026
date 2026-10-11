@@ -1,0 +1,16 @@
+{
+  "file": "10_ddl_mission.png",
+  "native_px": [
+    2509,
+    3033
+  ],
+  "min_font_px": 64,
+  "portrait": {
+    "width_cm": 14.5,
+    "font_pt": 10.5,
+    "dpi": 440
+  },
+  "orientation": "portrait",
+  "width_cm": 14.5,
+  "legible": true
+}

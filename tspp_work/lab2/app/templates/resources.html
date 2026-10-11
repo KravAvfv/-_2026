@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Ресурси{% endblock %}
+{% block body %}
+<h1>Готовність вогневих ресурсів</h1>
+<p class="muted">Розрахунки: готові / на завданні / всього; перехоплювачі: готові / всього.</p>
+<table class="nowrap"><tr><th>Позиція</th><th>Сектор</th><th>Стан</th><th class="num">Розрахунки</th><th class="num">Перехоплювачі</th></tr>
+{% for r in ready %}<tr><td><a href="?pos={{ r.position_code }}">{{ r.position_code }}</a></td><td>{{ r.sector_name }}</td><td>{{ r.position_status }}</td>
+<td class="num">{{ r.crews_ready }} / {{ r.crews_tasked }} / {{ r.crews_total }}</td><td class="num">{{ r.interceptors_ready }} / {{ r.interceptors_total }}</td></tr>{% endfor %}
+</table>
+<h2>Перехоплювачі{% if pos %} позиції {{ pos }}{% endif %} {% if can('interceptor.manage') %}<a class="btn sec" href="{{ url_for('interceptor_form') }}">+ Додати</a>{% endif %}</h2>
+<table><tr><th>Серійний номер</th><th>Модель</th><th>Позиція</th><th>Стан</th><th class="num">Вильоти</th><th>Прошивка</th>{% if can('interceptor.manage') %}<th>Дії</th>{% endif %}</tr>
+{% for i in ints %}<tr><td class="mono">{{ i.serial_no }}</td><td>{{ i.model }}</td><td>{{ i.pos or 'склад' }}</td><td>{{ i.state }}</td><td class="num">{{ i.flight_count }}</td><td>{{ i.firmware_version or '—' }}</td>
+{% if can('interceptor.manage') %}<td><a href="{{ url_for('interceptor_form', iid=i.interceptor_id) }}">змінити</a>
+<form method="post" action="{{ url_for('interceptor_delete', iid=i.interceptor_id) }}" style="display:inline"><button class="sec">видалити</button></form></td>{% endif %}</tr>{% endfor %}
+</table>
+{% endblock %}

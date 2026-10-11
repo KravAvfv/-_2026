@@ -1,0 +1,77 @@
+@startuml
+hide circle
+hide methods
+skinparam linetype ortho
+left to right direction
+entity "sector" as sector {
+  {field} * sector_id : UUID «PK»
+  --
+  {field} * code : VARCHAR(10) «U»
+  {field} * name : VARCHAR(100) «U»
+  {field} * zone_type : sector_zone
+  {field} * boundary : JSONB
+  {field} * valid_from : TIMESTAMPTZ
+  {field} valid_to : TIMESTAMPTZ
+}
+entity "protected_object" as protected_object {
+  {field} * object_id : UUID «PK»
+  --
+  {field} * sector_id : UUID «FK»
+  {field} * name : VARCHAR(200) «U»
+  {field} * category : object_category
+  {field} * lat : DECIMAL(9,6)
+  {field} * lon : DECIMAL(9,6)
+}
+entity "sensor" as sensor {
+  {field} * sensor_id : UUID «PK»
+  --
+  {field} * sector_id : UUID «FK»
+  {field} * hw_serial : VARCHAR(64) «U»
+  {field} * kind : sensor_kind
+  {field} * status : sensor_status
+  {field} * lat : DECIMAL(9,6)
+  {field} * lon : DECIMAL(9,6)
+  {field} * height_m : DECIMAL(6,1)
+  {field} last_heartbeat_at : TIMESTAMPTZ
+  {field} calibration : JSONB
+}
+entity "air_track" as air_track {
+  {field} * track_id : UUID «PK»
+  --
+  {field} * track_number : VARCHAR(12)
+  {field} * track_date : DATE
+  {field} * state : track_state
+  {field} * identity : air_track_identity
+  {field} target_type : VARCHAR(40)
+  {field} * threat_score : DECIMAL(5,2)
+  {field} predicted_object_id : UUID «FK»
+  {field} eta_s : INTEGER
+  {field} classified_by : UUID «FK»
+  {field} * first_seen_at : TIMESTAMPTZ
+  {field} * last_update_at : TIMESTAMPTZ
+}
+entity "detection" as detection {
+  {field} * detection_id : BIGINT «PK»
+  --
+  {field} * sensor_id : UUID «FK»
+  {field} track_id : UUID «FK»
+  {field} * detected_at : TIMESTAMPTZ
+  {field} * received_at : TIMESTAMPTZ
+  {field} lat : DECIMAL(9,6)
+  {field} lon : DECIMAL(9,6)
+  {field} bearing_deg : DECIMAL(5,2)
+  {field} altitude_m : DECIMAL(7,1)
+  {field} speed_mps : DECIMAL(6,1)
+  {field} signature_class : VARCHAR(50)
+  {field} * confidence : DECIMAL(3,2)
+}
+entity "personnel" as personnel <<група 4>> {
+  {field} * user_id : UUID «PK»
+}
+sector ||--o{ protected_object
+sector ||--o{ sensor
+protected_object |o--o{ air_track
+personnel |o--o{ air_track
+sensor ||--o{ detection
+air_track |o--o{ detection
+@enduml

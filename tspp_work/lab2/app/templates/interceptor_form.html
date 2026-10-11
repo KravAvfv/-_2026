@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Перехоплювач{% endblock %}
+{% block body %}
+<h1>{{ 'Зміна даних перехоплювача ' ~ it.serial_no if it else 'Новий перехоплювач' }}</h1>
+<form method="post" class="card" style="max-width: 560px">
+  <dl>
+    <dt>Серійний номер</dt><dd><input name="serial_no" value="{{ it.serial_no if it else '' }}" required></dd>
+    <dt>Модель</dt><dd><select name="model_id">{% for m in models %}<option value="{{ m.model_id }}" {{ 'selected' if it and it.model_id == m.model_id }}>{{ m.name }}</option>{% endfor %}</select></dd>
+    <dt>Позиція</dt><dd><select name="position_id"><option value="">склад центру</option>{% for p in positions %}<option value="{{ p.position_id }}" {{ 'selected' if it and it.position_id == p.position_id }}>{{ p.code }}</option>{% endfor %}</select></dd>
+    <dt>Стан</dt><dd><select name="state">{% for s in states %}<option {{ 'selected' if it and it.state == s }}>{{ s }}</option>{% endfor %}</select></dd>
+    <dt>Версія прошивки</dt><dd><input name="firmware_version" value="{{ it.firmware_version if it and it.firmware_version else '' }}"></dd>
+  </dl>
+  <p><button>Зберегти</button> <a class="btn sec" href="{{ url_for('resources') }}">Скасувати</a></p>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{
+  "file": "03_logical_g2.puml",
+  "native_px": [
+    384,
+    574
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 11.74,
+    "font_pt": 13.0,
+    "dpi": 332
+  },
+  "landscape": {
+    "width_cm": 9.7,
+    "font_pt": 10.7,
+    "dpi": 402
+  },
+  "orientation": "portrait",
+  "width_cm": 11.74,
+  "legible": true
+}

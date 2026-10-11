@@ -57,6 +57,8 @@ the domain model (`DOMAIN_KNOWLEDGE_BASE.md` — РЦПДО «Щит-Півні�
 | `tools/bpmn_model.py`, `tools/bpmn/` | BPMN 2.0 generator (grid layout + DI) and bpmn-js renderer (node, puppeteer-core); legibility gate |
 | `tools/idef_model.py` | IDEF0 / IDEF3 / node-tree renderer (AFPM-style frame, ICOM routing, squiggle label placer, tunnels, call arrows, FEO) → SVG/PNG + legibility gate |
 | `tools/puml_render.py`, `tools/plantuml/` | PlantUML renderer (jar not committed — see tools/plantuml/README.md) + legibility gate |
+| `tools/drawio_lib.py`, `tools/drawio_export.py` | native draw.io export of every ПІС diagram (BPMN via DI, Mermaid via .mmd + SVG geometry, IDEF/PlantUML via SVG) → `labN/drawio/NN_*.drawio` in defence order (`MANIFEST`); `--png` previews via `drawio` desktop CLI |
+| `tools/make_speeches.py` | defence prompters («СУФЛЕР», Ukrainian .docx) for **every work of every subject** → `Суфлери/<дисципліна>/<робота>/NN_*_СУФЛЕР.docx` + `Суфлери/README.md`. Registry `WORKS`; content: ПІС `labN/speech/content_labN.py` (one per draw.io file, order = MANIFEST), ТСПП `tspp_work/speech/content_*.py`, кібербезпека `cybersec_work/speech/`, ТАУ `tau_work/speech/` (one per defence topic, `show` = figures/tables to show). **Every new work gets prompters too.** |
 | `tools/docx2pdf.sh` | headless .docx → .pdf via OnlyOffice x2t (no LibreOffice on this machine) |
 | `.claude/skills/diagram-generator/` | diagram workflow skill |
 | `.claude/skills/academic-report-builder/` | report assembly skill |
@@ -141,11 +143,31 @@ the domain model (`DOMAIN_KNOWLEDGE_BASE.md` — РЦПДО «Щит-Півні�
   - **ПР4** (done; due 2026-10-14) — `pract4/model_p4.py` + `make_pract4.py`: BPMN ×2 (TO-BE, platform lanes),
     IDEF0 A-0 + A0 (system viewpoint, mechanisms = gateways / core / apps), UML concept (use case reused from ПР1,
     state of «Місія», classes) → logical (activity, sequence, collaboration) → physical (DB classes, components,
-    deployment), mirroring the 2020 example's structure. `idef_model` IDEF0 frame fields now overridable via spec
+    deployment), mirroring the 2020 example's structure.
+    §2.6 «Реалізація моделей у CASE-засобах» (added 2026-10-11, mirrors the example's CASE subsection): toolchain
+    figure `14_toolchain.mmd` + `pract4/ddl_gen.py` (forward engineering: physical class `.puml` + state `.puml`
+    → `pract4/schema.sql` for PostgreSQL, enum values `model_p4.ENUMS`, nullable `model_p4.NULLABLE`; fragment
+    rendered as `15_ddl_fragment.png` with its own layout.json). Script verified in a temp PostgreSQL 18 cluster. `idef_model` IDEF0 frame fields now overridable via spec
     `frame` (Track 2 reader = Кравченко О. В.). PlantUML: prefix typed attributes with `{field}` when `hide methods`.
     Original brief: Проектування системи: "section 2 of the project work" — BPMN, UML and IDEF diagrams of
     the application domain and node/module interconnections; every figure described in detail; third-person
     technical narrative. Reference: `2020-КР-Приклад опису Діаграм -Розробка UML.pdf`.
+- **Лабораторні роботи Track 2** (assignment text only in MS Teams — differs from `Теми лабораторних робіт…docx`;
+  title template `Титульна сторінка для лб.docx`, `work_label: "Лабораторна робота №"`, workspace `tspp_work/labN/`):
+  - **ЛР1** (done; due 2026-10-21) «Опис бази даних»: context / logical / physical DB model, table descriptions with
+    types, conclusions = FR for ЛР2 (ФВ-БД-01…13). `lab1/model_l1.py` (single source: 18 tables in 3 levels
+    довідникові/основні/операційні × 4 subject groups, 14 ENUMs, indexes) → `gen_l1.py` (SQL DDL, IE-notation
+    PlantUML ER logical+physical per group, context .mmd, `verify()` = temp PostgreSQL cluster + integrity tests)
+    → `make_lab1.py`. Theory = Л3 (трирівнева архітектура СКБД, моделі даних); structure mirrors Безносюк 2026
+    thesis (supervisor Кравченко). In prose write `0..∗` (U+2217), not `0..*` — `*` triggers Markdown italics.
+  - **ЛР2** (done; due 2026-10-28) «Опис програмної реалізації системи»: мета, вхідні/вихідні дані, системні
+    вимоги, засоби з обґрунтуванням, алгоритм + блок-схеми, інтерфейс; plus §8 = implementation of ФВ-БД-01…13.
+    Real working product: `lab2/db/impl.sql` (PL/pgSQL functions, triggers, views, roles, hash-chained audit),
+    `lab2/db/seed.py`, Flask app `lab2/app/` (psycopg, Jinja2), `lab2/run_demo.py` (temp PostgreSQL → seed → app →
+    REST API → screenshots via `tools/bpmn/shots.mjs` at 720 px × 3 → FR checks → `demo.json`, read by
+    `make_lab2.py`), `lab2/serve.py` = live demo at http://127.0.0.1:5080. Flowcharts = `idef_model` kind
+    `flowchart` (ISO 5807 symbols, grid + on-page connectors; Mermaid TB flowcharts were < 10 pt).
+    Order: `run_demo.py` → `make_lab2.py` → build. Screenshots: all CSS fonts ≥ 16 px, viewport 720 → 10.4 pt.
 - **Product:** theme from the course `My_theme.txt` («Розподілена IoT-система цілевказівки та координації дронів для
   перехоплення повітряних цілей») realised as IoT-платформа «Щит-Лінк»; title-page «Тема» = practical-work title.
 - **Pattern:** `tspp_work/practN/model_pN.py` (data) + `make_practN.py` (diagrams + `report.yaml`); shared helpers in

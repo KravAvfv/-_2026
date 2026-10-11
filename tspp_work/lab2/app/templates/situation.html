@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% block title %}Обстановка{% endblock %}
+{% block body %}
+<h1>Повітряна обстановка — черга загроз</h1>
+<div class="kpis">
+  <div class="kpi"><b>{{ kpi.threats }}</b><span>активних треків</span></div>
+  <div class="kpi"><b>{{ kpi.active }}</b><span>місій у роботі</span></div>
+  <div class="kpi"><b>{{ kpi.crews }}</b><span>розрахунків готові</span></div>
+  <div class="kpi"><b>{{ kpi.sensors_on }}/{{ kpi.sensors }}</b><span>сенсорів у мережі</span></div>
+</div>
+<table>
+  <tr><th>Трек</th><th>Стан</th><th>Належність</th><th>Загроза</th><th class="num">Час підльоту</th><th>Об’єкт під загрозою</th><th>Місія</th></tr>
+  {% for t in queue %}
+  <tr>
+    <td><a href="{{ url_for('track', tid=t.track_id) }}">{{ t.track_number }}</a></td>
+    <td>{{ t.state }}</td>
+    <td class="{{ 'hostile' if t.identity == 'ворожа' }}">{{ t.identity }}</td>
+    <td><span class="bar"><i style="width: {{ t.threat_score|int }}%"></i></span> {{ '%.0f'|format(t.threat_score) }}</td>
+    <td class="num">{{ fmt_eta(t.eta_s) }}</td>
+    <td>{{ t.object_name or '—' }} {% if t.object_category %}<span class="muted">(кат. {{ t.object_category }})</span>{% endif %}</td>
+    <td>{{ t.active_mission or '—' }}</td>
+  </tr>
+  {% else %}<tr><td colspan="7" class="muted">Активних загроз немає</td></tr>{% endfor %}
+</table>
+{% endblock %}

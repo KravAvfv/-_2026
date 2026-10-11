@@ -1,0 +1,23 @@
+{
+  "file": "03_ingest",
+  "native_px": [
+    698,
+    876
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.1,
+    "main_pt": 10.1,
+    "dpi": 322
+  },
+  "landscape": {
+    "width_cm": 11.55,
+    "font_pt": 7.0,
+    "main_pt": 7.0,
+    "dpi": 460
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

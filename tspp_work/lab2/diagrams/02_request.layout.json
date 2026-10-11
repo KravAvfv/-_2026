@@ -1,0 +1,23 @@
+{
+  "file": "02_request",
+  "native_px": [
+    504,
+    912
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 12.43,
+    "font_pt": 10.5,
+    "main_pt": 10.5,
+    "dpi": 309
+  },
+  "landscape": {
+    "width_cm": 8.01,
+    "font_pt": 6.8,
+    "main_pt": 6.8,
+    "dpi": 479
+  },
+  "orientation": "portrait",
+  "width_cm": 12.43,
+  "legible": true
+}

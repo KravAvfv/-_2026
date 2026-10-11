@@ -1,0 +1,52 @@
+@startuml
+hide circle
+hide methods
+skinparam linetype ortho
+top to bottom direction
+entity "Модель перехоплювача" as interceptor_model {
+  * Код моделі «PK»
+  --
+  * Назва моделі «U»
+  * Максимальна швидкість
+  * Дальність
+  * Тривалість польоту
+  * Граничний вітер
+  * Нічне застосування
+  * Багаторазовість
+}
+entity "Вогнева позиція" as position {
+  * Код позиції «PK»
+  --
+  * Код сектора «FK»
+  * Умовний номер «U»
+  * Стан позиції
+  * Широта
+  * Довгота
+  * Радіус дії
+}
+entity "Розрахунок" as crew {
+  * Код розрахунку «PK»
+  --
+  * Код позиції «FK»
+  * Позивний «U»
+  * Стан готовності
+}
+entity "Перехоплювач" as interceptor {
+  * Код перехоплювача «PK»
+  --
+  * Код моделі «FK»
+  Код позиції «FK»
+  * Серійний номер «U»
+  * Стан
+  Версія прошивки
+  * Кількість вильотів
+  * Дата надходження
+}
+entity "Сектор" as sector <<група 1>> {
+  * Код сектора «PK»
+}
+sector ||--o{ position : містить
+position ||--o{ crew : розміщує
+interceptor_model ||--o{ interceptor : описує
+position |o--o{ interceptor : зберігає
+@enduml

@@ -1,0 +1,21 @@
+{
+  "file": "09_physical_g4.puml",
+  "native_px": [
+    642,
+    643
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.9,
+    "dpi": 395
+  },
+  "landscape": {
+    "width_cm": 14.48,
+    "font_pt": 9.6,
+    "dpi": 450
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

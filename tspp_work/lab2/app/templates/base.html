@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="utf-8"><title>{% block title %}АРМ{% endblock %} · Щит-Лінк</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<header>
+  <div class="brand">Щит-Лінк · АРМ</div>
+  {% if g.user %}
+  <nav>
+    {% set ep = request.endpoint %}
+    {% if can('track.read') %}<a href="{{ url_for('situation') }}" class="{{ 'on' if ep in ('situation','track') }}">Обстановка</a>{% endif %}
+    {% if can('mission.read') %}<a href="{{ url_for('missions') }}" class="{{ 'on' if ep in ('missions','mission') }}">Місії</a>{% endif %}
+    {% if can('resource.read') %}<a href="{{ url_for('resources') }}" class="{{ 'on' if ep in ('resources','interceptor_form') }}">Ресурси</a>{% endif %}
+    {% if can('analytics.read') %}<a href="{{ url_for('analytics') }}" class="{{ 'on' if ep == 'analytics' }}">Аналітика</a>{% endif %}
+    {% if can('audit.read') %}<a href="{{ url_for('audit') }}" class="{{ 'on' if ep == 'audit' }}">Аудит</a>{% endif %}
+  </nav>
+  <div class="who">{{ g.user.full_name }} · {{ g.user.role_code }}<br>{{ g.user.role_name }}{% if g.user.call_sign %} «{{ g.user.call_sign }}»{% endif %} · <a href="{{ url_for('logout') }}">вийти</a></div>
+  {% endif %}
+</header>
+<main>
+  {% for cat, msg in get_flashed_messages(with_categories=true) %}<div class="flash {{ cat }}">{{ msg }}</div>{% endfor %}
+  {% block body %}{% endblock %}
+</main>
+</body>
+</html>

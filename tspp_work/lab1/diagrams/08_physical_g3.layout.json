@@ -1,0 +1,21 @@
+{
+  "file": "08_physical_g3.puml",
+  "native_px": [
+    757,
+    574
+  ],
+  "min_font_px": 15.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 9.3,
+    "dpi": 350
+  },
+  "landscape": {
+    "width_cm": 19.12,
+    "font_pt": 10.7,
+    "dpi": 302
+  },
+  "orientation": "landscape",
+  "width_cm": 19.12,
+  "legible": true
+}

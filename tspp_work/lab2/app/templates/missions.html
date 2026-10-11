@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Місії{% endblock %}
+{% block body %}
+<h1>Місії перехоплення</h1>
+<form class="inline" method="get"><label>Стан</label>
+  <select name="state"><option value="">усі</option>{% for s in states %}<option {{ 'selected' if s == st }}>{{ s }}</option>{% endfor %}</select>
+  <button class="sec">Показати</button></form>
+<table><tr><th>Номер</th><th>Трек</th><th>Розрахунок</th><th>Стан</th><th>Запропоновано</th><th>Закрито</th><th>Результат</th></tr>
+{% for m in ms %}<tr><td><a href="{{ url_for('mission', mid=m.mission_id) }}">{{ m.mission_no }}</a></td><td>{{ m.track_number }}</td><td>{{ m.call_sign }}</td>
+<td><span class="badge {{ state_class[m.state] }}">{{ m.state }}</span></td><td>{{ fmt_dt(m.proposed_at) }}</td><td>{{ fmt_dt(m.closed_at) }}</td><td>{{ m.assessment or '—' }}</td></tr>{% endfor %}
+</table>
+{% endblock %}
