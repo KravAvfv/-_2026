@@ -1,0 +1,27 @@
+flowchart TB
+  classDef src fill:#F2F2F2,stroke:#000,stroke-width:1.5px;
+  classDef tool fill:#FFFFFF,stroke:#000,stroke-width:1.5px;
+  classDef out fill:#E6E6E6,stroke:#000,stroke-width:1.5px;
+
+  M1["Модель BPMN 2.0<br/>(XML, *.bpmn)"]:::src
+  M2["Модель IDEF0<br/>(дані Python)"]:::src
+  M3["Моделі UML<br/>(текст PlantUML, *.puml)"]:::src
+
+  T1["Редактор і рендерер<br/>bpmn-js"]:::tool
+  T2["Генератор IDEF0<br/>(нотація AllFusion PM)"]:::tool
+  T3["PlantUML"]:::tool
+  T4["Генератор SQL DDL<br/>(пряме проектування)"]:::tool
+  T5["Контроль<br/>читабельності<br/>(≥ 10 пт, ≥ 300 dpi)"]:::tool
+
+  O1["Рисунки<br/>SVG / PNG"]:::out
+  O2["Скрипт схеми БД<br/>PostgreSQL"]:::out
+  O3["Розділ проектної<br/>документації<br/>.docx / .pdf"]:::out
+  G[("Репозиторій Git:<br/>версії всіх моделей")]:::src
+
+  M1 --> T1
+  M2 --> T2
+  M3 --> T3
+  M3 -- "діаграма класів<br/>фізичного рівня" --> T4
+  T1 & T2 & T3 --> T5 --> O1 --> O3
+  T4 --> O2
+  G -.- M1 & M2 & M3

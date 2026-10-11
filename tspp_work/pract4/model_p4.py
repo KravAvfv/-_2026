@@ -106,3 +106,13 @@ IDEF_CTX = {"kind": "idef0", "frame": FRAME, "node": "A-0", "title": IDEF_TITLE,
             "text": f"Мета: {IDEF_META['purpose']}\nТочка зору: {IDEF_META['viewpoint']}"}
 IDEF_A0 = {"kind": "idef0", "frame": FRAME, "node": "A0", "title": IDEF_TITLE, "number": "2", "boxes": A0_BOXES,
            "arrows": A0_ARROWS}
+
+# ------------------------------------------------------------------ генерація DDL з фізичної діаграми класів (2.6)
+# Значення переліків: стани «Місії» беруться з діаграми станів (06_state.puml); інші — довідники системи.
+ENUMS = {
+    ("air_track", "identity"): ["ворожа", "дружня", "нейтральна", "невідома"],
+    ("crew", "status"): ["готовий", "на завданні", "недоступний"],
+    ("interceptor", "state"): ["на складі", "готовий", "застосований", "втрачений"],
+    ("engagement_report", "assessment"): ["влучання", "промах", "скасовано"],
+}
+NULLABLE = {("mission", "approved_by"), ("mission", "launched_at")}   # заповнюються після санкції та пуску
