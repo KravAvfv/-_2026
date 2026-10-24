@@ -12,3 +12,6 @@ tspp_work/*/diagrams/*.svg
 **/preview/
 cybersec_work/*/*.pdf
 cybersec_work/*/diagrams/*.svg
+
+# містить пароль до сайту викладача — не публікувати
+Філософія/зроби.txt

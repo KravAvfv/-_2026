@@ -6,9 +6,11 @@ Works are listed in WORKS (subject, folder, label, title, content file, kind):
 * kind "report" (other subjects) — one prompter per defence topic; each speech names the figures/tables to show.
 Content file: SPEECHES = [ {id, title, notation, role, opening, walk, traps, defense, [show]} ... ]; for "drawio"
 `id` is the draw.io stem (key "drawio" is accepted too). Inline markup: **жирний**.
+Every content file also defines DEMO = {minutes, intro, steps: [(крок, що показати, що сказати)], finish} — the
+narration script for demonstrating the whole work → <робота>/00_Сценарій_демонстрації.docx.
 
     .venv/bin/python tools/make_speeches.py              # all works
-    .venv/bin/python tools/make_speeches.py tspp cyb     # selected subjects (pis, tspp, cyb, tau)
+    .venv/bin/python tools/make_speeches.py tspp cyb     # selected subjects (pis, tspp, cyb, tau, bank)
 """
 import importlib.util
 import re
@@ -29,7 +31,8 @@ ROOT = Path(__file__).resolve().parent.parent
 FONT = "Times New Roman"
 OUT = ROOT / "Суфлери"
 SUBJECTS = {"pis": "Проєктування інформаційних систем", "tspp": "Технології створення програмних продуктів",
-            "cyb": "Кібернетична безпека підприємства", "tau": "Теорія автоматичного управління"}
+            "cyb": "Кібернетична безпека підприємства", "tau": "Теорія автоматичного управління",
+            "bank": "Системи банкової безпеки"}
 LAB_TITLE = {1: "Вибір об’єкта дослідження, дерево цілей і WBS", 2: "Моделювання бізнес-процесів у нотації BPMN",
              3: "Функціональне моделювання IDEF0 / IDEF3", 4: "Моделювання DFD і вартісний аналіз (ABC)",
              5: "Об’єктно-орієнтоване моделювання UML", 7: "Концепція архітектури IoT-системи"}
@@ -53,7 +56,13 @@ WORKS = [("pis", f"ЛР{n}", f"ЛР {n}", t, f"lab{n}/speech/content_lab{n}.py",
 ] + [("tau", f"ПЗ{n}", f"ПЗ {n}", t, f"tau_work/speech/content_pz{n}.py", "report",
       f"ТАУ/ПЗ{n}_Кравченко_ІР-31_варіант8.docx")
      for n, t in ((1, "Передатні функції елементів САУ"), (2, "Часові характеристики ланок САУ"),
-                  (3, "Перетворення структурних схем і передатні функції САУ"))]
+                  (3, "Перетворення структурних схем і передатні функції САУ"),
+                  (4, "Логарифмічні частотні характеристики розімкненої системи"), (5, "Оцінка точності АСУ"),
+                  (6, "Оцінка стійкості АСУ"))] + [
+    ("bank", f"ПР{n}", f"ПР {n}", t, f"bank_work/speech/content_pr{n}.py", "report",
+     f"Системи банкової безпеки/Практична {n}/Готово/ПР_{n}_Варіант_08_Кравченко.xlsx")
+    for n, t in ((1, "Оцінка ризиків для відділення банку"), (2, "Модель загроз шляху платіжної картки"),
+                 (3, "Проєкт мережі відділення: зони, VLAN, адреси"))]
 
 
 def _runs(par, text, size=None, bold=False, italic=False, color=None):
@@ -163,6 +172,59 @@ def build(work, idx, total, sp, out):
     doc.save(out)
 
 
+def build_demo(work, demo, out):
+    """Сценарій демонстрації всієї роботи: що показати і що сказати на кожному кроці."""
+    subj, folder, label, title, _content, kind, report = work
+    doc = Document()
+    sec = doc.sections[0]
+    sec.page_width, sec.page_height = Cm(21), Cm(29.7)
+    sec.left_margin = sec.right_margin = Cm(2); sec.top_margin = sec.bottom_margin = Cm(1.8)
+    st = doc.styles["Normal"]; st.font.name = FONT; st.font.size = Pt(13)
+    st.element.rPr.rFonts.set(qn("w:eastAsia"), FONT)
+    _para(doc, f"СЦЕНАРІЙ ДЕМОНСТРАЦІЇ · {label} · {title}", size=10.5, italic=True, color="595959", after=2)
+    _para(doc, f"{label}: {title}", size=17, bold=True, after=6)
+    t = doc.add_table(rows=0, cols=2)
+    t.style = "Table Grid"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    files = (f"{folder.replace('ЛР', 'lab')}/drawio/*.drawio (порядок — як у кроках)" if kind == "drawio" else report)
+    rows = [("Дисципліна", SUBJECTS[subj])] + ([("Звіт", report)] if kind == "drawio" else [])
+    for k, v in rows + [("Що відкрити заздалегідь", files),
+                 ("Тривалість", f"≈ {demo['minutes']} хв ({len(demo['steps'])} кроків)"),
+                 ("Як користуватися", "Ліва колонка — що показати на екрані, права — що сказати. Говоріть "
+                                      "своїми словами; деталі й відповіді на питання — у суфлерах цієї роботи.")]:
+        c0, c1 = t.add_row().cells
+        c0.width, c1.width = Cm(4.2), Cm(12.8)
+        _shade(c0, "E8EEF7")
+        c0.paragraphs[0].text = ""; _runs(c0.paragraphs[0], k, 11.5, bold=True)
+        c1.paragraphs[0].text = ""; _runs(c1.paragraphs[0], v, 11.5)
+    _heading(doc, "Вступ", 1)
+    _para(doc, demo["intro"], size=13.5, after=4).paragraph_format.left_indent = Cm(0.4)
+    _heading(doc, "Хід демонстрації", 2)
+    steps = doc.add_table(rows=1, cols=3)
+    steps.style = "Table Grid"; steps.alignment = WD_TABLE_ALIGNMENT.CENTER
+    widths = (Cm(4.0), Cm(4.6), Cm(8.4))
+    for c, w, h in zip(steps.rows[0].cells, widths, ("Крок", "Що показати", "Що сказати")):
+        c.width = w; _shade(c, "1F3864")
+        c.paragraphs[0].text = ""; _runs(c.paragraphs[0], h, 11.5, bold=True, color="FFFFFF")
+    for i, (name, show, say) in enumerate(demo["steps"], 1):
+        cells = steps.add_row().cells
+        for c, w in zip(cells, widths):
+            c.width = w
+        _shade(cells[0], "E8EEF7")
+        cells[0].paragraphs[0].text = ""; _runs(cells[0].paragraphs[0], f"{i}. {name}", 11.5, bold=True)
+        cells[1].paragraphs[0].text = ""; _runs(cells[1].paragraphs[0], show, 11, color="1F3864")
+        cells[2].paragraphs[0].text = ""; _runs(cells[2].paragraphs[0], say, 11.5)
+    _heading(doc, "Завершення", 3)
+    _para(doc, demo["finish"], size=13.5, after=4).paragraph_format.left_indent = Cm(0.4)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    doc.save(out)
+
+
+def load_demo(path):
+    spec = importlib.util.spec_from_file_location(Path(path).stem + "_demo", ROOT / path)
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    return getattr(mod, "DEMO", None)
+
+
 def load(path):
     spec = importlib.util.spec_from_file_location(Path(path).stem, ROOT / path)
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
@@ -197,7 +259,17 @@ def main(argv):
             out = OUT / SUBJECTS[subj] / f"{folder} {safe}" / f"{name}_СУФЛЕР.docx"
             build(work, i, len(speeches), sp, out)
             index.setdefault(SUBJECTS[subj], []).append((folder, title, out.relative_to(OUT), sp["title"]))
-        print(f"{SUBJECTS[subj]} / {folder}: {len(speeches)}")
+        demo = load_demo(content)
+        assert demo and all(demo.get(k) for k in ("minutes", "intro", "steps", "finish")), \
+            f"{subj} {folder}: no DEMO narration script in {content}"
+        assert all(len(s) == 3 and all(s) for s in demo["steps"]), f"{subj} {folder}: DEMO step must be (крок, показати, сказати)"
+        safe = title.replace(" / ", " і ").replace("/", "-")
+        dout = OUT / SUBJECTS[subj] / f"{folder} {safe}" / "00_Сценарій_демонстрації.docx"
+        build_demo(work, demo, dout)
+        items = index.setdefault(SUBJECTS[subj], [])
+        items.insert(len(items) - len(speeches), (folder, title, dout.relative_to(OUT),
+                                                  "**Сценарій демонстрації всієї роботи**"))
+        print(f"{SUBJECTS[subj]} / {folder}: {len(speeches)} + сценарій")
     if set(subjects) == set(SUBJECTS):
         lines = ["# Суфлери до захисту", "", "Згенеровано `tools/make_speeches.py`; зміст — у файлах content_*.py "
                  "відповідних робіт.", ""]
