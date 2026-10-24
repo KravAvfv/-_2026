@@ -170,6 +170,11 @@ the domain model (`DOMAIN_KNOWLEDGE_BASE.md` — РЦПДО «Щит-Півні�
     `make_lab2.py`), `lab2/serve.py` = live demo at http://127.0.0.1:5080. Flowcharts = `idef_model` kind
     `flowchart` (ISO 5807 symbols, grid + on-page connectors; Mermaid TB flowcharts were < 10 pt).
     Order: `run_demo.py` → `make_lab2.py` → build. Screenshots: all CSS fonts ≥ 16 px, viewport 720 → 10.4 pt.
+- **Тези НУХТ** (conference abstract, Internet-конференція НУХТ; brief = handwritten photo in `НУХТ/`):
+  `tspp_work/nuft/make_theses.py` — body rebuilt inside the styles of `НУХТ/Example_2025.doc` (x2t → .docx,
+  `jc end→right`), compact ПР2 architecture figure (≥ 10 pt at 16.5 cm), Harvard refs cited only in the
+  intro/analysis paragraphs, `verify()` = exactly 1–2 FULL pages + citation rules → `НУХТ/Готово/Кравченко_П.docx/.pdf`.
+  x2t cannot WRITE .doc (Word 2003) — save as .doc in Word if the organisers insist.
 - **Product:** theme from the course `My_theme.txt` («Розподілена IoT-система цілевказівки та координації дронів для
   перехоплення повітряних цілей») realised as IoT-платформа «Щит-Лінк»; title-page «Тема» = practical-work title.
 - **Pattern:** `tspp_work/practN/model_pN.py` (data) + `make_practN.py` (diagrams + `report.yaml`); shared helpers in
