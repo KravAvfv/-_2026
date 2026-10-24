@@ -10,7 +10,7 @@
 Перевірено на Linux.
 
 ```sh
-git clone https://github.com/KravAvfv/-_2026.git shchit && cd shchit
+git clone -b coursework --depth 1 https://github.com/KravAvfv/-_2026.git shchit && cd shchit
 python3 -m venv .venv
 .venv/bin/pip install -r coursework_final/app/requirements.txt
 .venv/bin/python coursework_final/app/serve.py
