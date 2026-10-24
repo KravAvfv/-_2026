@@ -22,7 +22,7 @@ try:
 except Exception:  # pragma: no cover
     SCRIPT_CMAP = set()
 FALLBACK = "/usr/share/fonts/wps-fonts/segoepr.ttf"
-FALLBACK_CHARS = set("δζω∞≥≤±∫→")
+FALLBACK_CHARS = set("δζω∞≥≤±∫→φΔγ√ν")
 
 W, H, CELL = 1320, 1720, 37
 GRID_X0, GRID_Y0 = 11, 9
