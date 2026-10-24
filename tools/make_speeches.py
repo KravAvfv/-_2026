@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Defence prompters («СУФЛЕР») for every work of every subject → Суфлери/<дисципліна>/<робота>/NN_<назва>_СУФЛЕР.docx.
+"""Defence prompters («СУФЛЕР») for every work of every subject → Здача/<N. дисципліна>/<робота>/Суфлер/NN_<назва>_СУФЛЕР.docx.
+The report, its extra materials and Здача/README.md are put next to them by tools/build_submission.py (which calls
+this module), so each work's folder holds everything for that work.
 
 Works are listed in WORKS (subject, folder, label, title, content file, kind):
 * kind "drawio" (ПІС labs) — one prompter per draw.io file, order = tools/drawio_export.py MANIFEST;
@@ -7,7 +9,9 @@ Works are listed in WORKS (subject, folder, label, title, content file, kind):
 Content file: SPEECHES = [ {id, title, notation, role, opening, walk, traps, defense, [show]} ... ]; for "drawio"
 `id` is the draw.io stem (key "drawio" is accepted too). Inline markup: **жирний**.
 Every content file also defines DEMO = {minutes, intro, steps: [(крок, що показати, що сказати)], finish} — the
-narration script for demonstrating the whole work → <робота>/00_Сценарій_демонстрації.docx.
+narration script for demonstrating the whole work → <робота>/Суфлер/00_Сценарій_демонстрації.docx.
+For "report" works every figure and table caption of the .docx report must be named in some speech's `show` or
+`walk` («рис. 2.4», «табл. 1.7–1.27») — the tool aborts otherwise, so no component is left without a prompter.
 
     .venv/bin/python tools/make_speeches.py              # all works
     .venv/bin/python tools/make_speeches.py tspp cyb     # selected subjects (pis, tspp, cyb, tau, bank)
@@ -26,10 +30,14 @@ from docx.shared import Cm, Pt, RGBColor
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from drawio_export import MANIFEST  # noqa: E402
+from uk_plural import n_uk  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 FONT = "Times New Roman"
-OUT = ROOT / "Суфлери"
+OUT = ROOT / "Здача"
+SUBJ_DIR = {"pis": "1. Проєктування інформаційних систем", "tspp": "2. Технології створення програмних продуктів",
+            "tau": "3. Теорія автоматичного управління", "bank": "4. Системи банкової безпеки",
+            "cyb": "5. Кібернетична безпека підприємства"}
 SUBJECTS = {"pis": "Проєктування інформаційних систем", "tspp": "Технології створення програмних продуктів",
             "cyb": "Кібернетична безпека підприємства", "tau": "Теорія автоматичного управління",
             "bank": "Системи банкової безпеки"}
@@ -39,6 +47,8 @@ LAB_TITLE = {1: "Вибір об’єкта дослідження, дерево
 # (subject, folder, label, title, content file, kind, report file)
 WORKS = [("pis", f"ЛР{n}", f"ЛР {n}", t, f"lab{n}/speech/content_lab{n}.py", "drawio", f"lab{n}/ЛР{n}_Кравченко_ІР-31.docx")
          for n, t in LAB_TITLE.items()] + [
+    ("pis", "КР", "КР", "Курсова робота", "coursework_final/speech/content_kr.py", "report",
+     "coursework_final/КР_Кравченко_ІР-31.docx"),
     ("tspp", "ПР1", "ПР 1", "Збір та документування вимог для програмного продукту", "tspp_work/speech/content_pr1.py",
      "report", "tspp_work/pract1/ПР1_Кравченко_ІР-31.docx"),
     ("tspp", "ПР2", "ПР 2", "Архітектура IoT екосистеми", "tspp_work/speech/content_pr2.py", "report",
@@ -51,6 +61,8 @@ WORKS = [("pis", f"ЛР{n}", f"ЛР {n}", t, f"lab{n}/speech/content_lab{n}.py",
      "tspp_work/lab1/ЛР1_Кравченко_ІР-31.docx"),
     ("tspp", "ЛР2", "ЛР 2", "Опис програмної реалізації системи", "tspp_work/speech/content_lr2.py", "report",
      "tspp_work/lab2/ЛР2_Кравченко_ІР-31.docx"),
+    ("tspp", "Тези", "Тези", "Тези доповіді на конференцію НУХТ", "tspp_work/speech/content_theses.py", "report",
+     "Технології створення програмних продуктів/НУХТ/Готово/Кравченко_П.docx"),
     ("cyb", "ЛР1", "ЛР 1", "Структура системи управління кібербезпекою підприємства та стандарти",
      "cybersec_work/speech/content_lab1.py", "report", "cybersec_work/lab1/ЛР1_Кравченко_ІР-31.docx"),
 ] + [("tau", f"ПЗ{n}", f"ПЗ {n}", t, f"tau_work/speech/content_pz{n}.py", "report",
@@ -127,11 +139,12 @@ def build(work, idx, total, sp, out):
     t.style = "Table Grid"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
     rows = [("Дисципліна", SUBJECTS[subj])]
     if kind == "drawio":
-        rows += [("Нотація", sp["notation"]), ("Файл draw.io", f"{folder.replace('ЛР', 'lab')}/drawio/{sp['id']}.drawio"),
+        rows += [("Нотація", sp["notation"]), ("Рисунок у звіті", sp.get("_fig", "—")),
+                 ("Файл draw.io", f"draw.io/{sp['id']}.drawio (у папці роботи)"),
                  ("Порядок показу", f"{idx} з {total}"), ("Роль у системі", sp["role"])]
     else:
         rows += [("Тема відповіді", sp["notation"]), ("Що показати у звіті", sp.get("show", "—")),
-                 ("Звіт", report), ("Порядок показу", f"{idx} з {total}"), ("Роль у роботі", sp["role"])]
+                 ("Звіт", f"{Path(report).name} (у папці роботи)"), ("Порядок показу", f"{idx} з {total}"), ("Роль у роботі", sp["role"])]
     for k, v in rows:
         c0, c1 = t.add_row().cells
         c0.width, c1.width = Cm(4.2), Cm(12.8)
@@ -185,10 +198,11 @@ def build_demo(work, demo, out):
     _para(doc, f"{label}: {title}", size=17, bold=True, after=6)
     t = doc.add_table(rows=0, cols=2)
     t.style = "Table Grid"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
-    files = (f"{folder.replace('ЛР', 'lab')}/drawio/*.drawio (порядок — як у кроках)" if kind == "drawio" else report)
-    rows = [("Дисципліна", SUBJECTS[subj])] + ([("Звіт", report)] if kind == "drawio" else [])
+    files = ("draw.io/*.drawio у папці роботи (порядок — як у кроках)" if kind == "drawio"
+             else f"{Path(report).name} у папці роботи")
+    rows = [("Дисципліна", SUBJECTS[subj])] + ([("Звіт", Path(report).name)] if kind == "drawio" else [])
     for k, v in rows + [("Що відкрити заздалегідь", files),
-                 ("Тривалість", f"≈ {demo['minutes']} хв ({len(demo['steps'])} кроків)"),
+                 ("Тривалість", f"≈ {demo['minutes']} хв ({n_uk(len(demo['steps']), 'крок', 'кроки', 'кроків')})"),
                  ("Як користуватися", "Ліва колонка — що показати на екрані, права — що сказати. Говоріть "
                                       "своїми словами; деталі й відповіді на питання — у суфлерах цієї роботи.")]:
         c0, c1 = t.add_row().cells
@@ -225,6 +239,23 @@ def load_demo(path):
     return getattr(mod, "DEMO", None)
 
 
+def load_tables(path):
+    """TABLE_SPEECHES робіт з draw.io: суфлери до таблиць звіту (компонентів, які не є схемами)."""
+    spec = importlib.util.spec_from_file_location(Path(path).stem + "_tables", ROOT / path)
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    return getattr(mod, "TABLE_SPEECHES", [])
+
+
+def captions(report, kind):
+    """Номери рисунків («Р»)/таблиць («Т») звіту в порядку появи."""
+    out = []
+    for p in Document(ROOT / report).paragraphs:
+        m = re.match(r"^(Рисунок|Рис\.|Таблиця)\s+(\d+\.\d+)\b", p.text.strip())
+        if m and (("Р" if m.group(1).startswith("Рис") else "Т") == kind):
+            out.append(m.group(2))
+    return out
+
+
 def load(path):
     spec = importlib.util.spec_from_file_location(Path(path).stem, ROOT / path)
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
@@ -238,7 +269,39 @@ def slug(s):
     return re.sub(r"[^\w\-.]+", "_", s, flags=re.U).strip("_")
 
 
+def work_dir(work):
+    """Папка роботи; без символів, заборонених в іменах файлів Windows (: / \\ ? * " < > |)."""
+    subj, folder, _label, title, *_ = work
+    name = title if title.startswith(folder) else f"{folder} {title}"
+    name = re.sub(r"\s*:\s*", " — ", name.replace(" / ", " і ").replace("/", "-"))
+    return OUT / SUBJ_DIR[subj] / re.sub(r'[\\?*"<>|]', "", name)
+
+
+def refs(text):
+    """«рис. 1.2–1.5», «табл. 1.7, 1.8», «рисунки 2.1–2.3» → {"Р1.2", …}."""
+    out = set()
+    for kind, body in re.findall(r"(рис|табл)[а-яіїє]*\.?\s*((?:\d+\.\d+(?:\s*[–-]\s*(?:\d+\.)?\d+)?"
+                                 r"(?:\s*(?:,|і|та)\s*)?)+)", text, re.I):
+        k = "Р" if kind.lower() == "рис" else "Т"
+        for a, b1, b2 in re.findall(r"(\d+)\.(\d+)(?:\s*[–-]\s*(?:\d+\.)?(\d+))?", body):
+            out |= {f"{k}{a}.{x}" for x in range(int(b1), int(b2 or b1) + 1)}
+    return out
+
+
+def uncovered(report, speeches):
+    """Рисунки й таблиці звіту, яких не названо в жодному суфлері."""
+    caps = set()
+    for p in Document(ROOT / report).paragraphs:
+        m = re.match(r"^(Рисунок|Рис\.|Таблиця)\s+(\d+\.\d+)\b", p.text.strip())
+        if m:
+            caps.add(("Р" if m.group(1).startswith("Рис") else "Т") + m.group(2))
+    cov = set().union(*[refs(" ".join([sp.get("show", "")] + sp["walk"])) for sp in speeches])
+    return sorted(caps - cov)
+
+
 def main(argv):
+    """Будує суфлери й сценарії; повертає {work: [(файл, назва)…]} для покажчика tools/build_submission.py."""
+    import shutil
     subjects = [a for a in argv if a in SUBJECTS] or list(SUBJECTS)
     index = {}
     for work in WORKS:
@@ -250,35 +313,46 @@ def main(argv):
             names = [m[1] for m in MANIFEST[int(folder[2:])]]
             got = [s["id"] for s in speeches]
             assert got == names, f"{folder}: speech order/names {got} != draw.io manifest {names}"
+            figs = captions(report, "Р")
+            assert len(figs) == len(speeches), f"{folder}: {len(figs)} рисунків у звіті ≠ {len(speeches)} draw.io"
+            for sp, num in zip(speeches, figs):          # схеми draw.io йдуть у звіті в тому самому порядку
+                sp["_fig"] = f"рис. {num}"
+            tables = load_tables(content)
+            miss = sorted(set(f"Т{t}" for t in captions(report, "Т")) -
+                          set().union(set(), *[refs(" ".join([t.get("show", "")] + t["walk"])) for t in tables]))
+            assert not miss, f"{subj} {folder}: таблиці без суфлера: {miss}"
+        elif report.endswith(".docx"):
+            miss = uncovered(report, speeches)
+            assert not miss, f"{subj} {folder}: рисунки/таблиці без суфлера: {miss}"
+        demo = load_demo(content)
+        assert demo and all(demo.get(k) for k in ("minutes", "intro", "steps", "finish")), \
+            f"{subj} {folder}: no DEMO narration script in {content}"
+        assert all(len(s) == 3 and all(s) for s in demo["steps"]), f"{subj} {folder}: DEMO step must be (крок, показати, сказати)"
+        sdir = work_dir(work) / "Суфлер"
+        shutil.rmtree(sdir, ignore_errors=True)          # без застарілих суфлерів попередніх версій
+        dout = sdir / "00_Сценарій_демонстрації.docx"
+        build_demo(work, demo, dout)
+        items = index.setdefault(work, [(dout, "Сценарій демонстрації всієї роботи")])
         for i, sp in enumerate(speeches, 1):
             for k in ("id", "title", "notation", "role", "opening", "walk", "traps", "defense"):
                 assert sp.get(k), f"{subj} {folder} {sp.get('id')}: empty {k}"
             assert 3 <= len(sp["traps"]) <= 5, f"{subj} {folder} {sp['id']}: need 3–5 traps"
             name = sp["id"] if kind == "drawio" else f"{i:02d}_{slug(sp['id'])}"
-            safe = title.replace(" / ", " і ").replace("/", "-")
-            out = OUT / SUBJECTS[subj] / f"{folder} {safe}" / f"{name}_СУФЛЕР.docx"
+            out = sdir / f"{name}_СУФЛЕР.docx"
             build(work, i, len(speeches), sp, out)
-            index.setdefault(SUBJECTS[subj], []).append((folder, title, out.relative_to(OUT), sp["title"]))
-        demo = load_demo(content)
-        assert demo and all(demo.get(k) for k in ("minutes", "intro", "steps", "finish")), \
-            f"{subj} {folder}: no DEMO narration script in {content}"
-        assert all(len(s) == 3 and all(s) for s in demo["steps"]), f"{subj} {folder}: DEMO step must be (крок, показати, сказати)"
-        safe = title.replace(" / ", " і ").replace("/", "-")
-        dout = OUT / SUBJECTS[subj] / f"{folder} {safe}" / "00_Сценарій_демонстрації.docx"
-        build_demo(work, demo, dout)
-        items = index.setdefault(SUBJECTS[subj], [])
-        items.insert(len(items) - len(speeches), (folder, title, dout.relative_to(OUT),
-                                                  "**Сценарій демонстрації всієї роботи**"))
-        print(f"{SUBJECTS[subj]} / {folder}: {len(speeches)} + сценарій")
-    if set(subjects) == set(SUBJECTS):
-        lines = ["# Суфлери до захисту", "", "Згенеровано `tools/make_speeches.py`; зміст — у файлах content_*.py "
-                 "відповідних робіт.", ""]
-        for subj, items in index.items():
-            lines += [f"## {subj}", ""]
-            for folder, title, rel, t in items:
-                lines.append(f"- **{folder}** — [{t}]({str(rel).replace(' ', '%20')})")
-            lines.append("")
-        (OUT / "README.md").write_text("\n".join(lines), encoding="utf-8")
+            items.append((out, sp["title"]))
+        if kind == "drawio":                             # суфлери до таблиць звіту — після схем
+            rwork = work[:5] + ("report",) + work[6:]
+            for i, sp in enumerate(tables, 1):
+                for k in ("id", "title", "notation", "role", "opening", "walk", "traps", "defense"):
+                    assert sp.get(k), f"{subj} {folder} {sp.get('id')}: empty {k}"
+                assert 3 <= len(sp["traps"]) <= 5, f"{subj} {folder} {sp['id']}: need 3–5 traps"
+                out = sdir / f"Т{i:02d}_{slug(sp['id'])}_СУФЛЕР.docx"
+                build(rwork, i, len(tables), sp, out)
+                items.append((out, sp["title"]))
+        n_tab = len(tables) if kind == "drawio" else 0
+        print(f"{SUBJECTS[subj]} / {folder}: {len(speeches)}" + (f" + {n_tab} табл." if n_tab else "") + " + сценарій")
+    return index
 
 
 if __name__ == "__main__":

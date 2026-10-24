@@ -1,0 +1,145 @@
+<mxfile host="app.diagrams.net" agent="Shchyt-Link lab toolchain" version="24.7.17" type="device">
+  <diagram name="Роботи командного пункту" id="d2a5c4a5be4d5a6f9c2a">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n_S1" value="1. Приймання зміни та перевірка&lt;br&gt;готовності сил і засобів" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#EDEDED;strokeColor=#000000;strokeWidth=2;fontStyle=1;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="264.2" y="12" width="333.23" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="n_S2" value="2. Моніторинг повітряної обстановки&lt;br&gt;у зоні відповідальності" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="255.18" y="136" width="351.27" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="n_S3" value="3. Отримання та верифікація виявлень&lt;br&gt;від сенсорів і спостерігачів" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="12" y="260" width="359.38" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="n_S4" value="4. Класифікація цілі&lt;br&gt;та оцінка загрози" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="222.86" y="384" width="202.84" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="n_S5" value="5. Призначення розрахунку&lt;br&gt;та санкціонування пуску" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="192.02" y="508" width="264.53" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="n_S6" value="6. Супровід місії перехоплення" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="176.02" y="632" width="296.53" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="n_S7" value="7. Оцінка результату&lt;br&gt;та доповідь вищому КП" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.3;fontStyle=0;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="306.66" y="726" width="235.66" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="n_S8" value="8. Облік витрати ресурсу&lt;br&gt;та передача зміни" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#EDEDED;strokeColor=#000000;strokeWidth=2;fontStyle=1;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="295.34" y="850" width="258.31" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S1" target="n_S2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430.81" y="96.00" as="sourcePoint" />
+            <mxPoint x="430.81" y="132.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c3" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.2642;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S2" target="n_S3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348.00" y="220.00" as="sourcePoint" />
+            <mxPoint x="191.69" y="256.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="348.00" y="232.93" />
+              <mxPoint x="348.00" y="240.00" />
+              <mxPoint x="340.93" y="240.00" />
+              <mxPoint x="198.76" y="240.00" />
+              <mxPoint x="191.69" y="240.00" />
+              <mxPoint x="191.69" y="247.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c4" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.3498;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S3" target="n_S4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="191.69" y="344.00" as="sourcePoint" />
+            <mxPoint x="293.81" y="380.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="191.69" y="356.93" />
+              <mxPoint x="191.69" y="364.00" />
+              <mxPoint x="198.76" y="364.00" />
+              <mxPoint x="286.74" y="364.00" />
+              <mxPoint x="293.81" y="364.00" />
+              <mxPoint x="293.81" y="371.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c5" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S4" target="n_S5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="324.28" y="468.00" as="sourcePoint" />
+            <mxPoint x="324.28" y="504.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c6" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S5" target="n_S6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="324.28" y="592.00" as="sourcePoint" />
+            <mxPoint x="324.28" y="628.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c7" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.3475;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S6" target="n_S7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="324.28" y="686.00" as="sourcePoint" />
+            <mxPoint x="388.55" y="722.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="324.28" y="698.93" />
+              <mxPoint x="324.28" y="706.00" />
+              <mxPoint x="331.35" y="706.00" />
+              <mxPoint x="381.48" y="706.00" />
+              <mxPoint x="388.55" y="706.00" />
+              <mxPoint x="388.55" y="713.07" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c8" value="" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;labelBackgroundColor=#FFFFFF;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S7" target="n_S8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="424.49" y="810.00" as="sourcePoint" />
+            <mxPoint x="424.49" y="846.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c9" value="наступна ціль" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;dashed=1;dashPattern=6 4;labelBackgroundColor=#FFFFFF;exitX=0.6525;exitY=0.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.7358;entryY=1.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S7" target="n_S2">
+          <mxGeometry relative="1" as="geometry" x="0.223">
+            <mxPoint x="-0.2" y="0.0" as="offset" />
+            <mxPoint x="460.43" y="726.00" as="sourcePoint" />
+            <mxPoint x="513.63" y="224.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="460.43" y="713.07" />
+              <mxPoint x="460.43" y="706.00" />
+              <mxPoint x="467.51" y="706.00" />
+              <mxPoint x="567.44" y="706.00" />
+              <mxPoint x="574.51" y="706.00" />
+              <mxPoint x="574.51" y="698.93" />
+              <mxPoint x="574.51" y="659.00" />
+              <mxPoint x="574.51" y="550.00" />
+              <mxPoint x="574.51" y="302.00" />
+              <mxPoint x="574.51" y="247.07" />
+              <mxPoint x="574.51" y="240.00" />
+              <mxPoint x="567.44" y="240.00" />
+              <mxPoint x="520.70" y="240.00" />
+              <mxPoint x="513.63" y="240.00" />
+              <mxPoint x="513.63" y="232.93" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c10" value="хибна ціль" style="html=1;endArrow=block;endFill=1;endSize=8;rounded=0;edgeStyle=none;strokeColor=#000000;fontFamily=Times New Roman;fontSize=18;dashed=1;dashPattern=6 4;labelBackgroundColor=#FFFFFF;exitX=0.6502;exitY=0.0000;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5000;entryY=1.0000;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="n_S4" target="n_S2">
+          <mxGeometry relative="1" as="geometry" x="0.278">
+            <mxPoint x="-0.1" y="0.0" as="offset" />
+            <mxPoint x="354.76" y="384.00" as="sourcePoint" />
+            <mxPoint x="430.81" y="224.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="354.76" y="371.07" />
+              <mxPoint x="354.76" y="364.00" />
+              <mxPoint x="361.83" y="364.00" />
+              <mxPoint x="449.80" y="364.00" />
+              <mxPoint x="456.88" y="364.00" />
+              <mxPoint x="456.88" y="356.93" />
+              <mxPoint x="456.88" y="247.07" />
+              <mxPoint x="456.88" y="240.00" />
+              <mxPoint x="449.80" y="240.00" />
+              <mxPoint x="437.88" y="240.00" />
+              <mxPoint x="430.81" y="240.00" />
+              <mxPoint x="430.81" y="232.93" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

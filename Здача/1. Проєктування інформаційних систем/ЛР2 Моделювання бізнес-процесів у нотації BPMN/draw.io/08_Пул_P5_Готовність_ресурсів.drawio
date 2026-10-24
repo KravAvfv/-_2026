@@ -1,0 +1,142 @@
+<mxfile host="app.diagrams.net" agent="Shchyt-Link lab toolchain" version="24.7.17" type="device">
+  <diagram name="P5 Готовність" id="0b8e77b4444a58c5b181">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1092" pageHeight="1169" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pool_P3c7" value="Виконання місії перехоплення" style="rounded=0;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fillColor=#FFFFFF;whiteSpace=wrap;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="0" y="0" width="488" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="pool_X_SUP" value="Постачальник перехоплювачів і АКБ" style="rounded=0;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fillColor=#FFFFFF;whiteSpace=wrap;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="480" y="0" width="572" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="pool_P5" value="Забезпечення готовності ресурсів" style="swimlane;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fontStyle=0;horizontal=0;startSize=50;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;collapsible=0;container=1;whiteSpace=wrap;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="0" y="104" width="1052" height="354" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_P5_L1" value="Командир розрахунку" style="swimlane;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fontStyle=0;horizontal=0;startSize=30;fillColor=none;swimlaneFillColor=none;collapsible=0;container=1;whiteSpace=wrap;strokeWidth=1;" parent="pool_P5" vertex="1">
+          <mxGeometry x="50" y="0" width="1002" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_P5_L2" value="Технік служби" style="swimlane;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fontStyle=0;horizontal=0;startSize=30;fillColor=none;swimlaneFillColor=none;collapsible=0;container=1;whiteSpace=wrap;strokeWidth=1;" parent="pool_P5" vertex="1">
+          <mxGeometry x="50" y="118" width="1002" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_P5_L3" value="Логіст" style="swimlane;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;fontStyle=0;horizontal=0;startSize=30;fillColor=none;swimlaneFillColor=none;collapsible=0;container=1;whiteSpace=wrap;strokeWidth=1;" parent="pool_P5" vertex="1">
+          <mxGeometry x="50" y="236" width="1002" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_s" value="Місію завершено" style="shape=mxgraph.bpmn.event;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;perimeter=ellipsePerimeter;outline=standard;symbol=message;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=110;labelBackgroundColor=none;spacing=0;" parent="lane_P5_L1" vertex="1">
+          <mxGeometry x="86" y="39" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_t1" value="Доповісти про витрату і стан техніки" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=user;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P5_L1" vertex="1">
+          <mxGeometry x="164" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_t2" value="Провести післяпольотний контроль" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=manual;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P5_L2" vertex="1">
+          <mxGeometry x="164" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_g1" value="Є несправності?" style="shape=mxgraph.bpmn.gateway2;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;perimeter=rhombusPerimeter;outline=none;symbol=none;gwType=exclusive;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=top;verticalAlign=bottom;labelWidth=166;labelBackgroundColor=none;spacing=0;" parent="lane_P5_L2" vertex="1">
+          <mxGeometry x="359" y="32" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_t3" value="Відремонтувати або списати техніку" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=manual;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P5_L2" vertex="1">
+          <mxGeometry x="444" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_t4" value="Оновити облік запасів і готовності" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=service;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P5_L3" vertex="1">
+          <mxGeometry x="444" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_g2" value="Запас нижче норми?" style="shape=mxgraph.bpmn.gateway2;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;perimeter=rhombusPerimeter;outline=none;symbol=none;gwType=exclusive;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=110;labelBackgroundColor=none;spacing=0;" parent="lane_P5_L3" vertex="1">
+          <mxGeometry x="639" y="32" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_t5" value="Сформувати заявку на поповнення" style="shape=mxgraph.bpmn.task;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;whiteSpace=wrap;rectStyle=rounded;size=10;taskMarker=send;fillColor=#FFFFFF;strokeWidth=1.5;verticalAlign=middle;spacingLeft=6;spacingRight=6;spacingTop=10;" parent="lane_P5_L3" vertex="1">
+          <mxGeometry x="724" y="15" width="164" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_e2" value="Заявку надіслано" style="shape=mxgraph.bpmn.event;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;perimeter=ellipsePerimeter;outline=end;symbol=general;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=110;labelBackgroundColor=none;spacing=0;" parent="lane_P5_L3" vertex="1">
+          <mxGeometry x="926" y="39" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n_P5_e1" value="Готовність підтверджено" style="shape=mxgraph.bpmn.event;html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;perimeter=ellipsePerimeter;outline=end;symbol=general;fillColor=#FFFFFF;whiteSpace=wrap;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=116;labelBackgroundColor=none;spacing=0;" parent="lane_P5_L2" vertex="1">
+          <mxGeometry x="926" y="39" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f_SF_P5_0" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P5_s" target="n_P5_t1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="176.00" y="163.00" as="sourcePoint" />
+            <mxPoint x="214.00" y="163.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_1" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P5_t1" target="n_P5_t2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="296.00" y="207.00" as="sourcePoint" />
+            <mxPoint x="296.00" y="237.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_2" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P5_t2" target="n_P5_g1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="378.00" y="281.00" as="sourcePoint" />
+            <mxPoint x="409.00" y="281.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_3" value="так" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="n_P5_g1" target="n_P5_t3">
+          <mxGeometry relative="1" as="geometry" x="0.419">
+            <mxPoint x="0.0" y="-12.0" as="offset" />
+            <mxPoint x="463.00" y="281.00" as="sourcePoint" />
+            <mxPoint x="494.00" y="281.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_4" value="ні" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="n_P5_g1" target="n_P5_t4">
+          <mxGeometry relative="1" as="geometry" x="-0.839">
+            <mxPoint x="16.5" y="0.0" as="offset" />
+            <mxPoint x="436.00" y="308.00" as="sourcePoint" />
+            <mxPoint x="494.00" y="399.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="436.00" y="399.00" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_5" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5000;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P5_t3" target="n_P5_t4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="576.00" y="325.00" as="sourcePoint" />
+            <mxPoint x="576.00" y="355.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_6" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P5_t4" target="n_P5_g2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="658.00" y="399.00" as="sourcePoint" />
+            <mxPoint x="689.00" y="399.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_7" value="так" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="n_P5_g2" target="n_P5_t5">
+          <mxGeometry relative="1" as="geometry" x="0.419">
+            <mxPoint x="0.0" y="-12.0" as="offset" />
+            <mxPoint x="743.00" y="399.00" as="sourcePoint" />
+            <mxPoint x="774.00" y="399.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_8" value="ні" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5000;exitY=0.0000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="n_P5_g2" target="n_P5_e1">
+          <mxGeometry relative="1" as="geometry" x="-0.932">
+            <mxPoint x="16.5" y="0.0" as="offset" />
+            <mxPoint x="716.00" y="372.00" as="sourcePoint" />
+            <mxPoint x="976.00" y="281.00" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="716.00" y="281.00" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_SF_P5_9" value="" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=1;edgeStyle=none;rounded=0;strokeWidth=1.3;entryX=0.0000;entryY=0.5000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.0000;exitY=0.5000;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" source="n_P5_t5" target="n_P5_e2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="938.00" y="399.00" as="sourcePoint" />
+            <mxPoint x="976.00" y="399.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_MF_d7_readiness_0" value="Дані про витрату" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=0;startArrow=oval;startFill=0;startSize=7;dashed=1;dashPattern=8 5;edgeStyle=none;rounded=0;entryX=0.5000;entryY=0.0000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.3197;exitY=1.0000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="pool_P3c7" target="n_P5_s">
+          <mxGeometry relative="1" as="geometry" x="-0.494">
+            <mxPoint x="75.0" y="0.0" as="offset" />
+            <mxPoint x="156.00" y="64.00" as="sourcePoint" />
+            <mxPoint x="156.00" y="143.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_MF_d7_readiness_1" value="Заявка на поповнення" style="html=1;fontFamily=Times New Roman;fontSize=16;fontColor=#000000;strokeColor=#000000;endArrow=block;endFill=0;startArrow=oval;startFill=0;startSize=7;dashed=1;dashPattern=8 5;edgeStyle=none;rounded=0;entryX=0.7098;entryY=1.0000;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.6829;exitY=0.0000;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=#FFFFFF;fontSize=15;" parent="1" edge="1" source="n_P5_t5" target="pool_X_SUP">
+          <mxGeometry relative="1" as="geometry" x="0.863">
+            <mxPoint x="-92.0" y="0.0" as="offset" />
+            <mxPoint x="886.00" y="355.00" as="sourcePoint" />
+            <mxPoint x="886.00" y="64.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
