@@ -14,7 +14,7 @@
 ## Відтворення
 
 ```sh
-.venv/bin/python -m pytest -q coursework_final/app/tests        # 51 тест
+.venv/bin/python -m pytest -q coursework_final/app/tests        # 54 тести
 .venv/bin/python coursework_final/app/run_demo.py               # знімки екрана + demo.json
 .venv/bin/python coursework_final/model/make_diagrams.py        # діаграми
 .venv/bin/python coursework_final/model/make_report.py          # report.yaml

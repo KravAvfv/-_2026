@@ -187,16 +187,16 @@
   201,
   {
    "detection_id": 652,
-   "track_id": "3d4c5e2b-d697-457b-bf4a-272ce55e1863",
+   "track_id": "948e5c3f-5cc1-46f3-a0a2-b6c4dce4cf72",
    "track_number": "ЩП-0004"
   }
  ],
  "api_noauth": 401,
  "api_latency_ms": {
   "n": 50,
-  "median": 8.6,
-  "p95": 10.4,
-  "max": 12.3
+  "median": 8.7,
+  "p95": 11.1,
+  "max": 12.4
  },
  "shots": {
   "s01_login": {
@@ -213,24 +213,24 @@
   },
   "s03_situation": {
    "url": "/situation",
-   "cssHeight": 850,
+   "cssHeight": 929,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
   "s04_track": {
-   "url": "/tracks/3d4c5e2b-d697-457b-bf4a-272ce55e1863",
+   "url": "/tracks/948e5c3f-5cc1-46f3-a0a2-b6c4dce4cf72",
    "cssHeight": 738,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
   "s05_proposed": {
-   "url": "/missions/0428b788-98fb-4b1c-a7f5-11e7372a933e",
+   "url": "/missions/80b1fd28-f61c-4bf4-ab11-c883194266dc",
    "cssHeight": 556,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
   "s06_approved": {
-   "url": "/missions/0428b788-98fb-4b1c-a7f5-11e7372a933e",
+   "url": "/missions/80b1fd28-f61c-4bf4-ab11-c883194266dc",
    "cssHeight": 610,
    "font_pt": 10.4,
    "width_cm": 16.5
@@ -242,20 +242,20 @@
    "width_cm": 16.5
   },
   "s08_launched": {
-   "url": "/missions/0428b788-98fb-4b1c-a7f5-11e7372a933e",
+   "url": "/missions/80b1fd28-f61c-4bf4-ab11-c883194266dc",
    "cssHeight": 685,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
   "s09_closed": {
-   "url": "/missions/0428b788-98fb-4b1c-a7f5-11e7372a933e",
+   "url": "/missions/80b1fd28-f61c-4bf4-ab11-c883194266dc",
    "cssHeight": 716,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
   "s10_missions_filter": {
    "url": "/missions?state=%D0%B7%D0%B0%D0%BA%D1%80%D0%B8%D1%82%D0%B0&crew=&q=&from=2026-09-24&to=2026-10-24",
-   "cssHeight": 748,
+   "cssHeight": 787,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
@@ -272,28 +272,28 @@
    "width_cm": 16.5
   },
   "s13_detection_result": {
-   "url": "/tracks/aa9410e4-9844-4dff-9a58-d9d4a4ac8ccc",
+   "url": "/tracks/9e9b5bfd-7cc9-4787-a2e4-458c58dad705",
    "cssHeight": 543,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
   "s14_resources": {
    "url": "/resources?pos=%D0%9F-01&state=",
-   "cssHeight": 812,
+   "cssHeight": 941,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
   "s15_interceptor_edit": {
-   "url": "/interceptors/ee656f02-bc7b-4dac-91a4-e345f59ab73b/edit",
+   "url": "/interceptors/96817e4b-71cd-4e7c-9051-3cb90dd47c85/edit",
    "cssHeight": 414,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
   "s16_delete_refused": {
    "url": "/resources?pos=%D0%9F-01&state=",
-   "cssHeight": 887,
-   "font_pt": 10.4,
-   "width_cm": 16.5
+   "cssHeight": 1016,
+   "font_pt": 10.0,
+   "width_cm": 15.94
   },
   "s17_sensors_filter": {
    "url": "/sensors?q=&kind=&status=%D0%BF%D0%BE%D0%B7%D0%B0+%D0%BC%D0%B5%D1%80%D0%B5%D0%B6%D0%B5%D1%8E",
@@ -302,7 +302,7 @@
    "width_cm": 16.5
   },
   "s18_sensor_edit": {
-   "url": "/sensors/86fa8b1a-1a17-4be0-842d-c8ce8a34ccc1/edit",
+   "url": "/sensors/07e98411-8bcc-4f77-9753-3133dbb227d2/edit",
    "cssHeight": 443,
    "font_pt": 10.4,
    "width_cm": 16.5
@@ -321,7 +321,7 @@
   },
   "s21_analytics": {
    "url": "/analytics",
-   "cssHeight": 603,
+   "cssHeight": 886,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
@@ -333,7 +333,7 @@
   },
   "s23_users": {
    "url": "/users?q=&role=R-04&status=",
-   "cssHeight": 794,
+   "cssHeight": 844,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
@@ -351,7 +351,7 @@
   },
   "s26_audit": {
    "url": "/audit?entity=mission",
-   "cssHeight": 555,
+   "cssHeight": 700,
    "font_pt": 10.4,
    "width_cm": 16.5
   },
@@ -388,12 +388,13 @@
   null
  ],
  "loc": {
-  "app.py": 617,
+  "app.py": 651,
   "db/schema.sql": 351,
   "db/impl.sql": 454,
-  "db/seed.py": 296,
+  "db/seed.py": 398,
+  "templates/_pager.html": 3,
   "templates/analytics.html": 20,
-  "templates/audit.html": 9,
+  "templates/audit.html": 10,
   "templates/base.html": 23,
   "templates/detection_form.html": 18,
   "templates/error.html": 4,
@@ -404,20 +405,21 @@
   "templates/missions.html": 16,
   "templates/object_form.html": 14,
   "templates/objects.html": 8,
-  "templates/resources.html": 18,
+  "templates/resources.html": 19,
   "templates/roles.html": 9,
   "templates/search.html": 15,
   "templates/sensor_form.html": 18,
   "templates/sensors.html": 13,
-  "templates/situation.html": 34,
+  "templates/situation.html": 35,
   "templates/track.html": 31,
   "templates/user_form.html": 18,
-  "templates/users.html": 13,
-  "static/style.css": 66,
+  "templates/users.html": 14,
+  "static/style.css": 67,
   "tests/conftest.py": 59,
   "tests/test_api.py": 19,
-  "tests/test_consistency.py": 9,
+  "tests/test_consistency.py": 11,
   "tests/test_db.py": 140,
+  "tests/test_demo.py": 46,
   "tests/test_web.py": 199,
   "run_demo.py": 242,
   "pgtemp.py": 44,
@@ -431,6 +433,6 @@
  },
  "pytest": {
   "returncode": 0,
-  "summary": "51 passed in 6.21s"
+  "summary": "54 passed in 8.48s"
  }
 }

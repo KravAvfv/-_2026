@@ -96,9 +96,10 @@ def flows_rows(dfd):
 def store_usage(dfd):
     rows = []
     for st in dfd["stores"]:
-        w = [f"{f['src']} — «{f['label']}»" for f in dfd["flows"] if f["dst"] == st["id"] or
+        other = lambda f: f["dst"] if f["src"] == st["id"] else f["src"]   # процес на іншому кінці потоку
+        w = [f"{other(f)} — «{f['label']}»" for f in dfd["flows"] if f["dst"] == st["id"] or
              (f.get("bidir") and f["src"] == st["id"])]
-        r = [f"{f['dst']} — «{f['label']}»" for f in dfd["flows"] if f["src"] == st["id"] or
+        r = [f"{other(f)} — «{f['label']}»" for f in dfd["flows"] if f["src"] == st["id"] or
              (f.get("bidir") and f["dst"] == st["id"])]
         rows.append([f"{st['id']} {st['name']}", w or ["—"], r or ["—"]])
     return rows

@@ -5,6 +5,7 @@
     574
   ],
   "min_font_px": 15.0,
+  "overlaps": [],
   "portrait": {
     "width_cm": 11.74,
     "font_pt": 13.0,

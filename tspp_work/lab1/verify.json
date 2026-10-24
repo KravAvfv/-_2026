@@ -53,7 +53,7 @@
    "UPDATE mission SET approved_by = proposed_by, approved_at = now()",
    true,
    [
-    "DETAIL:  Failing row contains (7c12fd7d-ed92-4e79-8b21-c7e7257a39d6, М-0412-01, 048c595a-f5e1-49df-94c9-c1b9d0da5bf7, 05104efd-a117-4b21-be68-869db3b29852, null, 993030b9-1d29-44a4-bf04-ef3782b55671, 993030b9-1d29-44a4-bf04-ef3782b55671, запропонована, 2026-10-11 16:58:00.093868+03, 2026-10-11 16:58:00.100845+03, null, null, null)."
+    "DETAIL:  Failing row contains (c68276b1-4809-41f2-89f6-3be5e6de2005, М-0412-01, 59904ded-5a53-4e01-960a-bfcaaa36bcbf, a718ccf9-c201-4c85-b08a-a807733e5acb, null, 9674e5a1-1e33-49dc-94b0-1fa544a34c1b, 9674e5a1-1e33-49dc-94b0-1fa544a34c1b, запропонована, 2026-10-24 13:53:53.897832+03, 2026-10-24 13:53:53.906224+03, null, null, null)."
    ]
   ],
   [
@@ -65,7 +65,7 @@
    "UPDATE mission SET state = 'скасована'",
    true,
    [
-    "DETAIL:  Failing row contains (7c12fd7d-ed92-4e79-8b21-c7e7257a39d6, М-0412-01, 048c595a-f5e1-49df-94c9-c1b9d0da5bf7, 05104efd-a117-4b21-be68-869db3b29852, null, 993030b9-1d29-44a4-bf04-ef3782b55671, 720e0c5b-2d99-4e6f-9529-2603a0ae7bf5, скасована, 2026-10-11 16:58:00.093868+03, 2026-10-11 16:58:00.10567+03, null, null, null)."
+    "DETAIL:  Failing row contains (c68276b1-4809-41f2-89f6-3be5e6de2005, М-0412-01, 59904ded-5a53-4e01-960a-bfcaaa36bcbf, a718ccf9-c201-4c85-b08a-a807733e5acb, null, 9674e5a1-1e33-49dc-94b0-1fa544a34c1b, 386e6f90-3126-4a0d-878a-80e4182a6656, скасована, 2026-10-24 13:53:53.897832+03, 2026-10-24 13:53:53.911795+03, null, null, null)."
    ]
   ],
   [
@@ -84,28 +84,28 @@
    "INSERT INTO engagement_report (mission_id, assessment, submitted_by) SELECT mission_id, 'промах', approved_by FROM mission",
    true,
    [
-    "DETAIL:  Key (mission_id)=(7c12fd7d-ed92-4e79-8b21-c7e7257a39d6) already exists."
+    "DETAIL:  Key (mission_id)=(c68276b1-4809-41f2-89f6-3be5e6de2005) already exists."
    ]
   ],
   [
    "INSERT INTO detection (sensor_id, detected_at, confidence) SELECT sensor_id, now(), 1.5 FROM sensor",
    true,
    [
-    "DETAIL:  Failing row contains (1, f31f7e19-4505-440c-83c7-3eece94adfc1, null, 2026-10-11 16:58:00.136282+03, 2026-10-11 16:58:00.136282+03, null, null, null, null, null, null, 1.50)."
+    "DETAIL:  Failing row contains (1, 260e9d61-f944-41a0-b0a3-0fa1d094b6ae, null, 2026-10-24 13:53:53.940099+03, 2026-10-24 13:53:53.940099+03, null, null, null, null, null, null, 1.50)."
    ]
   ],
   [
    "INSERT INTO air_track (track_number, threat_score, first_seen_at, last_update_at) VALUES ('ЩП-0412', 10, now(), now())",
    true,
    [
-    "DETAIL:  Key (track_number, track_date)=(ЩП-0412, 2026-10-11) already exists."
+    "DETAIL:  Key (track_number, track_date)=(ЩП-0412, 2026-10-24) already exists."
    ]
   ],
   [
    "DELETE FROM crew",
    true,
    [
-    "DETAIL:  Key (crew_id)=(05104efd-a117-4b21-be68-869db3b29852) is still referenced from table \"mission\"."
+    "DETAIL:  Key (crew_id)=(a718ccf9-c201-4c85-b08a-a807733e5acb) is still referenced from table \"mission\"."
    ]
   ]
  ]

@@ -2,15 +2,15 @@
   "file": "s16_delete_refused.png",
   "native_px": [
     2160,
-    2661
+    3048
   ],
   "min_font_px": 48,
   "portrait": {
-    "width_cm": 16.5,
-    "font_pt": 10.4,
-    "dpi": 333
+    "width_cm": 15.94,
+    "font_pt": 10.0,
+    "dpi": 344
   },
   "orientation": "portrait",
-  "width_cm": 16.5,
+  "width_cm": 15.94,
   "legible": true
 }

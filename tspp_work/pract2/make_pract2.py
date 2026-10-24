@@ -16,6 +16,7 @@ ROOT = HERE.parents[1]
 for p_ in (ROOT / "tools", HERE.parent, HERE.parent / "pract1", HERE):
     sys.path.insert(0, str(p_))
 from idef_model import render  # noqa: E402
+from uk_plural import uk_form  # noqa: E402
 from tspp_common import COURSE, block_helpers, number_citations  # noqa: E402
 import model_p1 as P1  # noqa: E402  (вимоги з ПР1)
 from model_p2 import ARCH, CORE, REF, SERVICES  # noqa: E402
@@ -160,7 +161,8 @@ def report():
     h1("3. Вибір рівнів реалізації програмного продукту")
     h2("3.1. Вихідні вимоги до архітектури")
     p(f"Вибір рівнів і стилю ґрунтується на специфікації вимог практичної роботи № 1 [@pr1]: {len(P1.FR)} "
-      f"функціональних і {len(P1.NFR)} нефункціональних вимог. Для архітектури визначальними є нефункціональні "
+      f"{uk_form(len(P1.FR), 'функціональна', 'функціональні', 'функціональних')} і {len(P1.NFR)} "
+      f"{uk_form(len(P1.NFR), 'нефункціональна вимога', 'нефункціональні вимоги', 'нефункціональних вимог')}. Для архітектури визначальними є нефункціональні "
       "вимоги, наведені в табл. {tab:drivers}: саме вони відрізняють «Щит-Лінк» від типових IoT-систем "
       "моніторингу (теплиці, клініки, насосні станції [@vasyuta; @legoyda]), де допустимі затримки в секунди-"
       "хвилини й робота лише в хмарі.")
