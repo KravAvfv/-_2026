@@ -1,0 +1,225 @@
+{
+ "figures": [
+  [
+   "1.1",
+   "coursework_final/diagrams/01_org_structure.png",
+   "portrait",
+   15.89,
+   10.0
+  ],
+  [
+   "1.2",
+   "coursework_final/diagrams/04_goal_tree.png",
+   "portrait",
+   16.35,
+   10.0
+  ],
+  [
+   "1.3",
+   "coursework_final/diagrams/05_wbs.png",
+   "portrait",
+   16.67,
+   10.0
+  ],
+  [
+   "2.1",
+   "coursework_final/diagrams/bpmn_00_interaction_map.png",
+   "landscape",
+   25.7,
+   10.0
+  ],
+  [
+   "2.2",
+   "coursework_final/diagrams/bpmn_02_p2_assignment_a.png",
+   "landscape",
+   24.95,
+   10.0
+  ],
+  [
+   "2.3",
+   "coursework_final/diagrams/bpmn_03_p2_assignment_b.png",
+   "landscape",
+   20.73,
+   10.0
+  ],
+  [
+   "2.4",
+   "coursework_final/diagrams/20_uc_combat.png",
+   "landscape",
+   25.45,
+   10.0
+  ],
+  [
+   "2.5",
+   "coursework_final/diagrams/21_uc_support.png",
+   "portrait",
+   17.0,
+   10.0
+  ],
+  [
+   "2.6",
+   "coursework_final/diagrams/22_activity.png",
+   "portrait",
+   16.74,
+   10.0
+  ],
+  [
+   "2.7",
+   "coursework_final/diagrams/23_sequence.png",
+   "portrait",
+   14.17,
+   10.0
+  ],
+  [
+   "2.8",
+   "coursework_final/diagrams/24_class_all.png",
+   "landscape",
+   17.75,
+   10.0
+  ],
+  [
+   "3.1",
+   "coursework_final/diagrams/31_components.png",
+   "portrait",
+   16.67,
+   10.0
+  ],
+  [
+   "3.2",
+   "coursework_final/diagrams/32_deployment.png",
+   "landscape",
+   25.2,
+   10.0
+  ],
+  [
+   "3.3",
+   "coursework_final/diagrams/33_network.png",
+   "portrait",
+   16.5,
+   10.0
+  ],
+  [
+   "3.4",
+   "coursework_final/diagrams/34_interaction.png",
+   "portrait",
+   9.9,
+   10.0
+  ],
+  [
+   "4.1",
+   "coursework_final/diagrams/40_navmap.png",
+   "portrait",
+   16.83,
+   10.0
+  ],
+  [
+   "4.2",
+   "coursework_final/diagrams/screens/s01_login.png",
+   "portrait",
+   15.87,
+   10.0
+  ],
+  [
+   "4.3",
+   "coursework_final/diagrams/screens/s02_home_och.png",
+   "portrait",
+   15.87,
+   10.0
+  ],
+  [
+   "4.4",
+   "coursework_final/diagrams/screens/s03_situation.png",
+   "portrait",
+   15.87,
+   10.0
+  ],
+  [
+   "4.5",
+   "coursework_final/diagrams/screens/s08_launched.png",
+   "portrait",
+   15.87,
+   10.0
+  ],
+  [
+   "4.6",
+   "coursework_final/diagrams/screens/s10_missions_filter.png",
+   "portrait",
+   15.87,
+   10.0
+  ],
+  [
+   "4.7",
+   "coursework_final/diagrams/screens/s12_detection_form.png",
+   "portrait",
+   15.87,
+   10.0
+  ],
+  [
+   "4.8",
+   "coursework_final/diagrams/screens/s15_interceptor_edit.png",
+   "portrait",
+   15.87,
+   10.0
+  ],
+  [
+   "4.9",
+   "coursework_final/diagrams/screens/s28_roles_a.png",
+   "portrait",
+   15.87,
+   10.0
+  ],
+  [
+   "4.10",
+   "coursework_final/diagrams/screens/s28_roles_b.png",
+   "portrait",
+   15.87,
+   10.0
+  ]
+ ],
+ "toc": {
+  "ВСТУП": 4,
+  "РОЗДІЛ 1 АНАЛІЗ ТА ОПИС ОБ’ЄКТА ДОСЛІДЖЕННЯ. ПОСТАНОВКА ЗАДАЧІ НА ПРОЄКТУВАННЯ": 5,
+  "1.1 Аналіз об’єкта дослідження": 5,
+  "1.2 Основні функції підприємства": 7,
+  "1.3 Завдання на автоматизацію": 9,
+  "1.4 Цілі підприємства": 12,
+  "1.5 Робоча структура проєкту (WBS)": 14,
+  "РОЗДІЛ 2 ПРОЄКТУВАННЯ МОДЕЛІ ІНФОРМАЦІЙНОЇ СИСТЕМИ": 17,
+  "2.1 Функціональне моделювання": 17,
+  "2.2 Об’єктно-орієнтоване проєктування": 21,
+  "2.2.1 Діаграма варіантів використання": 21,
+  "2.2.2 Діаграма діяльності": 24,
+  "2.2.3 Діаграма послідовності": 26,
+  "2.2.4 Діаграма класів": 27,
+  "2.2.5 Взаємозв’язок діаграм": 27,
+  "РОЗДІЛ 3 ПРОЄКТУВАННЯ КОМПОНЕНТІВ ДІЯЛЬНОСТІ СИСТЕМИ": 29,
+  "3.1 Концепція автоматизованої інформаційної системи": 29,
+  "3.2 Тип архітектури та її обґрунтування": 29,
+  "3.3 Програмно-апаратна архітектура": 30,
+  "3.4 Інформаційні потоки та взаємодія компонентів": 33,
+  "3.5 Опис бази даних": 34,
+  "3.6 Ролі користувачів і права доступу": 35,
+  "3.7 Механізми взаємодії користувачів із системою": 36,
+  "РОЗДІЛ 4 СТВОРЕННЯ ПРОТОТИПУ СИСТЕМИ": 37,
+  "4.1 Засоби прототипування": 37,
+  "4.2 Карта навігації": 37,
+  "4.3 Сторінка авторизації та головна сторінка": 38,
+  "4.4 Основні функціональні модулі": 40,
+  "4.5 Інтерфейси користувачів за ролями": 45,
+  "4.6 Перевірка прототипу": 47,
+  "ВИСНОВКИ": 48,
+  "ПЕРЕЛІК ВИКОРИСТАНИХ ІНФОРМАЦІЙНИХ ДЖЕРЕЛ": 49
+ },
+ "breaks": [],
+ "cuts": {
+  "1.2": [
+   6
+  ],
+  "1.3": [
+   13
+  ],
+  "3.1": [
+   14
+  ]
+ }
+}

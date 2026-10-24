@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block title %}Ручне донесення{% endblock %}
+{% block body %}
+<h1>Ручне донесення про виявлення</h1>
+<p class="muted">Донесення поста візуального спостереження обробляється так само, як виявлення від периферійного шлюзу: зіставлення з треком, підтвердження, оцінка загрози.</p>
+<form method="post" class="card" style="max-width: 600px">
+  <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+  <dl>
+    <dt>Пост</dt><dd><select name="sensor">{% for p in posts %}<option {{ 'selected' if f.sensor == p.hw_serial }}>{{ p.hw_serial }}</option>{% endfor %}</select></dd>
+    <dt>Широта, °</dt><dd><input name="lat" type="number" step="0.000001" min="-90" max="90" value="{{ f.lat or '' }}" required></dd>
+    <dt>Довгота, °</dt><dd><input name="lon" type="number" step="0.000001" min="-180" max="180" value="{{ f.lon or '' }}" required></dd>
+    <dt>Висота, м</dt><dd><input name="alt" type="number" step="1" min="0" value="{{ f.alt or '' }}"></dd>
+    <dt>Швидкість, м/с</dt><dd><input name="speed" type="number" step="0.1" min="0" value="{{ f.speed or '' }}"></dd>
+    <dt>Тип цілі</dt><dd><select name="signature">{% for s in ['ударний поршневий', 'ударний реактивний', 'розвідувальний', 'квадрокоптер'] %}<option {{ 'selected' if f.signature == s }}>{{ s }}</option>{% endfor %}</select></dd>
+    <dt>Достовірність</dt><dd><input name="confidence" type="number" step="0.01" min="0" max="1" value="{{ f.confidence or '0.7' }}" required></dd>
+  </dl>
+  <p><button>Надіслати донесення</button> <a class="btn sec" href="{{ url_for('situation') }}">Скасувати</a></p>
+</form>
+{% endblock %}

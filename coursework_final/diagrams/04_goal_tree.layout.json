@@ -1,0 +1,23 @@
+{
+  "file": "04_goal_tree",
+  "native_px": [
+    692,
+    880
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 10.4,
+    "main_pt": 10.4,
+    "dpi": 320
+  },
+  "landscape": {
+    "width_cm": 11.64,
+    "font_pt": 7.1,
+    "main_pt": 7.1,
+    "dpi": 463
+  },
+  "orientation": "portrait",
+  "width_cm": 17.0,
+  "legible": true
+}

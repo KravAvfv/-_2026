@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Сенсори{% endblock %}
+{% block body %}
+<h1>Сенсорна мережа <a class="btn sec" href="{{ url_for('sensor_form') }}">+ Зареєструвати</a></h1>
+<form class="inline" method="get"><input name="q" value="{{ a.q or '' }}" placeholder="серійний номер" size="12">
+<select name="kind"><option value="">усі типи</option>{% for k in kinds %}<option {{ 'selected' if k == a.kind }}>{{ k }}</option>{% endfor %}</select>
+<select name="status"><option value="">усі стани</option>{% for s in statuses %}<option {{ 'selected' if s == a.status }}>{{ s }}</option>{% endfor %}</select><button class="sec">Фільтрувати</button></form>
+<p class="muted">Показано {{ ss|length }} з {{ total }} (не більше 12).</p>
+<table><tr><th>Серійний №</th><th>Тип</th><th>Стан</th><th>Сектор</th><th>Координати</th><th>Останній сигнал</th><th></th></tr>
+{% for s in ss %}<tr><td class="mono">{{ s.hw_serial }}</td><td>{{ s.kind }}</td><td>{{ s.status }}</td><td>{{ s.sector }}</td><td>{{ '%.3f'|format(s.lat) }}, {{ '%.3f'|format(s.lon) }}</td><td>{{ fmt_dt(s.last_heartbeat_at) }}</td>
+<td><a href="{{ url_for('sensor_form', sid=s.sensor_id) }}">змінити</a></td></tr>
+{% else %}<tr><td colspan="7" class="muted">За умовами фільтра сенсорів немає</td></tr>{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Об’єкт прикриття{% endblock %}
+{% block body %}
+<h1>Об’єкт прикриття «{{ o.name }}»</h1>
+<form method="post" class="card" style="max-width: 560px">
+  <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+  <dl>
+    <dt>Назва</dt><dd><input name="name" value="{{ o.name }}" size="30" required></dd>
+    <dt>Категорія</dt><dd><select name="category">{% for c in cats %}<option {{ 'selected' if o.category == c }}>{{ c }}</option>{% endfor %}</select></dd>
+    <dt>Широта, °</dt><dd><input name="lat" type="number" step="0.000001" value="{{ o.lat }}" required></dd>
+    <dt>Довгота, °</dt><dd><input name="lon" type="number" step="0.000001" value="{{ o.lon }}" required></dd>
+  </dl>
+  <p><button>Зберегти</button> <a class="btn sec" href="{{ url_for('objects') }}">Скасувати</a></p>
+</form>
+{% endblock %}

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1076" height="615" viewBox="0 0 1076 615"><rect width="100%" height="100%" fill="#fff"/><rect x="286" y="40" width="620" height="561.2" rx="10" fill="#fff" stroke="#000" stroke-width="1.6"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="596.0" y="60.3">Прототип «Щит-Лінк»: бойове управління</tspan></text>
+<ellipse cx="451.0" cy="112.0" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="451.0" y="106.9">UC1. Переглянути повітряну</tspan><tspan x="451.0" y="124.3">обстановку</tspan></text>
+<ellipse cx="451.0" cy="174.4" rx="107.5" ry="20.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="451.0" y="178.0">UC2. Класифікувати ціль</tspan></text>
+<ellipse cx="741.0" cy="179.6" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="741.0" y="174.5">UC10. Надіслати ручне</tspan><tspan x="741.0" y="191.9">донесення</tspan></text>
+<ellipse cx="741.0" cy="112.0" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="741.0" y="106.9">UC11. Передати виявлення</tspan><tspan x="741.0" y="124.3">через API</tspan></text>
+<ellipse cx="451.0" cy="236.8" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="451.0" y="231.7">UC5. Санкціонувати або</tspan><tspan x="451.0" y="249.1">відхилити місію</tspan></text>
+<ellipse cx="741.0" cy="351.2" rx="107.5" ry="20.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="741.0" y="354.8">UC3. Запропонувати місію</tspan></text>
+<ellipse cx="741.0" cy="424.0" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="741.0" y="418.9">UC4. Підібрати</tspan><tspan x="741.0" y="436.3">розрахунок-кандидат</tspan></text>
+<ellipse cx="741.0" cy="236.8" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="741.0" y="231.7">UC12. Перепризначити</tspan><tspan x="741.0" y="249.1">розрахунок</tspan></text>
+<ellipse cx="451.0" cy="294.0" rx="107.5" ry="20.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="451.0" y="297.6">UC9. Скасувати місію</tspan></text>
+<ellipse cx="451.0" cy="418.8" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="451.0" y="413.7">UC6. Прийняти бойове</tspan><tspan x="451.0" y="431.1">завдання</tspan></text>
+<ellipse cx="451.0" cy="476.0" rx="107.5" ry="20.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="451.0" y="479.6">UC8. Доповісти результат</tspan></text>
+<ellipse cx="451.0" cy="538.4" rx="107.5" ry="20.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="451.0" y="542.0">UC7. Здійснити пуск</tspan></text>
+<circle cx="52.0" cy="78.0" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="52.0,86.0 52.0,108.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="39.0,94.0 65.0,94.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="41.0,124.0 52.0,108.0 63.0,124.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="52.0" y="62.9">Персонал КП</tspan></text>
+<circle cx="190.0" cy="130.0" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="190.0,138.0 190.0,160.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="177.0,146.0 203.0,146.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="179.0,176.0 190.0,160.0 201.0,176.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="190.0" y="191.3">Аналітик обстановки</tspan></text>
+<circle cx="190.0" cy="213.2" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="190.0,221.2 190.0,243.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="177.0,229.2 203.0,229.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="179.0,259.2 190.0,243.2 201.0,259.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="190.0" y="274.5">Оперативний черговий</tspan></text>
+<circle cx="190.0" cy="317.2" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="190.0,325.2 190.0,347.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="177.0,333.2 203.0,333.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="179.0,363.2 190.0,347.2 201.0,363.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="190.0" y="378.5">Офіцер бойового</tspan><tspan x="190.0" y="395.9">управління</tspan></text>
+<circle cx="190.0" cy="431.6" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="190.0,439.6 190.0,461.6" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="177.0,447.6 203.0,447.6" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="179.0,477.6 190.0,461.6 201.0,477.6" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="190.0" y="492.9">Командир розрахунку</tspan></text>
+<circle cx="190.0" cy="525.2" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="190.0,533.2 190.0,555.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="177.0,541.2 203.0,541.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="179.0,571.2 190.0,555.2 201.0,571.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="190.0" y="586.5">Оператор</tspan><tspan x="190.0" y="603.9">перехоплювача</tspan></text>
+<circle cx="991.0" cy="187.2" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="991.0,195.2 991.0,217.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="978.0,203.2 1004.0,203.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="980.0,233.2 991.0,217.2 1002.0,233.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="991.0" y="248.5">Оператор поста</tspan><tspan x="991.0" y="265.9">спостереження</tspan></text>
+<circle cx="991.0" cy="78.0" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="991.0,86.0 991.0,108.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="978.0,94.0 1004.0,94.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="980.0,124.0 991.0,108.0 1002.0,124.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="991.0" y="139.3">Периферійний шлюз</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-style="italic" fill="#000"><tspan x="991.0" y="62.3">«система»</tspan></text>
+<polyline points="74.0,116.0 343.6,113.1" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,150.0 356.8,164.8" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,233.2 386.2,190.4" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,233.2 343.7,235.2" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,233.2 387.5,277.9" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,337.2 634.6,348.4" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,337.2 373.9,307.9" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,451.6 421.8,313.2" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,451.6 357.2,431.7" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,451.6 356.8,466.4" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,451.6 402.0,520.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="212.0,545.2 344.7,541.4" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="969.0,207.2 837.4,191.3" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="969.0,98.0 845.3,105.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="174.0,146.0 105.0,146.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="174.0,229.2 105.0,229.2" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="174.0,333.2 105.0,333.2" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="105.0,94.0 105.0,333.2" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="105.0,94.0 68.0,94.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="68.0,94.0 81.0,99.8 81.0,88.2" fill="#fff" stroke="#000" stroke-width="1"/>
+<polyline points="741.0,371.2 741.0,397.6" fill="none" stroke="#000" stroke-width="1.3" stroke-dasharray="6 4" stroke-linejoin="round"/>
+<polyline points="745.8,387.7 741.0,397.6 736.2,387.7" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="start" fill="#000"><tspan x="749.0" y="387.7">«include»</tspan></text>
+<polyline points="633.5,236.8 558.5,236.8" fill="none" stroke="#000" stroke-width="1.3" stroke-dasharray="6 4" stroke-linejoin="round"/>
+<polyline points="568.4,241.6 558.5,236.8 568.4,232.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="596.0" y="229.7">«extend»</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="596.0" y="252.1">[відмова]</tspan></text></svg>

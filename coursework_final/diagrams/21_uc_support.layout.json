@@ -1,0 +1,23 @@
+{
+  "file": "21_uc_support",
+  "native_px": [
+    721,
+    620
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 10.0,
+    "main_pt": 10.0,
+    "dpi": 333
+  },
+  "landscape": {
+    "width_cm": 17.21,
+    "font_pt": 10.1,
+    "main_pt": 10.1,
+    "dpi": 326
+  },
+  "orientation": "portrait",
+  "width_cm": 17.0,
+  "legible": true
+}

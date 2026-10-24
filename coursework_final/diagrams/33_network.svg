@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="704" height="478" viewBox="0 0 704 478"><rect width="100%" height="100%" fill="#fff"/><rect x="20.0" y="6.5" width="160.0" height="259.0" fill="none" stroke="#000" stroke-width="1.1" stroke-dasharray="7 5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="start" font-weight="bold" fill="#000"><tspan x="28.0" y="22.8">Сенсори</tspan></text>
+<rect x="188.0" y="6.5" width="160.0" height="259.0" fill="none" stroke="#000" stroke-width="1.1" stroke-dasharray="7 5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="start" font-weight="bold" fill="#000"><tspan x="196.0" y="22.8">ЛОМ позиції</tspan></text>
+<rect x="524.0" y="114.0" width="160.0" height="327.2" fill="none" stroke="#000" stroke-width="1.1" stroke-dasharray="7 5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="start" font-weight="bold" fill="#000"><tspan x="532.0" y="130.3">Мережа ЦОД</tspan></text>
+<rect x="27.0" y="59.6" width="146.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="100.0" y="82.9">Акустичні вузли</tspan><tspan x="100.0" y="100.3">(LoRaWAN, LTE-M)</tspan></text>
+<rect x="27.0" y="170.9" width="146.0" height="74.2" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="100.0" y="194.2">РЛС,</tspan><tspan x="100.0" y="211.6">оптико-електронні</tspan><tspan x="100.0" y="229.0">пости</tspan></text>
+<rect x="195.0" y="66.0" width="146.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="268.0" y="91.6">Планшет розрахунку</tspan></text>
+<rect x="195.0" y="186.0" width="146.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="268.0" y="211.6">Периферійний шлюз</tspan></text>
+<rect x="363.0" y="66.0" width="146.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="436.0" y="91.6">АРМ КП (ЛОМ КП)</tspan></text>
+<rect x="363.0" y="170.9" width="146.0" height="74.2" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="436.0" y="194.2">Тунель WireGuard:</tspan><tspan x="436.0" y="211.6">меш-радіо, LTE,</tspan><tspan x="436.0" y="229.0">супутник</tspan></text>
+<rect x="531.0" y="179.6" width="146.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="604.0" y="202.9">Міжмережевий</tspan><tspan x="604.0" y="220.3">екран, проксі TLS</tspan></text>
+<rect x="531.0" y="291.6" width="146.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="604.0" y="317.2">Сервер застосунку</tspan></text>
+<path d="M531.0,401.4 A73.0,9 0 0 1 677.0,401.4 L677.0,427.4 A73.0,9 0 0 1 531.0,427.4 Z M531.0,401.4 A73.0,9 0 0 0 677.0,401.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="604.0" y="422.5">Сервер БД</tspan></text>
+<polyline points="173.0,88.0 184.0,88.0 184.0,208.0 195.0,208.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="195.0,208.0 186.0,203.9 186.0,212.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="173.0,208.0 195.0,208.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="195.0,208.0 186.0,203.9 186.0,212.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="268.0,110.0 268.0,186.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="268.0,186.0 272.1,177.0 263.9,177.0" fill="#000" stroke="#000" stroke-width="1"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="start" font-style="italic" fill="#000"><tspan x="274.0" y="123.3">Wi-Fi</tspan></text>
+<polyline points="341.0,208.0 363.0,208.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="363.0,208.0 354.0,203.9 354.0,212.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="509.0,208.0 531.0,208.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="531.0,208.0 522.0,203.9 522.0,212.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="509.0,88.0 604.0,88.0 604.0,179.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="604.0,179.6 608.0,170.6 600.0,170.6" fill="#000" stroke="#000" stroke-width="1"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="start" font-style="italic" fill="#000"><tspan x="514.0" y="81.9">HTTPS</tspan></text>
+<polyline points="604.0,236.4 604.0,291.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="604.0,291.6 608.0,282.6 600.0,282.6" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="604.0,335.6 604.0,392.4" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="604.0,392.4 608.0,383.4 600.0,383.4" fill="#000" stroke="#000" stroke-width="1"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="start" font-style="italic" fill="#000"><tspan x="610.0" y="348.9">SQL/TLS</tspan></text></svg>

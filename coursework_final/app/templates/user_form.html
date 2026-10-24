@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block title %}Обліковий запис{% endblock %}
+{% block body %}
+<h1>{{ 'Обліковий запис ' ~ u.login if uid else 'Новий обліковий запис' }}</h1>
+<form method="post" class="card" style="max-width: 620px">
+  <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+  <dl>
+    {% if not uid %}<dt>Логін</dt><dd><input name="login" value="{{ u.login if u else '' }}" required></dd>{% endif %}
+    <dt>ПІБ</dt><dd><input name="full_name" value="{{ u.full_name if u else '' }}" size="28" required></dd>
+    <dt>Звання</dt><dd><input name="rank" value="{{ u.rank if u and u.rank else '' }}"></dd>
+    <dt>Роль</dt><dd><select name="role_id">{% for r in roles %}<option value="{{ r.role_id }}" {{ 'selected' if u and u.role_id|string == r.role_id|string }}>{{ r.code }} {{ r.name }}</option>{% endfor %}</select></dd>
+    <dt>Розрахунок</dt><dd><select name="crew_id"><option value="">—</option>{% for c in crews %}<option value="{{ c.crew_id }}" {{ 'selected' if u and u.crew_id and u.crew_id|string == c.crew_id|string }}>{{ c.call_sign }}</option>{% endfor %}</select></dd>
+    <dt>Допуск до</dt><dd><input type="date" name="admission_valid_to" value="{{ u.admission_valid_to if u and u.admission_valid_to else '' }}"></dd>
+    <dt>Двофакторна</dt><dd><input type="checkbox" name="mfa_enabled" {{ 'checked' if not u or u.mfa_enabled }}> увімкнена</dd>
+    <dt>{{ 'Новий пароль' if uid else 'Пароль' }}</dt><dd><input type="password" name="password" {{ '' if uid else 'required' }} minlength="8"> <span class="muted">{{ 'порожньо — без змін' if uid else 'від 8 символів' }}</span></dd>
+  </dl>
+  <p><button>Зберегти</button> <a class="btn sec" href="{{ url_for('users') }}">Скасувати</a></p>
+</form>
+{% endblock %}

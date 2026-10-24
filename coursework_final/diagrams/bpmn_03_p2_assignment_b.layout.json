@@ -1,0 +1,27 @@
+{
+  "file": "bpmn_03_p2_assignment_b.bpmn",
+  "native_px": [
+    882,
+    470
+  ],
+  "png_px": [
+    3528,
+    1880
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 8.2,
+    "dpi": 543,
+    "main_pt": 8.2
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 12.4,
+    "dpi": 349,
+    "main_pt": 12.4
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

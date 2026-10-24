@@ -1,0 +1,436 @@
+{
+ "seed_outcomes": {
+  "miss": 5,
+  "hit": 17,
+  "reject": 2,
+  "reassign": 2,
+  "abort": 2
+ },
+ "seed_seconds": 0.4,
+ "counts": {
+  "air_track": 40,
+  "audit_log": 426,
+  "crew": 18,
+  "detection": 651,
+  "engagement_report": 24,
+  "interceptor": 60,
+  "interceptor_model": 4,
+  "mission": 30,
+  "mission_event": 146,
+  "mission_transition": 8,
+  "permission": 21,
+  "personnel": 60,
+  "position": 10,
+  "protected_object": 12,
+  "role": 13,
+  "role_permission": 51,
+  "sector": 12,
+  "sensor": 42,
+  "sensor_transition": 12,
+  "telemetry_frame": 523
+ },
+ "objects": {
+  "tables": 20,
+  "functions": 22,
+  "triggers": 16,
+  "views": 2,
+  "enums": 14,
+  "db_roles": 6
+ },
+ "versions": {
+  "postgresql": "18.6",
+  "python": "3.14.7",
+  "flask": "3.1.1",
+  "werkzeug": "3.1.9",
+  "jinja2": "3.1.6",
+  "psycopg": "3.2.10",
+  "pytest": "9.1.1"
+ },
+ "routes": [
+  [
+   "/",
+   "GET",
+   "index"
+  ],
+  [
+   "/analytics",
+   "GET",
+   "analytics"
+  ],
+  [
+   "/api/v1/detections",
+   "POST",
+   "api_detection"
+  ],
+  [
+   "/api/v1/threats",
+   "GET",
+   "api_threats"
+  ],
+  [
+   "/audit",
+   "GET",
+   "audit"
+  ],
+  [
+   "/detections/new",
+   "GET,POST",
+   "detection_new"
+  ],
+  [
+   "/interceptors/<uuid:iid>/delete",
+   "POST",
+   "interceptor_delete"
+  ],
+  [
+   "/interceptors/<uuid:iid>/edit",
+   "GET,POST",
+   "interceptor_form"
+  ],
+  [
+   "/interceptors/new",
+   "GET,POST",
+   "interceptor_form"
+  ],
+  [
+   "/login",
+   "GET,POST",
+   "login"
+  ],
+  [
+   "/logout",
+   "GET",
+   "logout"
+  ],
+  [
+   "/missions",
+   "GET",
+   "missions"
+  ],
+  [
+   "/missions/<uuid:mid>",
+   "GET,POST",
+   "mission"
+  ],
+  [
+   "/objects",
+   "GET",
+   "objects"
+  ],
+  [
+   "/objects/<uuid:oid>/edit",
+   "GET,POST",
+   "object_form"
+  ],
+  [
+   "/resources",
+   "GET",
+   "resources"
+  ],
+  [
+   "/roles",
+   "GET,POST",
+   "roles"
+  ],
+  [
+   "/search",
+   "GET",
+   "search"
+  ],
+  [
+   "/sensors",
+   "GET",
+   "sensors"
+  ],
+  [
+   "/sensors/<uuid:sid>/edit",
+   "GET,POST",
+   "sensor_form"
+  ],
+  [
+   "/sensors/new",
+   "GET,POST",
+   "sensor_form"
+  ],
+  [
+   "/situation",
+   "GET",
+   "situation"
+  ],
+  [
+   "/tracks/<uuid:tid>",
+   "GET,POST",
+   "track"
+  ],
+  [
+   "/users",
+   "GET",
+   "users"
+  ],
+  [
+   "/users/<uuid:uid>/edit",
+   "GET,POST",
+   "user_form"
+  ],
+  [
+   "/users/<uuid:uid>/status",
+   "POST",
+   "user_status"
+  ],
+  [
+   "/users/new",
+   "GET,POST",
+   "user_form"
+  ]
+ ],
+ "api_ok": [
+  201,
+  {
+   "detection_id": 652,
+   "track_id": "3d4c5e2b-d697-457b-bf4a-272ce55e1863",
+   "track_number": "ЩП-0004"
+  }
+ ],
+ "api_noauth": 401,
+ "api_latency_ms": {
+  "n": 50,
+  "median": 8.6,
+  "p95": 10.4,
+  "max": 12.3
+ },
+ "shots": {
+  "s01_login": {
+   "url": "/login",
+   "cssHeight": 413,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s02_home_och": {
+   "url": "/",
+   "cssHeight": 529,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s03_situation": {
+   "url": "/situation",
+   "cssHeight": 850,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s04_track": {
+   "url": "/tracks/3d4c5e2b-d697-457b-bf4a-272ce55e1863",
+   "cssHeight": 738,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s05_proposed": {
+   "url": "/missions/0428b788-98fb-4b1c-a7f5-11e7372a933e",
+   "cssHeight": 556,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s06_approved": {
+   "url": "/missions/0428b788-98fb-4b1c-a7f5-11e7372a933e",
+   "cssHeight": 610,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s07_home_cmd": {
+   "url": "/",
+   "cssHeight": 541,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s08_launched": {
+   "url": "/missions/0428b788-98fb-4b1c-a7f5-11e7372a933e",
+   "cssHeight": 685,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s09_closed": {
+   "url": "/missions/0428b788-98fb-4b1c-a7f5-11e7372a933e",
+   "cssHeight": 716,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s10_missions_filter": {
+   "url": "/missions?state=%D0%B7%D0%B0%D0%BA%D1%80%D0%B8%D1%82%D0%B0&crew=&q=&from=2026-09-24&to=2026-10-24",
+   "cssHeight": 748,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s11_search": {
+   "url": "/search?q=%D0%9C-0924",
+   "cssHeight": 313,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s12_detection_form": {
+   "url": "/detections/new",
+   "cssHeight": 553,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s13_detection_result": {
+   "url": "/tracks/aa9410e4-9844-4dff-9a58-d9d4a4ac8ccc",
+   "cssHeight": 543,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s14_resources": {
+   "url": "/resources?pos=%D0%9F-01&state=",
+   "cssHeight": 812,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s15_interceptor_edit": {
+   "url": "/interceptors/ee656f02-bc7b-4dac-91a4-e345f59ab73b/edit",
+   "cssHeight": 414,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s16_delete_refused": {
+   "url": "/resources?pos=%D0%9F-01&state=",
+   "cssHeight": 887,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s17_sensors_filter": {
+   "url": "/sensors?q=&kind=&status=%D0%BF%D0%BE%D0%B7%D0%B0+%D0%BC%D0%B5%D1%80%D0%B5%D0%B6%D0%B5%D1%8E",
+   "cssHeight": 413,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s18_sensor_edit": {
+   "url": "/sensors/86fa8b1a-1a17-4be0-842d-c8ce8a34ccc1/edit",
+   "cssHeight": 443,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s19_home_r12": {
+   "url": "/",
+   "cssHeight": 529,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s20_objects": {
+   "url": "/objects?cat=I",
+   "cssHeight": 388,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s21_analytics": {
+   "url": "/analytics",
+   "cssHeight": 603,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s22_home_admin": {
+   "url": "/",
+   "cssHeight": 349,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s23_users": {
+   "url": "/users?q=&role=R-04&status=",
+   "cssHeight": 794,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s24_user_new": {
+   "url": "/users/new",
+   "cssHeight": 515,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s25_roles": {
+   "url": "/roles",
+   "cssHeight": 774,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s26_audit": {
+   "url": "/audit?entity=mission",
+   "cssHeight": 555,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s27_forbidden": {
+   "url": "/situation",
+   "cssHeight": 264,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s28_roles_a": {
+   "url": "/ (r03, r05, r07, r09)",
+   "cssHeight": 934,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  },
+  "s28_roles_b": {
+   "url": "/ (r10, r11, r12, r13)",
+   "cssHeight": 836,
+   "font_pt": 10.4,
+   "width_cm": 16.5
+  }
+ },
+ "demo_mission": [
+  "М-1024-03",
+  "закрита",
+  "влучання",
+  "Орлан-3",
+  5,
+  "знищений"
+ ],
+ "audit_after_demo": [
+  434,
+  0,
+  null
+ ],
+ "loc": {
+  "app.py": 617,
+  "db/schema.sql": 351,
+  "db/impl.sql": 454,
+  "db/seed.py": 296,
+  "templates/analytics.html": 20,
+  "templates/audit.html": 9,
+  "templates/base.html": 23,
+  "templates/detection_form.html": 18,
+  "templates/error.html": 4,
+  "templates/index.html": 22,
+  "templates/interceptor_form.html": 15,
+  "templates/login.html": 15,
+  "templates/mission.html": 36,
+  "templates/missions.html": 16,
+  "templates/object_form.html": 14,
+  "templates/objects.html": 8,
+  "templates/resources.html": 18,
+  "templates/roles.html": 9,
+  "templates/search.html": 15,
+  "templates/sensor_form.html": 18,
+  "templates/sensors.html": 13,
+  "templates/situation.html": 34,
+  "templates/track.html": 31,
+  "templates/user_form.html": 18,
+  "templates/users.html": 13,
+  "static/style.css": 66,
+  "tests/conftest.py": 59,
+  "tests/test_api.py": 19,
+  "tests/test_consistency.py": 9,
+  "tests/test_db.py": 140,
+  "tests/test_web.py": 199,
+  "run_demo.py": 242,
+  "pgtemp.py": 44,
+  "shots.mjs": 55
+ },
+ "stand": {
+  "cpu": "Intel(R) Core(TM) Ultra 5 125H",
+  "logical_cpus": 18,
+  "ram_gb": 31,
+  "os": "Linux 7.2.9-1-cachyos"
+ },
+ "pytest": {
+  "returncode": 0,
+  "summary": "51 passed in 6.21s"
+ }
+}

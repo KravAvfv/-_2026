@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="708" height="497" viewBox="0 0 708 497"><rect width="100%" height="100%" fill="#fff"/><polyline points="186.0,18.0 186.0,478.8" fill="none" stroke="#000" stroke-width="1.1" stroke-dasharray="7 5" stroke-linejoin="round"/>
+<polyline points="354.0,18.0 354.0,478.8" fill="none" stroke="#000" stroke-width="1.1" stroke-dasharray="7 5" stroke-linejoin="round"/>
+<polyline points="522.0,18.0 522.0,478.8" fill="none" stroke="#000" stroke-width="1.1" stroke-dasharray="7 5" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="102.0" y="43.6">Рівень користувача</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="102.0" y="457.4">HTTPS</tspan></text>
+<rect x="38.0" y="79.0" width="128.0" height="60.0" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="102.0" y="103.9">АРМ КП</tspan><tspan x="102.0" y="121.3">(браузер)</tspan></text>
+<rect x="38.0" y="157.0" width="128.0" height="60.0" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="102.0" y="181.9">Застосунок</tspan><tspan x="102.0" y="199.3">розрахунку</tspan></text>
+<rect x="38.0" y="235.0" width="128.0" height="60.0" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="102.0" y="259.9">Консоль</tspan><tspan x="102.0" y="277.3">адміністратора</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="270.0" y="43.6">Периферійний рівень</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="270.0" y="457.4">REST</tspan></text>
+<rect x="206.0" y="313.0" width="128.0" height="60.0" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="270.0" y="337.9">Брокер MQTT,</tspan><tspan x="270.0" y="355.3">адаптери, буфер</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="438.0" y="34.9">Оброблення: ядро в</tspan><tspan x="438.0" y="52.3">ЦОД</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="438.0" y="457.4">застосунки</tspan></text>
+<rect x="374.0" y="75.9" width="128.0" height="66.2" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="438.0" y="95.2">Шлюз інтеграції</tspan><tspan x="438.0" y="112.6">із зовнішніми</tspan><tspan x="438.0" y="130.0">системами</tspan></text>
+<rect x="374.0" y="157.0" width="128.0" height="91.2" fill="#E6E6E6" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="438.0" y="188.8">Веб-застосунок і</tspan><tspan x="438.0" y="206.2">REST API</tspan><tspan x="438.0" y="223.6">(прототип)</tspan></text>
+<rect x="374.0" y="281.8" width="128.0" height="60.0" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="438.0" y="306.7">Сервіс місій і</tspan><tspan x="438.0" y="324.1">правил</tspan></text>
+<rect x="374.0" y="359.8" width="128.0" height="60.0" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="438.0" y="384.7">Сервіс злиття</tspan><tspan x="438.0" y="402.1">треків</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="606.0" y="43.6">Зберігання</tspan></text>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="606.0" y="457.4">дані (SQL)</tspan></text>
+<rect x="542.0" y="157.0" width="128.0" height="91.2" fill="#E6E6E6" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="606.0" y="180.1">PostgreSQL:</tspan><tspan x="606.0" y="197.5">функції,</tspan><tspan x="606.0" y="214.9">тригери</tspan><tspan x="606.0" y="232.3">(прототип)</tspan></text>
+<rect x="542.0" y="359.8" width="128.0" height="60.0" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="606.0" y="384.7">Сховище</tspan><tspan x="606.0" y="402.1">телеметрії</tspan></text>
+<polyline points="166.0,109.0 178.0,109.0 178.0,174.6 374.0,174.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="374.0,174.6 365.0,170.5 365.0,178.7" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="166.0,187.0 374.0,187.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="374.0,187.0 365.0,182.9 365.0,191.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="166.0,265.0 178.0,265.0 178.0,224.6 374.0,224.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="374.0,224.6 365.0,220.5 365.0,228.7" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="334.0,343.0 346.0,343.0 346.0,242.6 374.0,242.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="374.0,242.6 365.0,238.5 365.0,246.7" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="438.0,142.1 438.0,157.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="438.0,157.0 442.1,148.0 433.9,148.0" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="502.0,202.6 542.0,202.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="542.0,202.6 533.0,198.5 533.0,206.7" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="502.0,311.8 514.0,311.8 514.0,224.6 542.0,224.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="542.0,224.6 533.0,220.5 533.0,228.7" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="502.0,389.8 532.0,389.8 532.0,242.6 542.0,242.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="542.0,242.6 533.0,238.5 533.0,246.7" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="502.0,389.8 542.0,389.8" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="542.0,389.8 533.0,385.7 533.0,393.8" fill="#000" stroke="#000" stroke-width="1"/></svg>

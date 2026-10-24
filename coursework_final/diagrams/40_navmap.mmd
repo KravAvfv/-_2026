@@ -1,0 +1,41 @@
+flowchart LR
+  classDef s fill:#FFFFFF,stroke:#000,stroke-width:1.2px;
+  classDef k fill:#E6E6E6,stroke:#000,stroke-width:2px,font-weight:bold;
+  login["Вхід до системи<br/><i>усі ролі</i>"]:::k
+  index["Головна сторінка<br/><i>усі ролі</i>"]:::k
+  search["Пошук<br/><i>усі ролі</i>"]:::s
+  situation["Обстановка<br/>(мнемосхема, черга загроз)<br/><i>R-01…R-06, R-09, R-12, R-13</i>"]:::s
+  track["Картка треку<br/><i>R-01…R-06, R-09, R-12, R-13</i>"]:::s
+  detection_new["Ручне донесення<br/><i>R-06</i>"]:::s
+  missions["Місії (фільтри)<br/><i>R-01…R-05, R-09, R-12, R-13</i>"]:::s
+  mission["Картка місії<br/><i>R-01…R-05, R-09, R-12, R-13</i>"]:::s
+  resources["Ресурси<br/><i>R-01…R-04, R-07, R-08, R-12</i>"]:::s
+  interceptor_form["Форма перехоплювача<br/><i>R-07, R-08</i>"]:::s
+  sensors["Сенсори<br/><i>R-07</i>"]:::s
+  sensor_form["Форма сенсора<br/><i>R-07</i>"]:::s
+  objects["Об’єкти прикриття<br/><i>R-02, R-12</i>"]:::s
+  object_form["Форма об’єкта<br/><i>R-02, R-12</i>"]:::s
+  analytics["Аналітика<br/><i>R-01, R-09, R-12, R-13</i>"]:::s
+  users["Користувачі<br/><i>R-10, R-11</i>"]:::s
+  user_form["Форма облікового запису<br/><i>R-10</i>"]:::s
+  roles["Ролі та права<br/><i>R-10</i>"]:::s
+  audit["Журнал аудиту<br/><i>R-11</i>"]:::s
+  login --> index
+  index --> search
+  index --> situation
+  situation --> track
+  situation --> detection_new
+  index --> missions
+  missions --> mission
+  index --> resources
+  resources --> interceptor_form
+  index --> sensors
+  sensors --> sensor_form
+  index --> objects
+  objects --> object_form
+  index --> analytics
+  index --> users
+  users --> user_form
+  index --> roles
+  index --> audit
+  track --> mission

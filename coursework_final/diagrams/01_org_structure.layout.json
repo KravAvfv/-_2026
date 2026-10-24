@@ -1,0 +1,28 @@
+{
+  "file": "01_org_structure.mmd",
+  "native_px": [
+    904,
+    914
+  ],
+  "png_px": [
+    2712,
+    2742
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 10.7,
+    "dpi": 417,
+    "main_pt": 10.7
+  },
+  "landscape": {
+    "width_cm": 14.64,
+    "font_pt": 9.2,
+    "dpi": 480,
+    "main_pt": 9.2
+  },
+  "orientation": "portrait",
+  "width_cm": 17.0,
+  "legible": true,
+  "aspect": 0.99
+}

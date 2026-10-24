@@ -1,0 +1,24 @@
+{
+  "file": "22_activity.puml",
+  "native_px": [
+    712,
+    978
+  ],
+  "min_font_px": 15.0,
+  "overlaps": [],
+  "portrait": {
+    "width_cm": 16.74,
+    "font_pt": 10.0,
+    "dpi": 331,
+    "main_pt": 10.0
+  },
+  "landscape": {
+    "width_cm": 10.77,
+    "font_pt": 6.4,
+    "dpi": 514,
+    "main_pt": 6.4
+  },
+  "orientation": "portrait",
+  "width_cm": 16.74,
+  "legible": true
+}

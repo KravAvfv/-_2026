@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="utf-8"><title>{% block title %}АРМ{% endblock %} · Щит-Лінк</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+<header>
+  <a class="brand" href="{{ url_for('index') }}">Щит-Лінк · АРМ</a>
+  {% if g.user %}
+  <nav>
+    {% set ep = request.endpoint %}
+    <a href="{{ url_for('index') }}" class="{{ 'on' if ep == 'index' }}">Головна</a>
+    {% for m_ep, m_title, m_eps in menu %}<a href="{{ url_for(m_ep) }}" class="{{ 'on' if ep in m_eps }}">{{ m_title }}</a>{% endfor %}
+  </nav>
+  <form class="search" method="get" action="{{ url_for('search') }}"><input name="q" placeholder="пошук: трек, місія, №" size="17" value="{{ request.args.get('q', '') if ep == 'search' }}"></form>
+  <div class="who">{{ g.user.full_name }} · {{ g.user.role_code }} {{ g.user.role_name }}{% if g.user.call_sign %} «{{ g.user.call_sign }}»{% endif %} · <a href="{{ url_for('logout') }}">вийти</a></div>
+  {% endif %}
+</header>
+<main>
+  {% for cat, msg in get_flashed_messages(with_categories=true) %}<div class="flash {{ cat }}">{{ msg }}</div>{% endfor %}
+  {% block body %}{% endblock %}
+</main>
+</body>
+</html>

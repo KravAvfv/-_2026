@@ -1,0 +1,24 @@
+{
+  "file": "32_deployment.puml",
+  "native_px": [
+    1069,
+    414
+  ],
+  "min_font_px": 15.0,
+  "overlaps": [],
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 6.8,
+    "dpi": 494,
+    "main_pt": 6.8
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.2,
+    "dpi": 317,
+    "main_pt": 10.2
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

@@ -1,0 +1,24 @@
+{
+  "file": "34_interaction.puml",
+  "native_px": [
+    421,
+    582
+  ],
+  "min_font_px": 15.0,
+  "overlaps": [],
+  "portrait": {
+    "width_cm": 12.87,
+    "font_pt": 13.0,
+    "dpi": 332,
+    "main_pt": 13.0
+  },
+  "landscape": {
+    "width_cm": 10.71,
+    "font_pt": 10.8,
+    "dpi": 408,
+    "main_pt": 10.8
+  },
+  "orientation": "portrait",
+  "width_cm": 12.87,
+  "legible": true
+}

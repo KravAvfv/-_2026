@@ -1,0 +1,23 @@
+{
+  "file": "02_interaction",
+  "native_px": [
+    716,
+    452
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 10.1,
+    "main_pt": 10.1,
+    "dpi": 441
+  },
+  "landscape": {
+    "width_cm": 21.89,
+    "font_pt": 13.0,
+    "main_pt": 13.0,
+    "dpi": 332
+  },
+  "orientation": "portrait",
+  "width_cm": 17.0,
+  "legible": true
+}

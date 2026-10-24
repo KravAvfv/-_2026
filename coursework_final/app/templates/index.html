@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block title %}Головна{% endblock %}
+{% block body %}
+<h1>Головна сторінка</h1>
+<p class="muted">{{ g.user.rank or '' }} {{ g.user.full_name }} — {{ g.user.role_name }}{% if w.crew %}, розрахунок «{{ w.crew.call_sign }}» (позиція {{ w.crew.code }}, стан: {{ w.crew.status }}){% endif %}.</p>
+<div class="tiles">
+{% for m_ep, m_title, m_eps in menu %}<a class="tile" href="{{ url_for(m_ep) }}">{{ m_title }}</a>{% endfor %}
+</div>
+<div class="cols">
+{% if w.threats is defined %}<div class="card"><b>Найвищі загрози</b>
+<table>{% for t in w.threats %}<tr><td><a href="{{ url_for('track', tid=t.track_id) }}">{{ t.track_number }}</a></td><td class="{{ 'hostile' if t.identity == 'ворожа' }}">{{ t.identity }}</td><td class="num">{{ '%.0f'|format(t.threat_score) }}</td><td class="num">{{ fmt_eta(t.eta_s) }}</td></tr>{% else %}<tr><td class="muted">загроз немає</td></tr>{% endfor %}</table>
+{% if can('detection.write') %}<p><a class="btn sec" href="{{ url_for('detection_new') }}">Ручне донесення</a></p>{% endif %}</div>{% endif %}
+{% if w.to_approve is defined %}<div class="card"><b>Очікують санкції ({{ w.to_approve|length }})</b>
+<table>{% for m in w.to_approve %}<tr><td><a href="{{ url_for('mission', mid=m.mission_id) }}">{{ m.mission_no }}</a></td><td>{{ m.track_number }}</td><td>«{{ m.call_sign }}»</td></tr>{% else %}<tr><td class="muted">немає</td></tr>{% endfor %}</table></div>{% endif %}
+{% if w.my_missions is defined %}<div class="card"><b>Завдання мого розрахунку</b>
+<table>{% for m in w.my_missions %}<tr><td><a href="{{ url_for('mission', mid=m.mission_id) }}">{{ m.mission_no }}</a></td><td>{{ m.track_number }}</td><td><span class="badge {{ state_class[m.state] }}">{{ m.state }}</span></td></tr>{% else %}<tr><td class="muted">активних завдань немає</td></tr>{% endfor %}</table></div>{% endif %}
+{% if w.ready is defined %}<div class="card"><b>Готовність</b><dl><dt>Розрахунки</dt><dd>{{ w.ready.crews }} з {{ w.ready.crews_total }} готові</dd><dt>Перехоплювачі</dt><dd>{{ w.ready.ints }} з {{ w.ready.ints_total }} готові</dd></dl></div>{% endif %}
+{% if w.stats is defined %}<div class="card"><b>Місії за 30 діб</b><dl><dt>Усього</dt><dd>{{ w.stats.missions }}</dd><dt>Частка влучань</dt><dd>{{ w.stats.hit_rate or 0 }} %</dd></dl></div>{% endif %}
+{% if w.sensors is defined %}<div class="card"><b>Сенсори за станом</b><dl>{% for s in w.sensors %}<dt>{{ s.status }}</dt><dd>{{ s.n }}</dd>{% endfor %}</dl></div>{% endif %}
+{% if w.users is defined %}<div class="card"><b>Облікові записи</b><dl>{% for s in w.users %}<dt>{{ s.status }}</dt><dd>{{ s.n }}</dd>{% endfor %}</dl></div>{% endif %}
+{% if w.audit is defined %}<div class="card"><b>Журнал аудиту</b><p>Записів: {{ w.audit.checked }}, порушень ланцюжка: {{ w.audit.broken }}</p></div>{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{
+  "file": "bpmn_01_p1_monitoring.bpmn",
+  "native_px": [
+    1054,
+    572
+  ],
+  "png_px": [
+    4216,
+    2288
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 6.9,
+    "dpi": 649,
+    "main_pt": 6.9
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.4,
+    "dpi": 417,
+    "main_pt": 10.4
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="716" height="824" viewBox="0 0 716 824"><rect width="100%" height="100%" fill="#fff"/><rect x="28.0" y="210.0" width="204.0" height="44.0" rx="22.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="130.0" y="235.6">Вхід до системи (усі ролі)</tspan></text>
+<rect x="28.0" y="354.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="130.0" y="379.6">Головна сторінка (усі ролі)</tspan></text>
+<rect x="256.0" y="750.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="775.6">Пошук (усі ролі)</tspan></text>
+<rect x="256.0" y="86.9" width="204.0" height="74.2" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="110.2">Обстановка (мнемосхема,</tspan><tspan x="358.0" y="127.6">черга загроз) (R-01…R-06,</tspan><tspan x="358.0" y="145.0">R-09, R-12, R-13)</tspan></text>
+<rect x="484.0" y="95.6" width="204.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="586.0" y="118.9">Картка треку (R-01…R-06,</tspan><tspan x="586.0" y="136.3">R-09, R-12, R-13)</tspan></text>
+<rect x="484.0" y="30.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="586.0" y="55.6">Ручне донесення (R-06)</tspan></text>
+<rect x="256.0" y="167.6" width="204.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="190.9">Місії (фільтри) (R-01…R-05,</tspan><tspan x="358.0" y="208.3">R-09, R-12, R-13)</tspan></text>
+<rect x="484.0" y="167.6" width="204.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="586.0" y="190.9">Картка місії (R-01…R-05,</tspan><tspan x="586.0" y="208.3">R-09, R-12, R-13)</tspan></text>
+<rect x="256.0" y="239.6" width="204.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="262.9">Ресурси (R-01…R-04, R-07,</tspan><tspan x="358.0" y="280.3">R-08, R-12)</tspan></text>
+<rect x="484.0" y="239.6" width="204.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="586.0" y="262.9">Форма перехоплювача (R-07,</tspan><tspan x="586.0" y="280.3">R-08)</tspan></text>
+<rect x="256.0" y="318.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="343.6">Сенсори (R-07)</tspan></text>
+<rect x="484.0" y="318.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="586.0" y="343.6">Форма сенсора (R-07)</tspan></text>
+<rect x="256.0" y="383.6" width="204.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="406.9">Об’єкти прикриття (R-02,</tspan><tspan x="358.0" y="424.3">R-12)</tspan></text>
+<rect x="484.0" y="390.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="586.0" y="415.6">Форма об’єкта (R-02, R-12)</tspan></text>
+<rect x="256.0" y="455.6" width="204.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="478.9">Аналітика (R-01, R-09, R-12,</tspan><tspan x="358.0" y="496.3">R-13)</tspan></text>
+<rect x="256.0" y="534.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="559.6">Користувачі (R-10, R-11)</tspan></text>
+<rect x="484.0" y="527.6" width="204.0" height="56.8" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="586.0" y="550.9">Форма облікового запису</tspan><tspan x="586.0" y="568.3">(R-10)</tspan></text>
+<rect x="256.0" y="606.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="631.6">Ролі та права (R-10)</tspan></text>
+<rect x="256.0" y="678.0" width="204.0" height="44.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="358.0" y="703.6">Журнал аудиту (R-11)</tspan></text>
+<polyline points="130.0,254.0 130.0,354.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="130.0,354.0 134.1,345.0 126.0,345.0" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,772.0 256.0,772.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,772.0 247.0,768.0 247.0,776.0" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,124.0 256.0,124.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,124.0 247.0,120.0 247.0,128.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="460.0,124.0 484.0,124.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="484.0,124.0 475.0,120.0 475.0,128.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="460.0,124.0 472.0,124.0 472.0,52.0 484.0,52.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="484.0,52.0 475.0,48.0 475.0,56.0" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,196.0 256.0,196.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,196.0 247.0,191.9 247.0,200.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="460.0,196.0 484.0,196.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="484.0,196.0 475.0,191.9 475.0,200.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,268.0 256.0,268.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,268.0 247.0,263.9 247.0,272.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="460.0,268.0 484.0,268.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="484.0,268.0 475.0,263.9 475.0,272.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,340.0 256.0,340.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,340.0 247.0,335.9 247.0,344.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="460.0,340.0 484.0,340.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="484.0,340.0 475.0,335.9 475.0,344.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,412.0 256.0,412.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,412.0 247.0,407.9 247.0,416.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="460.0,412.0 484.0,412.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="484.0,412.0 475.0,407.9 475.0,416.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,484.0 256.0,484.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,484.0 247.0,479.9 247.0,488.1" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,556.0 256.0,556.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,556.0 247.0,552.0 247.0,560.0" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="460.0,556.0 484.0,556.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="484.0,556.0 475.0,552.0 475.0,560.0" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,628.0 256.0,628.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,628.0 247.0,624.0 247.0,632.0" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="232.0,376.0 244.0,376.0 244.0,700.0 256.0,700.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="256.0,700.0 247.0,696.0 247.0,704.0" fill="#000" stroke="#000" stroke-width="1"/>
+<polyline points="586.0,152.4 586.0,167.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polygon points="586.0,167.6 590.0,158.6 582.0,158.6" fill="#000" stroke="#000" stroke-width="1"/></svg>

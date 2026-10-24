@@ -1,0 +1,24 @@
+{
+  "file": "26_state_mission.puml",
+  "native_px": [
+    451,
+    617
+  ],
+  "min_font_px": 15.0,
+  "overlaps": [],
+  "portrait": {
+    "width_cm": 13.79,
+    "font_pt": 13.0,
+    "dpi": 332,
+    "main_pt": 13.0
+  },
+  "landscape": {
+    "width_cm": 10.82,
+    "font_pt": 10.2,
+    "dpi": 432,
+    "main_pt": 10.2
+  },
+  "orientation": "portrait",
+  "width_cm": 13.79,
+  "legible": true
+}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Аудит{% endblock %}
+{% block body %}
+<h1>Журнал аудиту</h1>
+<div class="flash {{ 'ok' if ver.broken == 0 else 'error' }}">Перевірка ланцюжка хешів SHA-256: перевірено записів — {{ ver.checked }}, порушень — {{ ver.broken }}{% if ver.first_broken %} (перше — запис № {{ ver.first_broken }}){% endif %}.</div>
+<form class="inline" method="get"><label>Сутність</label><select name="entity"><option value="">усі</option>{% for e in ents %}<option {{ 'selected' if e == ent }}>{{ e }}</option>{% endfor %}</select><button class="sec">Фільтрувати</button></form>
+<table><tr><th class="num">№</th><th>Час</th><th>Дія</th><th>Суб’єкт</th><th>Хеш запису</th></tr>
+{% for a in log %}<tr><td class="num">{{ a.entry_id }}</td><td>{{ fmt_dt(a.logged_at) }}</td><td class="mono">{{ a.action }}</td><td>{{ a.full_name or a.actor_type }}</td><td class="mono">{{ a.hash[:16] }}…</td></tr>{% endfor %}
+</table>
+{% endblock %}

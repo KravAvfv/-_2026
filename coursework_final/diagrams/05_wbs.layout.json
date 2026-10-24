@@ -1,0 +1,23 @@
+{
+  "file": "05_wbs",
+  "native_px": [
+    708,
+    531
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 10.2,
+    "main_pt": 10.2,
+    "dpi": 436
+  },
+  "landscape": {
+    "width_cm": 19.73,
+    "font_pt": 11.8,
+    "main_pt": 11.8,
+    "dpi": 372
+  },
+  "orientation": "portrait",
+  "width_cm": 17.0,
+  "legible": true
+}

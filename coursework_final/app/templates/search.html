@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Пошук{% endblock %}
+{% block body %}
+<h1>Пошук</h1>
+<form class="inline" method="get"><input name="q" value="{{ q }}" size="24" placeholder="щонайменше 2 символи"><button class="sec">Знайти</button></form>
+{% if q|length >= 2 %}<p class="muted">Знайдено: {{ found|length }} (лише в розділах, доступних вашій ролі).</p>
+<table><tr><th>Тип</th><th>Номер</th><th>Відомості</th></tr>
+{% for r in found %}<tr><td>{{ r.kind }}</td><td>
+{% if r.kind == 'трек' %}<a href="{{ url_for('track', tid=r.ref_id) }}">{{ r.label }}</a>
+{% elif r.kind == 'місія' %}<a href="{{ url_for('mission', mid=r.ref_id) }}">{{ r.label }}</a>
+{% elif r.kind == 'перехоплювач' and can('interceptor.manage') %}<a href="{{ url_for('interceptor_form', iid=r.ref_id) }}">{{ r.label }}</a>
+{% elif r.kind == 'сенсор' %}<a href="{{ url_for('sensor_form', sid=r.ref_id) }}">{{ r.label }}</a>
+{% else %}{{ r.label }}{% endif %}</td><td>{{ r.detail }}</td></tr>
+{% else %}<tr><td colspan="3" class="muted">Нічого не знайдено</td></tr>{% endfor %}</table>
+{% elif q %}<p class="muted">Введіть щонайменше 2 символи.</p>{% endif %}
+{% endblock %}

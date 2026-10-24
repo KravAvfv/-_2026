@@ -1,0 +1,66 @@
+/* АРМ «Щит-Лінк» — стиль прототипу; кегль 16 px, щоб знімки екрана лишались читабельними у пояснювальній записці */
+:root { --ink: #1b1f24; --muted: #5b6470; --line: #c9d0d8; --bg: #f3f5f7; --head: #1f3346; --acc: #1f5f9e;
+        --ok: #1e7a45; --warn: #a86800; --bad: #b3261e; --run: #6a3fb0; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.4 "Liberation Sans", Arial, sans-serif; color: var(--ink); background: var(--bg); }
+header { background: var(--head); color: #fff; padding: 8px 14px; display: flex; align-items: center; gap: 6px 14px; flex-wrap: wrap; }
+header .brand { font-weight: bold; font-size: 18px; white-space: nowrap; }
+header nav { display: flex; gap: 4px; flex-wrap: wrap; }
+header nav a { color: #dbe6f1; text-decoration: none; padding: 5px 9px; border-radius: 4px; }
+header nav a.on, header nav a:hover { background: #33506b; color: #fff; }
+header .who { margin-left: auto; text-align: right; font-size: 16px; line-height: 1.25; color: #dbe6f1; }
+header .who a { color: #fff; }
+main { padding: 14px 14px 18px; }
+h1 { font-size: 22px; margin: 0 0 12px; }
+h2 { font-size: 18px; margin: 18px 0 8px; }
+table { border-collapse: collapse; width: 100%; background: #fff; }
+th, td { border: 1px solid var(--line); padding: 4px 6px; text-align: left; vertical-align: top; }
+th { background: #e6ebf0; font-weight: bold; }
+td.num, th.num { text-align: right; }
+a { color: var(--acc); }
+.kpis { display: flex; gap: 10px; margin-bottom: 14px; }
+.kpi { flex: 1; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; }
+.kpi b { display: block; font-size: 24px; }
+.kpi span { color: var(--muted); font-size: 16px; }
+.bar { background: #e6ebf0; height: 10px; border-radius: 5px; width: 90px; display: inline-block; vertical-align: middle; }
+.bar i { display: block; height: 10px; border-radius: 5px; background: var(--bad); }
+.badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 16px; border: 1px solid; white-space: nowrap; }
+.s-new { color: var(--acc); } .s-ok { color: var(--ok); } .s-run { color: var(--run); }
+.s-warn { color: var(--warn); } .s-off { color: var(--muted); } .s-done { color: var(--ink); }
+.hostile { color: var(--bad); font-weight: bold; }
+.flash { padding: 8px 12px; border-radius: 5px; margin-bottom: 12px; border: 1px solid; }
+.flash.error { background: #fbeaea; color: var(--bad); }
+.flash.ok { background: #e8f5ec; color: var(--ok); }
+.cols { display: flex; gap: 12px; flex-wrap: wrap; } .cols > div { flex: 1; min-width: 300px; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 10px 14px; margin-bottom: 12px; }
+.card dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; margin: 0; }
+.card dt { color: var(--muted); } .card dd { margin: 0; }
+form.inline { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 4px 0; }
+label { color: var(--muted); }
+select, input { font: inherit; padding: 4px 6px; border: 1px solid var(--line); border-radius: 4px; background: #fff; }
+button, .btn { font: inherit; padding: 5px 12px; border-radius: 4px; border: 1px solid var(--acc); background: var(--acc);
+               color: #fff; cursor: pointer; text-decoration: none; display: inline-block; }
+button.sec, .btn.sec { background: #fff; color: var(--acc); }
+button.danger { background: var(--bad); border-color: var(--bad); }
+.muted { color: var(--muted); } .mono { font-family: "Liberation Mono", monospace; font-size: 16px; }
+.login { max-width: 560px; margin: 40px auto; }
+table.nowrap td { white-space: nowrap; padding-top: 2px; padding-bottom: 2px; }
+header a.brand { color: #fff; text-decoration: none; }
+header form.search input { padding: 3px 6px; font-size: 16px; }
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.tile { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--acc); border-radius: 4px; padding: 8px 14px;
+        text-decoration: none; font-weight: bold; }
+.card table { margin-top: 6px; }
+svg.map { width: 100%; height: auto; display: block; }
+svg.map .lbl { font: 16px "Liberation Sans", Arial, sans-serif; fill: #1b1f24; }
+svg.map .lbl.trk { fill: #b3261e; font-weight: bold; }
+.legend { margin: 6px 0 0; color: var(--muted); }
+.legend svg { vertical-align: -1px; margin-left: 8px; }
+td.nw { white-space: nowrap; }
+.bar { width: 60px; }
+table.matrix th, table.matrix td { padding: 1px 2px; text-align: center; }
+table.matrix td.mono { text-align: left; padding: 1px 4px; }
+table.matrix form { margin: 0; }
+button.cell { background: #fff; color: var(--muted); border: none; padding: 0 6px; font-size: 16px; }
+button.cell.on { color: var(--ok); font-weight: bold; }
+.card dl dd input[type=checkbox] { vertical-align: middle; }

@@ -1,0 +1,27 @@
+{
+  "file": "bpmn_00_interaction_map.bpmn",
+  "native_px": [
+    1098,
+    446
+  ],
+  "png_px": [
+    4392,
+    1784
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 6.6,
+    "dpi": 676,
+    "main_pt": 6.6
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.0,
+    "dpi": 434,
+    "main_pt": 10.0
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

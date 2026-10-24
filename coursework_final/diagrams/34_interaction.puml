@@ -1,0 +1,24 @@
+@startuml
+skinparam componentStyle rectangle
+actor "Користувач" as U
+component "Шлюз (імітатор)" as GW
+package "app.py" {
+  [Сеанс, CSRF; need()] as AUTH
+  [Обробники сторінок] as VIEWS
+  [REST API] as API
+}
+package "PostgreSQL" {
+  [Функції PL/pgSQL] as FN
+  [Тригери] as TRG
+  [Представлення] as VW
+  database "Таблиці" as T
+}
+U --> AUTH : 1 HTTPS
+AUTH --> VIEWS : 2
+VIEWS --> FN : 3 виклик
+FN --> T
+TRG --> T : 4 перевірка, аудит
+VIEWS --> VW : 5 вибірка
+GW --> API : 6 POST
+API --> FN : 7
+@enduml

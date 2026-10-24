@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Вхід{% endblock %}
+{% block body %}
+<div class="login card">
+  <h1>Вхід до АРМ «Щит-Лінк»</h1>
+  <form method="post">
+    <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+    <dl>
+      <dt><label for="login">Логін</label></dt><dd><input name="login" id="login" value="{{ login }}" required autofocus></dd>
+      <dt><label for="password">Пароль</label></dt><dd><input type="password" name="password" id="password" required></dd>
+    </dl>
+    <p><button type="submit">Увійти</button></p>
+  </form>
+  <p class="muted">Після 5 невдалих спроб обліковий запис блокується; сеанс завершується після 15 хв бездіяльності.</p>
+</div>
+{% endblock %}

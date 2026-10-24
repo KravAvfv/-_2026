@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="721" height="620" viewBox="0 0 721 620"><rect width="100%" height="100%" fill="#fff"/><rect x="186" y="40" width="365" height="566.4" rx="10" fill="#fff" stroke="#000" stroke-width="1.6"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="368.5" y="60.3">Забезпечення та адміністрування</tspan></text>
+<ellipse cx="368.5" cy="112.0" rx="107.5" ry="20.0" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="115.6">UC13. Вести облік сенсорів</tspan></text>
+<ellipse cx="368.5" cy="169.2" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="164.1">UC14. Вести облік</tspan><tspan x="368.5" y="181.5">перехоплювачів</tspan></text>
+<ellipse cx="368.5" cy="226.4" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="221.3">UC15. Переглянути</tspan><tspan x="368.5" y="238.7">готовність ресурсів</tspan></text>
+<ellipse cx="368.5" cy="283.6" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="278.5">UC16. Вести об’єкти</tspan><tspan x="368.5" y="295.9">прикриття</tspan></text>
+<ellipse cx="368.5" cy="340.8" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="335.7">UC17. Переглянути</tspan><tspan x="368.5" y="353.1">показники ефективності</tspan></text>
+<ellipse cx="368.5" cy="403.2" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="398.1">UC18. Керувати</tspan><tspan x="368.5" y="415.5">користувачами</tspan></text>
+<ellipse cx="368.5" cy="455.2" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="450.1">UC19. Керувати матрицею</tspan><tspan x="368.5" y="467.5">прав</tspan></text>
+<ellipse cx="368.5" cy="512.4" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="507.3">UC21. Переглянути журнал</tspan><tspan x="368.5" y="524.7">аудиту</tspan></text>
+<ellipse cx="368.5" cy="564.4" rx="107.5" ry="26.4" fill="#fff" stroke="#000" stroke-width="1.5"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="368.5" y="559.3">UC20. Заблокувати</tspan><tspan x="368.5" y="576.7">обліковий запис</tspan></text>
+<circle cx="90.0" cy="98.8" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="90.0,106.8 90.0,128.8" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="77.0,114.8 103.0,114.8" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="79.0,144.8 90.0,128.8 101.0,144.8" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="90.0" y="160.1">Технік</tspan></text>
+<circle cx="90.0" cy="192.4" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="90.0,200.4 90.0,222.4" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="77.0,208.4 103.0,208.4" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="79.0,238.4 90.0,222.4 101.0,238.4" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="90.0" y="253.7">Логіст</tspan></text>
+<circle cx="90.0" cy="291.2" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="90.0,299.2 90.0,321.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="77.0,307.2 103.0,307.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="79.0,337.2 90.0,321.2 101.0,337.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="90.0" y="352.5">Начальник центру</tspan></text>
+<circle cx="636.0" cy="286.0" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="636.0,294.0 636.0,316.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="623.0,302.0 649.0,302.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="625.0,332.0 636.0,316.0 647.0,332.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="636.0" y="347.3">Аналітик ефективності</tspan></text>
+<circle cx="90.0" cy="390.0" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="90.0,398.0 90.0,420.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="77.0,406.0 103.0,406.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="79.0,436.0 90.0,420.0 101.0,436.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="90.0" y="451.3">Адміністратор системи</tspan></text>
+<circle cx="90.0" cy="494.0" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="90.0,502.0 90.0,524.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="77.0,510.0 103.0,510.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="79.0,540.0 90.0,524.0 101.0,540.0" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="90.0" y="555.3">Офіцер кібербезпеки</tspan></text>
+<circle cx="636.0" cy="369.2" r="8" fill="#fff" stroke="#000" stroke-width="1.2"/>
+<polyline points="636.0,377.2 636.0,399.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="623.0,385.2 649.0,385.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="625.0,415.2 636.0,399.2 647.0,415.2" fill="none" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="636.0" y="430.5">Інструктор</tspan></text>
+<polyline points="112.0,118.8 262.1,114.8" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,118.8 284.6,152.7" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,212.4 279.8,184.1" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,212.4 263.6,220.7" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,311.2 304.4,247.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,311.2 270.0,294.2" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,311.2 271.2,329.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="614.0,306.0 461.6,327.6" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,410.0 261.6,406.0" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,410.0 281.2,439.8" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,514.0 284.6,547.9" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="112.0,514.0 261.0,513.1" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/>
+<polyline points="614.0,389.2 452.3,357.3" fill="none" stroke="#000" stroke-width="1.3" stroke-linejoin="round"/></svg>

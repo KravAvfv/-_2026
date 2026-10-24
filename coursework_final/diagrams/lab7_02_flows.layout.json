@@ -1,0 +1,23 @@
+{
+  "file": "02_flows",
+  "native_px": [
+    1074,
+    500
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 6.7,
+    "main_pt": 6.7,
+    "dpi": 496
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.2,
+    "main_pt": 10.2,
+    "dpi": 318
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

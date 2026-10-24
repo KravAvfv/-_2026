@@ -1,0 +1,27 @@
+{
+  "file": "bpmn_07_p5_readiness.bpmn",
+  "native_px": [
+    1062,
+    474
+  ],
+  "png_px": [
+    4248,
+    1896
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 6.8,
+    "dpi": 654,
+    "main_pt": 6.8
+  },
+  "landscape": {
+    "width_cm": 25.7,
+    "font_pt": 10.3,
+    "dpi": 420,
+    "main_pt": 10.3
+  },
+  "orientation": "landscape",
+  "width_cm": 25.7,
+  "legible": true
+}

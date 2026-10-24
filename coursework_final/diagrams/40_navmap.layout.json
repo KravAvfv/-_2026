@@ -1,0 +1,23 @@
+{
+  "file": "40_navmap",
+  "native_px": [
+    716,
+    824
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 10.1,
+    "main_pt": 10.1,
+    "dpi": 331
+  },
+  "landscape": {
+    "width_cm": 12.86,
+    "font_pt": 7.7,
+    "main_pt": 7.7,
+    "dpi": 433
+  },
+  "orientation": "portrait",
+  "width_cm": 17.0,
+  "legible": true
+}

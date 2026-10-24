@@ -1,0 +1,72 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+skinparam nodesep 14
+skinparam ranksep 34
+class protected_object as "Об’єктПрикриття" {
+  {field} name : varchar(200)
+  {field} category : object_category
+}
+class sensor as "Сенсор" {
+  {field} hw_serial : varchar(64)
+  {field} kind : sensor_kind
+  {field} status : sensor_status
+  --
+  {method} trg_sensor_guard()
+}
+class detection as "Виявлення" {
+  {field} detected_at : timestamptz
+  {field} confidence : decimal(3,2)
+  --
+  {method} fn_ingest_detection()
+}
+class air_track as "ПовітрянийТрек" {
+  {field} track_number : varchar(12)
+  {field} state : track_state
+  {field} identity : air_track_identity
+  {field} threat_score : decimal(5,2)
+  --
+  {method} fn_classify_track()
+}
+class mission as "Місія" {
+  {field} mission_no : varchar(16)
+  {field} state : mission_state
+  {field} approved_at : timestamptz
+  --
+  {method} fn_propose_mission()
+  {method} trg_mission_guard()
+}
+class mission_event as "ПодіяМісії" {
+  {field} event_type : mission_event_type
+}
+class engagement_report as "ЗвітПроПерехоплення" {
+  {field} assessment : engagement_assessment
+  --
+  {method} trg_report_after()
+}
+class crew as "Розрахунок" {
+  {field} call_sign : varchar(20)
+  {field} status : crew_status
+}
+class interceptor as "Перехоплювач" {
+  {field} serial_no : varchar(40)
+  {field} state : interceptor_state
+}
+class personnel as "Користувач" {
+  {field} login : varchar(40)
+  {field} status : personnel_status
+  --
+  {method} fn_has_perm()
+}
+sensor "1" -- "*" detection
+air_track "0..1" -- "*" detection
+protected_object "0..1" -- "*" air_track : під загрозою
+air_track "1" -- "*" mission
+crew "1" -- "*" mission
+interceptor "0..1" -- "*" mission
+personnel "1" -- "*" mission : запропонував
+personnel "0..1" -- "*" mission : санкціонував
+mission "1" *-- "*" mission_event
+mission "1" -- "0..1" engagement_report
+crew "0..1" -- "*" personnel
+@enduml

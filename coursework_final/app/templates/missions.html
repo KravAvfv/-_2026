@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block title %}Місії{% endblock %}
+{% block body %}
+<h1>Місії перехоплення</h1>
+<form class="inline filter" method="get">
+  <input name="q" value="{{ a.q or '' }}" placeholder="№ місії або треку" size="15">
+  <select name="state"><option value="">усі стани</option>{% for s in states %}<option {{ 'selected' if s == a.state }}>{{ s }}</option>{% endfor %}</select>
+  <select name="crew"><option value="">усі розрахунки</option>{% for c in crews %}<option {{ 'selected' if c == a.crew }}>{{ c }}</option>{% endfor %}</select>
+  <label>з</label><input type="date" name="from" value="{{ a.get('from', '') }}"><label>до</label><input type="date" name="to" value="{{ a.get('to', '') }}">
+  <button class="sec">Фільтрувати</button></form>
+<p class="muted">Показано {{ ms|length }} (не більше 12) з {{ total }} {{ pl(total, 'місії', 'місій', 'місій') }}.</p>
+<table><tr><th>Номер</th><th>Трек</th><th>Розрахунок</th><th>Стан</th><th>Запропоновано</th><th>Результат</th></tr>
+{% for m in ms %}<tr><td><a href="{{ url_for('mission', mid=m.mission_id) }}">{{ m.mission_no }}</a></td><td>{{ m.track_number }}</td><td>{{ m.call_sign }}</td>
+<td><span class="badge {{ state_class[m.state] }}">{{ m.state }}</span></td><td>{{ fmt_dt(m.proposed_at) }}</td><td>{{ m.assessment or '—' }}</td></tr>
+{% else %}<tr><td colspan="6" class="muted">За умовами фільтра місій немає</td></tr>{% endfor %}
+</table>
+{% endblock %}

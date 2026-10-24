@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Ролі та права{% endblock %}
+{% block body %}
+<h1>Матриця «роль — право»</h1>
+<p class="muted">✓ — право надано (натисніть, щоб відкликати), · — не надано (натисніть, щоб надати). Бойові права — лише ролям із бойовими правами (*).</p>
+<table class="matrix"><tr><th>Право</th>{% for r in rs %}<th title="{{ r.name }}">{{ r.code[2:] }}{{ '*' if r.combat_rights }}</th>{% endfor %}</tr>
+{% for p in ps %}<tr><td class="mono" title="{{ p.description }}">{{ p.code }}</td>
+{% for r in rs %}{% set on = (r.role_id, p.permission_id) in has %}<td class="c"><form method="post"><input type="hidden" name="csrf" value="{{ csrf_token() }}"><input type="hidden" name="role_id" value="{{ r.role_id }}"><input type="hidden" name="permission_id" value="{{ p.permission_id }}"><input type="hidden" name="grant" value="{{ '0' if on else '1' }}"><button class="cell {{ 'on' if on }}">{{ '✓' if on else '·' }}</button></form></td>{% endfor %}</tr>{% endfor %}
+</table>
+{% endblock %}

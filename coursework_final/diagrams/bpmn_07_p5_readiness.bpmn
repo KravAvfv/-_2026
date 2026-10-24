@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs_d7_readiness" targetNamespace="http://knu.ua/pis/shchyt-link" exporter="tools/bpmn_model.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_d7_readiness">
+    <bpmn:participant id="P3c7" name="Виконання місії перехоплення"/>
+    <bpmn:participant id="X_SUP" name="Постачальник перехоплювачів і АКБ"/>
+    <bpmn:participant id="P5" name="Забезпечення готовності ресурсів" processRef="Proc_P5"/>
+    <bpmn:messageFlow id="MF_d7_readiness_0" sourceRef="P3c7" targetRef="P5_s" name="Дані про витрату"/>
+    <bpmn:messageFlow id="MF_d7_readiness_1" sourceRef="P5_t5" targetRef="X_SUP" name="Заявка на поповнення"/>
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_P5" isExecutable="false">
+    <bpmn:laneSet id="LS_P5">
+      <bpmn:lane id="P5_L1" name="Командир розрахунку">
+        <bpmn:flowNodeRef>P5_s</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P5_t1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P5_L2" name="Технік служби">
+        <bpmn:flowNodeRef>P5_t2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P5_g1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P5_t3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P5_e1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="P5_L3" name="Логіст">
+        <bpmn:flowNodeRef>P5_t4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P5_g2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P5_t5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P5_e2</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P5_s" name="Місію завершено"><bpmn:outgoing>SF_P5_0</bpmn:outgoing><bpmn:messageEventDefinition id="ED_P5_s"/></bpmn:startEvent>
+    <bpmn:userTask id="P5_t1" name="Доповісти про витрату і стан техніки"><bpmn:incoming>SF_P5_0</bpmn:incoming><bpmn:outgoing>SF_P5_1</bpmn:outgoing></bpmn:userTask>
+    <bpmn:manualTask id="P5_t2" name="Провести післяпольотний контроль"><bpmn:incoming>SF_P5_1</bpmn:incoming><bpmn:outgoing>SF_P5_2</bpmn:outgoing></bpmn:manualTask>
+    <bpmn:exclusiveGateway id="P5_g1" name="Є несправності?"><bpmn:incoming>SF_P5_2</bpmn:incoming><bpmn:outgoing>SF_P5_3</bpmn:outgoing><bpmn:outgoing>SF_P5_4</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:manualTask id="P5_t3" name="Відремонтувати або списати техніку"><bpmn:incoming>SF_P5_3</bpmn:incoming><bpmn:outgoing>SF_P5_5</bpmn:outgoing></bpmn:manualTask>
+    <bpmn:serviceTask id="P5_t4" name="Оновити облік запасів і готовності"><bpmn:incoming>SF_P5_4</bpmn:incoming><bpmn:incoming>SF_P5_5</bpmn:incoming><bpmn:outgoing>SF_P5_6</bpmn:outgoing></bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="P5_g2" name="Запас нижче норми?"><bpmn:incoming>SF_P5_6</bpmn:incoming><bpmn:outgoing>SF_P5_7</bpmn:outgoing><bpmn:outgoing>SF_P5_8</bpmn:outgoing></bpmn:exclusiveGateway>
+    <bpmn:sendTask id="P5_t5" name="Сформувати заявку на поповнення"><bpmn:incoming>SF_P5_7</bpmn:incoming><bpmn:outgoing>SF_P5_9</bpmn:outgoing></bpmn:sendTask>
+    <bpmn:endEvent id="P5_e2" name="Заявку надіслано"><bpmn:incoming>SF_P5_9</bpmn:incoming></bpmn:endEvent>
+    <bpmn:endEvent id="P5_e1" name="Готовність підтверджено"><bpmn:incoming>SF_P5_8</bpmn:incoming></bpmn:endEvent>
+    <bpmn:sequenceFlow id="SF_P5_0" sourceRef="P5_s" targetRef="P5_t1" name=""/>
+    <bpmn:sequenceFlow id="SF_P5_1" sourceRef="P5_t1" targetRef="P5_t2" name=""/>
+    <bpmn:sequenceFlow id="SF_P5_2" sourceRef="P5_t2" targetRef="P5_g1" name=""/>
+    <bpmn:sequenceFlow id="SF_P5_3" sourceRef="P5_g1" targetRef="P5_t3" name="так"/>
+    <bpmn:sequenceFlow id="SF_P5_4" sourceRef="P5_g1" targetRef="P5_t4" name="ні"/>
+    <bpmn:sequenceFlow id="SF_P5_5" sourceRef="P5_t3" targetRef="P5_t4" name=""/>
+    <bpmn:sequenceFlow id="SF_P5_6" sourceRef="P5_t4" targetRef="P5_g2" name=""/>
+    <bpmn:sequenceFlow id="SF_P5_7" sourceRef="P5_g2" targetRef="P5_t5" name="так"/>
+    <bpmn:sequenceFlow id="SF_P5_8" sourceRef="P5_g2" targetRef="P5_e1" name="ні"/>
+    <bpmn:sequenceFlow id="SF_P5_9" sourceRef="P5_t5" targetRef="P5_e2" name=""/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Dgm_d7_readiness"><bpmndi:BPMNPlane id="Plane_d7_readiness" bpmnElement="Collab_d7_readiness">
+    <bpmndi:BPMNShape id="P3c7_di" bpmnElement="P3c7" isHorizontal="true"><dc:Bounds x="0" y="0" width="488" height="64"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="X_SUP_di" bpmnElement="X_SUP" isHorizontal="true"><dc:Bounds x="480" y="0" width="572" height="64"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_di" bpmnElement="P5" isHorizontal="true"><dc:Bounds x="0" y="104" width="1052" height="354"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_L1_di" bpmnElement="P5_L1" isHorizontal="true"><dc:Bounds x="50" y="104" width="1002" height="118"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_L2_di" bpmnElement="P5_L2" isHorizontal="true"><dc:Bounds x="50" y="222" width="1002" height="118"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_L3_di" bpmnElement="P5_L3" isHorizontal="true"><dc:Bounds x="50" y="340" width="1002" height="118"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_s_di" bpmnElement="P5_s"><dc:Bounds x="136" y="143" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="104" y="186" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_t1_di" bpmnElement="P5_t1"><dc:Bounds x="214" y="119" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_t2_di" bpmnElement="P5_t2"><dc:Bounds x="214" y="237" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_g1_di" bpmnElement="P5_g1"><dc:Bounds x="409" y="254" width="54" height="54"/><bpmndi:BPMNLabel><dc:Bounds x="356" y="231" width="160" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_t3_di" bpmnElement="P5_t3"><dc:Bounds x="494" y="237" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_t4_di" bpmnElement="P5_t4"><dc:Bounds x="494" y="355" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_g2_di" bpmnElement="P5_g2"><dc:Bounds x="689" y="372" width="54" height="54"/><bpmndi:BPMNLabel><dc:Bounds x="664" y="429" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_t5_di" bpmnElement="P5_t5"><dc:Bounds x="774" y="355" width="164" height="88"/></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_e2_di" bpmnElement="P5_e2"><dc:Bounds x="976" y="379" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="944" y="422" width="104" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="P5_e1_di" bpmnElement="P5_e1"><dc:Bounds x="976" y="261" width="40" height="40"/><bpmndi:BPMNLabel><dc:Bounds x="941" y="304" width="110" height="40"/></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="SF_P5_0_di" bpmnElement="SF_P5_0"><di:waypoint x="176" y="163"/><di:waypoint x="214" y="163"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_1_di" bpmnElement="SF_P5_1"><di:waypoint x="296" y="207"/><di:waypoint x="296" y="237"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_2_di" bpmnElement="SF_P5_2"><di:waypoint x="378" y="281"/><di:waypoint x="409" y="281"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_3_di" bpmnElement="SF_P5_3"><di:waypoint x="463" y="281"/><di:waypoint x="494" y="281"/><bpmndi:BPMNLabel><dc:Bounds x="469" y="259" width="32" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_4_di" bpmnElement="SF_P5_4"><di:waypoint x="436" y="308"/><di:waypoint x="436" y="399"/><di:waypoint x="494" y="399"/><bpmndi:BPMNLabel><dc:Bounds x="441" y="310" width="23" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_5_di" bpmnElement="SF_P5_5"><di:waypoint x="576" y="325"/><di:waypoint x="576" y="355"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_6_di" bpmnElement="SF_P5_6"><di:waypoint x="658" y="399"/><di:waypoint x="689" y="399"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_7_di" bpmnElement="SF_P5_7"><di:waypoint x="743" y="399"/><di:waypoint x="774" y="399"/><bpmndi:BPMNLabel><dc:Bounds x="749" y="377" width="32" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_8_di" bpmnElement="SF_P5_8"><di:waypoint x="716" y="372"/><di:waypoint x="716" y="281"/><di:waypoint x="976" y="281"/><bpmndi:BPMNLabel><dc:Bounds x="721" y="350" width="23" height="20"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="SF_P5_9_di" bpmnElement="SF_P5_9"><di:waypoint x="938" y="399"/><di:waypoint x="976" y="399"/></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d7_readiness_0_di" bpmnElement="MF_d7_readiness_0"><di:waypoint x="156" y="64"/><di:waypoint x="156" y="143"/><bpmndi:BPMNLabel><dc:Bounds x="162" y="73" width="138" height="22"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="MF_d7_readiness_1_di" bpmnElement="MF_d7_readiness_1"><di:waypoint x="886" y="355"/><di:waypoint x="886" y="64"/><bpmndi:BPMNLabel><dc:Bounds x="708" y="73" width="172" height="22"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane></bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,35 @@
+@startuml
+hide footbox
+actor "ОБУ" as FCO
+actor "ОЧ" as OC
+participant "Flask-застосунок" as APP
+database "PostgreSQL" as DB
+FCO -> APP : GET /tracks/{id}
+activate APP
+APP -> DB : set_config('app.user_id')
+APP -> DB : fn_crew_candidates()
+DB --> APP : кандидати
+APP --> FCO : сторінка з кандидатами
+deactivate APP
+FCO -> APP : POST /tracks/{id}
+activate APP
+APP -> DB : set_config('app.user_id')
+APP -> DB : fn_propose_mission()
+note right of DB : trg_mission_after, trg_audit
+APP --> FCO : 302 /missions/{id}
+deactivate APP
+OC -> APP : POST /missions/{id}
+activate APP
+APP -> DB : set_config('app.user_id')
+APP -> DB : UPDATE mission
+note right of DB : trg_mission_guard
+alt дозволено
+  APP -> DB : COMMIT
+  APP --> OC : стан оновлено
+else відмова
+  DB --> APP : помилка тригера
+  APP -> DB : ROLLBACK
+  APP --> OC : причина відмови
+end
+deactivate APP
+@enduml

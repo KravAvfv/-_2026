@@ -1,0 +1,16 @@
+{
+  "file": "s04_track.png",
+  "native_px": [
+    2160,
+    2214
+  ],
+  "min_font_px": 48,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.4,
+    "dpi": 333
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true
+}

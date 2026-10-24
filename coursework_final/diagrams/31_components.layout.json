@@ -1,0 +1,23 @@
+{
+  "file": "31_components",
+  "native_px": [
+    708,
+    497
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 10.2,
+    "main_pt": 10.2,
+    "dpi": 436
+  },
+  "landscape": {
+    "width_cm": 21.08,
+    "font_pt": 12.7,
+    "main_pt": 12.7,
+    "dpi": 348
+  },
+  "orientation": "portrait",
+  "width_cm": 17.0,
+  "legible": true
+}

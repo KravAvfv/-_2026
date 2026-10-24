@@ -1,0 +1,24 @@
+{
+  "file": "24_class_all.puml",
+  "native_px": [
+    754,
+    593
+  ],
+  "min_font_px": 15.0,
+  "overlaps": [],
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 9.6,
+    "dpi": 348,
+    "main_pt": 9.6
+  },
+  "landscape": {
+    "width_cm": 18.82,
+    "font_pt": 10.6,
+    "dpi": 312,
+    "main_pt": 10.6
+  },
+  "orientation": "landscape",
+  "width_cm": 18.82,
+  "legible": true
+}

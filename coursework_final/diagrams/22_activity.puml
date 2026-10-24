@@ -1,0 +1,43 @@
+@startuml
+skinparam conditionStyle diamond
+|ОБУ|
+start
+:Обрати
+розрахунок;
+|БД|
+:fn_propose_mission;
+|ОЧ|
+if (пуск?) then ([так])
+  :Санкціо-
+  нувати;
+else ([ні])
+  :Відхи-
+  лити;
+endif
+|БД|
+:trg_mission_guard,
+CHECK;
+if (відхилено?) then ([так])
+  stop
+endif
+|Командир|
+while (відмова?) is ([так])
+  |ОЧ|
+  :Перепризначити;
+  :Санкціонує інший ОЧ;
+  |БД|
+  :trg_mission_guard;
+  |Командир|
+endwhile ([ні])
+:Прийняти,
+здійснити пуск;
+if (скасувати?) then ([так])
+  :Скасувати
+  (або ОЧ, ОБУ);
+  stop
+else ([ні])
+  :Доповісти
+  результат;
+  stop
+endif
+@enduml

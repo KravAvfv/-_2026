@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="708" height="531" viewBox="0 0 708 531"><rect width="100%" height="100%" fill="#fff"/><rect x="6.0" y="6.0" width="696.0" height="27.4" fill="#D9D9D9" stroke="#000" stroke-width="2.2"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="354.0" y="23.3">1. Створення IoT-платформи «Щит-Лінк»</tspan></text>
+<polyline points="12.0,33.4 12.0,454.7" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polyline points="378.0,33.4 378.0,410.6" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<rect x="18.0" y="73.8" width="128.0" height="44.8" fill="#EDEDED" stroke="#000" stroke-width="1.8"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="82.0" y="91.1">1.1 Управління</tspan><tspan x="82.0" y="108.5">проєктом</tspan></text>
+<polyline points="12.0,96.2 17.0,96.2" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="18.0,96.2 12.0,93.5 12.0,98.9" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="47.4" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="64.7">1.1.1 Планування та</tspan><tspan x="247.0" y="82.1">контроль</tspan></text>
+<polyline points="146.0,96.2 152.0,96.2 152.0,69.8 157.0,69.8" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,69.8 152.0,67.1 152.0,72.5" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="100.2" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="117.5">1.1.2 Управління</tspan><tspan x="247.0" y="134.9">ризиками та якістю</tspan></text>
+<polyline points="146.0,96.2 152.0,96.2 152.0,122.6 157.0,122.6" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,122.6 152.0,119.9 152.0,125.3" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="18.0" y="172.7" width="128.0" height="62.2" fill="#EDEDED" stroke="#000" stroke-width="1.8"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="82.0" y="190.0">1.2 Обстеження</tspan><tspan x="82.0" y="207.4">та формування</tspan><tspan x="82.0" y="224.8">вимог</tspan></text>
+<polyline points="12.0,203.8 17.0,203.8" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="18.0,203.8 12.0,201.1 12.0,206.5" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="155.0" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="172.3">1.2.1 Обстеження об’єкта</tspan><tspan x="247.0" y="189.7">автоматизації</tspan></text>
+<polyline points="146.0,203.8 152.0,203.8 152.0,177.4 157.0,177.4" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,177.4 152.0,174.7 152.0,180.1" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="207.8" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="225.1">1.2.2 Технічне завдання</tspan><tspan x="247.0" y="242.5">та концепція</tspan></text>
+<polyline points="146.0,203.8 152.0,203.8 152.0,230.2 157.0,230.2" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,230.2 152.0,227.5 152.0,232.9" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="18.0" y="298.0" width="128.0" height="44.8" fill="#EDEDED" stroke="#000" stroke-width="1.8"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="82.0" y="315.3">1.3 Підсистема</tspan><tspan x="82.0" y="332.7">збору телеметрії</tspan></text>
+<polyline points="12.0,320.4 17.0,320.4" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="18.0,320.4 12.0,317.7 12.0,323.1" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="262.6" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="279.9">1.3.1 Периферійні шлюзи</tspan></text>
+<polyline points="146.0,320.4 152.0,320.4 152.0,276.3 157.0,276.3" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,276.3 152.0,273.6 152.0,279.0" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="298.0" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="315.3">1.3.2 Адаптери</tspan><tspan x="247.0" y="332.7">протоколів</tspan></text>
+<polyline points="146.0,320.4 152.0,320.4 152.0,320.4 157.0,320.4" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,320.4 152.0,317.7 152.0,323.1" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="350.8" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="368.1">1.3.3 Реєстр пристроїв</tspan></text>
+<polyline points="146.0,320.4 152.0,320.4 152.0,364.5 157.0,364.5" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,364.5 152.0,361.8 152.0,367.2" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="18.0" y="423.6" width="128.0" height="62.2" fill="#EDEDED" stroke="#000" stroke-width="1.8"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="82.0" y="440.9">1.4 Підсистема</tspan><tspan x="82.0" y="458.3">ситуаційної</tspan><tspan x="82.0" y="475.7">обізнаності</tspan></text>
+<polyline points="12.0,454.7 17.0,454.7" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="18.0,454.7 12.0,452.0 12.0,457.4" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="388.2" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="405.5">1.4.1 Злиття даних</tspan></text>
+<polyline points="146.0,454.7 152.0,454.7 152.0,401.9 157.0,401.9" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,401.9 152.0,399.2 152.0,404.6" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="423.6" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="440.9">1.4.2 Класифікація та</tspan><tspan x="247.0" y="458.3">оцінка загрози</tspan></text>
+<polyline points="146.0,454.7 152.0,454.7 152.0,446.0 157.0,446.0" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,446.0 152.0,443.3 152.0,448.7" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="158.0" y="476.4" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="247.0" y="493.7">1.4.3 Інтерфейс</tspan><tspan x="247.0" y="511.1">командного пункту</tspan></text>
+<polyline points="146.0,454.7 152.0,454.7 152.0,498.8 157.0,498.8" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="158.0,498.8 152.0,496.1 152.0,501.5" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="384.0" y="74.1" width="128.0" height="62.2" fill="#EDEDED" stroke="#000" stroke-width="1.8"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="448.0" y="91.4">1.5 Підсистема</tspan><tspan x="448.0" y="108.8">координації</tspan><tspan x="448.0" y="126.2">перехоплення</tspan></text>
+<polyline points="378.0,105.2 383.0,105.2" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="384.0,105.2 378.0,102.5 378.0,107.9" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="47.4" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="64.7">1.5.1 Призначення цілей</tspan></text>
+<polyline points="512.0,105.2 518.0,105.2 518.0,61.1 523.0,61.1" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,61.1 518.0,58.4 518.0,63.8" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="82.8" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="100.1">1.5.2 Супровід місій</tspan></text>
+<polyline points="512.0,105.2 518.0,105.2 518.0,96.5 523.0,96.5" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,96.5 518.0,93.8 518.0,99.2" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="118.2" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="135.5">1.5.3 Деконфлікція</tspan><tspan x="613.0" y="152.9">повітряного простору</tspan></text>
+<polyline points="512.0,105.2 518.0,105.2 518.0,140.6 523.0,140.6" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,140.6 518.0,137.9 518.0,143.3" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="384.0" y="173.0" width="128.0" height="79.6" fill="#EDEDED" stroke="#000" stroke-width="1.8"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="448.0" y="190.3">1.6 Підсистема</tspan><tspan x="448.0" y="207.7">ресурсів,</tspan><tspan x="448.0" y="225.1">аналітики та</tspan><tspan x="448.0" y="242.5">звітності</tspan></text>
+<polyline points="378.0,212.8 383.0,212.8" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="384.0,212.8 378.0,210.1 378.0,215.5" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="173.0" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="190.3">1.6.1 Облік ресурсів</tspan></text>
+<polyline points="512.0,212.8 518.0,212.8 518.0,186.7 523.0,186.7" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,186.7 518.0,184.0 518.0,189.4" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="208.4" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="225.7">1.6.2 Аналітика і звітність</tspan></text>
+<polyline points="512.0,212.8 518.0,212.8 518.0,222.1 523.0,222.1" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,222.1 518.0,219.4 518.0,224.8" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="384.0" y="271.6" width="128.0" height="62.2" fill="#EDEDED" stroke="#000" stroke-width="1.8"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="448.0" y="288.9">1.7</tspan><tspan x="448.0" y="306.3">Інфраструктура</tspan><tspan x="448.0" y="323.7">та кібербезпека</tspan></text>
+<polyline points="378.0,302.7 383.0,302.7" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="384.0,302.7 378.0,300.0 378.0,305.4" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="262.6" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="279.9">1.7.1 Обчислювальна</tspan><tspan x="613.0" y="297.3">інфраструктура</tspan></text>
+<polyline points="512.0,302.7 518.0,302.7 518.0,285.0 523.0,285.0" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,285.0 518.0,282.3 518.0,287.7" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="315.4" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="332.7">1.7.2 Кібербезпека</tspan></text>
+<polyline points="512.0,302.7 518.0,302.7 518.0,329.1 523.0,329.1" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,329.1 518.0,326.4 518.0,331.8" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="384.0" y="388.2" width="128.0" height="44.8" fill="#EDEDED" stroke="#000" stroke-width="1.8"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" font-weight="bold" fill="#000"><tspan x="448.0" y="405.5">1.8</tspan><tspan x="448.0" y="422.9">Впровадження</tspan></text>
+<polyline points="378.0,410.6 383.0,410.6" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="384.0,410.6 378.0,407.9 378.0,413.3" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="352.8" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="370.1">1.8.1 Випробування</tspan></text>
+<polyline points="512.0,410.6 518.0,410.6 518.0,366.5 523.0,366.5" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,366.5 518.0,363.8 518.0,369.2" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="388.2" width="178.0" height="44.8" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="405.5">1.8.2 Підготовка</tspan><tspan x="613.0" y="422.9">персоналу</tspan></text>
+<polyline points="512.0,410.6 518.0,410.6 518.0,410.6 523.0,410.6" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,410.6 518.0,407.9 518.0,413.3" fill="#000" stroke="#000" stroke-width="1"/>
+<rect x="524.0" y="441.0" width="178.0" height="27.4" fill="#F7F7F7" stroke="#000" stroke-width="1.4"/>
+<text font-family="Times New Roman" font-size="15" text-anchor="middle" fill="#000"><tspan x="613.0" y="458.3">1.8.3 Введення в дію</tspan></text>
+<polyline points="512.0,410.6 518.0,410.6 518.0,454.7 523.0,454.7" fill="none" stroke="#000" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="524.0,454.7 518.0,452.0 518.0,457.4" fill="#000" stroke="#000" stroke-width="1"/></svg>

@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+node "Сенсори" as SEN
+node "Дрон" as UAV
+node "Позиція (× 9)" as POS {
+  node "НСУ" as GCS
+  node "Шлюз" as GW
+  node "Планшет" as TAB
+}
+node "АРМ КП" as WS
+node "Основний ЦОД" as DC1 {
+  artifact "Flask (WSGI)" as A1
+  database "PostgreSQL 18" as D1
+}
+node "Резервний ЦОД" as DC2 {
+  database "Репліка PostgreSQL" as D2
+}
+SEN --> GW : MQTT/TLS, ASTERIX
+GCS <-left-> UAV : MAVLink 2
+GCS <--> GW : телеметрія, команди
+GW <--> A1 : HTTPS, VPN
+TAB --> A1 : HTTPS, VPN
+WS --> A1 : HTTPS
+A1 --> D1 : SQL/TLS
+D1 -right-> D2 : реплікація
+@enduml

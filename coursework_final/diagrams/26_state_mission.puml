@@ -1,0 +1,23 @@
+@startuml
+hide empty description
+state "запропонована" as S0
+state "відхилена" as S1
+state "санкціонована" as S2
+state "перепризначена" as S3
+state "прийнята" as S4
+state "виконується" as S5
+state "скасована" as S6
+state "закрита" as S7
+[*] --> S0 : fn_propose_mission
+S0 --> S1 : mission.approve
+S0 --> S2 : mission.approve
+S2 --> S3 : mission.reassign
+S3 --> S0 : mission.reassign
+S2 --> S4 : mission.accept
+S4 --> S5 : mission.launch
+S5 --> S6 : mission.abort
+S5 --> S7 : mission.report
+S1 --> [*]
+S6 --> [*]
+S7 --> [*]
+@enduml

@@ -1,0 +1,23 @@
+{
+  "file": "33_network",
+  "native_px": [
+    704,
+    478
+  ],
+  "min_font_px": 15,
+  "portrait": {
+    "width_cm": 17.0,
+    "font_pt": 10.3,
+    "main_pt": 10.3,
+    "dpi": 433
+  },
+  "landscape": {
+    "width_cm": 21.51,
+    "font_pt": 13.0,
+    "main_pt": 13.0,
+    "dpi": 335
+  },
+  "orientation": "portrait",
+  "width_cm": 17.0,
+  "legible": true
+}

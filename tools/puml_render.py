@@ -8,9 +8,14 @@ Usage: .venv/bin/python tools/puml_render.py <file.puml> [--min-pt 10]
   STYLE below, so .puml sources contain only the model.
 * Writes <file>.svg, <file>.png (rsvg-convert, zoom chosen for >= 300 dpi) and <file>.layout.json
   (orientation / width_cm / font_pt) consumed by tools/build_report.py. Exit 3 = too dense.
+* Link labels / cluster titles that a line runs through are moved to the nearest free spot
+  (tools/svg_overlap.py); overlaps that cannot be resolved are reported in layout.json "overlaps".
 """
 import json, math, re, subprocess, sys, tempfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from svg_overlap import check, fix_labels  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 JAR = ROOT / "tools/plantuml/plantuml.jar"
@@ -59,13 +64,15 @@ def render(src, min_pt=10.0):
         svg_t = out.read_text(encoding="utf-8")
     if "Syntax Error" in svg_t or "An error has occured" in svg_t:
         sys.exit(f"{src.name}: PlantUML syntax error (see {src.with_suffix('.svg')})")
+    svg_t = fix_labels(svg_t)
     src.with_suffix(".svg").write_text(svg_t, encoding="utf-8")
     m = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', svg_t)
     W, H = float(m.group(1)), float(m.group(2))
     sizes = [float(x) for x in re.findall(r'font-size="([\d.]+)"', svg_t)]
     fpx = min([s for s in sizes if s >= 8] or [FPX])
     cm_to_pt = 72 / 2.54
-    res = {"file": src.name, "native_px": [round(W), round(H)], "min_font_px": fpx}
+    res = {"file": src.name, "native_px": [round(W), round(H)], "min_font_px": fpx,
+           "overlaps": [f"{t} × {who}" for t, who in check(svg_t)]}
     best = None
     for name, (bw, bh) in {"portrait": (16.5, 22.5), "landscape": (25.7, 14.5)}.items():
         wcm = min(bw, bh * W / H, 13.0 * W / fpx / cm_to_pt)
