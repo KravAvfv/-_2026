@@ -29,6 +29,7 @@ GATEWAY_TOKEN = os.environ.get("SHCH_GATEWAY_TOKEN", "demo-gateway-token")
 IDLE_TIMEOUT_S = 15 * 60                         # DOMAIN_KNOWLEDGE_BASE §6.6: тайм-аут бездіяльності АРМ
 MAX_FAILED_LOGINS = 5
 PAGE = 12                                        # рядків у списках
+MAP_H = 340                                      # висота мнемосхеми, px
 
 STATE_CLASS = {"запропонована": "s-new", "санкціонована": "s-ok", "прийнята": "s-ok", "виконується": "s-run",
                "перепризначена": "s-warn", "відхилена": "s-off", "скасована": "s-off", "закрита": "s-done"}
@@ -138,6 +139,21 @@ def plural(n, one, few, many):
     return one if n % 10 == 1 and n % 100 != 11 else few if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14 else many
 
 
+def pager(total):
+    """Сторінка списку (?page=N): номер, межі показаних рядків і OFFSET для запиту."""
+    pages = max(1, -(-total // PAGE))
+    try:
+        page = min(pages, max(1, int(request.args.get("page", 1))))
+    except ValueError:
+        page = 1
+    return dict(total=total, page=page, pages=pages, offset=(page - 1) * PAGE, first=min(total, (page - 1) * PAGE + 1),
+                last=min(total, page * PAGE))
+
+
+def page_url(page):
+    return url_for(request.endpoint, **request.view_args, **{**request.args.to_dict(), "page": page})
+
+
 @app.context_processor
 def helpers():
     menu, seen = [], set()
@@ -145,7 +161,7 @@ def helpers():
         if perm in g.perms and ep not in seen:
             seen.add(ep)
             menu.append((ep, title, eps))
-    return dict(can=lambda p: p in g.perms, state_class=STATE_CLASS, menu=menu, csrf_token=csrf_token, pl=plural,
+    return dict(can=lambda p: p in g.perms, state_class=STATE_CLASS, menu=menu, csrf_token=csrf_token, pl=plural, page_url=page_url,
                 fmt_dt=lambda d: d.astimezone().strftime("%d.%m %H:%M:%S") if d else "—",
                 fmt_date=lambda d: d.strftime("%d.%m.%Y") if d else "—",
                 fmt_eta=lambda s: f"{s // 60}:{s % 60:02d}" if s is not None else "—")
@@ -255,22 +271,34 @@ def map_points():
     boxes = []
     for p in pts:
         p["x"] = round((p["lon"] - lon0) / (lon1 - lon0) * 660 + 20, 1)
-        p["y"] = round((lat1 - p["lat"]) / (lat1 - lat0) * 230 + 15, 1)
+        p["y"] = round((lat1 - p["lat"]) / (lat1 - lat0) * (MAP_H - 30) + 15, 1)
         boxes.append((p["x"] - 8, p["y"] - 8, p["x"] + 8, p["y"] + 8))
-    # підписи: перше вільне місце праворуч / ліворуч / згори / знизу від знака, у межах схеми
-    for p in pts:
+    # підписи: найближче вільне місце навколо знака (8 напрямків, віддалення до 46 px), у межах схеми;
+    # далекий підпис з’єднується зі знаком виносною лінією; спершу — треки (вони важливіші)
+    for p in sorted(pts, key=lambda p: p["kind"] != "трек"):
         if p["kind"] == "об’єкт":
             continue
-        w = len(p["label"]) * 9.5
-        for dx, dy, anchor in ((10, 5, "start"), (-10, 5, "end"), (10, -9, "start"), (10, 19, "start"),
-                               (-10, -9, "end"), (-10, 19, "end")):
-            x0 = p["x"] + dx if anchor == "start" else p["x"] + dx - w
-            box = (x0, p["y"] + dy - 14, x0 + w, p["y"] + dy + 3)
-            inside = box[0] >= 2 and box[2] <= 698 and box[1] >= 2 and box[3] <= 258
-            if inside and not any(box[0] < b[2] and b[0] < box[2] and box[1] < b[3] and b[1] < box[3]
-                                  for b in boxes):
+        w = len(p["label"]) * (10.4 if p["kind"] == "трек" else 9.4)
+        best = None
+        for r in (0, 8, 16, 26, 36, 46):
+            for dx, dy, anchor in ((10, 5, "start"), (-10, 5, "end"), (10, -9, "start"), (10, 19, "start"),
+                                   (-10, -9, "end"), (-10, 19, "end"), (-w / 2, -13, "start"), (-w / 2, 23, "start")):
+                ux, uy = (1 if dx > 0 else -1 if anchor == "end" else 0), (1 if dy > 10 else -1 if dy < 0 else 0)
+                lx, ly = p["x"] + dx + ux * r, p["y"] + dy + uy * r
+                x0 = lx if anchor == "start" else lx - w
+                box = (x0, ly - 14, x0 + w, ly + 3)
+                if box[0] < 2 or box[2] > 698 or box[1] < 2 or box[3] > MAP_H - 2:
+                    continue
+                hit = sum(box[0] < b[2] and b[0] < box[2] and box[1] < b[3] and b[1] < box[3] for b in boxes)
+                if best is None or hit < best[0]:
+                    best = (hit, lx, ly, anchor, box, r)
+                if hit == 0:
+                    break
+            if best and best[0] == 0:
                 break
-        p["lx"], p["ly"], p["anchor"] = p["x"] + dx, p["y"] + dy, anchor
+        _, p["lx"], p["ly"], p["anchor"], box, r = best
+        if r >= 16:                                 # виносна лінія від знака до найближчої точки підпису
+            p["leader"] = (min(max(p["x"], box[0]), box[2]), min(max(p["y"], box[1]), box[3]))
         boxes.append(box)
     return pts
 
@@ -284,7 +312,7 @@ def situation():
               "(SELECT count(*) FROM crew WHERE status = 'готовий') AS crews, "
               "(SELECT count(*) FROM sensor WHERE status IN ('у мережі', 'деградований')) AS sensors_on, "
               "(SELECT count(*) FROM sensor) AS sensors")
-    return render_template("situation.html", queue=queue, kpi=kpi, pts=map_points())
+    return render_template("situation.html", queue=queue, kpi=kpi, pts=map_points(), map_h=MAP_H)
 
 
 @app.route("/tracks/<uuid:tid>", methods=["GET", "POST"])
@@ -352,16 +380,19 @@ def missions():
     a = request.args
     st, crew, q = a.get("state", ""), a.get("crew", ""), a.get("q", "").strip()
     frm, to = a.get("from") or "2000-01-01", a.get("to") or "2100-01-01"
+    src = ("FROM mission m JOIN air_track t USING (track_id) JOIN crew c USING (crew_id) "
+           "LEFT JOIN engagement_report r USING (mission_id) WHERE (%s = '' OR m.state::text = %s) "
+           "AND (%s = '' OR c.call_sign = %s) AND (%s = '' OR m.mission_no ILIKE %s OR t.track_number ILIKE %s) "
+           "AND m.proposed_at >= %s::date AND m.proposed_at < %s::date + 1 ")
+    args = (st, st, crew, crew, q, f"%{q}%", f"%{q}%", frm, to)
+    pg = pager(row("SELECT count(*) AS n " + src, *args)["n"])
     ms = rows("SELECT m.mission_id, m.mission_no, m.state, m.proposed_at, m.closed_at, t.track_number, "
-              "c.call_sign, r.assessment FROM mission m JOIN air_track t USING (track_id) JOIN crew c USING (crew_id) "
-              "LEFT JOIN engagement_report r USING (mission_id) WHERE (%s = '' OR m.state::text = %s) "
-              "AND (%s = '' OR c.call_sign = %s) AND (%s = '' OR m.mission_no ILIKE %s OR t.track_number ILIKE %s) "
-              "AND m.proposed_at >= %s::date AND m.proposed_at < %s::date + 1 "
-              "ORDER BY m.proposed_at DESC LIMIT %s", st, st, crew, crew, q, f"%{q}%", f"%{q}%", frm, to, PAGE)
+              "c.call_sign, r.assessment " + src + "ORDER BY m.proposed_at DESC LIMIT %s OFFSET %s",
+              *args, PAGE, pg["offset"])
     total = row("SELECT count(*) AS n FROM mission")["n"]
     crews = [r["call_sign"] for r in rows("SELECT call_sign FROM crew ORDER BY call_sign")]
     return render_template("missions.html", ms=ms, states=enum_values("mission_state"), crews=crews, a=a,
-                           total=total)
+                           total=total, pg=pg)
 
 
 def _perm_for(frm, to):
@@ -419,11 +450,13 @@ def resources():
     need("resource.read")
     ready = rows("SELECT * FROM v_readiness")
     pos, st = request.args.get("pos", ""), request.args.get("state", "")
+    src = ("FROM interceptor i JOIN interceptor_model im USING (model_id) LEFT JOIN position p USING (position_id) "
+           "WHERE (%s = '' OR p.code = %s) AND (%s = '' OR i.state::text = %s) ")
+    pg = pager(row("SELECT count(*) AS n " + src, pos, pos, st, st)["n"])
     ints = rows("SELECT i.interceptor_id, i.serial_no, im.name AS model, i.state, i.flight_count, "
-                "i.firmware_version, p.code AS pos FROM interceptor i JOIN interceptor_model im USING (model_id) "
-                "LEFT JOIN position p USING (position_id) WHERE (%s = '' OR p.code = %s) "
-                "AND (%s = '' OR i.state::text = %s) ORDER BY i.serial_no LIMIT 4", pos, pos, st, st)
-    return render_template("resources.html", ready=ready, ints=ints, pos=pos, st=st,
+                "i.firmware_version, p.code AS pos " + src + "ORDER BY i.serial_no LIMIT %s OFFSET %s",
+                pos, pos, st, st, PAGE, pg["offset"])
+    return render_template("resources.html", ready=ready, ints=ints, pos=pos, st=st, pg=pg,
                            states=enum_values("interceptor_state"))
 
 
@@ -478,13 +511,14 @@ def sensors():
     need("sensor.manage")
     a = request.args
     kind, st, q = a.get("kind", ""), a.get("status", ""), a.get("q", "").strip()
+    total = row("SELECT count(*) AS n FROM sensor WHERE (%s = '' OR kind::text = %s) AND (%s = '' OR status::text = %s) "
+                "AND (%s = '' OR hw_serial ILIKE %s)", kind, kind, st, st, q, f"%{q}%")["n"]
+    pg = pager(total)
     ss = rows("SELECT s.sensor_id, s.hw_serial, s.kind, s.status, s.lat, s.lon, s.height_m, s.last_heartbeat_at, "
               "sc.code AS sector FROM sensor s JOIN sector sc USING (sector_id) WHERE (%s = '' OR s.kind::text = %s) "
               "AND (%s = '' OR s.status::text = %s) AND (%s = '' OR s.hw_serial ILIKE %s) ORDER BY s.hw_serial "
-              "LIMIT %s", kind, kind, st, st, q, f"%{q}%", PAGE)
-    total = row("SELECT count(*) AS n FROM sensor WHERE (%s = '' OR kind::text = %s) AND (%s = '' OR status::text = %s) "
-                "AND (%s = '' OR hw_serial ILIKE %s)", kind, kind, st, st, q, f"%{q}%")["n"]
-    return render_template("sensors.html", ss=ss, a=a, total=total, kinds=enum_values("sensor_kind"),
+              "LIMIT %s OFFSET %s", kind, kind, st, st, q, f"%{q}%", PAGE, pg["offset"])
+    return render_template("sensors.html", ss=ss, a=a, total=total, pg=pg, kinds=enum_values("sensor_kind"),
                            statuses=enum_values("sensor_status"))
 
 
@@ -560,7 +594,7 @@ def analytics():
                  "round(avg(extract(epoch FROM m.launched_at - m.approved_at))) AS launch_s FROM mission m "
                  "JOIN crew c USING (crew_id) LEFT JOIN engagement_report r USING (mission_id) "
                  "WHERE m.proposed_at >= %s::date AND m.proposed_at < %s::date GROUP BY c.call_sign "
-                 "ORDER BY n DESC, hits DESC LIMIT 6", frm, to)
+                 "ORDER BY n DESC, hits DESC", frm, to)
     return render_template("analytics.html", st=st, crews=crews, frm=frm, to=to)
 
 
@@ -569,11 +603,12 @@ def audit():
     need("audit.read")
     ent = request.args.get("entity", "")
     ver = row("SELECT * FROM fn_audit_verify()")
+    pg = pager(row("SELECT count(*) AS n FROM audit_log WHERE %s = '' OR entity = %s", ent, ent)["n"])
     log = rows("SELECT a.entry_id, a.logged_at, a.action, a.entity_id, a.actor_type, u.full_name, a.hash "
                "FROM audit_log a LEFT JOIN personnel u ON u.user_id = a.actor_id WHERE %s = '' OR a.entity = %s "
-               "ORDER BY a.entry_id DESC LIMIT 9", ent, ent)
+               "ORDER BY a.entry_id DESC LIMIT %s OFFSET %s", ent, ent, PAGE, pg["offset"])
     ents = [r["entity"] for r in rows("SELECT DISTINCT entity FROM audit_log ORDER BY entity")]
-    return render_template("audit.html", ver=ver, log=log, ent=ent, ents=ents)
+    return render_template("audit.html", ver=ver, log=log, ent=ent, ents=ents, pg=pg)
 
 
 # ------------------------------------------------------------------------------------------ користувачі, ролі
@@ -582,13 +617,16 @@ def users():
     need("user.manage", "user.block")
     a = request.args
     role, st, q = a.get("role", ""), a.get("status", ""), a.get("q", "").strip()
+    src = ("FROM personnel u JOIN role r USING (role_id) LEFT JOIN crew c USING (crew_id) "
+           "WHERE (%s = '' OR r.code = %s) AND (%s = '' OR u.status::text = %s) "
+           "AND (%s = '' OR u.full_name ILIKE %s OR u.login ILIKE %s) ")
+    args = (role, role, st, st, q, f"%{q}%", f"%{q}%")
+    pg = pager(row("SELECT count(*) AS n " + src, *args)["n"])
     us = rows("SELECT u.user_id, u.full_name, u.login, u.rank, u.status, u.mfa_enabled, u.admission_valid_to, "
-              "r.code, r.name AS role, c.call_sign FROM personnel u JOIN role r USING (role_id) "
-              "LEFT JOIN crew c USING (crew_id) WHERE (%s = '' OR r.code = %s) AND (%s = '' OR u.status::text = %s) "
-              "AND (%s = '' OR u.full_name ILIKE %s OR u.login ILIKE %s) ORDER BY r.code, u.login LIMIT %s",
-              role, role, st, st, q, f"%{q}%", f"%{q}%", PAGE)
+              "r.code, r.name AS role, c.call_sign " + src + "ORDER BY r.code, u.login LIMIT %s OFFSET %s",
+              *args, PAGE, pg["offset"])
     roles_ = rows("SELECT code, name FROM role ORDER BY code")
-    return render_template("users.html", us=us, a=a, roles=roles_, statuses=enum_values("personnel_status"))
+    return render_template("users.html", us=us, a=a, roles=roles_, pg=pg, statuses=enum_values("personnel_status"))
 
 
 @app.route("/users/new", methods=["GET", "POST"])

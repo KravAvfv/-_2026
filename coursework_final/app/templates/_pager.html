@@ -1,0 +1,3 @@
+<p class="pager muted">{% if pg.total %}Показано {{ pg.first }}–{{ pg.last }} з {{ pg.total }}{% else %}Записів не знайдено{% endif %}{% if pg.pages > 1 %} · сторінка {{ pg.page }} з {{ pg.pages }}
+{% if pg.page > 1 %}<a href="{{ page_url(1) }}">« перша</a> <a href="{{ page_url(pg.page - 1) }}">‹ попередня</a>{% endif %}
+{% if pg.page < pg.pages %}<a href="{{ page_url(pg.page + 1) }}">наступна ›</a> <a href="{{ page_url(pg.pages) }}">остання »</a>{% endif %}{% endif %}</p>

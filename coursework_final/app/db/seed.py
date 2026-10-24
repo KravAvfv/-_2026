@@ -7,7 +7,9 @@ werkzeug) і два пости візуального спостереження
 (fn_ingest_detection, переходи стану місії, звіти), тож разом із даними наповнюються хронологія подій і журнал
 аудиту. Історія охоплює 30 діб до моменту запуску; 6 треків «живі» (останні хвилини) — для черги загроз.
 
-    seed(conn)   # conn — psycopg.Connection до БД з виконаними schema.sql та impl.sql
+    seed(conn)              # conn — psycopg.Connection до БД з виконаними schema.sql та impl.sql
+    seed(conn, rich=True)   # + розширений набір для живої демонстрації (serve.py): ще 4 місяці історії,
+                            #   місії, що чекають дії кожної ролі, ресурси в усіх станах (записка й тести — без нього)
 """
 import math
 import random
@@ -66,13 +68,17 @@ OBJECTS = [("ТЕЦ-2", "I"), ("Підстанція 330 кВ «Північна
            ("Насосна станція", "II")]
 NUM = {}                                      # лічильник номерів місій за добу
 SIGS = ["ударний поршневий", "ударний реактивний", "розвідувальний", "квадрокоптер"]
+EXTRA_OBJECTS = [("ТЕЦ-5", "I"), ("Газорозподільна станція", "I"), ("Підстанція 110 кВ «Лісова»", "II"),
+                 ("Пологовий будинок", "I"), ("Водонапірна вежа", "III"), ("Автовокзал", "III"),
+                 ("Склад пально-мастильних матеріалів", "II"), ("Цукровий завод", "III"), ("Річковий порт", "II"),
+                 ("Обласний центр зв’язку", "I")]
 
 
 def pt(lat, lon, km_n, km_e):
     return lat + km_n / 111.0, lon + km_e / (111.0 * math.cos(math.radians(lat)))
 
 
-def seed(conn, now=None):
+def seed(conn, now=None, rich=False):
     now = now or datetime.now(timezone.utc).replace(microsecond=0)
     cur = conn.cursor()
     q = lambda sql, *a: cur.execute(sql, a)                                    # noqa: E731
@@ -255,7 +261,107 @@ def seed(conn, now=None):
                       crew[1][0])
             q("UPDATE mission SET state = 'виконується', interceptor_id = %s WHERE mission_id = %s", itc, mid)
         conn.commit()
+    if rich:
+        stats["демо"] = enrich(cur, q, one, user, at, conn, now, objs, positions, crews, users, cmd, model_id, sec_of,
+                               live, fly, classify, start_point, person, ints)
     user(None); at(None)
+    conn.commit()
+    return stats
+
+
+def enrich(cur, q, one, user, at, conn, now, objs, positions, crews, users, cmd, model_id, sec_of, live, fly,
+           classify, start_point, person, ints):
+    """Розширений набір для живої демонстрації: фільтри, сторінки списків і дії кожної ролі мають на чому працювати."""
+    R2 = random.Random(26)
+    for name, cat in EXTRA_OBJECTS:
+        la, lo = R2.uniform(51.05, 51.55), R2.uniform(30.6, 32.6)
+        objs.append((one("INSERT INTO protected_object (sector_id, name, category, lat, lon) VALUES "
+                         "(%s,%s,%s,%s,%s) RETURNING object_id", sec_of(la, lo), name, cat, round(la, 6),
+                         round(lo, 6)), la, lo))
+    statuses = ["у мережі"] * 18 + ["деградований"] * 4 + ["поза мережею"] * 3 + ["у карантині"] * 2 + \
+               ["зареєстрований"] * 2 + ["виведений"]
+    kinds = ["акустичний", "радіолокаційний", "оптико-електронний", "радіотехнічний", "акустичний"]
+    for i, st in enumerate(statuses):
+        k = kinds[i % 5]
+        la, lo = R2.uniform(51.1, 52.15), R2.uniform(30.5, 32.7)
+        hb = None if st in ("зареєстрований", "виведений") else \
+            now - (timedelta(hours=R2.randint(3, 72)) if st == "поза мережею" else timedelta(seconds=R2.randint(5, 600)))
+        q("INSERT INTO sensor (sector_id, hw_serial, kind, status, lat, lon, height_m, last_heartbeat_at) VALUES "
+          "(%s,%s,%s,%s,%s,%s,%s,%s)", sec_of(la, lo), {"акустичний": "AC", "радіолокаційний": "RD",
+                                                       "оптико-електронний": "EO", "радіотехнічний": "RF"}[k] +
+          f"-{41 + i:04d}", k, st, round(la, 6), round(lo, 6), R2.choice([4.0, 6.0, 8.0, 12.0]), hb)
+    la, lo = 51.9, 30.9
+    q("INSERT INTO position (sector_id, code, status, lat, lon, engagement_radius_m) VALUES (%s,%s,%s,%s,%s,%s)",
+      sec_of(la, lo), "П-11", "неактивна", la, lo, 8000)
+    no = 1200
+    for pos in positions:                         # поповнення позицій: на них витрачатиметься історія
+        for k in range(24):
+            q("INSERT INTO interceptor (model_id, position_id, serial_no, state, firmware_version, received_at) "
+              "VALUES (%s,%s,%s,'готовий',%s,%s)", model_id[(no + k) % 4], pos[0], f"ПХ-{no:05d}",
+              f"4.{R2.randint(1, 3)}.{R2.randint(0, 9)}", (now - timedelta(days=R2.randint(130, 170))).date())
+            no += 1
+    for k in range(16):
+        q("INSERT INTO interceptor (model_id, position_id, serial_no, state, firmware_version, received_at) "
+          "VALUES (%s,NULL,%s,%s,%s,%s)", model_id[k % 4], f"ПХ-{no:05d}", "на складі" if k < 12 else "втрачений",
+          f"4.{R2.randint(1, 3)}.{R2.randint(0, 9)}", (now - timedelta(days=R2.randint(5, 60))).date())
+        no += 1
+    conn.commit()
+
+    # ще 120 треків за 34–124 доби до запуску; «живі» треки на цей час виведено з зіставлення
+    saved = cur.execute("SELECT track_id, state FROM air_track WHERE track_id = ANY(%s)", (live,)).fetchall()
+    q("UPDATE air_track SET state = 'переданий' WHERE track_id = ANY(%s)", live)
+    pool = [c for i, c in enumerate(crews[:16]) if i not in (0, 5)]      # 0 і 5 зайняті активними місіями
+    pool = (pool * 2)[:16]
+    plan = ["hit"] * 60 + ["miss"] * 18 + ["abort"] * 8 + ["reject"] * 7 + ["reassign"] * 7 + [None] * 20
+    R2.shuffle(plan)
+    stats = {}
+    for n, outcome in enumerate(plan):
+        t0 = now - timedelta(days=124) + timedelta(hours=n * 18 + R2.randint(0, 5), minutes=R2.randint(0, 59))
+        obj = R2.choice(objs)
+        track = fly(t0, R2.randint(4, 7), start_point(obj), (obj[1], obj[2]), R2.uniform(42, 58), R2.choice(SIGS))
+        t_cls = t0 + timedelta(seconds=40)
+        classify(track, t_cls, "ворожа" if outcome else R2.choice(["невідома", "дружня", "нейтральна"]),
+                 "ударний БпЛА" if outcome else R2.choice(["невстановлений", "розвідувальний БпЛА", "цивільний"]))
+        conn.commit()
+        if outcome is None:
+            q("UPDATE air_track SET state = %s WHERE track_id = %s", R2.choice(["втрачений", "переданий", "скинутий"]),
+              track)
+        else:
+            mission_lifecycle(cur, q, one, user, at, users, cmd, pool, track, t_cls, outcome, n, R2, ints)
+            stats[outcome] = stats.get(outcome, 0) + 1
+        conn.commit()
+    q("UPDATE air_track SET state = 'втрачений' WHERE state NOT IN ('знищений', 'втрачений', 'переданий', 'скинутий') "
+      "AND track_id <> ALL(%s)", live)
+    for tid, st in saved:
+        q("UPDATE air_track SET state = %s WHERE track_id = %s", st, tid)
+    user(None); at(None)
+    conn.commit()
+
+    # ще 6 «живих» треків; місії, що чекають дії: санкції ОЧ, прийняття розрахунком, пуску
+    new = []
+    for n in range(6):
+        obj = objs[n * 2 + 1]
+        new.append(fly(now - timedelta(seconds=30 + 20 * n), 5, start_point(obj), (obj[1], obj[2]),
+                       R2.uniform(45, 55), SIGS[(n + 1) % 4], 2 + n % 2))
+    for tr in new[:4]:
+        classify(tr, now)
+    conn.commit()
+    for k, (tr, crew, to) in enumerate(((new[0], crews[6], None), (new[1], crews[7], None),
+                                        (new[2], crews[1], "санкціонована"), (new[3], crews[2], "прийнята"))):
+        user(users["R-02"][1 + k % 3]); at(None)
+        mid = one("SELECT fn_propose_mission(%s, %s)", tr, crew[0])
+        if to:
+            user(users["R-01"][k % 4])
+            q("UPDATE mission SET state = 'санкціонована' WHERE mission_id = %s", mid)
+        if to == "прийнята":
+            user(cmd[crew[0]])
+            q("UPDATE mission SET state = 'прийнята' WHERE mission_id = %s", mid)
+        conn.commit()
+    user(None)
+    for code, login, status in (("R-03", "an5", "відкликаний"), ("R-06", "r06_3", "призупинений"),   # для фільтра
+                                ("R-07", "r07_4", "відкликаний"), ("R-08", "r08_3", "активний")):     # «Стан»
+        uid = person(code, login)
+        q("UPDATE personnel SET status = %s WHERE user_id = %s", status, uid)
     conn.commit()
     return stats
 

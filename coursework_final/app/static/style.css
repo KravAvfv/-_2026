@@ -64,3 +64,4 @@ table.matrix form { margin: 0; }
 button.cell { background: #fff; color: var(--muted); border: none; padding: 0 6px; font-size: 16px; }
 button.cell.on { color: var(--ok); font-weight: bold; }
 .card dl dd input[type=checkbox] { vertical-align: middle; }
+.pager a { margin-left: 8px; }

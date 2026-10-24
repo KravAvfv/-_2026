@@ -7,7 +7,7 @@
   <select name="crew"><option value="">усі розрахунки</option>{% for c in crews %}<option {{ 'selected' if c == a.crew }}>{{ c }}</option>{% endfor %}</select>
   <label>з</label><input type="date" name="from" value="{{ a.get('from', '') }}"><label>до</label><input type="date" name="to" value="{{ a.get('to', '') }}">
   <button class="sec">Фільтрувати</button></form>
-<p class="muted">Показано {{ ms|length }} (не більше 12) з {{ total }} {{ pl(total, 'місії', 'місій', 'місій') }}.</p>
+<p class="muted">Усього в базі {{ total }} {{ pl(total, 'місія', 'місії', 'місій') }}.</p>{% include "_pager.html" %}
 <table><tr><th>Номер</th><th>Трек</th><th>Розрахунок</th><th>Стан</th><th>Запропоновано</th><th>Результат</th></tr>
 {% for m in ms %}<tr><td><a href="{{ url_for('mission', mid=m.mission_id) }}">{{ m.mission_no }}</a></td><td>{{ m.track_number }}</td><td>{{ m.call_sign }}</td>
 <td><span class="badge {{ state_class[m.state] }}">{{ m.state }}</span></td><td>{{ fmt_dt(m.proposed_at) }}</td><td>{{ m.assessment or '—' }}</td></tr>
