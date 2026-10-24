@@ -68,14 +68,16 @@
 | P6 | Communication jamming (РЕБ) disrupts links | Lost situational picture | Store-and-forward edge, link redundancy (mesh radio / LTE / satellite), degraded-mode procedures |
 | P7 | Paper-based reporting of results and consumption | Slow resupply, disputed results (pay-per-intercept) | Automatic **engagement reports**, video evidence, consumption accounting |
 
-### 1.3 High-level objectives (feed for the goal tree in ЛР1)
-- **G0 (генеральна мета):** забезпечити своєчасне виявлення та ефективне перехоплення повітряних цілей у зоні
-  відповідальності центру шляхом автоматизації обміну телеметрією та координації дронів-перехоплювачів.
-- G1 Підвищити повноту та достовірність ситуаційної картини повітряного простору.
-- G2 Скоротити час циклу «виявлення — рішення — перехоплення».
-- G3 Забезпечити ефективне управління ресурсами (розрахунки, перехоплювачі, АКБ, позиції).
-- G4 Гарантувати безпеку, надійність і кіберзахищеність функціонування системи.
-- G5 Забезпечити аналітику, звітність та безперервне вдосконалення діяльності.
+### 1.3 High-level objectives (goal tree of ЛР1 and the course project; changed 2026-10-23 per instructor)
+- **G0 (генеральна мета):** забезпечення безпеки повітряного простору на території, яку покриває система
+  (IoT-платформа «Щит-Лінк»; формулювання викладача).
+- G1 Повна та достовірна обізнаність про повітряну обстановку.
+- G2 Своєчасна нейтралізація повітряних загроз.
+- G3 Безпека дружньої авіації та населення (деконфлікція, зони заборони, людина ухвалює рішення на пуск).
+- G4 Постійна готовність сил і засобів.
+- G5 Стійка та захищена робота системи (кіберзахист, доступність, вдосконалення за аналізом).
+- Single source: `GOALS` in `lab1/make_lab1.py` (15 level-2 goals × 2 measures; whole tree on ONE figure, renderer
+  `tools/idef_model.py` kind `goaltree`).
 
 ### 1.4 System boundaries
 **In scope (автоматизується):** реєстрація сенсорів і периферійних вузлів; прийом/нормалізація телеметрії й виявлень;

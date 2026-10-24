@@ -1,26 +1,26 @@
 {
-  "file": "07_goal_tree_branch_4.mmd",
+  "file": "13_wbs_1_5.mmd",
   "native_px": [
-    922,
-    882
+    727,
+    750
   ],
   "png_px": [
-    2769,
-    2646
+    2181,
+    2250
   ],
   "min_font_px": 20.0,
   "portrait": {
     "width_cm": 16.5,
-    "font_pt": 10.1,
-    "dpi": 426
+    "font_pt": 12.9,
+    "dpi": 336
   },
   "landscape": {
-    "width_cm": 15.16,
-    "font_pt": 9.3,
-    "dpi": 464
+    "width_cm": 14.05,
+    "font_pt": 11.0,
+    "dpi": 394
   },
   "orientation": "portrait",
   "width_cm": 16.5,
   "legible": true,
-  "aspect": 1.05
+  "aspect": 0.97
 }

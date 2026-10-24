@@ -7,8 +7,8 @@
         <mxCell id="n_P" value="1 Створення&lt;br&gt;IoT-платформи&lt;br&gt;«Щит-Лінк»" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#D9D9D9;strokeColor=#000000;strokeWidth=2.5;fontStyle=1;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
           <mxGeometry x="12" y="401" width="169.81" height="114" as="geometry" />
         </mxCell>
-        <mxCell id="n_N1_1" value="1.1 Управління проектом" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#EDEDED;strokeColor=#000000;strokeWidth=2;fontStyle=1;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
-          <mxGeometry x="281.81" y="12" width="259.72" height="54" as="geometry" />
+        <mxCell id="n_N1_1" value="1.1 Управління проєктом" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#EDEDED;strokeColor=#000000;strokeWidth=2;fontStyle=1;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
+          <mxGeometry x="281.81" y="12" width="259.48" height="54" as="geometry" />
         </mxCell>
         <mxCell id="n_N1_2" value="1.2 Обстеження та&lt;br&gt;формування вимог" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;fontColor=#000000;fillColor=#EDEDED;strokeColor=#000000;strokeWidth=2;fontStyle=1;spacingLeft=4;spacingRight=4;" parent="1" vertex="1">
           <mxGeometry x="281.81" y="106" width="204.72" height="84" as="geometry" />

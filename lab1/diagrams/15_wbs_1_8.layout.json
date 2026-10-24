@@ -1,26 +1,26 @@
 {
   "file": "15_wbs_1_8.mmd",
   "native_px": [
-    770,
-    686
+    740,
+    780
   ],
   "png_px": [
-    2310,
-    2058
+    2220,
+    2340
   ],
   "min_font_px": 20.0,
   "portrait": {
     "width_cm": 16.5,
-    "font_pt": 12.2,
-    "dpi": 356
+    "font_pt": 12.6,
+    "dpi": 342
   },
   "landscape": {
-    "width_cm": 16.27,
-    "font_pt": 12.0,
-    "dpi": 361
+    "width_cm": 13.75,
+    "font_pt": 10.5,
+    "dpi": 410
   },
   "orientation": "portrait",
   "width_cm": 16.5,
   "legible": true,
-  "aspect": 1.12
+  "aspect": 0.95
 }

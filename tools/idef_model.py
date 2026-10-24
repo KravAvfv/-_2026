@@ -873,7 +873,7 @@ def render_usecase(spec, svg_path):
     xl_par, xl = 52, (190 if left_par else 90)
     bx = xl + 96
     cols = 1 + max(u["col"] for u in spec["usecases"])
-    colw = UW + 40
+    colw = UW + spec.get("cgap", 40)               # cgap: проміжок між колонками (місце для «include»)
     bw = cols * colw + 40
     has_right = any(a["side"] == "right" for a in spec["actors"])
     W = bx + bw + (170 if has_right else 30)
@@ -941,19 +941,23 @@ def render_usecase(spec, svg_path):
         svg.line([(busx, py - 4), (px + 16, py - 4)], sw=1.3)
         svg.head((busx, py - 4), (px + 16, py - 4), size=13, filled=False)
     for kind, pairs in (("include", spec.get("include", [])), ("extend", spec.get("extend", []))):
-        for s_, t_ in pairs:
+        for pair in pairs:                         # (джерело, ціль[, умова розширення])
+            s_, t_ = pair[0], pair[1]
+            cond = pair[2] if len(pair) > 2 else None
             _, sx, sy, *_ = pos[s_]; _, tx, ty, *_ = pos[t_]
             p1, p2 = uc_edge(s_, (tx, ty)), uc_edge(t_, (sx, sy))
             svg.line([p1, p2], sw=1.3, dash="6 4")
-            svg.head(p1, p2, filled=False)
+            ang = math.atan2(p2[1] - p1[1], p2[0] - p1[0])   # UML-залежність: відкрита стрілка (не трикутник)
+            wing = [(p2[0] - 11 * math.cos(ang + s * 0.45), p2[1] - 11 * math.sin(ang + s * 0.45)) for s in (1, -1)]
+            svg.line([wing[0], p2, wing[1]], sw=1.3)
             mx, my = (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2
             lab = f"«{kind}»"
             if abs(p1[0] - p2[0]) < 30:          # vertical link: label beside the line
                 svg.text(mx + 8, my - 9, [lab])
                 continue
-            svg.items.append(f'<rect x="{mx - tw(lab) / 2 - 3:.1f}" y="{my - 10:.1f}" width="{tw(lab) + 6:.1f}" '
-                             f'height="19" fill="#fff" stroke="none"/>')
-            svg.text(mx, my - 9, [lab], anchor="middle")
+            svg.text(mx, my - FPX * LH - 2, [lab], anchor="middle")   # підпис над лінією — штрихи видно повністю
+            if cond:                                               # умова розширення — під лінією
+                svg.text(mx, my + 3, [f"[{cond}]"], anchor="middle")
     svg.save(svg_path, W, H)
     return W, H
 
@@ -1253,10 +1257,99 @@ def render_flowchart(spec, svg_path):
     return W, H
 
 
+# ------------------------------------------------------------------------------------------- goal tree (one sheet)
+def render_goaltree(spec, svg_path):
+    """Whole goal tree on one sheet. The general goal is a banner across the top; below it the tree runs left to
+    right: level 1 → level 2 → level-3 measures. The measures of one level-2 goal stand side by side in one row
+    (the second one is reached by a rake line over the first); a code ending with «а»/«б» is an alternative
+    (dashed frame, «або»). spec: {"kind": "goaltree", "root": (code, text),
+    "goals": [(c1, t1, [(c2, t2, [(c3, t3), ...]), ...]), ...], "cols": [w1, w2, w_measure]}
+    Level-3 lists may be empty (a three-level tree, e.g. WBS levels 1–3); "sep1": separator after a level-1 code;
+    "split": 2 places the level-1 branches in two side-by-side columns under one banner (halves the height)."""
+    W1, W2, WM = spec.get("cols", (106, 170, 180))
+    G, PAD, MG, GG, BG, BUS = 12, 5, 8, 8, 10, 12
+    lh = FPX * LH
+
+    def bh(text, w, bold=False):
+        return len(wrap(text, w - 2 * PAD, bold)) * lh + 2 * PAD
+    nmax = max(len(l) for _, _, subs in spec["goals"] for _, _, l in subs)
+    s1 = spec.get("sep1", ". ")
+    x1 = 6 + BUS
+    x2 = x1 + W1 + G
+    x3 = x2 + W2 + G
+    W = (x3 + nmax * WM + (nmax - 1) * MG + 6) if nmax else x3 - G + 6
+    rc, rt = spec["root"]
+    h0 = bh(f"{rc}. {rt}", W - 12, True)
+    blocks, y = [], 6 + h0 + 14
+    for c1, t1, subs in spec["goals"]:
+        y1s, groups = y, []
+        for c2, t2, leaves in subs:
+            h2 = bh(f"{c2} {t2}", W2)
+            hm = max((bh(f"{c} {t}", WM) for c, t in leaves), default=0)
+            gh = max(h2, hm)
+            groups.append((c2, t2, y + (gh - h2) / 2, h2, y + (gh - hm) / 2, hm, leaves))
+            y += gh + GG
+        y -= GG
+        h1 = bh(f"{c1}{s1}{t1}", W1, True)
+        span = max(y - y1s, h1)
+        y = y1s + span
+        blocks.append((c1, t1, y1s + (span - h1) / 2, h1, groups))
+        y += BG
+    H = y - BG + 6
+    shift = [(0, 0)] * len(blocks)                     # (dx, dy) кожної гілки першого рівня
+    if spec.get("split", 1) == 2 and len(blocks) > 1:
+        top = blocks[0][2] - 2
+        tops = [min(b[2], min(g[2] for g in b[4])) for b in blocks]
+        k = min(range(1, len(blocks)), key=lambda i: abs((tops[i] - top) - (H - tops[i])))
+        dx, dy = W + 24, -(tops[k] - tops[0])
+        shift = [(0, 0)] * k + [(dx, dy)] * (len(blocks) - k)
+        H = max(tops[k] - 0, H + dy)
+        W = 2 * W + 24
+    svg = SVG()
+
+    def box(x, yb, w, h, text, bold=False, fill="#fff", sw=1.3, dash=None):
+        svg.rect(x, yb, w, h, sw=sw, dash=dash, fill=fill)
+        lines = wrap(text, w - 2 * PAD, bold)
+        svg.text(x + w / 2, yb + (h - len(lines) * lh) / 2, lines, anchor="middle", bold=bold)
+
+    def link(xa, ya, xb, yb, xm):
+        svg.line([(xa, ya), (xm, ya), (xm, yb), (xb - 1, yb)], sw=1.1)
+        svg.head((xm, yb), (xb, yb), size=6)
+    box(6, 6, W - 12, h0, f"{rc}. {rt}", bold=True, fill="#D9D9D9", sw=2.2)
+    xbus0 = 6 + BUS / 2
+    for sh in sorted(set(shift)):
+        mine = [b for b, s_ in zip(blocks, shift) if s_ == sh]
+        last = mine[-1][2] + mine[-1][3] / 2 + sh[1]
+        svg.line([(xbus0 + sh[0], 6 + h0), (xbus0 + sh[0], last)], sw=1.1)
+    x1_, x2_, x3_ = x1, x2, x3
+    for (c1, t1, yb1, h1, groups), (sdx, sdy) in zip(blocks, shift):
+        x1, x2, x3, xbus = x1_ + sdx, x2_ + sdx, x3_ + sdx, xbus0 + sdx
+        yb1 += sdy
+        groups = [(c2, t2, yb2 + sdy, h2, ym + sdy, hm, lv) for c2, t2, yb2, h2, ym, hm, lv in groups]
+        box(x1, yb1, W1, h1, f"{c1}{s1}{t1}", bold=True, fill="#EDEDED", sw=1.8)
+        svg.line([(xbus, yb1 + h1 / 2), (x1 - 1, yb1 + h1 / 2)], sw=1.1)
+        svg.head((xbus, yb1 + h1 / 2), (x1, yb1 + h1 / 2), size=6)
+        for c2, t2, yb2, h2, ym, hm, leaves in groups:
+            box(x2, yb2, W2, h2, f"{c2} {t2}", fill="#F7F7F7", sw=1.4)
+            link(x1 + W1, yb1 + h1 / 2, x2, yb2 + h2 / 2, x1 + W1 + G / 2)
+            xb = x2 + W2 + G / 2
+            for k, (c3, t3) in enumerate(leaves):
+                mx = x3 + k * (WM + MG)
+                box(mx, ym, WM, hm, f"{c3} {t3}", dash="5 3" if c3[-1] in "аб" else None, sw=1.1)
+                if k == 0:
+                    link(x2 + W2, yb2 + h2 / 2, mx, ym + hm / 2, xb)
+                else:
+                    ty = ym - GG / 2
+                    svg.line([(xb, yb2 + h2 / 2), (xb, ty), (mx + WM / 2, ty), (mx + WM / 2, ym - 1)], sw=1.1)
+                    svg.head((mx + WM / 2, ty), (mx + WM / 2, ym), size=6)
+    svg.save(svg_path, W, H)
+    return W, H
+
+
 def render(spec, out_base, min_pt=10.0):
     out_base = Path(out_base)
     svg = out_base.with_suffix(".svg")
-    fn = {"idef0": render_idef0, "idef3": render_idef3, "tree": render_tree, "dfd": render_dfd, "usecase": render_usecase, "layers": render_layers, "columns": render_columns, "flowchart": render_flowchart}[spec["kind"]]
+    fn = {"idef0": render_idef0, "idef3": render_idef3, "tree": render_tree, "dfd": render_dfd, "usecase": render_usecase, "layers": render_layers, "columns": render_columns, "flowchart": render_flowchart, "goaltree": render_goaltree}[spec["kind"]]
     _FRAME.clear(); _FRAME.update(FRAME_DEFAULT, **spec.get("frame", {}))
     W, H = fn(spec, svg)
     png = out_base.with_suffix(".png")
