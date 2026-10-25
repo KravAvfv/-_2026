@@ -63,6 +63,7 @@ the domain model (`DOMAIN_KNOWLEDGE_BASE.md` — РЦПДО «Щит-Півні�
 | `tools/uk_plural.py` | `n_uk(n, one, few, many)` — Ukrainian numeral agreement; use it in every generated «N іменник» sentence. |
 | `tools/office2pdf.sh` | same as docx2pdf.sh for any office file (.xlsx/.pptx); x2t renders only the ACTIVE sheet of a workbook |
 | `bank_work/` | «Системи банкової безпеки» ПР1–ПР3, variant 08: `make_prN.py` keeps only the В08 sheets of the teacher's all-variants template, fills yellow cells, recalculates with `formulas` and asserts every «Перевірка» = ОК → `Системи банкової безпеки/Практична N/Готово/`. ПР3 template ships with an EMPTY zone check L5:L13 — rebuilt formula `CHECK`. Step 4 («Нова обставина») waits for the teacher's file. |
+| `cybersec_work/` | «Кібернетична безпека підприємства» ЛР1–ЛР4, variant 24 (ТЦК та СП): `labN/model_lN.py` + `make_labN.py` + figures drawn with `lab1/svg_fig.py`; shared refs/spec writer `cyb_common.py` (ЛР2 CRAMM, ЛР3 OCTAVE Allegro + FRAP on own devices, ЛР4 FMECA). Build: `make_labN.py` → `build_report.py --pdf` → `check_report.py`. |
 | `tools/docx2pdf.sh` | headless .docx → .pdf via OnlyOffice x2t (no LibreOffice on this machine) |
 | `.claude/skills/diagram-generator/` | diagram workflow skill |
 | `.claude/skills/academic-report-builder/` | report assembly skill |

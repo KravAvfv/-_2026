@@ -394,11 +394,15 @@ class ReportBuilder:
     def h3(self, text, new_page=False):
         self._heading(text, new_page, WD_ALIGN_PARAGRAPH.LEFT, 1.25, 6, 0, italic=True, level=3)
 
-    def para(self, text):
+    def para(self, text, align=None):
+        """Body paragraph; `align: center` (block key) gives a centred, unindented line, e.g. a formula."""
         self.switch("portrait")
         for chunk in str(text).strip().split("\n\n"):
             p = self.doc.add_paragraph()
-            fmt_par(p)
+            if align == "center":
+                fmt_par(p, align=WD_ALIGN_PARAGRAPH.CENTER, indent=0)
+            else:
+                fmt_par(p)
             add_text(p, self.resolve(" ".join(chunk.split())))
 
     def lst(self, items, numbered):
@@ -533,7 +537,7 @@ class ReportBuilder:
             if key == "h1": self.h1(val, np_)
             elif key == "h2": self.h2(val, np_)
             elif key == "h3": self.h3(val, np_)
-            elif key == "p": self.para(val)
+            elif key == "p": self.para(val, b.get("align"))
             elif key == "bullets": self.lst(val, False)
             elif key == "numbered": self.lst(val, True)
             elif key == "table": self.table(val)
