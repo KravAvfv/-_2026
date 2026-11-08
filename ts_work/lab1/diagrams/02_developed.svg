@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2060" height="1190" viewBox="0 0 2060 1190">
+<defs><marker id="ar" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L12,6 L0,12 z" fill="#000"/></marker><marker id="as" markerWidth="12" markerHeight="12" refX="1" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M12,0 L0,6 L12,12 z" fill="#000"/></marker></defs>
+<rect width="2060" height="1190" fill="#fff"/>
+<rect x="20" y="20" width="2020" height="190" fill="#FAFAFA" stroke="#404040" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="34" y="50.6" font-family="Times New Roman" font-size="34" text-anchor="start" dominant-baseline="central" font-weight="bold">Зовнішнє середовище</text>
+<rect x="45.0" y="75.0" width="340" height="100" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="215" y="104.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">ОСР: мережа</text>
+<text x="215" y="145.06" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">0,4 / 10 кВ</text>
+<rect x="520.0" y="75.0" width="400" height="100" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="720" y="104.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Агрегатор, ринок</text>
+<text x="720" y="145.06" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">допоміжних послуг</text>
+<rect x="1020.0" y="75.0" width="360" height="100" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1200" y="104.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Метеосервіс</text>
+<text x="1200" y="145.06" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">(прогноз погоди)</text>
+<rect x="1500.0" y="75.0" width="480" height="100" rx="50.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1740" y="104.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Мешканці, управитель,</text>
+<text x="1740" y="145.06" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">сервісна організація</text>
+<rect x="20" y="240" width="2020" height="930" fill="#FFFFFF" stroke="#404040" stroke-width="2"/>
+<text x="34" y="1139.4" font-family="Times New Roman" font-size="34" text-anchor="start" dominant-baseline="central" font-weight="bold">Межа системи «Мікромережа будинку»</text>
+<rect x="120" y="275" width="1900" height="200" fill="#FAFAFA" stroke="#404040" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="134" y="305.6" font-family="Times New Roman" font-size="34" text-anchor="start" dominant-baseline="central" font-weight="bold">Хмарний рівень: платформа керування енергією (Н9)</text>
+<rect x="300.0" y="350.0" width="360" height="100" rx="50.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="480" y="379.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Прогнозування</text>
+<text x="480" y="420.06" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">(ШІ)</text>
+<rect x="720.0" y="350.0" width="360" height="100" rx="50.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="900" y="379.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Оптимізація</text>
+<text x="900" y="420.06" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">розкладу УЗЕ</text>
+<rect x="1140.0" y="350.0" width="360" height="100" rx="50.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1320" y="379.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Цифровий</text>
+<text x="1320" y="420.06" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">двійник (Н10)</text>
+<rect x="1560.0" y="350.0" width="360" height="100" rx="50.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1740" y="379.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Моніторинг</text>
+<text x="1740" y="420.06" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">безпеки, SIEM (Н11)</text>
+<rect x="120" y="505" width="1900" height="145" fill="#FAFAFA" stroke="#404040" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="134" y="535.6" font-family="Times New Roman" font-size="34" text-anchor="start" dominant-baseline="central" font-weight="bold"></text>
+<rect x="130.0" y="528.0" width="220" height="100" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="240" y="557.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Шлюз</text>
+<text x="240" y="598.0600000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">безпеки (Н8)</text>
+<rect x="390.0" y="528.0" width="1300" height="100" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1040" y="557.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Контролер мікромережі (Н7): балансування,</text>
+<text x="1040" y="598.0600000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">перехід у острівний режим</text>
+<rect x="1735.0" y="528.0" width="260" height="100" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1865" y="557.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">УЗПД, сервер</text>
+<text x="1865" y="598.0600000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">(Е5, Е7)</text>
+<rect x="120" y="680" width="1900" height="440" fill="#FAFAFA" stroke="#404040" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="134" y="1089.4" font-family="Times New Roman" font-size="34" text-anchor="start" dominant-baseline="central" font-weight="bold">Рівень пристроїв: генерація, накопичення, вимірювання, навантаження</text>
+<rect x="85.0" y="735.0" width="260" height="170" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="215" y="759.82" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">ТСП:</text>
+<text x="215" y="799.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">комутація,</text>
+<text x="215" y="840.0600000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">лічильник</text>
+<text x="215" y="880.1800000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Е3 (Н5)</text>
+<rect x="360.0" y="735.0" width="260" height="170" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="490" y="759.82" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Датчики</text>
+<text x="490" y="799.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">інсоляції,</text>
+<text x="490" y="840.0600000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">якості</text>
+<text x="490" y="880.1800000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">енергії (Н6)</text>
+<rect x="635.0" y="735.0" width="260" height="170" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="765" y="759.82" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">СЕС</text>
+<text x="765" y="799.94" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">60 кВт,</text>
+<text x="765" y="840.0600000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">інвертори</text>
+<text x="765" y="880.1800000000001" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">(Н1)</text>
+<rect x="910.0" y="735.0" width="260" height="170" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1040" y="779.88" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">УЗЕ</text>
+<text x="1040" y="820.0" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">100 кВт·год,</text>
+<text x="1040" y="860.12" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">BMS (Н2)</text>
+<rect x="1185.0" y="735.0" width="260" height="170" rx="85.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1315" y="779.88" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Зарядні</text>
+<text x="1315" y="820.0" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">станції EV</text>
+<text x="1315" y="860.12" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">× 4 (Н3)</text>
+<rect x="1460.0" y="735.0" width="260" height="170" rx="85.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1590" y="779.88" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Керовані</text>
+<text x="1590" y="820.0" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">навантаження,</text>
+<text x="1590" y="860.12" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">реле (Н4)</text>
+<rect x="1735.0" y="735.0" width="260" height="170" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1865" y="779.88" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">Лічильники</text>
+<text x="1865" y="820.0" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">квартир</text>
+<text x="1865" y="860.12" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">і МЗК × 75</text>
+<polyline points="60,175 60,820 85,820" fill="none" stroke="#000" stroke-width="5"/>
+<polyline points="215,905 215,980 1865,980" fill="none" stroke="#000" stroke-width="5"/>
+<polyline points="765,905 765,980" fill="none" stroke="#000" stroke-width="5"/>
+<polyline points="1040,905 1040,980" fill="none" stroke="#000" stroke-width="5"/>
+<polyline points="1315,905 1315,980" fill="none" stroke="#000" stroke-width="5"/>
+<polyline points="1590,905 1590,980" fill="none" stroke="#000" stroke-width="5"/>
+<polyline points="1865,905 1865,980" fill="none" stroke="#000" stroke-width="5"/>
+<text x="1040" y="1020.0" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">шина 0,4 кВ будинку (двобічні потоки енергії)</text>
+<polyline points="300,735 300,665 420,665 420,628" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="490,735 490,628" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" stroke-dasharray="12 8"/>
+<polyline points="765,735 765,628" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="1040,735 1040,628" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="1315,735 1315,628" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="1590,735 1590,628" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="1865,735 1865,628" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1823.64" y="659.94" width="82.72" height="44.12" fill="#fff"/>
+<text x="1865" y="682.0" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">DLMS</text>
+<polyline points="1690,578 1735,578" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="350,578 390,578" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="240,528 240,450" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<rect x="258.28" y="467.94" width="153.44" height="44.12" fill="#fff"/>
+<text x="335" y="490.0" font-family="Times New Roman" font-size="34" text-anchor="middle" dominant-baseline="central">MQTT/TLS</text>
+<polyline points="330,175 330,275" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="720,175 720,275" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)"/>
+<polyline points="1200,175 1200,275" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<polyline points="1740,175 1740,275" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)" marker-start="url(#as)" stroke-dasharray="12 8"/>
+</svg>

@@ -1,0 +1,26 @@
+{
+  "file": "02_stage0.mmd",
+  "native_px": [
+    928,
+    1227
+  ],
+  "png_px": [
+    2784,
+    3681
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.1,
+    "dpi": 429
+  },
+  "landscape": {
+    "width_cm": 10.96,
+    "font_pt": 6.7,
+    "dpi": 645
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true,
+  "aspect": 0.76
+}

@@ -1,0 +1,3 @@
+show port-security
+show port-security address
+copy running-config startup-config

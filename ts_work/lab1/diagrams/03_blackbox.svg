@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1060" viewBox="0 0 1800 1060">
+<defs><marker id="ar" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L12,6 L0,12 z" fill="#000"/></marker><marker id="as" markerWidth="12" markerHeight="12" refX="1" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M12,0 L0,6 L12,12 z" fill="#000"/></marker></defs>
+<rect width="1800" height="1060" fill="#fff"/>
+<rect x="20" y="20" width="1760" height="190" fill="#FFFFFF" stroke="#404040" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="34" y="48.8" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central" font-weight="bold">Надсистема та середовище: ОСР, ринок, регулятор, погода</text>
+<rect x="470.0" y="90.0" width="860" height="80" rx="40.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="900" y="130.0" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central">Ціль: надійне, економне й захищене енергозабезпечення</text>
+<text x="30" y="300.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">X1–X3: дані лічильників, датчиків</text>
+<polyline points="560,300 650,300" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="30" y="395.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">X4: прогноз погоди</text>
+<polyline points="560,395 650,395" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="30" y="490.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">X5: тарифи, запити агрегатора</text>
+<polyline points="560,490 650,490" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="30" y="585.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">X6: стан і обмеження ОСР</text>
+<polyline points="560,585 650,585" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="30" y="680.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">X7: команди управителя</text>
+<polyline points="560,680 650,680" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="30" y="775.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">X8: енергія мережі й Сонця</text>
+<polyline points="560,775 650,775" fill="none" stroke="#000" stroke-width="5" marker-end="url(#ar)"/>
+<text x="30" y="870.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">X9: оновлення ПЗ і моделей</text>
+<polyline points="560,870 650,870" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<polyline points="1150,290 1240,290" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="1255" y="290.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">Y1: уставки інверторам, УЗЕ</text>
+<polyline points="1150,380 1240,380" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="1255" y="380.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">Y2: команди навантаженням</text>
+<polyline points="1150,470 1240,470" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="1255" y="470.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">Y3: острівний режим (ТСП)</text>
+<polyline points="1150,560 1240,560" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="1255" y="560.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">Y4: дані обліку для ППКО</text>
+<polyline points="1150,650 1240,650" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="1255" y="650.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">Y5: звіти управителю</text>
+<polyline points="1150,740 1240,740" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="1255" y="740.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">Y6: відповіді агрегатору</text>
+<polyline points="1150,830 1240,830" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<text x="1255" y="830.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">Y7: тривожні сповіщення</text>
+<polyline points="1150,920 1240,920" fill="none" stroke="#000" stroke-width="5" marker-end="url(#ar)"/>
+<text x="1255" y="920.0" font-family="Times New Roman" font-size="32" text-anchor="start" dominant-baseline="central">Y8: енергія споживачам</text>
+<rect x="650.0" y="260.0" width="500" height="760" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="900" y="291.12" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central" font-weight="bold">Мікромережа</text>
+<text x="900" y="328.88" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central" font-weight="bold">будинку</text>
+<rect x="690.0" y="395.0" width="420" height="70" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="900" y="430.0" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central">П1–П3: пристрої</text>
+<rect x="690.0" y="495.0" width="420" height="70" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="900" y="530.0" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central">П4: контролер</text>
+<rect x="690.0" y="595.0" width="420" height="70" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="900" y="630.0" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central">П5: хмара, ШІ</text>
+<rect x="690.0" y="695.0" width="420" height="70" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="900" y="730.0" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central">П6: користувачі</text>
+<rect x="680.0" y="805.0" width="440" height="170" fill="#EDEDED" stroke="#000" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="900" y="852.24" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central">СЗІБ (П7): захист</text>
+<text x="900" y="890.0" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central">команд, даних,</text>
+<text x="900" y="927.76" font-family="Times New Roman" font-size="32" text-anchor="middle" dominant-baseline="central">приватності</text>
+<polyline points="900,170 900,260" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+</svg>

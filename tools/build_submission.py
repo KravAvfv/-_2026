@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Збирає папку «Здача»: для кожної роботи кожної дисципліни — звіт (.docx + .pdf), додаткові матеріали, що здаються
-разом зі звітом (draw.io, BPMN, Excel, PowerPoint, SQL, вихідний код прототипу, фото конспекту), і суфлери
+разом зі звітом (draw.io, BPMN, Excel, PowerPoint, SQL, вихідний код прототипу, графіки), і суфлери
 (tools/make_speeches.py) — усе в одній папці роботи. Покажчик — Здача/README.md.
 
 Робочі папки (lab*/, tspp_work/, tau_work/, …) лишаються джерелом: тут лише копії готових файлів, тому після
@@ -67,13 +67,21 @@ def materials(work):
         return pair + extra
     if subj == "tau":
         n = folder[2:]
-        photos = sorted((TAU / "Готові ПЗ (варіант 8)").glob(f"ПЗ{n}_стор*.jpg"),
-                        key=lambda p: int(p.stem.split("стор")[1]))
-        return pair + [("Фото конспекту", p) for p in photos] + \
-            [("Фото конспекту", TAU / "Готові ПЗ (варіант 8)" / f"ПЗ{n}_Кравченко_варіант8.pdf")]
+        figs = sorted((ROOT / "tau_work/typed/fig").glob(f"p{n}_*.png"))   # графіки й схеми звіту (300 dpi)
+        return pair + [("Графіки", p) for p in figs]
+    if subj == "bank" and folder.startswith("ЛР"):        # звіт, файл .pkt (коли збережено) і команди CLI
+        d = BANK / f"Лабораторна робота {folder[2:]}" / "Готово"
+        return (pair + sorted(d.glob("*.pkt")) + [("CLI", x) for x in sorted((d / "CLI").glob("*.txt"))])
     if subj == "bank":
         n = folder[2:]
         return sorted((BANK / f"Практична {n}" / "Готово").glob("*"))
+    if subj == "eng":                                    # резюме, супровідний лист, сценарій пітчу
+        return pair + sorted(p for p in (ROOT / "Англійська" / "Готово").glob("*")
+                             if p.suffix in (".docx", ".pdf") and not p.stem.startswith("Homework"))
+    if subj == "ts" and folder.startswith("ПР"):          # вихідні тексти схем Mermaid (вимога плану заняття)
+        return pair + [("Mermaid", x) for x in sorted((ROOT / "ts_work" / f"pract{folder[2:]}" / "diagrams").glob("*.mmd"))]
+    if subj == "ts":                                     # схеми у форматі draw.io (вимога методичних вказівок)
+        return pair + [("draw.io", x) for x in sorted((ROOT / "ts_work" / folder.lower().replace("лр", "lab") / "drawio").glob("*.drawio"))]
     return pair                                          # кібербезпека
 
 
@@ -95,12 +103,16 @@ def main():
              "редагується.", ""]
     missing = []
     current = None
+    rel = lambda p: str(p.relative_to(OUT)).replace(" ", "%20")
     for work in S.WORKS:
         subj, folder, label, title, *_ = work
         wd = S.work_dir(work)
         if subj != current:
             current = subj
             lines += [f"## {S.SUBJ_DIR[subj]}", ""]
+            allt = OUT / S.SUBJ_DIR[subj] / "00_Виступи_на_захист_усіх_робіт.docx"
+            if allt.exists():
+                lines += [f"- [Виступи на захист усіх робіт (по ≤ {S.TALK_MAX_MIN} хв)]({rel(allt)})", ""]
         got = []
         for m in materials(work):
             if isinstance(m, tuple) and m[0] == "zip":

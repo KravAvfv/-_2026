@@ -1,0 +1,7 @@
+configure terminal
+interface fastEthernet 0/1
+ shutdown
+ no shutdown
+ end
+show interfaces status
+show port-security interface fastEthernet 0/1

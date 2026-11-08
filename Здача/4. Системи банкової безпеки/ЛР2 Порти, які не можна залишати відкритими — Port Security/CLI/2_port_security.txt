@@ -1,0 +1,43 @@
+configure terminal
+interface fastEthernet 0/1
+ description KASA-1
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address sticky
+ switchport port-security violation shutdown
+ exit
+interface fastEthernet 0/2
+ description KASA-HUB
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address <MAC Kasa-2>
+ switchport port-security mac-address <MAC Kasa-3>
+ switchport port-security violation shutdown
+ exit
+interface fastEthernet 0/3
+ description MGR-1
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address sticky
+ switchport port-security violation restrict
+ exit
+interface fastEthernet 0/4
+ description ABS-1
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address <MAC ABS-1>
+ switchport port-security violation protect
+ exit
+interface fastEthernet 0/5
+ description SRV-1
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security mac-address <MAC SRV-1>
+ switchport port-security violation protect
+ exit
+end

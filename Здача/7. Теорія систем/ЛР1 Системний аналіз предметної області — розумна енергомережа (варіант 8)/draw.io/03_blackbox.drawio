@@ -1,0 +1,178 @@
+<mxfile host="app.diagrams.net" agent="Shchyt-Link lab toolchain" version="24.7.17" type="device">
+  <diagram name="Модель «входи — система — виходи»" id="14fbc2852eab5a999f27">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1820" pageHeight="1169" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="c2" value="Надсистема та середовище: ОСР, ринок, регулятор, погода" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#404040;strokeWidth=2;dashed=1;align=left;spacingLeft=12;verticalAlign=top;fontFamily=Times New Roman;fontSize=24;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="20" y="20" width="1760" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="Ціль: надійне, економне й захищене енергозабезпечення" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;rounded=1;arcSize=50;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="470" y="90" width="860" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="X1–X3: дані лічильників, датчиків" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="30" y="279.12" width="590.8" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560.00" y="300.00" as="sourcePoint" />
+            <mxPoint x="650.00" y="300.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c6" value="X4: прогноз погоди" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="30" y="374.12" width="326.8" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560.00" y="395.00" as="sourcePoint" />
+            <mxPoint x="650.00" y="395.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c8" value="X5: тарифи, запити агрегатора" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="30" y="469.12" width="520.4" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560.00" y="490.00" as="sourcePoint" />
+            <mxPoint x="650.00" y="490.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c10" value="X6: стан і обмеження ОСР" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="30" y="564.12" width="432.4" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c11" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560.00" y="585.00" as="sourcePoint" />
+            <mxPoint x="650.00" y="585.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c12" value="X7: команди управителя" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="30" y="659.12" width="397.2" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c13" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560.00" y="680.00" as="sourcePoint" />
+            <mxPoint x="650.00" y="680.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c14" value="X8: енергія мережі й Сонця" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="30" y="754.12" width="467.6" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c15" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=5;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560.00" y="775.00" as="sourcePoint" />
+            <mxPoint x="650.00" y="775.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c16" value="X9: оновлення ПЗ і моделей" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="30" y="849.12" width="467.6" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c17" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560.00" y="870.00" as="sourcePoint" />
+            <mxPoint x="650.00" y="870.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c18" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150.00" y="290.00" as="sourcePoint" />
+            <mxPoint x="1240.00" y="290.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c19" value="Y1: уставки інверторам, УЗЕ" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="269.12" width="485.2" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c20" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150.00" y="380.00" as="sourcePoint" />
+            <mxPoint x="1240.00" y="380.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c21" value="Y2: команди навантаженням" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="359.12" width="450" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c22" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150.00" y="470.00" as="sourcePoint" />
+            <mxPoint x="1240.00" y="470.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c23" value="Y3: острівний режим (ТСП)" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="449.12" width="450" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c24" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150.00" y="560.00" as="sourcePoint" />
+            <mxPoint x="1240.00" y="560.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c25" value="Y4: дані обліку для ППКО" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="539.12" width="432.4" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c26" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150.00" y="650.00" as="sourcePoint" />
+            <mxPoint x="1240.00" y="650.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c27" value="Y5: звіти управителю" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="629.12" width="362" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c28" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150.00" y="740.00" as="sourcePoint" />
+            <mxPoint x="1240.00" y="740.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c29" value="Y6: відповіді агрегатору" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="719.12" width="432.4" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c30" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150.00" y="830.00" as="sourcePoint" />
+            <mxPoint x="1240.00" y="830.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c31" value="Y7: тривожні сповіщення" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="809.12" width="414.8" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c32" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=5;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1150.00" y="920.00" as="sourcePoint" />
+            <mxPoint x="1240.00" y="920.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c33" value="Y8: енергія споживачам" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="899.12" width="397.2" height="41.76" as="geometry" />
+        </mxCell>
+        <mxCell id="c34" value="" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="650" y="260" width="500" height="760" as="geometry" />
+        </mxCell>
+        <mxCell id="c35" value="Мікромережа&lt;br&gt;будинку" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontFamily=Times New Roman;fontSize=24;fontStyle=1;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="798.2" y="270.24" width="203.6" height="79.52" as="geometry" />
+        </mxCell>
+        <mxCell id="c36" value="П1–П3: пристрої" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="690" y="395" width="420" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c37" value="П4: контролер" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="690" y="495" width="420" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c38" value="П5: хмара, ШІ" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="690" y="595" width="420" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c39" value="П6: користувачі" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="690" y="695" width="420" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c40" value="СЗІБ (П7): захист&lt;br&gt;команд, даних,&lt;br&gt;приватності" style="html=1;whiteSpace=wrap;fillColor=#EDEDED;strokeColor=#000000;strokeWidth=2;dashed=1;fontFamily=Times New Roman;fontSize=24;fontStyle=0;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="680" y="805" width="440" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="c41" value="" style="html=1;rounded=0;endArrow=block;endFill=1;startArrow=none;startFill=1;strokeColor=#000000;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="900.00" y="170.00" as="sourcePoint" />
+            <mxPoint x="900.00" y="260.00" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

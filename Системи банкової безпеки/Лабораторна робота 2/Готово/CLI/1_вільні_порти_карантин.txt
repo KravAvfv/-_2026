@@ -1,0 +1,29 @@
+enable
+configure terminal
+hostname BR08-SW1
+no ip domain-lookup
+banner motd #BANK N | VARIANT 08#
+vlan 523
+ name QUARANTINE
+ exit
+interface range fastEthernet 0/6 - 7
+ description FREE-SERVER
+ switchport mode access
+ switchport access vlan 523
+ shutdown
+ exit
+interface range fastEthernet 0/8 - 21
+ description FREE-OTHER
+ switchport mode access
+ switchport access vlan 523
+ shutdown
+ exit
+interface range fastEthernet 0/22 - 24
+ description FREE-HALL
+ switchport mode access
+ switchport access vlan 523
+ shutdown
+ exit
+end
+show interfaces status
+copy running-config startup-config

@@ -10,11 +10,14 @@ Content file: SPEECHES = [ {id, title, notation, role, opening, walk, traps, def
 `id` is the draw.io stem (key "drawio" is accepted too). Inline markup: **жирний**.
 Every content file also defines DEMO = {minutes, intro, steps: [(крок, що показати, що сказати)], finish} — the
 narration script for demonstrating the whole work → <робота>/Суфлер/00_Сценарій_демонстрації.docx.
+Optional TALK = [(що показати, суцільний текст)…] — the whole defence speech of the report, read aloud as one
+connected text (≤ TALK_MAX_MIN хв at TALK_WPM слів/хв) → <робота>/Суфлер/00_Виступ_на_захисті.docx; all TALKs of a
+subject are also collected into <дисципліна>/00_Виступи_на_захист_усіх_робіт.docx.
 For "report" works every figure and table caption of the .docx report must be named in some speech's `show` or
 `walk` («рис. 2.4», «табл. 1.7–1.27») — the tool aborts otherwise, so no component is left without a prompter.
 
     .venv/bin/python tools/make_speeches.py              # all works
-    .venv/bin/python tools/make_speeches.py tspp cyb     # selected subjects (pis, tspp, cyb, tau, bank)
+    .venv/bin/python tools/make_speeches.py tspp cyb     # selected subjects (pis, tspp, cyb, tau, bank, eng, ts)
 """
 import importlib.util
 import re
@@ -37,10 +40,12 @@ FONT = "Times New Roman"
 OUT = ROOT / "Здача"
 SUBJ_DIR = {"pis": "1. Проєктування інформаційних систем", "tspp": "2. Технології створення програмних продуктів",
             "tau": "3. Теорія автоматичного управління", "bank": "4. Системи банкової безпеки",
-            "cyb": "5. Кібернетична безпека підприємства"}
+            "cyb": "5. Кібернетична безпека підприємства", "eng": "6. Англійська мова",
+            "ts": "7. Теорія систем"}
 SUBJECTS = {"pis": "Проєктування інформаційних систем", "tspp": "Технології створення програмних продуктів",
             "cyb": "Кібернетична безпека підприємства", "tau": "Теорія автоматичного управління",
-            "bank": "Системи банкової безпеки"}
+            "bank": "Системи банкової безпеки", "eng": "Англійська мова (Job Getting Course, ICT-31)",
+            "ts": "Теорія систем"}
 LAB_TITLE = {1: "Вибір об’єкта дослідження, дерево цілей і WBS", 2: "Моделювання бізнес-процесів у нотації BPMN",
              3: "Функціональне моделювання IDEF0 / IDEF3", 4: "Моделювання DFD і вартісний аналіз (ABC)",
              5: "Об’єктно-орієнтоване моделювання UML", 7: "Концепція архітектури IoT-системи"}
@@ -80,7 +85,17 @@ WORKS = [("pis", f"ЛР{n}", f"ЛР {n}", t, f"lab{n}/speech/content_lab{n}.py",
     ("bank", f"ПР{n}", f"ПР {n}", t, f"bank_work/speech/content_pr{n}.py", "report",
      f"Системи банкової безпеки/Практична {n}/Готово/ПР_{n}_Варіант_08_Кравченко.xlsx")
     for n, t in ((1, "Оцінка ризиків для відділення банку"), (2, "Модель загроз шляху платіжної картки"),
-                 (3, "Проєкт мережі відділення: зони, VLAN, адреси"))]
+                 (3, "Проєкт мережі відділення: зони, VLAN, адреси"))] + [
+    ("bank", f"ЛР{n}", f"ЛР {n}", t, f"bank_work/speech/content_lr{n}.py", "report",
+     f"Системи банкової безпеки/Лабораторна робота {n}/Готово/ЛР_{n}_Звіт_Варіант_08_Кравченко.docx")
+    for n, t in ((1, "Відділення банку: VLAN і маршрутизація між ними"),
+                 (2, "Порти, які не можна залишати відкритими: Port Security"))] + [
+    ("eng", "JGC", "Job Getting Course", "Домашні завдання 09.09–28.10.2026 (резюме, супровідний лист, пітч)",
+     "english_work/speech/content_eng.py", "report", "Англійська/Готово/Homework_ICT-31_Petro_Kravchenko.docx"),
+    ("ts", "ЛР1", "ЛР 1", "Системний аналіз предметної області: розумна енергомережа (варіант 8)",
+     "ts_work/speech/content_lab1.py", "report", "ts_work/lab1/ЛР1_Кравченко_ІР-31.docx"),
+    ("ts", "ПР1", "ПР 1", "Моделювання в системному аналізі: формалізація, структурне моделювання та оцінка "
+     "адекватності (варіант 8)", "ts_work/speech/content_pr1.py", "report", "ts_work/pract1/ПР1_Кравченко_ІР-31.docx")]
 
 
 def _runs(par, text, size=None, bold=False, italic=False, color=None):
@@ -239,6 +254,84 @@ def build_demo(work, demo, out):
     doc.save(out)
 
 
+TALK_WPM, TALK_MAX_MIN = 110, 5                         # спокійний темп з показом сторінок
+
+
+def _min(words):
+    return f"{words / TALK_WPM:.1f}".replace(".", ",")
+
+
+def talk_words(talk):
+    return sum(len(t.split()) for _show, t in talk)
+
+
+def _talk_body(doc, work, talk):
+    subj, folder, label, title, _content, kind, report = work
+    w = talk_words(talk)
+    _para(doc, f"ВИСТУП НА ЗАХИСТІ · {label} · {title}", size=10.5, italic=True, color="595959", after=2)
+    _para(doc, f"{label}: {title}", size=17, bold=True, after=6)
+    t = doc.add_table(rows=0, cols=2)
+    t.style = "Table Grid"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    for k, v in (("Дисципліна", SUBJECTS[subj]), ("Що відкрити", f"{Path(report).name} (у папці роботи)"),
+                 ("Тривалість", f"≈ {_min(w)} хв ({n_uk(w, 'слово', 'слова', 'слів')}, темп "
+                                f"{TALK_WPM} слів/хв); межа — {TALK_MAX_MIN} хв"),
+                 ("Як користуватися", "Суцільний текст читається підряд як одна розповідь; сіра позначка над "
+                                      "абзацом — що в цей момент показати у звіті. Відповіді на питання — в "
+                                      "суфлерах до окремих тем роботи.")):
+        c0, c1 = t.add_row().cells
+        c0.width, c1.width = Cm(4.2), Cm(12.8)
+        _shade(c0, "E8EEF7")
+        c0.paragraphs[0].text = ""; _runs(c0.paragraphs[0], k, 11.5, bold=True)
+        c1.paragraphs[0].text = ""; _runs(c1.paragraphs[0], v, 11.5)
+    _para(doc, "", after=2)
+    for show, text in talk:
+        p = _para(doc, f"▶ {show}", size=11, italic=True, color="1F3864", before=6, after=1)
+        p.paragraph_format.keep_with_next = True
+        p = _para(doc, text, size=14, after=4)
+        p.paragraph_format.first_line_indent = Cm(1.0)
+        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+
+
+def _new_doc():
+    doc = Document()
+    sec = doc.sections[0]
+    sec.page_width, sec.page_height = Cm(21), Cm(29.7)
+    sec.left_margin = sec.right_margin = Cm(2); sec.top_margin = sec.bottom_margin = Cm(1.8)
+    st = doc.styles["Normal"]; st.font.name = FONT; st.font.size = Pt(13)
+    st.element.rPr.rFonts.set(qn("w:eastAsia"), FONT)
+    return doc
+
+
+def build_talk(work, talk, out):
+    """Суцільний виступ на захисті всієї роботи (≤ TALK_MAX_MIN хв)."""
+    doc = _new_doc()
+    _talk_body(doc, work, talk)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    doc.save(out)
+
+
+def build_talks_all(subj, talks, out):
+    """Усі виступи дисципліни в одному файлі, кожна робота — з нової сторінки."""
+    doc = _new_doc()
+    total = sum(talk_words(t) for _w, t in talks)
+    _para(doc, f"Виступи на захист усіх робіт · {SUBJECTS[subj]}", size=18, bold=True, after=6)
+    _para(doc, f"{n_uk(len(talks), 'робота', 'роботи', 'робіт')}; кожен виступ — до {TALK_MAX_MIN} хв "
+               f"(разом ≈ {total / TALK_WPM:.0f} хв). Порядок:", size=13, after=4)
+    for i, (w, t) in enumerate(talks, 1):
+        _para(doc, f"{i}. {w[2]} — {w[3]} (≈ {_min(talk_words(t))} хв)", size=13, after=2, indent=0.6)
+    for w, t in talks:
+        doc.add_page_break()
+        _talk_body(doc, w, t)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    doc.save(out)
+
+
+def load_talk(path):
+    spec = importlib.util.spec_from_file_location(Path(path).stem + "_talk", ROOT / path)
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    return getattr(mod, "TALK", None)
+
+
 def load_demo(path):
     spec = importlib.util.spec_from_file_location(Path(path).stem + "_demo", ROOT / path)
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
@@ -309,7 +402,7 @@ def main(argv):
     """Будує суфлери й сценарії; повертає {work: [(файл, назва)…]} для покажчика tools/build_submission.py."""
     import shutil
     subjects = [a for a in argv if a in SUBJECTS] or list(SUBJECTS)
-    index = {}
+    index, talks = {}, {}
     for work in WORKS:
         subj, folder, label, title, content, kind, report = work
         if subj not in subjects:
@@ -339,6 +432,15 @@ def main(argv):
         dout = sdir / "00_Сценарій_демонстрації.docx"
         build_demo(work, demo, dout)
         items = index.setdefault(work, [(dout, "Сценарій демонстрації всієї роботи")])
+        talk = load_talk(content)
+        if talk:
+            assert all(len(x) == 2 and all(x) for x in talk), f"{subj} {folder}: TALK item must be (показати, текст)"
+            w = talk_words(talk)
+            assert w / TALK_WPM <= TALK_MAX_MIN, f"{subj} {folder}: виступ {w} слів > {TALK_MAX_MIN} хв"
+            tout = sdir / "00_Виступ_на_захисті.docx"
+            build_talk(work, talk, tout)
+            items.insert(0, (tout, f"Виступ на захисті всієї роботи (≈ {_min(w)} хв)"))
+            talks.setdefault(subj, []).append((work, talk))
         for i, sp in enumerate(speeches, 1):
             for k in ("id", "title", "notation", "role", "opening", "walk", "traps", "defense"):
                 assert sp.get(k), f"{subj} {folder} {sp.get('id')}: empty {k}"
@@ -358,6 +460,10 @@ def main(argv):
                 items.append((out, sp["title"]))
         n_tab = len(tables) if kind == "drawio" else 0
         print(f"{SUBJECTS[subj]} / {folder}: {len(speeches)}" + (f" + {n_tab} табл." if n_tab else "") + " + сценарій")
+    for subj, ts in talks.items():
+        out = OUT / SUBJ_DIR[subj] / "00_Виступи_на_захист_усіх_робіт.docx"
+        build_talks_all(subj, ts, out)
+        print(f"{SUBJECTS[subj]}: усі виступи → {out.relative_to(ROOT)}")
     return index
 
 

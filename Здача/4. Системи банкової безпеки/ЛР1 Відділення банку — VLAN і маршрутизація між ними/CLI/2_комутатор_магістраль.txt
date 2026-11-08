@@ -1,0 +1,9 @@
+configure terminal
+interface gigabitEthernet 0/1
+ switchport mode trunk
+ switchport trunk native vlan 904
+ switchport trunk allowed vlan 93,115,19,126
+ end
+copy running-config startup-config
+
+show interfaces trunk

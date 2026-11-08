@@ -1,0 +1,21 @@
+﻿Варіант;Карантинний VLAN;Порядок блоків;Вільні: зала;Вільні: серверна;Вільні: решта;Режим кас (Fa0/1-2);Режим кабінету (Fa0/3);Режим серверної (Fa0/4-5);Менеджер: адреса;Серверна: адреса;Для тих, хто встиг
+01;433;HSU;Fa0/6–8;Fa0/9;Fa0/10–24;protect;restrict;shutdown;static;sticky;3
+02;332;HSU;Fa0/6–8;Fa0/9;Fa0/10–24;shutdown;restrict;protect;sticky;sticky;1
+03;807;USH;Fa0/23–24;Fa0/22;Fa0/6–21;restrict;protect;shutdown;static;sticky;3
+04;697;HUS;Fa0/6–8;Fa0/23–24;Fa0/9–22;restrict;protect;shutdown;static;sticky;4
+05;614;HUS;Fa0/6–7;Fa0/23–24;Fa0/8–22;protect;shutdown;restrict;sticky;static;2
+06;222;UHS;Fa0/21–23;Fa0/24;Fa0/6–20;protect;shutdown;restrict;static;static;1
+07;304;HSU;Fa0/6–7;Fa0/8;Fa0/9–24;shutdown;protect;restrict;sticky;sticky;1
+08;523;SUH;Fa0/22–24;Fa0/6–7;Fa0/8–21;shutdown;restrict;protect;sticky;static;4
+09;252;USH;Fa0/23–24;Fa0/22;Fa0/6–21;shutdown;protect;restrict;sticky;static;1
+10;153;USH;Fa0/22–24;Fa0/21;Fa0/6–20;protect;shutdown;restrict;static;static;2
+11;521;USH;Fa0/23–24;Fa0/22;Fa0/6–21;shutdown;protect;restrict;static;static;4
+12;354;HSU;Fa0/6–7;Fa0/8;Fa0/9–24;protect;shutdown;restrict;sticky;sticky;3
+13;106;HUS;Fa0/6–8;Fa0/23–24;Fa0/9–22;protect;shutdown;restrict;sticky;static;3
+14;359;USH;Fa0/22–24;Fa0/20–21;Fa0/6–19;shutdown;protect;restrict;static;static;2
+15;112;SUH;Fa0/22–24;Fa0/6–7;Fa0/8–21;restrict;protect;shutdown;sticky;static;3
+16;573;HSU;Fa0/6–7;Fa0/8–9;Fa0/10–24;shutdown;restrict;protect;static;sticky;2
+17;563;UHS;Fa0/20–22;Fa0/23–24;Fa0/6–19;shutdown;restrict;protect;static;sticky;2
+18;487;UHS;Fa0/22–23;Fa0/24;Fa0/6–21;protect;restrict;shutdown;static;sticky;4
+19;554;SUH;Fa0/23–24;Fa0/6–7;Fa0/8–22;shutdown;protect;restrict;static;static;2
+20;586;UHS;Fa0/22–23;Fa0/24;Fa0/6–21;shutdown;restrict;protect;sticky;static;2

@@ -64,7 +64,7 @@ def main():
     theme = spec.get("theme") or theme
     if " ".join(theme.split()) not in " ".join(title_zone.split()):
         fail("Expected «Тема» text not found on title page")
-    if "гіпотетичн" not in full and "умовн" not in full:
+    if not spec.get("no_org") and "гіпотетичн" not in full and "умовн" not in full:   # no_org: work has no organisation
         fail("No hypothetical-organisation disclaimer (умовна/гіпотетична організація) in the report")
 
     # --- sections
@@ -78,14 +78,17 @@ def main():
     # --- fonts (body after title page)
     body_start = next((i for i, t in enumerate(upper) if t == required[0]), 25)
     bad_font = set()
+    is_code = lambda p: p.runs and all(r.font.name == "Courier New" for r in p.runs if r.text.strip())
     for p in paras[body_start:]:
+        if is_code(p):                      # програмні лістинги (блок `code:` build_report) — моноширинний шрифт
+            continue
         for r in p.runs:
             if r.text.strip() and r.font.name not in (None, "Times New Roman"):
                 bad_font.add(r.font.name)
     if bad_font:
         fail(f"Non-Times fonts in body: {sorted(bad_font)}")
     small = [p.text[:40] for p in paras[body_start:]
-             if p.runs and p.text.strip() and not p.text.startswith(("Рис.",))
+             if p.runs and p.text.strip() and not p.text.startswith(("Рис.",)) and not is_code(p)
              and any(r.font.size and r.font.size.pt < 14 for r in p.runs if r.text.strip())
              and p.style.name != "Footer"]
     if small:

@@ -1,0 +1,46 @@
+enable
+configure terminal
+hostname BR08-SW1
+no ip domain-lookup
+banner motd #BANK N | VARIANT 08#
+vlan 93
+ name KASA
+vlan 115
+ name MANAGERS
+vlan 19
+ name ABS
+vlan 126
+ name ATM_POS
+vlan 224
+ name IOT
+vlan 76
+ name GUEST
+vlan 904
+ name PARKING
+ exit
+interface range fastEthernet 0/1 - 2
+ switchport mode access
+ switchport access vlan 93
+ exit
+interface fastEthernet 0/3
+ switchport mode access
+ switchport access vlan 115
+ exit
+interface fastEthernet 0/4
+ switchport mode access
+ switchport access vlan 19
+ exit
+interface range fastEthernet 0/5 - 6
+ switchport mode access
+ switchport access vlan 126
+ exit
+interface range fastEthernet 0/7 - 8
+ switchport mode access
+ switchport access vlan 224
+ exit
+interface range fastEthernet 0/9 - 10
+ switchport mode access
+ switchport access vlan 76
+ exit
+end
+show vlan brief

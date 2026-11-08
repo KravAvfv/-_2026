@@ -43,6 +43,10 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from omml import latex_to_omml, omml_para_xml  # noqa: E402
+from docx.oxml import parse_xml  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE = ROOT / "Титульна сторінка для лб.docx"
 THEME_FILE = ROOT / "My_theme.txt"
@@ -83,10 +87,18 @@ def fmt_par(p, align=WD_ALIGN_PARAGRAPH.JUSTIFY, indent=1.25, spacing=1.5, befor
 
 
 INLINE = re.compile(r"(\*\*[^*]+\*\*|\*[^*]+\*)")
+MATH = {"inline": False}          # spec `inline_math: true` → $…$ in any text becomes a native Word equation
 
 
 def add_text(p, text, size=14, bold=False, italic=False):
-    """Supports **bold** and *italic* inline markup."""
+    """Supports **bold** and *italic* inline markup (and $LaTeX$ → OMML when inline math is enabled)."""
+    if MATH["inline"] and "$" in text:
+        for k, seg in enumerate(re.split(r"(?<!\\)\$", text)):
+            if k % 2:
+                p._p.append(latex_to_omml(seg, size=size))
+            elif seg:
+                add_text(p, seg.replace("\\$", "$"), size, bold, italic)
+        return
     for part in INLINE.split(text):
         if not part:
             continue
@@ -145,6 +157,11 @@ def cell_text(cell, text, size, bold=False, align=WD_ALIGN_PARAGRAPH.LEFT):
     for k, line in enumerate(lines):
         p = cell.paragraphs[0] if k == 0 else cell.add_paragraph()
         fmt_par(p, align=align, indent=0, spacing=1.0)
+        m = re.fullmatch(r"\$([^$]+)\$", str(line).strip()) if MATH["inline"] else None
+        if m:                                       # a cell holding only a formula → display style (full-size fractions)
+            jc = {WD_ALIGN_PARAGRAPH.CENTER: "center", WD_ALIGN_PARAGRAPH.RIGHT: "right"}.get(align, "left")
+            p._p.append(parse_xml(omml_para_xml(m.group(1), size=size, jc=jc)))
+            continue
         add_text(p, str(line), size=size, bold=bold)
 
 
@@ -229,8 +246,13 @@ class ReportBuilder:
 
     # -- numbering pass (so forward references work)
     def _number_objects(self):
-        f = t = 0
+        f = t = e = 0
+        self.eq_ids = {}
         for b in self.spec["blocks"]:
+            if "eq" in b and b.get("num", True) and b.get("id") is not False:
+                e += 1
+                if b.get("id"):
+                    self.eq_ids[b["id"]] = f"{self.lab}.{e}"
             if "figure" in b:
                 f += 1
                 if b["figure"].get("id"):
@@ -243,11 +265,11 @@ class ReportBuilder:
     def resolve(self, text):
         def rep(m):
             kind, key = m.group(1), m.group(2)
-            table = self.fig_ids if kind == "fig" else self.tab_ids
+            table = {"fig": self.fig_ids, "tab": self.tab_ids, "eq": self.eq_ids}[kind]
             if key not in table:
                 sys.exit(f"Unknown reference {{{kind}:{key}}}")
             return table[key]
-        return re.sub(r"\{(fig|tab):([\w\-]+)\}", rep, str(text))
+        return re.sub(r"\{(fig|tab|eq):([\w\-]+)\}", rep, str(text))
 
     def _prepare_styles(self):
         for lvl in (1, 2, 3):
@@ -462,10 +484,12 @@ class ReportBuilder:
         for j, h in enumerate(header):
             cell_text(tbl.rows[0].cells[j], self.resolve(h), size, bold=True, align=WD_ALIGN_PARAGRAPH.CENTER)
         repeat_table_header(tbl.rows[0])           # <w:tblHeader/> — header repeats on every page
+        data_align = WD_ALIGN_PARAGRAPH.CENTER if t.get("align") == "center" else WD_ALIGN_PARAGRAPH.LEFT
         for i, r in enumerate(rows, 1):
             for j, v in enumerate(r):
                 val = [self.resolve(x) for x in v] if isinstance(v, list) else self.resolve(v)
-                cell_text(tbl.rows[i].cells[j], val, size)
+                cell_text(tbl.rows[i].cells[j], val, size,
+                          align=WD_ALIGN_PARAGRAPH.LEFT if (j == 0 and t.get("first_left")) else data_align)
         for row in tbl.rows:                       # <w:cantSplit/> on every row incl. header
             no_split_row(row)
             for j, c in enumerate(row.cells):
@@ -474,7 +498,9 @@ class ReportBuilder:
         # enforces the same in OnlyOffice by moving a split chunk to a new page.
         keep = t.get("keep_together", len(rows) <= 30)
         last = " ".join(" ".join(x) if isinstance(x, list) else str(x) for x in rows[-1]) if rows else ""
-        self.table_meta.append((key, keep, probe, self.resolve(last), " ".join(self.resolve(h) for h in header)))
+        nomath = lambda x: re.sub(r"\$[^$]*\$", " ", x)      # LaTeX source of formulas never appears in the PDF text
+        self.table_meta.append((key, keep, probe, nomath(self.resolve(last)),
+                                nomath(" ".join(self.resolve(h) for h in header))))
         chain = tbl.rows[:-1] if keep else tbl.rows[:2]
         for row in chain:
             for c in row.cells:
@@ -521,12 +547,52 @@ class ReportBuilder:
             fmt_par(n, align=WD_ALIGN_PARAGRAPH.LEFT, indent=0, spacing=1.0, after=6)
             add_text(n, self.resolve(f["note"]), size=12, italic=True)
 
+    def equation(self, latex, num=True, size=14):
+        """Display equation (native OMML). Numbered → centred formula + "(lab.k)" at the right margin (ДСТУ 3008)."""
+        self.switch("portrait")
+        p = self.doc.add_paragraph()
+        fmt_par(p, align=WD_ALIGN_PARAGRAPH.CENTER, indent=0, spacing=1.15, before=4, after=4)
+        if not num:
+            p._p.append(parse_xml(omml_para_xml(latex, size=size)))
+            return
+        self._eq_counter = getattr(self, "_eq_counter", 0) + 1
+        # borderless 1×3 table: [ | formula (display style) | (lab.k) ] — robust in Word and OnlyOffice
+        p._p.getparent().remove(p._p)
+        avail = PORTRAIT["w"] - PORTRAIT["left"] - PORTRAIT["right"]
+        tbl = self.doc.add_table(rows=1, cols=3)
+        tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
+        tbl.autofit = False
+        row = tbl.rows[0]
+        repeat_table_header(row); no_split_row(row)
+        for c, w in zip(row.cells, (1.8, avail - 3.6, 1.8)):
+            c.width = Cm(w)
+            c.vertical_alignment = 1                       # centre
+        mid = row.cells[1].paragraphs[0]
+        fmt_par(mid, align=WD_ALIGN_PARAGRAPH.CENTER, indent=0, spacing=1.0, before=3, after=3)
+        mid._p.append(parse_xml(omml_para_xml(latex, size=size)))
+        right = row.cells[2].paragraphs[0]
+        fmt_par(right, align=WD_ALIGN_PARAGRAPH.RIGHT, indent=0, spacing=1.0)
+        add_text(right, f"({self.lab}.{self._eq_counter})")
+        fmt_par(row.cells[0].paragraphs[0], indent=0, spacing=1.0)
+
+    def code(self, text, size=10):
+        """Program listing: monospace, single-spaced, ragged-right, no indent; one paragraph per line (no markup)."""
+        self.switch("portrait")
+        for line in str(text).rstrip("\n").split("\n"):
+            p = self.doc.add_paragraph()
+            fmt_par(p, align=WD_ALIGN_PARAGRAPH.LEFT, indent=0, spacing=1.0)
+            r = p.add_run(line.replace("\t", "    ") or " ")
+            r.font.name = "Courier New"
+            r._element.get_or_add_rPr().get_or_add_rFonts().set(qn("w:eastAsia"), "Courier New")
+            r.font.size = Pt(size)
+
     def pagebreak(self):
         p = self.doc.add_paragraph()
         p.add_run().add_break(WD_BREAK.PAGE)
 
     # -- main
     def build(self):
+        MATH["inline"] = bool(self.spec.get("inline_math"))
         self.fill_title()
         self.first_body_section()
         if self.spec.get("toc", True):
@@ -543,6 +609,11 @@ class ReportBuilder:
             elif key == "table": self.table(val)
             elif key == "figure": self.figure(val)
             elif key == "refs": self.refs(val)
+            elif key == "eq":
+                for k, line in enumerate(val if isinstance(val, list) else [val]):
+                    self.equation(line, num=b.get("num", True) and k == len(val if isinstance(val, list) else [val]) - 1,
+                                  size=b.get("size", 14))
+            elif key == "code": self.code(val, b.get("size", 10))
             elif key == "pagebreak": self.pagebreak()
             else: sys.exit(f"Unknown block type: {key}")
         out = (ROOT / self.spec["output"]).resolve()
@@ -574,9 +645,10 @@ def split_tables(pdf, meta):
         if not keep:
             continue
         split = False
-        words = set(WORD.findall(last))
+        words = set(WORD.findall(last)) or set(re.findall(r"\d+[,.]\d{2,}", last))   # numeric rows: use numbers
         if words:   # (a) last row's words missing from the caption page
-            on_page = set(WORD.findall(pages[pg].split(probe, 1)[1]))
+            rest = pages[pg].split(probe, 1)[1]
+            on_page = set(WORD.findall(rest)) | set(re.findall(r"\d+[,.]\d{2,}", rest))
             split = len(words & on_page) / len(words) < 0.8
         if not split and head and pg + 1 < n:  # (b) header row repeated at the top of the next page
             nxt = pages_lay[pg + 1].lstrip()
