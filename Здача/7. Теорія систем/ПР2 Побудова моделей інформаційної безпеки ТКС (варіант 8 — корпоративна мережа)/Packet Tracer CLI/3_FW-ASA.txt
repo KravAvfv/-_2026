@@ -1,0 +1,26 @@
+enable
+configure terminal
+hostname FW-ASA
+interface gigabitEthernet 1/2
+ nameif inside
+ security-level 100
+ ip address 10.0.0.1 255.255.255.252
+ no shutdown
+interface gigabitEthernet 1/1
+ nameif outside
+ security-level 0
+ ip address 203.0.113.1 255.255.255.252
+ no shutdown
+route outside 0.0.0.0 0.0.0.0 203.0.113.2
+route inside 192.168.0.0 255.255.0.0 10.0.0.2
+object network LAN
+ subnet 192.168.0.0 255.255.0.0
+ nat (inside,outside) dynamic interface
+access-list OUTSIDE_IN extended permit icmp any any echo-reply
+access-list OUTSIDE_IN extended deny ip any any
+access-group OUTSIDE_IN in interface outside
+policy-map global_policy
+ class inspection_default
+  inspect icmp
+end
+write memory

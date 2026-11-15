@@ -12,8 +12,8 @@ interface fastEthernet 0/2
  switchport mode access
  switchport port-security
  switchport port-security maximum 2
- switchport port-security mac-address <MAC Kasa-2>
- switchport port-security mac-address <MAC Kasa-3>
+ switchport port-security mac-address 0007.EC08.2211
+ switchport port-security mac-address 000A.4164.1EE2
  switchport port-security violation shutdown
  exit
 interface fastEthernet 0/3
@@ -29,7 +29,7 @@ interface fastEthernet 0/4
  switchport mode access
  switchport port-security
  switchport port-security maximum 1
- switchport port-security mac-address <MAC ABS-1>
+ switchport port-security mac-address 0001.42C5.4C64
  switchport port-security violation protect
  exit
 interface fastEthernet 0/5
@@ -37,7 +37,7 @@ interface fastEthernet 0/5
  switchport mode access
  switchport port-security
  switchport port-security maximum 1
- switchport port-security mac-address <MAC SRV-1>
+ switchport port-security mac-address 0090.0CD1.3044
  switchport port-security violation protect
  exit
 end

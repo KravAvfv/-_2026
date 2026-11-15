@@ -1,0 +1,33 @@
+---
+config:
+  flowchart:
+    nodeSpacing: 18
+    rankSpacing: 40
+    padding: 6
+---
+%% Модель поверхні атак корпоративної мережі (варіант 8, ПР2 «Теорія систем»)
+%% Суцільні стрілки — шлях трафіку; пунктир — точка атаки (код загрози T1–T13)
+graph TB
+  I(("Інтернет"))
+  FW["Firewall<br/>(ASA)"]
+  CORE["Комутатор ядра<br/>L3, SVI + ACL"]
+  ACC["Комутатор<br/>доступу"]
+  HR["VLAN 10<br/>HR"]
+  FIN["VLAN 20<br/>Finance"]
+  ADM["VLAN 30<br/>Administration"]
+  AD[("VLAN 99<br/>Active Directory")]
+  I --> FW --> CORE
+  CORE --> ACC
+  ACC --> HR & FIN & ADM
+  CORE --> AD
+  a9["[T9] DoS"] -.-> FW
+  a10["[T10] підбір пароля<br/>керування МЕ"] -.-> FW
+  a4["[T4] VLAN hopping"] -.-> CORE
+  a13["[T13] ARP-спуфінг,<br/>rogue DHCP"] -.-> ACC
+  a1["[T1] фішинг"] -.-> HR
+  a6["[T6] підміна<br/>платежу"] -.-> FIN
+  a5["[T5] доступ<br/>з VLAN HR"] -.-> FIN
+  a8["[T8] вимагач"] -.-> ADM
+  a3["[T2, T3] підбір паролів,<br/>Pass-the-Hash"] -.-> AD
+  classDef atk stroke-dasharray:6 3
+  class a9,a10,a4,a13,a1,a6,a5,a8,a3 atk

@@ -120,18 +120,18 @@ if __name__ == "__main__":
         select_tool()
 
 
-def prompt(xy, name, geom=DEV_GEOM):
+def prompt(xy, name, geom=DEV_GEOM, icon=(910, 170)):
     """Відкрити Desktop → Command Prompt пристрою (якщо вже відкритий — перевідкрити)."""
     open_dev(xy, name, geom)
     tab("Desktop", geom)
     dx, dy = geom[0] - 300, geom[1] - 60
     ptx.click(1158 + dx, 127 + dy); time.sleep(0.5)      # «X» відкритої підпрограми (якщо є)
-    ptx.click(910 + dx, 170 + dy); time.sleep(1.2)       # іконка Command Prompt
+    ptx.click(icon[0] + dx, icon[1] + dy); time.sleep(1.2)   # іконка Command Prompt (планшет/сервер: 742,180)
     ptx.click(750 + dx, 600 + dy); time.sleep(0.2)
 
 
-def pc_cmd(xy, name, cmds, wait=1.0, keep=False, geom=DEV_GEOM):
-    prompt(xy, name, geom)
+def pc_cmd(xy, name, cmds, wait=1.0, keep=False, geom=DEV_GEOM, icon=(910, 170)):
+    prompt(xy, name, geom, icon)
     for c in cmds:
         ptx.type_text(c + "\n", delay=0.01)
         time.sleep(wait)

@@ -78,10 +78,12 @@ def materials(work):
     if subj == "eng":                                    # резюме, супровідний лист, сценарій пітчу
         return pair + sorted(p for p in (ROOT / "Англійська" / "Готово").glob("*")
                              if p.suffix in (".docx", ".pdf") and not p.stem.startswith("Homework"))
-    if subj == "ts" and folder.startswith("ПР"):          # вихідні тексти схем Mermaid (вимога плану заняття)
-        return pair + [("Mermaid", x) for x in sorted((ROOT / "ts_work" / f"pract{folder[2:]}" / "diagrams").glob("*.mmd"))]
-    if subj == "ts":                                     # схеми у форматі draw.io (вимога методичних вказівок)
-        return pair + [("draw.io", x) for x in sorted((ROOT / "ts_work" / folder.lower().replace("лр", "lab") / "drawio").glob("*.drawio"))]
+    if subj == "ts":                                     # схеми Mermaid/draw.io, файл .pkt, команди, програми
+        d = ROOT / "ts_work" / folder.lower().replace("лр", "lab").replace("пр", "pract")
+        return (pair + [("Mermaid", x) for x in sorted((d / "diagrams").glob("*.mmd"))]
+                + [("draw.io", x) for x in sorted((d / "drawio").glob("*.drawio"))]
+                + sorted((d / "pt").glob("*.pkt")) + [("Packet Tracer CLI", x) for x in sorted((d / "pt").glob("*.txt"))]
+                + [("Програма", x) for x in sorted(d.glob("*_l[0-9].py"))])
     return pair                                          # кібербезпека
 
 

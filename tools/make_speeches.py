@@ -95,7 +95,15 @@ WORKS = [("pis", f"ЛР{n}", f"ЛР {n}", t, f"lab{n}/speech/content_lab{n}.py",
     ("ts", "ЛР1", "ЛР 1", "Системний аналіз предметної області: розумна енергомережа (варіант 8)",
      "ts_work/speech/content_lab1.py", "report", "ts_work/lab1/ЛР1_Кравченко_ІР-31.docx"),
     ("ts", "ПР1", "ПР 1", "Моделювання в системному аналізі: формалізація, структурне моделювання та оцінка "
-     "адекватності (варіант 8)", "ts_work/speech/content_pr1.py", "report", "ts_work/pract1/ПР1_Кравченко_ІР-31.docx")]
+     "адекватності (варіант 8)", "ts_work/speech/content_pr1.py", "report", "ts_work/pract1/ПР1_Кравченко_ІР-31.docx"),
+    ("ts", "ЛР2", "ЛР 2", "Багатокритеріальний аналіз та експертне оцінювання (варіант 8)",
+     "ts_work/speech/content_lab2.py", "report", "ts_work/lab2/ЛР2_Кравченко_ІР-31.docx"),
+    ("ts", "ЛР3", "ЛР 3", "Оптимізаційне моделювання та розподіл ресурсів СЗІБ (варіант 8)",
+     "ts_work/speech/content_lab3.py", "report", "ts_work/lab3/ЛР3_Кравченко_ІР-31.docx"),
+    ("ts", "ПР2", "ПР 2", "Побудова моделей інформаційної безпеки ТКС (варіант 8: корпоративна мережа)",
+     "ts_work/speech/content_pr2.py", "report", "ts_work/pract2/ПР2_Кравченко_ІР-31.docx"),
+    ("ts", "ПР3", "ПР 3", "Реалізація та випробування заходів захисту СЗІБ у Cisco Packet Tracer (варіант 8)",
+     "ts_work/speech/content_pr3.py", "report", "ts_work/pract3/ПР3_Кравченко_ІР-31.docx")]
 
 
 def _runs(par, text, size=None, bold=False, italic=False, color=None):

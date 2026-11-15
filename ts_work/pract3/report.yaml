@@ -1,0 +1,284 @@
+lab_number: 3
+work_label: Практична робота №
+template: Теорія систем/Титульна сторінка для практичних.docx
+subject: Теорія систем
+theme: Реалізація та віртуальне випробування заходів захисту СЗІБ у Cisco Packet Tracer
+year: 2026
+inline_math: true
+output: ts_work/pract3/ПР3_Кравченко_ІР-31.docx
+required_sections:
+- 1. МЕТА ТА ЗАВДАННЯ РОБОТИ
+- 2. МЕРЕЖНА МОДЕЛЬ ОБ’ЄКТА
+- 3. ІМІТАЦІЯ ВРАЗЛИВОГО СТАНУ
+- 4. ЗАСТОСУВАННЯ ЗАХОДІВ ЗАХИСТУ
+- 5. ПЕРЕВІРКА ЕФЕКТИВНОСТІ
+- ВИСНОВКИ
+- СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ
+blocks:
+- h1: 1. Мета та завдання роботи
+  new_page: true
+- p: Мета роботи — перевірити й практично випробувати результати оптимізаційного моделювання (розподілу ресурсів на захист)
+    побудовою віртуальної мережної топології в Cisco Packet Tracer, налаштуванням засобів безпеки (ACL, шифрування, сегментація
+    VLAN) та імітацією атак на незахищену мережу [1].
+- p: 'Об’єкт — індивідуальний варіант № 8 «Розумна енергомережа (Smart Grid)»: технологічний сегмент мікромережі будинку (лічильник,
+    контролер інвертора, система керування УЗЕ), бездротова точка доступу, шлюз і хмарна платформа [2]. Результат оптимізації
+    з лабораторної роботи № 3 — розподіл бюджету 150 000 грн: рівень збору даних — 34 989 грн (23 %), мережевий рівень — 62
+    673 грн (42 %), хмарний — 52 339 грн (35 %). Найбільшу частку отримав мережевий рівень, тому практичні заходи цієї роботи
+    зосереджено саме на ньому.'
+- p: 'Етапи роботи за методичними матеріалами [1]:'
+- numbered:
+  - 'етап 1 — побудова мережної моделі з трьома зонами: сенсори й контролери, мережевий сегмент, серверний сегмент (розділ
+    2);'
+  - 'етап 2 — імітація вразливого стану: відкрита Wi-Fi, плоска мережа, HTTP без шифрування (розділ 3);'
+  - 'етап 3 — застосування заходів: VLAN, стандартні й розширені ACL, WPA2, HTTPS (розділ 4);'
+  - 'етап 4 — перевірка ефективності: ping між легітимними вузлами й блокування зловмисника (розділ 5);'
+  - відповіді на контрольні питання (розділ 6).
+- p: Файл топології — ПР3_Варіант_8_Кравченко.pkt; команди — у додатку А. Звіт оформлено за ДСТУ 3008:2015 [3].
+- p: Примітка. Об’єкт — умовний багатоквартирний будинок (навчальна модель варіанта № 8); пристрої технологічного сегмента
+    змодельовано вузлами PC-PT, адреси й паролі — навчальні.
+- h1: 2. Мережна модель об’єкта
+  new_page: true
+- p: Топологію (рис. {fig:t0}) поділено на зони відповідно до рівнів оптимізаційної моделі ЛР3; склад вузлів — у табл. {tab:dev}.
+- figure:
+    id: t0
+    src: ts_work/pract3/diagrams/01_pt_before_topology.png
+    caption: Топологія мікромережі в Cisco Packet Tracer (вразливий стан)
+    orientation: landscape
+- table:
+    font: 12
+    id: dev
+    caption: Вузли мережної моделі
+    header:
+    - Вузол
+    - Призначення
+    - IP-адреса
+    - Сегмент
+    - Зона
+    widths:
+    - 2.4
+    - 4.4
+    - 3.8
+    - 3.4
+    - 2.5
+    rows:
+    - - SM-1
+      - лічильник (ПК-модель)
+      - 192.168.10.11
+      - VLAN 10 SENSORS
+      - сенсори й контролери
+    - - INV-1
+      - контролер інвертора СЕС
+      - 192.168.10.12
+      - VLAN 10 SENSORS
+      - сенсори й контролери
+    - - BMS-1
+      - система керування УЗЕ
+      - 192.168.10.13
+      - VLAN 10 SENSORS
+      - сенсори й контролери
+    - - AP-FIELD
+      - точка доступу Wi-Fi
+      - —
+      - VLAN 20 WIFI
+      - мережевий
+    - - SW-FIELD
+      - комутатор 2960
+      - —
+      - магістраль 10, 20
+      - мережевий
+    - - R-GW
+      - маршрутизатор-шлюз 1941
+      - 192.168.10.1 / 20.1 / 99.1
+      - підінтерфейси .10, .20
+      - мережевий
+    - - CLOUD-SRV
+      - сервер хмарної платформи
+      - 192.168.99.10
+      - серверний сегмент
+      - серверний
+    - - ATTACKER
+      - планшет зловмисника
+      - 192.168.10.50
+      - бездротовий клієнт
+      - тестовий
+- h1: 3. Імітація вразливого стану
+  new_page: true
+- p: У початковому стані всі пристрої технологічного сегмента та бездротові клієнти перебувають в одній плоскій мережі 192.168.10.0/24,
+    точка доступу працює без автентифікації й шифрування (SSID «Default»), а сервер приймає дані за HTTP. Зловмисник з планшетом
+    приєднується до відкритої Wi-Fi, отримує адресу в тій самій мережі й безперешкодно досягає лічильника SM-1 і хмарного
+    сервера (рис. {fig:atk0}).
+- figure:
+    id: atk0
+    src: ts_work/pract3/diagrams/03_pt_before_attack.png
+    caption: 'Вразливий стан: зловмисник з відкритої Wi-Fi досягає лічильника й сервера'
+    width_cm: 14.5
+- p: 'У режимі Simulation (фільтр HTTP/HTTPS) запит SM-1 до сервера й відповідь проходять через комутатор і шлюз у відкритому
+    вигляді: у PDU видно порт 80, IP-адреси й вміст HTTP-відповіді (рис. {fig:http}). Будь-який вузол на шляху може прочитати
+    або змінити такі дані [4].'
+- figure:
+    id: http
+    src: ts_work/pract3/diagrams/04_pt_http_plain.png
+    caption: 'Simulation Mode: HTTP-відповідь сервера передається відкритим текстом'
+    orientation: landscape
+- h1: 4. Застосування заходів захисту
+  new_page: true
+- p: 'Заходи обрано відповідно до розподілу бюджету ЛР3: основна частина припадає на мережевий рівень (табл. {tab:meas}).'
+- table:
+    font: 12
+    id: meas
+    caption: Заходи захисту та їх зв’язок з результатами оптимізації
+    header:
+    - Рівень (ЛР3)
+    - Бюджет, грн
+    - Захід у Packet Tracer
+    widths:
+    - 4.0
+    - 2.4
+    - 10.1
+    rows:
+    - - Збір даних
+      - 34 989
+      - пристрої — в окремій VLAN 10, доступ лише до сервера
+    - - Мережевий
+      - 62 673
+      - VLAN 10/20, магістраль 802.1Q з native VLAN 999, вимкнені вільні порти, ACL 100/120 на шлюзі, WPA2-PSK (AES)
+    - - Хмарний
+      - 52 339
+      - вимкнено HTTP, лише HTTPS; керування шлюзом (VTY) — лише з серверного сегмента (стандартний ACL 10)
+- h2: 4.1. Сегментація VLAN
+- p: Пристрої технологічного сегмента перенесено у VLAN 10 SENSORS, точку доступу — у VLAN 20 WIFI; магістраль до шлюзу передає
+    лише VLAN 10 і 20, native VLAN — невикористовувана 999; вільні порти вимкнено [5].
+- h2: 4.2. Списки контролю доступу
+- p: 'На підінтерфейсах шлюзу застосовано розширені ACL: 100 — з VLAN 10 до сервера дозволено лише HTTPS і ICMP, HTTP заборонено;
+    120 — бездротовим клієнтам заборонено доступ до серверного сегмента й до пристроїв VLAN 10. Стандартний ACL 10 обмежує
+    віддалене керування шлюзом серверним сегментом (рис. {fig:acl}) [6]. Це прямий аналог прикладу з методичних матеріалів
+    «deny tcp … eq 80» [1].'
+- figure:
+    id: acl
+    src: ts_work/pract3/diagrams/05_pt_acl.png
+    caption: Списки контролю доступу на маршрутизаторі-шлюзі R-GW
+- h2: 4.3. Захист каналів зв’язку
+- p: 'Бездротову мережу переведено на WPA2-PSK із шифруванням AES і новим SSID «SG-FIELD» (рис. {fig:wpa}); на сервері вимкнено
+    HTTP і залишено HTTPS (рис. {fig:https}) [7]. IPsec VPN не налаштовувався: шлюз і сервер у моделі з’єднано напряму, а
+    WPA2 закриває головний вразливий канал — бездротовий.'
+- figure:
+    id: wpa
+    src: ts_work/pract3/diagrams/06_pt_wpa2.png
+    caption: Налаштування WPA2-PSK (AES) на точці доступу AP-FIELD
+    width_cm: 14.0
+- figure:
+    id: https
+    src: ts_work/pract3/diagrams/09_pt_https.png
+    caption: 'Сервер CLOUD-SRV: HTTP вимкнено, HTTPS увімкнено'
+    width_cm: 12.0
+- h1: 5. Перевірка ефективності
+  new_page: true
+- p: 'Після налаштування легітимний лічильник SM-1 і далі обмінюється з сервером (рис. {fig:legit}), а планшет зловмисника
+    без ключа WPA2 не може приєднатися до точки доступу: бездротовий зв’язок на схемі зник (рис. {fig:t1}), і ping до лічильника
+    та сервера не проходить (рис. {fig:atk1}). Підсумок — у табл. {tab:res}.'
+- figure:
+    id: legit
+    src: ts_work/pract3/diagrams/08_pt_after_legit.png
+    caption: 'Після захисту: SM-1 → CLOUD-SRV працює'
+    width_cm: 12.0
+- figure:
+    id: t1
+    src: ts_work/pract3/diagrams/02_pt_after_topology.png
+    caption: Топологія після застосування заходів захисту
+    orientation: landscape
+- figure:
+    id: atk1
+    src: ts_work/pract3/diagrams/07_pt_after_attack.png
+    caption: 'Після захисту: зловмисник не досягає лічильника й сервера'
+    width_cm: 14.5
+- table:
+    font: 12
+    id: res
+    caption: Результати перевірки до і після застосування заходів
+    header:
+    - Перевірка
+    - До
+    - Після
+    widths:
+    - 8.5
+    - 4.0
+    - 4.0
+    rows:
+    - - ATTACKER → SM-1 (ping)
+      - проходить
+      - не проходить
+    - - ATTACKER → CLOUD-SRV (ping)
+      - проходить
+      - не проходить
+    - - SM-1 → CLOUD-SRV (ping)
+      - проходить
+      - проходить
+    - - Вміст HTTP між SM-1 і сервером
+      - читається відкрито
+      - HTTP вимкнено, лише HTTPS
+    - - Приєднання до Wi-Fi без ключа
+      - можливе
+      - неможливе (WPA2-PSK)
+- h1: 6. Відповіді на контрольні питання
+  new_page: true
+- p: '1. Чому на початковому етапі пакети від датчиків перехоплюються безперешкодно? — Бо мережа плоска, Wi-Fi відкрита, а
+    дані передаються HTTP без шифрування: будь-хто в тій самій мережі бачить і може змінити пакети (рис. {fig:http}).'
+- p: '2. Як результати оптимізаційного моделювання впливають на вибір обладнання й налаштувань? — Вони показують, де вкладення
+    дають найбільше зниження ризику: мережевий рівень отримав 42 % бюджету, тому основні заходи — VLAN, ACL і WPA2 на комутаторі,
+    шлюзі й точці доступу.'
+- p: '3. Для чого застосовується VLAN при проєктуванні безпечної архітектури ТКС? — Щоб розділити пристрої за рівнем довіри:
+    трафік між сегментами проходить лише через шлюз, де його можна перевірити ACL; компрометація одного сегмента не дає прямого
+    доступу до інших.'
+- p: 4. Яку роль відіграють ACL у захисті критичних вузлів? — Вони дозволяють лише потрібні протоколи до сервера (HTTPS) і
+    блокують усе інше, зокрема спроби з бездротового сегмента та віддалене керування шлюзом з недовірених мереж.
+- h1: Висновки
+  new_page: true
+- p: 1. Побудовано мережну модель мікромережі в Cisco Packet Tracer із зонами сенсорів, мережі та сервера.
+- p: 2. Імітація вразливого стану показала, що зловмисник з відкритої Wi-Fi досягає пристроїв і сервера, а HTTP-дані передаються
+    відкритим текстом.
+- p: '3. Відповідно до розподілу бюджету ЛР3 застосовано заходи мережевого рівня: VLAN, розширені й стандартний ACL, WPA2-PSK
+    (AES) і перехід на HTTPS.'
+- p: '4. Перевірка підтвердила ефективність заходів: легітимний обмін зберігся, а несанкціонований доступ заблоковано.'
+- h1: Список використаних джерел
+  new_page: true
+- refs:
+  - 'Практична робота 3. Реалізація та віртуальне випробування заходів захисту СЗІБ у Cisco Packet Tracer : методичні матеріали
+    з дисципліни «Теорія систем». Київ, 2026. 3 с.'
+  - 'Pillitteri V. Y., Brewer T. L. Guidelines for Smart Grid Cybersecurity : NISTIR 7628 Revision 1. Gaithersburg : National
+    Institute of Standards and Technology, 2014. DOI: 10.6028/NIST.IR.7628r1.'
+  - 'ДСТУ 3008:2015. Інформація та документація. Звіти у сфері науки і техніки. Структура та правила оформлювання. Київ :
+    ДП «УкрНДНЦ», 2016. 26 с.'
+  - 'Fielding R., Nottingham M., Reschke J. HTTP Semantics : RFC 9110. IETF, 2022. DOI: 10.17487/RFC9110.'
+  - 'IEEE 802.1Q-2022. IEEE Standard for Local and Metropolitan Area Networks — Bridges and Bridged Networks. New York : IEEE,
+    2022.'
+  - 'Cisco Systems. Security Configuration Guide: Access Control Lists, Cisco IOS Release 15M&T. San Jose : Cisco, 2014. URL:
+    https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-mt/sec-data-acl-15-mt-book.html (дата
+    звернення: 16.11.2026).'
+  - 'IEEE 802.11-2020. IEEE Standard for Information Technology — Wireless LAN Medium Access Control (MAC) and Physical Layer
+    (PHY) Specifications. New York : IEEE, 2021.'
+- h1: Додаток А. Команди налаштування обладнання
+  new_page: true
+- p: 'Файл 1_R-GW_вразливий.txt:'
+- code: "enable\nconfigure terminal\nhostname R-GW\nno ip domain-lookup\ninterface gigabitEthernet 0/0\n description FIELD-FLAT\n\
+    \ ip address 192.168.10.1 255.255.255.0\n no shutdown\ninterface gigabitEthernet 0/1\n description CLOUD\n ip address\
+    \ 192.168.99.1 255.255.255.0\n no shutdown\n end\ncopy running-config startup-config\n\n"
+  size: 9
+- p: 'Файл 2_SW-FIELD_захищений.txt:'
+- code: "enable\nconfigure terminal\nhostname SW-FIELD\nno ip domain-lookup\nvlan 10\n name SENSORS\nvlan 20\n name WIFI\n\
+    vlan 999\n name PARKING\n exit\ninterface range fastEthernet 0/1 - 3\n switchport mode access\n switchport access vlan\
+    \ 10\n switchport nonegotiate\n exit\ninterface fastEthernet 0/4\n switchport mode access\n switchport access vlan 20\n\
+    \ switchport nonegotiate\n exit\ninterface range fastEthernet 0/5 - 24\n switchport mode access\n switchport access vlan\
+    \ 999\n shutdown\n exit\ninterface gigabitEthernet 0/1\n switchport mode trunk\n switchport trunk native vlan 999\n switchport\
+    \ trunk allowed vlan 10,20\n exit\nend\ncopy running-config startup-config\n\n"
+  size: 9
+- p: 'Файл 3_R-GW_захищений.txt:'
+- code: "configure terminal\ninterface gigabitEthernet 0/0\n no ip address\ninterface gigabitEthernet 0/0.10\n description\
+    \ SENSORS\n encapsulation dot1Q 10\n ip address 192.168.10.1 255.255.255.0\ninterface gigabitEthernet 0/0.20\n description\
+    \ WIFI\n encapsulation dot1Q 20\n ip address 192.168.20.1 255.255.255.0\n exit\naccess-list 100 deny tcp 192.168.10.0\
+    \ 0.0.0.255 host 192.168.99.10 eq 80\naccess-list 100 permit tcp 192.168.10.0 0.0.0.255 host 192.168.99.10 eq 443\naccess-list\
+    \ 100 permit icmp 192.168.10.0 0.0.0.255 host 192.168.99.10\naccess-list 100 deny ip any any\naccess-list 120 deny ip\
+    \ 192.168.20.0 0.0.0.255 192.168.99.0 0.0.0.255\naccess-list 120 deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255\n\
+    access-list 120 permit ip 192.168.20.0 0.0.0.255 any\naccess-list 10 permit 192.168.99.0 0.0.0.255\ninterface gigabitEthernet\
+    \ 0/0.10\n ip access-group 100 in\ninterface gigabitEthernet 0/0.20\n ip access-group 120 in\nline vty 0 4\n access-class\
+    \ 10 in\n end\ncopy running-config startup-config\n\n"
+  size: 9

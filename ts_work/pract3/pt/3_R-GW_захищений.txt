@@ -1,0 +1,29 @@
+configure terminal
+interface gigabitEthernet 0/0
+ no ip address
+interface gigabitEthernet 0/0.10
+ description SENSORS
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+interface gigabitEthernet 0/0.20
+ description WIFI
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+ exit
+access-list 100 deny tcp 192.168.10.0 0.0.0.255 host 192.168.99.10 eq 80
+access-list 100 permit tcp 192.168.10.0 0.0.0.255 host 192.168.99.10 eq 443
+access-list 100 permit icmp 192.168.10.0 0.0.0.255 host 192.168.99.10
+access-list 100 deny ip any any
+access-list 120 deny ip 192.168.20.0 0.0.0.255 192.168.99.0 0.0.0.255
+access-list 120 deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+access-list 120 permit ip 192.168.20.0 0.0.0.255 any
+access-list 10 permit 192.168.99.0 0.0.0.255
+interface gigabitEthernet 0/0.10
+ ip access-group 100 in
+interface gigabitEthernet 0/0.20
+ ip access-group 120 in
+line vty 0 4
+ access-class 10 in
+ end
+copy running-config startup-config
+

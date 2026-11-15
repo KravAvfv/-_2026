@@ -1,0 +1,30 @@
+configure terminal
+ip access-list extended HR_IN
+ permit udp 192.168.10.0 0.0.0.255 host 192.168.99.10 eq 53
+ permit tcp 192.168.10.0 0.0.0.255 host 192.168.99.10 eq 88
+ permit tcp 192.168.10.0 0.0.0.255 host 192.168.99.10 eq 389
+ permit tcp 192.168.10.0 0.0.0.255 host 192.168.99.10 eq 445
+ permit icmp 192.168.10.0 0.0.0.255 host 192.168.99.10 echo
+ permit icmp 192.168.10.0 0.0.0.255 192.168.30.0 0.0.0.255 echo-reply
+ deny ip 192.168.10.0 0.0.0.255 192.168.0.0 0.0.255.255
+ permit ip 192.168.10.0 0.0.0.255 any
+ exit
+ip access-list extended FIN_IN
+ permit udp 192.168.20.0 0.0.0.255 host 192.168.99.10 eq 53
+ permit tcp 192.168.20.0 0.0.0.255 host 192.168.99.10 eq 88
+ permit tcp 192.168.20.0 0.0.0.255 host 192.168.99.10 eq 389
+ permit tcp 192.168.20.0 0.0.0.255 host 192.168.99.10 eq 445
+ permit icmp 192.168.20.0 0.0.0.255 host 192.168.99.10 echo
+ permit icmp 192.168.20.0 0.0.0.255 192.168.30.0 0.0.0.255 echo-reply
+ deny ip 192.168.20.0 0.0.0.255 192.168.0.0 0.0.255.255
+ permit ip 192.168.20.0 0.0.0.255 any
+ exit
+interface vlan 10
+ ip access-group HR_IN in
+interface vlan 20
+ ip access-group FIN_IN in
+ end
+copy running-config startup-config
+
+show ip interface brief
+show access-lists
