@@ -206,7 +206,7 @@ def l2_cli(macs=None):
     ps += ["end"]
     chk = ["show port-security", "show port-security address", "copy running-config startup-config"]
     rec = ["configure terminal", "interface fastEthernet 0/1", " shutdown", " no shutdown", " end",
-           "show interfaces status", "show port-security interface fastEthernet 0/1"]
+           "show interfaces fastEthernet 0/1 status", "show port-security interface fastEthernet 0/1"]
     return {"1_вільні_порти_карантин": sw, "2_port_security": ps, "3_перевірка_port_security": chk,
             "4_відновлення_Fa0_1": rec}
 
@@ -230,7 +230,7 @@ L2 = dict(
         "show port-security address: дві sticky-адреси (Fa0/1, Fa0/3) і чотири статичні SecureConfigured "
         "(Fa0/2 ×2, Fa0/4, Fa0/5).",
         "Перевірка 3 — Intruder на Fa0/1 (режим shutdown): Port Status Secure-shutdown, Security Violation Count 1, "
-        "у show interfaces status Fa0/1 — err-disabled.",
+        "у show interfaces fastEthernet 0/1 status — err-disabled.",
         "Після відновлення: Kasa-1 на Fa0/1, shutdown / no shutdown — порт connected, пінг Kasa-1 → Mgr-1 проходить.",
     ],
     checks=[
@@ -245,11 +245,12 @@ L2 = dict(
          "MAC Intruder не збігається зі sticky-адресою Kasa-1, maximum 1 вичерпано — перший же кадр (ARP) вимикає "
          "порт"),
         ("Intruder замість Mgr-1 на Fa0/3 → Kasa-1 (режим restrict)", "не пройде, порт працює", "не пройшов",
-         "connected (Secure-up)", "> 0, зростає з кожним кадром Intruder",
+         "connected (Secure-up)", "4 (після одного ping, 4 запити) — зростає з кожним кадром Intruder",
          "кадри з невідомої MAC-адреси відкидаються, кожне порушення рахується й записується в журнал"),
         ("Intruder замість SRV-1 на Fa0/5 → Kasa-1 (режим protect)", "не пройде, порт працює", "не пройшов",
          "connected (Secure-up)", "0",
-         "кадри з невідомої адреси мовчки відкидаються: без лічильника й без повідомлення"),
+         "кадри з невідомої адреси відкидаються без збільшення лічильника (у справжньому IOS — і без повідомлень; "
+         "PT 9.0 усе ж виводить у консоль %PORT_SECURITY-2-PSECURE_VIOLATION)"),
     ],
     modes=[
         ("protect", "залишається connected (Secure-up)", "мовчки відкидаються", "немає: лічильник не зростає, "
@@ -265,10 +266,11 @@ L2 = dict(
     qa=[
         ("Чим відрізняються режими protect, restrict і shutdown? Що бачить адміністратор у кожному випадку?",
          "Усі три режими відкидають кадри з невідомих MAC-адрес, коли ліміт maximum вичерпано; різниця — у реакції. "
-         "protect лише мовчки відкидає кадри: порт працює, лічильник Security Violation Count не зростає, повідомлень "
-         "немає, тож адміністратор нічого не бачить (перевірка 5, Fa0/5). restrict так само відкидає кадри й залишає "
+         "protect лише мовчки відкидає кадри: порт працює, лічильник Security Violation Count не зростає (у нашій "
+         "перевірці 5 на Fa0/5 — 0), за Cisco IOS повідомлень немає, тож адміністратор нічого не бачить (симулятор "
+         "PT 9.0 усе ж друкує їх у консоль — це його особливість). restrict так само відкидає кадри й залишає "
          "порт увімкненим, але рахує кожне порушення і пише повідомлення в журнал — адміністратор бачить зростання "
-         "лічильника в show port-security (перевірка 4, Fa0/3). shutdown одразу переводить порт у стан err-disabled: "
+         "лічильника в show port-security (перевірка 4, Fa0/3: 4 порушення після одного ping). shutdown одразу переводить порт у стан err-disabled: "
          "трафік зупиняється повністю, зокрема для законного пристрою, лічильник дорівнює 1, у show interfaces status "
          "порт позначено err-disabled (перевірка 3, Fa0/1); відновлення — лише вручну."),
         ("Чому на порту з концентратором maximum 2, а не 1 і не 3?",

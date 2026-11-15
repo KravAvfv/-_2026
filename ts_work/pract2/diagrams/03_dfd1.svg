@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2300" height="1180" viewBox="0 0 2300 1180">
+<defs><marker id="ar" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L12,6 L0,12 z" fill="#000"/></marker><marker id="as" markerWidth="12" markerHeight="12" refX="1" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M12,0 L0,6 L12,12 z" fill="#000"/></marker></defs>
+<rect width="2300" height="1180" fill="#fff"/>
+<rect x="330" y="15" width="1610" height="1150" fill="#FAFAFA" stroke="#404040" stroke-width="2" stroke-dasharray="14 8"/>
+<text x="344" y="44.7" font-family="Times New Roman" font-size="33" text-anchor="start" dominant-baseline="central" font-weight="bold">Процес 2. Контроль міжсегментного доступу (Firewall, комутатор ядра)</text>
+<rect x="20.0" y="385.0" width="260" height="170" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="150" y="431.06" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">Е1–Е3. Робочі</text>
+<text x="150" y="470.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">станції</text>
+<text x="150" y="508.94" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">VLAN 10/20/30</text>
+<ellipse cx="530" cy="470" rx="133.0" ry="105.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="530" y="431.06" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">2.1. Прийняти</text>
+<text x="530" y="470.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">кадр, визна-</text>
+<text x="530" y="508.94" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">чити VLAN</text>
+<ellipse cx="930" cy="470" rx="133.0" ry="105.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="930" y="431.06" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">2.2. Маршру-</text>
+<text x="930" y="470.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">тизувати між</text>
+<text x="930" y="508.94" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">VLAN (SVI)</text>
+<ellipse cx="1330" cy="470" rx="133.0" ry="105.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1330" y="431.06" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">2.3. Перевір-</text>
+<text x="1330" y="470.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">ити ACL між-</text>
+<text x="1330" y="508.94" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">сегментів</text>
+<ellipse cx="1760" cy="470" rx="133.0" ry="105.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1760" y="431.06" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">2.4. Фільтру-</text>
+<text x="1760" y="470.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">вати, NAT</text>
+<text x="1760" y="508.94" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">(МЕ)</text>
+<rect x="2030.0" y="385.0" width="250" height="170" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="2155" y="431.06" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">Е5, Е6.</text>
+<text x="2155" y="470.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">Банк,</text>
+<text x="2155" y="508.94" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">Інтернет</text>
+<polyline points="280,470 405,470" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="293.1" y="448.53" width="97.8" height="42.94" fill="#fff"/>
+<text x="342" y="470.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">кадри</text>
+<polyline points="655,470 805,470" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="663.94" y="429.05999999999995" width="132.12" height="81.88" fill="#fff"/>
+<text x="730" y="450.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">802.1Q-</text>
+<text x="730" y="489.46999999999997" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">кадри</text>
+<polyline points="1055,470 1205,470" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1063.94" y="429.05999999999995" width="132.12" height="81.88" fill="#fff"/>
+<text x="1130" y="450.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">пакет</text>
+<text x="1130" y="489.46999999999997" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">до VLAN</text>
+<polyline points="1455,470 1635,470" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1478.94" y="429.05999999999995" width="132.12" height="81.88" fill="#fff"/>
+<text x="1545" y="450.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">трафік</text>
+<text x="1545" y="489.46999999999997" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">назовні</text>
+<polyline points="1885,470 2030,470" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1899.52" y="429.05999999999995" width="114.96000000000001" height="81.88" fill="#fff"/>
+<text x="1957" y="450.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">дозво-</text>
+<text x="1957" y="489.46999999999997" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">лений</text>
+<path d="M1410.0,94.0 L1410.0,186.0 A135.0,14 0 0 0 1680.0,186.0 L1680.0,94.0 A135.0,14 0 0 0 1410.0,94.0 Z" fill="#fff" stroke="#000" stroke-width="2"/>
+<path d="M1410.0,94.0 A135.0,14 0 0 0 1680.0,94.0" fill="none" stroke="#000" stroke-width="2"/>
+<text x="1545" y="127.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">D6. Правила</text>
+<text x="1545" y="166.47" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">ACL і МЕ</text>
+<polyline points="1420,200 1420,393" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1353.94" y="259.05999999999995" width="132.12" height="81.88" fill="#fff"/>
+<text x="1420" y="280.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">правила</text>
+<text x="1420" y="319.46999999999997" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">ACL</text>
+<polyline points="1670,200 1670,393" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1595.36" y="259.05999999999995" width="149.28" height="81.88" fill="#fff"/>
+<text x="1670" y="280.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">політика</text>
+<text x="1670" y="319.46999999999997" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">МЕ</text>
+<rect x="2030.0" y="80.0" width="250" height="120" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="2155" y="120.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">Е4. Систем-</text>
+<text x="2155" y="159.47" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">ний адмін.</text>
+<polyline points="2030,140 1680,140" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1746.04" y="99.06" width="217.92000000000002" height="81.88" fill="#fff"/>
+<text x="1855" y="120.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">зміна правил</text>
+<text x="1855" y="159.47" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">(SSH)</text>
+<ellipse cx="165" cy="860" rx="145.0" ry="100.0" fill="#fff" stroke="#000" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="165" y="821.06" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">1. Автенти-</text>
+<text x="165" y="860.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">фікація</text>
+<text x="165" y="898.9399999999999" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">(DFD-0)</text>
+<polyline points="1250,562 1250,860 312,860" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="659.62" y="838.53" width="200.76000000000002" height="42.94" fill="#fff"/>
+<text x="760" y="860.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">запит до AD</text>
+<ellipse cx="1545" cy="860" rx="125.0" ry="95.0" fill="#fff" stroke="#000" stroke-width="2"/>
+<text x="1545" y="821.06" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">2.5. Зареєст-</text>
+<text x="1545" y="860.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">рувати</text>
+<text x="1545" y="898.9399999999999" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">подію</text>
+<polyline points="1410,552 1410,820 1428,820" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1326.78" y="649.06" width="166.44" height="81.88" fill="#fff"/>
+<text x="1410" y="670.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">відхилені</text>
+<text x="1410" y="709.47" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">пакети</text>
+<polyline points="1760,570 1760,860 1670,860" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1676.78" y="679.06" width="166.44" height="81.88" fill="#fff"/>
+<text x="1760" y="700.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">відхилені</text>
+<text x="1760" y="739.47" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">з’єднання</text>
+<path d="M2030.0,814.0 L2030.0,906.0 A125.0,14 0 0 0 2280.0,906.0 L2280.0,814.0 A125.0,14 0 0 0 2030.0,814.0 Z" fill="#fff" stroke="#000" stroke-width="2"/>
+<path d="M2030.0,814.0 A125.0,14 0 0 0 2280.0,814.0" fill="none" stroke="#000" stroke-width="2"/>
+<text x="2155" y="847.53" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">D5. Журнал</text>
+<text x="2155" y="886.47" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">подій</text>
+<polyline points="1670,900 1820,900 1820,900 2030,900" fill="none" stroke="#000" stroke-width="2" marker-end="url(#ar)"/>
+<rect x="1872.52" y="878.53" width="114.96000000000001" height="42.94" fill="#fff"/>
+<text x="1930" y="900.0" font-family="Times New Roman" font-size="33" text-anchor="middle" dominant-baseline="central">записи</text>
+</svg>

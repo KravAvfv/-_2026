@@ -310,6 +310,17 @@ def build_talk(work, talk, out):
     doc.save(out)
 
 
+def build_talk_txt(work, talk, out):
+    """Той самий виступ простим текстом (UTF-8): читається з телефона чи ноутбука без Word."""
+    subj, folder, label, title, _content, kind, report = work
+    w = talk_words(talk)
+    lines = [f"{label}: {title}", f"Дисципліна: {SUBJECTS[subj]}. Звіт: {Path(report).name}.",
+             f"Тривалість ≈ {_min(w)} хв ({n_uk(w, 'слово', 'слова', 'слів')}). У дужках [ ] — що показати.", ""]
+    for show, text in talk:
+        lines += [f"[{show}]", text.replace("**", ""), ""]
+    out.write_text("\n".join(lines), encoding="utf-8")
+
+
 def build_talks_all(subj, talks, out):
     """Усі виступи дисципліни в одному файлі, кожна робота — з нової сторінки."""
     doc = _new_doc()
@@ -439,7 +450,9 @@ def main(argv):
             assert w / TALK_WPM <= TALK_MAX_MIN, f"{subj} {folder}: виступ {w} слів > {TALK_MAX_MIN} хв"
             tout = sdir / "00_Виступ_на_захисті.docx"
             build_talk(work, talk, tout)
+            build_talk_txt(work, talk, tout.with_suffix(".txt"))
             items.insert(0, (tout, f"Виступ на захисті всієї роботи (≈ {_min(w)} хв)"))
+            items.insert(1, (tout.with_suffix(".txt"), "Той самий виступ простим текстом (.txt)"))
             talks.setdefault(subj, []).append((work, talk))
         for i, sp in enumerate(speeches, 1):
             for k in ("id", "title", "notation", "role", "opening", "walk", "traps", "defense"):

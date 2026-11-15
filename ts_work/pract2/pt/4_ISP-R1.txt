@@ -1,0 +1,15 @@
+enable
+configure terminal
+hostname ISP-R1
+no ip domain-lookup
+interface gigabitEthernet 0/0
+ description TO-FW-ASA
+ ip address 203.0.113.2 255.255.255.252
+ no shutdown
+interface gigabitEthernet 0/1
+ description TO-INTERNET-SERVER
+ ip address 198.51.100.1 255.255.255.0
+ no shutdown
+ end
+copy running-config startup-config
+

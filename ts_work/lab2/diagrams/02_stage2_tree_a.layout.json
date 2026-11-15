@@ -1,0 +1,26 @@
+{
+  "file": "02_stage2_tree_a.mmd",
+  "native_px": [
+    935,
+    1268
+  ],
+  "png_px": [
+    2805,
+    3804
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 10.0,
+    "dpi": 432
+  },
+  "landscape": {
+    "width_cm": 10.69,
+    "font_pt": 6.5,
+    "dpi": 667
+  },
+  "orientation": "portrait",
+  "width_cm": 16.5,
+  "legible": true,
+  "aspect": 0.74
+}

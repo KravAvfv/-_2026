@@ -216,14 +216,16 @@ def guide1(cli):
           f"Fa0/11–24 і Gig0/2; PARKING {L.NATIVE} порожній).", "",
           "## Г. Питання 2 — магістраль, підінтерфейси, адреси", "",
           f"1. На {L.L1_SW} вставте `CLI/2_комутатор_магістраль.txt`:", "", *code(cli["2_комутатор_магістраль"]),
-          "", "   Після `show interfaces trunk` → **скриншот 3** (Gig0/1 on 802.1q, native "
+          "", "   Магістраль з’являється у `show interfaces trunk` лише після того, як піднято інтерфейс "
+          "маршрутизатора (п. 2), тому цю команду повторіть після п. 2 → **скриншот 3** (Gig0/1 on 802.1q, native "
           f"{L.NATIVE}, allowed 19,93,115,126).", "",
           "2. BR-R1 → CLI → на питання «initial configuration dialog» відповідайте `no` → вставте "
           "`CLI/3_маршрутизатор.txt`:", "", *code(cli["3_маршрутизатор"]), "",
           "   Повідомлення CDP про невідповідність native VLAN (якщо з'являться) ігноруйте — так задумано.",
           "3. На всіх 10 ПК поставте адреси з колонок «Адреса за карткою» і «Шлюз» (Desktop → IP Configuration → "
-          "Static). Швидше: Command Prompt → `ipconfig <адреса> 255.255.255.0 <шлюз>`, наприклад "
-          "`ipconfig 10.206.93.11 255.255.255.0 10.206.93.1`.",
+          "Static) або Command Prompt → `ipconfig <адреса> 255.255.255.0`. Увага: у PT 9.0 третій аргумент "
+          "`ipconfig` (шлюз) не застосовується — шлюз задайте в Config → Settings → Default Gateway, інакше "
+          "відповіді з інших VLAN не повертаються (перевірено у файлі .pkt цієї роботи).",
           "4. Розтягніть вікно CLI BR08-R1 так, щоб було видно результат `show ip interface brief` і "
           "`show ip route` (чотири рядки C) → **скриншот 4**.", "",
           "## Д. Питання 3 — Simulation Mode", "",
@@ -282,12 +284,12 @@ def guide2(cli):
           "**скриншот 3**; вивід `show port-security address` (SecureSticky і SecureConfigured) → **скриншот 4**.",
           "", "## Д. Питання 3 — Intruder на робочих портах", "",
           "Перед кожною перевіркою: Intruder → IP 192.168.1.99 / 255.255.255.0 (вже стоїть). Після кожної — "
-          "`show port-security interface fastEthernet 0/<порт>` і `show interfaces status`.", "",
+          "`show port-security interface fastEthernet 0/<порт>` і `show interfaces fastEthernet 0/<порт> status` (повний `show interfaces status` у PT зупиняється на `--More--` — гортайте пробілом).", "",
           "1. **Перевірка 1:** Kasa-1 → `ping 192.168.1.14` (проходить).",
           "2. **Перевірка 2:** Intruder у Fa0/22 → `ping 192.168.1.11` (не проходить, порт вимкнений).",
           "3. **Перевірка 3 (shutdown):** видаліть кабель Kasa-1 ↔ Fa0/1, підключіть Intruder до Fa0/1, з Intruder "
           "`ping 192.168.1.14`. Порт стає err-disabled. На комутаторі: `show port-security interface "
-          "fastEthernet 0/1` і `show interfaces status` → **скриншот 5**.",
+          "fastEthernet 0/1` і `show interfaces fastEthernet 0/1 status` → **скриншот 5**.",
           "4. **Відновлення (одразу після перевірки 3):** видаліть кабель Intruder, поверніть Kasa-1 на Fa0/1, "
           "вставте `CLI/4_відновлення_Fa0_1.txt`, потім з Kasa-1 `ping 192.168.1.14` (проходить) → **скриншот 6** "
           "(видно connected і успішний пінг). Intruder поверніть на Fa0/22.",

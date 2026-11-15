@@ -177,6 +177,9 @@ class Parser:
         if cmd == "sqrt":
             a = self.group_or_atom()
             return f'<m:rad><m:radPr><m:degHide m:val="1"/></m:radPr><m:deg/><m:e>{a}</m:e></m:rad>'
+        if cmd in ("bar", "overline"):                   # риска над символом (середнє значення)
+            a = self.group_or_atom()
+            return f'<m:bar><m:barPr><m:pos m:val="top"/></m:barPr><m:e>{a}</m:e></m:bar>'
         if cmd in ("text", "mathrm", "textrm", "operatorname"):
             return self.run(self.raw_group(), upright=True)
         if cmd == "left":

@@ -1,0 +1,26 @@
+{
+  "file": "04_attack.mmd",
+  "native_px": [
+    1278,
+    762
+  ],
+  "png_px": [
+    3837,
+    2286
+  ],
+  "min_font_px": 20.0,
+  "portrait": {
+    "width_cm": 16.5,
+    "font_pt": 7.3,
+    "dpi": 591
+  },
+  "landscape": {
+    "width_cm": 24.33,
+    "font_pt": 10.8,
+    "dpi": 400
+  },
+  "orientation": "landscape",
+  "width_cm": 24.33,
+  "legible": true,
+  "aspect": 1.68
+}
